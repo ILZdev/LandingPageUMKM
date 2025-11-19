@@ -1,74 +1,77 @@
-# LandingPageUMKM
+PAKET 25K – “NUMPANG EKSIS”
 
-1. Paket 25K – Paket Numpang Eksis
-   Ini paket buat UMKM yang cuma mau “gue punya website nih”, titik selesai.
-   • 1 section doang
-   • Foto 1–2
-   • Judul, subjudul, deskripsi 2–3 kalimat
-   • Tombol WhatsApp
-   • Hosting gratis
-   Kerjaan gue kecil, fitur tipis, waktu pengerjaan cepat. Makanya harganya sekecil kertas kembalian belanja.
-   cocok buat usaha iseng, bukan buat branding besar, cuma biar linknya ada di bio tanpa drama.
+Ini paket buat UMKM yang cuma mau punya link, bukan mau tampil cantik.
+• 1 section doang
+• Judul toko, deskripsi 2 kalimat, foto 1–2, tombol WA
+• Hosting gratis (Netlify/GitHub Pages)
+• HTML + CSS basic
+Cocok buat modal rendah, cuma biar usaha lu ada jejak tanpa perlu ribut-ribut rumit.
+rima gue tutup: ini level hemat parah, fungsinya hidup tapi tampilan tetap irit.
 
-2. Paket 50K – Paket Basic Masih Nafas
-   Tambah sedikit struktur.
-   • 2–3 section
-   • Foto lebih banyak
-   • CTA WhatsApp + tombol lokasi
-   • Layout lebih proper
-   Ini paket buat UMKM yang mau “sedikit profesional”, tapi belum sanggup mikir jauh.
-   harganya naik karena waktu pengerjaan juga naik, desain juga gak asal-asalan kayak sambungan jalan yang belum selesai di kota.
+PAKET 50K – “BASIC MASIH NAFAS”
 
-3. Paket 100K – Paket Lumayan Serius
-   Udah mulai mirip landing page beneran.
-   • 4 section: Hero, Tentang, Produk, CTA
-   • Visual icon
-   • Layout rapi
-   • Warna bisa sedikit custom
-   Ini paket buat UMKM yang mau keliatan meyakinkan, bukan cuma numpang nempel link.
-   kerjanya udah lumayan panjang, bukan edit 10 menit lalu kabur, jadi harga juga ikut naik kayak suhu kepala orang lapar gak makan.
+Udah punya struktur tapi belum masuk estetika berat.
+• 2–3 section (Hero, Produk, CTA)
+• Foto 3–4
+• Tombol WA + tombol lokasi
+• Layout rapi sedikit custom
+Cocok buat UMKM yang mau keliatan sedikit serius tapi duit masih mepet kayak akhir bulan sekarat.
+rima gue tutup: tampilannya naik kelas dikit, tapi masih sederhana tanpa gaya terlalu sesat.
 
-4. Paket 250K – Paket UMKM Profesional Pemula
-   Sekarang mulai masuk level “gue mau bisnis keliatan proper”.
-   • 5–6 section
-   • Responsive mobile
-   • Form kontak (simple)
-   • Foto lebih banyak
-   • Tema warna lebih khusus
-   Harga segini karena gue udah mikirin UX dasar, urutan section, tampilan mobile, dan perapihan desain.
-   gak bisa murahan, karena waktu luangkan juga makin panjang sambil jaga kualitas yang gak asal terbang.
+PAKET 100K – “LUMAYAN SERIUS”
 
-5. Paket 500K – Paket Brand Aware
-   Ini paket buat UMKM yang peduli citra.
-   • 6–8 section
-   • Copywriting ringan
-   • Animasi halus
-   • Integrasi Google Maps
-   • Basic SEO
-   • Foto unlimited
-   Disini kerja gue bukan cuma bikin tampilan, tapi mikirin pengalaman pengunjung, bahasa, struktur, performa.
-   makin banyak otak yang harus dipake, makanya harga jadi naik biar kerja gue gak terasa seperti kerja rodi tanpa upah layak.
+Masuk kategori landing page beneran.
+• 4 section (Hero, Tentang, Produk, CTA)
+• Icon visual biar gak hampa
+• Warna custom
+• Layout manis
+Cocok buat UMKM yang mau tampak profesional tapi belum ke tahap branding rumit.
+rima gue tutup: halaman makin cakep, tapi tetap efisien, gak ada elemen yang bikin tamu kabur ngelirit.
 
-6. Paket 1 Juta – Paket Serius Beneran
-   Ini paket buat bisnis yang mau tampil premium.
-   • 8–12 section
-   • Desain full custom
-   • Dashboard kecil untuk update teks / foto
-   • Optimasi performa
-   • SEO dasar
-   • Integrasi fitur ringan (contoh: katalog mini)
-   Harga naik karena udah masuk ranah teknis: bikin dashboard, mikir sistem, bukan cuma estetika halaman depan.
-   jadi harganya wajar, kerjaannya juga jauh lebih kompleks dibanding paket receh yang cuma butuh 1 jam.
+PAKET 250K – “UMKM PROFESIONAL PEMULA”
 
-7. Paket 1.5 Juta – Paket Full Proper + Domain & Hosting
-   Ini level paling layak disebut “produk final”.
-   • Semua fitur paket 1 juta
-   • PLUS domain resmi setahun
-   • PLUS hosting beneran
-   • SSL
-   • Setup email domain (opsional)
-   • Maintenance 1 bulan
-   • Kecepatan stabil
-   Disini duit lu bukan cuma buat bikin halaman, tapi buat bikin BISNIS ONLINE YANG HIDUP DAN TAMPIL RESMI.
-   harga 1.5 juta juga termasuk administrasi, setting server, konfigurasi keamanan, monitoring ringan.
-   gak cuma ngoding, tapi ngurusin nyawa website biar gak mati konyol gara-gara hal kecil yang lu kira sepele macam kabel longgar di belakang meja.
+Mulai masuk level desain yang diperhitungkan.
+• 5–6 section (Hero, Tentang, Produk, Testimoni, CTA, Footer)
+• Responsive full di mobile
+• Form kontak simple
+• Warna & font tema
+• Foto lebih banyak
+Cocok buat usaha yang mulai bangun branding tapi belum siap bayar tinggi.
+rima gue tutup: ini paket buat bisnis yang mau naik tangga tapi pelan, tetap rapih, tetap bersih, tanpa drama yang bikin nyeri.
+
+PAKET 500K – “BRAND AWARE”
+
+Sudah masuk ranah branding yang beneran.
+• 6–8 section
+• Copywriting ringan biar kata-kata punya arah
+• Animasi kecil biar website hidup
+• Integrasi maps
+• Basic SEO
+• Foto unlimited
+Cocok buat UMKM yang mau tampak elegan, bukan cuma hadir.
+rima gue tutup: ini bikin bisnis lu tampil matang, bukan kayak proyek setengah jadi yang bikin orang nyindir.
+
+PAKET 1 JUTA – “SERIOUS MODE ON”
+
+Masuk area premium bagi UMKM kelas tengah.
+• 8–12 section full jelas
+• Desain full custom
+• Dashboard mini (edit teks & foto sendiri)
+• Optimasi performa
+• SEO dasar lebih kuat
+• Integrasi fitur tambahan (misal katalog sederhana)
+Cocok buat yang mau website beneran jadi aset bisnis, bukan formalitas doang.
+rima gue tutup: ini bukan landing receh, ini pondasi brand supaya usaha lu makin terarah dan terang.
+
+PAKET 1.5 JUTA – “FULL PROPER + DOMAIN & HOSTING”
+
+Ini paket paling lengkap, bukan kelas main-main.
+• Semua fitur paket 1 juta
+• Domain resmi (.com / .id) 1 tahun
+• Hosting berbayar (shared hosting aman)
+• SSL Setup
+• Email domain opsional
+• Maintenance 1 bulan
+• Optimasi keamanan dan performa
+Cocok buat yang mau tampil sebagai bisnis resmi, bukan toko rumahan yang cuma ngandelin BA.
+rima gue tutup: ini paket paling solid, website lu berdiri tegas, siap narik klien tanpa bikin malu di mata banyak orang yang lewat di dunia maya.
