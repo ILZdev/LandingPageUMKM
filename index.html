@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UMKM Landing Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/_sdk/element_sdk.js"></script>
+    <style>
+      body {
+        box-sizing: border-box;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        overflow-x: hidden;
+      }
+
+      .smooth-scroll {
+        scroll-behavior: smooth;
+      }
+
+      .fade-in {
+        animation: fadeIn 0.6s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .hover-lift:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+      }
+
+      .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .accordion-content.active {
+        max-height: 500px;
+      }
+    </style>
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  </head>
+  <body class="smooth-scroll">
+    <!-- Header Navigation -->
+    <header
+      class="fixed top-0 w-full z-50 transition-all duration-300"
+      id="header"
+    >
+      <nav
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <div id="business-name" class="text-2xl font-bold tracking-tight">
+          BrandKu
+        </div>
+        <div class="flex gap-8 items-center">
+          <a
+            href="#produk"
+            class="text-sm font-medium hover:opacity-70 transition-opacity"
+            >Produk</a
+          >
+          <a
+            href="#testimoni"
+            class="text-sm font-medium hover:opacity-70 transition-opacity"
+            >Testimoni</a
+          >
+          <a
+            href="#faq"
+            class="text-sm font-medium hover:opacity-70 transition-opacity"
+            >FAQ</a
+          >
+          <a
+            href="#kontak"
+            id="header-cta"
+            class="px-6 py-2 rounded-lg text-sm font-semibold transition-all duration-300"
+            >Hubungi</a
+          >
+        </div>
+      </nav>
+    </header>
+    <!-- Hero Section -->
+    <section class="min-h-full flex items-center justify-center px-6 pt-20">
+      <div class="container mx-auto max-w-4xl text-center fade-in">
+        <h1 id="hero-title" class="text-6xl font-bold mb-6 leading-tight">
+          Produk Berkualitas untuk Kebutuhan Anda
+        </h1>
+        <p
+          id="hero-subtitle"
+          class="text-xl mb-10 opacity-80 max-w-2xl mx-auto"
+        >
+          Kami berkomitmen memberikan produk terbaik dengan harga terjangkau dan
+          layanan profesional
+        </p>
+        <a
+          href="#kontak"
+          id="hero-cta"
+          class="inline-block px-10 py-4 rounded-lg text-lg font-bold transition-all duration-300 hover-lift"
+          >Hubungi Kami Sekarang</a
+        >
+      </div>
+    </section>
+    <!-- Product Section -->
+    <section id="produk" class="py-24 px-6">
+      <div class="container mx-auto max-w-6xl">
+        <h2
+          id="product-section-title"
+          class="text-4xl font-bold text-center mb-16"
+        >
+          Produk Unggulan
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Product 1 -->
+          <div class="rounded-2xl overflow-hidden hover-lift">
+            <div class="h-64 flex items-center justify-center text-6xl">📦</div>
+            <div class="p-6">
+              <h3 class="text-2xl font-bold mb-2">Produk Premium A</h3>
+              <p class="mb-4 opacity-75 text-sm leading-relaxed">
+                Kualitas terbaik dengan bahan pilihan dan proses produksi yang
+                teliti
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold">Rp 250.000</span>
+                <button
+                  class="px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-300"
+                >
+                  Pesan
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Product 2 -->
+          <div class="rounded-2xl overflow-hidden hover-lift">
+            <div class="h-64 flex items-center justify-center text-6xl">🎁</div>
+            <div class="p-6">
+              <h3 class="text-2xl font-bold mb-2">Produk Eksklusif B</h3>
+              <p class="mb-4 opacity-75 text-sm leading-relaxed">
+                Desain unik dan eksklusif, cocok untuk hadiah spesial Anda
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold">Rp 350.000</span>
+                <button
+                  class="px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-300"
+                >
+                  Pesan
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Product 3 -->
+          <div class="rounded-2xl overflow-hidden hover-lift">
+            <div class="h-64 flex items-center justify-center text-6xl">⭐</div>
+            <div class="p-6">
+              <h3 class="text-2xl font-bold mb-2">Produk Favorit C</h3>
+              <p class="mb-4 opacity-75 text-sm leading-relaxed">
+                Pilihan terlaris pelanggan dengan rating tinggi dan review
+                positif
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold">Rp 180.000</span>
+                <button
+                  class="px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-300"
+                >
+                  Pesan
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Testimonial Section -->
+    <section id="testimoni" class="py-24 px-6">
+      <div class="container mx-auto max-w-6xl">
+        <h2
+          id="testimonial-section-title"
+          class="text-4xl font-bold text-center mb-16"
+        >
+          Apa Kata Pelanggan
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Testimonial 1 -->
+          <div class="p-8 rounded-2xl">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 rounded-full flex items-center justify-center text-2xl mr-4"
+              >
+                👤
+              </div>
+              <div>
+                <div class="font-bold">Sarah M.</div>
+                <div class="text-sm opacity-70">Jakarta</div>
+              </div>
+            </div>
+            <p class="text-sm leading-relaxed opacity-80">
+              "Kualitas produknya benar-benar memuaskan! Pelayanan cepat dan
+              ramah. Akan order lagi pasti."
+            </p>
+            <div class="mt-4 text-yellow-500">⭐⭐⭐⭐⭐</div>
+          </div>
+          <!-- Testimonial 2 -->
+          <div class="p-8 rounded-2xl">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 rounded-full flex items-center justify-center text-2xl mr-4"
+              >
+                👤
+              </div>
+              <div>
+                <div class="font-bold">Budi S.</div>
+                <div class="text-sm opacity-70">Bandung</div>
+              </div>
+            </div>
+            <p class="text-sm leading-relaxed opacity-80">
+              "Harga terjangkau dengan kualitas premium. Packaging juga rapi
+              banget, cocok buat kado!"
+            </p>
+            <div class="mt-4 text-yellow-500">⭐⭐⭐⭐⭐</div>
+          </div>
+          <!-- Testimonial 3 -->
+          <div class="p-8 rounded-2xl">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 rounded-full flex items-center justify-center text-2xl mr-4"
+              >
+                👤
+              </div>
+              <div>
+                <div class="font-bold">Linda T.</div>
+                <div class="text-sm opacity-70">Surabaya</div>
+              </div>
+            </div>
+            <p class="text-sm leading-relaxed opacity-80">
+              "Sudah langganan 6 bulan, gak pernah kecewa. Produknya konsisten
+              bagus terus!"
+            </p>
+            <div class="mt-4 text-yellow-500">⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 px-6">
+      <div class="container mx-auto max-w-3xl">
+        <h2 id="faq-section-title" class="text-4xl font-bold text-center mb-16">
+          Pertanyaan Umum
+        </h2>
+        <div class="space-y-4">
+          <!-- FAQ 1 -->
+          <div class="rounded-xl overflow-hidden">
+            <button
+              class="w-full px-6 py-5 text-left font-semibold flex justify-between items-center transition-colors duration-300 faq-button"
+            >
+              <span>Bagaimana cara memesan produk?</span>
+              <span class="text-2xl transition-transform duration-300 faq-icon"
+                >+</span
+              >
+            </button>
+            <div class="accordion-content px-6">
+              <p class="pb-5 opacity-80 text-sm leading-relaxed">
+                Anda bisa menghubungi kami melalui WhatsApp, Instagram, atau
+                form kontak di bawah. Tim kami akan membantu proses pemesanan
+                Anda dengan cepat dan mudah.
+              </p>
+            </div>
+          </div>
+          <!-- FAQ 2 -->
+          <div class="rounded-xl overflow-hidden">
+            <button
+              class="w-full px-6 py-5 text-left font-semibold flex justify-between items-center transition-colors duration-300 faq-button"
+            >
+              <span>Apakah ada garansi produk?</span>
+              <span class="text-2xl transition-transform duration-300 faq-icon"
+                >+</span
+              >
+            </button>
+            <div class="accordion-content px-6">
+              <p class="pb-5 opacity-80 text-sm leading-relaxed">
+                Ya, semua produk kami dilengkapi dengan garansi kualitas. Jika
+                ada kerusakan atau cacat produksi, kami akan mengganti produk
+                Anda tanpa biaya tambahan.
+              </p>
+            </div>
+          </div>
+          <!-- FAQ 3 -->
+          <div class="rounded-xl overflow-hidden">
+            <button
+              class="w-full px-6 py-5 text-left font-semibold flex justify-between items-center transition-colors duration-300 faq-button"
+            >
+              <span>Berapa lama waktu pengiriman?</span>
+              <span class="text-2xl transition-transform duration-300 faq-icon"
+                >+</span
+              >
+            </button>
+            <div class="accordion-content px-6">
+              <p class="pb-5 opacity-80 text-sm leading-relaxed">
+                Untuk wilayah Jabodetabek 1-2 hari kerja, luar kota 3-5 hari
+                kerja. Kami menggunakan jasa ekspedisi terpercaya untuk
+                memastikan produk sampai dengan aman.
+              </p>
+            </div>
+          </div>
+          <!-- FAQ 4 -->
+          <div class="rounded-xl overflow-hidden">
+            <button
+              class="w-full px-6 py-5 text-left font-semibold flex justify-between items-center transition-colors duration-300 faq-button"
+            >
+              <span>Apakah bisa custom atau request desain?</span>
+              <span class="text-2xl transition-transform duration-300 faq-icon"
+                >+</span
+              >
+            </button>
+            <div class="accordion-content px-6">
+              <p class="pb-5 opacity-80 text-sm leading-relaxed">
+                Tentu saja! Kami menerima custom order dan request desain sesuai
+                keinginan Anda. Hubungi kami untuk diskusi lebih lanjut mengenai
+                kebutuhan custom Anda.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="kontak" class="py-24 px-6">
+      <div class="container mx-auto max-w-4xl text-center">
+        <h2 id="contact-section-title" class="text-4xl font-bold mb-6">
+          Hubungi Kami
+        </h2>
+        <p id="contact-description" class="text-lg mb-12 opacity-80">
+          Siap melayani Anda dengan sepenuh hati. Tim kami akan merespon dengan
+          cepat!
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <a
+            href="https://wa.me/6281234567890"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-8 rounded-2xl hover-lift transition-all duration-300"
+          >
+            <div class="text-5xl mb-4">💬</div>
+            <div class="font-bold text-lg mb-2">WhatsApp</div>
+            <div class="text-sm opacity-70">Chat langsung</div></a
+          >
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-8 rounded-2xl hover-lift transition-all duration-300"
+          >
+            <div class="text-5xl mb-4">📸</div>
+            <div class="font-bold text-lg mb-2">Instagram</div>
+            <div class="text-sm opacity-70">@brandku</div></a
+          >
+          <a
+            href="mailto:info@brandku.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-8 rounded-2xl hover-lift transition-all duration-300"
+          >
+            <div class="text-5xl mb-4">✉️</div>
+            <div class="font-bold text-lg mb-2">Email</div>
+            <div class="text-sm opacity-70">info@brandku.com</div></a
+          >
+        </div>
+        <form
+          class="max-w-2xl mx-auto space-y-4"
+          onsubmit="handleSubmit(event)"
+        >
+          <input
+            type="text"
+            placeholder="Nama Anda"
+            required
+            class="w-full px-6 py-4 rounded-xl border-2 transition-colors duration-300 focus:outline-none"
+            id="name-input"
+          />
+          <input
+            type="email"
+            placeholder="Email Anda"
+            required
+            class="w-full px-6 py-4 rounded-xl border-2 transition-colors duration-300 focus:outline-none"
+            id="email-input"
+          />
+          <textarea
+            placeholder="Pesan Anda"
+            rows="5"
+            required
+            class="w-full px-6 py-4 rounded-xl border-2 transition-colors duration-300 focus:outline-none"
+            id="message-input"
+          ></textarea>
+          <button
+            type="submit"
+            class="w-full py-4 rounded-xl font-bold text-lg transition-all duration-300 hover-lift"
+            id="submit-button"
+          >
+            Kirim Pesan
+          </button>
+        </form>
+        <div id="success-message" class="mt-6 p-4 rounded-xl hidden">
+          <p class="font-semibold">
+            ✓ Terima kasih! Pesan Anda telah terkirim. Kami akan segera
+            menghubungi Anda.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t">
+      <div class="container mx-auto text-center">
+        <div id="footer-business-name" class="text-2xl font-bold mb-4">
+          BrandKu
+        </div>
+        <p class="text-sm opacity-70 mb-6">
+          Produk Berkualitas, Layanan Profesional
+        </p>
+        <div class="flex justify-center gap-6 mb-6">
+          <a href="#produk" class="text-sm hover:opacity-70 transition-opacity"
+            >Produk</a
+          >
+          <a
+            href="#testimoni"
+            class="text-sm hover:opacity-70 transition-opacity"
+            >Testimoni</a
+          >
+          <a href="#faq" class="text-sm hover:opacity-70 transition-opacity"
+            >FAQ</a
+          >
+          <a href="#kontak" class="text-sm hover:opacity-70 transition-opacity"
+            >Kontak</a
+          >
+        </div>
+        <p class="text-xs opacity-60">© 2024 BrandKu. All rights reserved.</p>
+      </div>
+    </footer>
+    <script>
+      const defaultConfig = {
+        background_color: "#f8f9fa",
+        card_color: "#ffffff",
+        text_color: "#1a1a1a",
+        primary_button_color: "#2d3748",
+        secondary_surface_color: "#e9ecef",
+        font_family: "system-ui",
+        font_size: 16,
+        business_name: "BrandKu",
+        hero_title: "Produk Berkualitas untuk Kebutuhan Anda",
+        hero_subtitle:
+          "Kami berkomitmen memberikan produk terbaik dengan harga terjangkau dan layanan profesional",
+        cta_button: "Hubungi Kami Sekarang",
+        product_title: "Produk Unggulan",
+        testimonial_title: "Apa Kata Pelanggan",
+        faq_title: "Pertanyaan Umum",
+        contact_title: "Hubungi Kami",
+        contact_description:
+          "Siap melayani Anda dengan sepenuh hati. Tim kami akan merespon dengan cepat!",
+      };
+
+      async function onConfigChange(config) {
+        const backgroundColor =
+          config.background_color || defaultConfig.background_color;
+        const cardColor = config.card_color || defaultConfig.card_color;
+        const textColor = config.text_color || defaultConfig.text_color;
+        const primaryButtonColor =
+          config.primary_button_color || defaultConfig.primary_button_color;
+        const secondarySurfaceColor =
+          config.secondary_surface_color ||
+          defaultConfig.secondary_surface_color;
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseSize = config.font_size || defaultConfig.font_size;
+        const baseFontStack = "system-ui, -apple-system, sans-serif";
+
+        document.body.style.backgroundColor = backgroundColor;
+        document.body.style.color = textColor;
+        document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+
+        document.getElementById("header").style.backgroundColor = cardColor;
+        document.getElementById("header").style.color = textColor;
+        document.getElementById(
+          "header"
+        ).style.borderBottom = `1px solid ${secondarySurfaceColor}`;
+
+        document.getElementById("business-name").textContent =
+          config.business_name || defaultConfig.business_name;
+        document.getElementById("business-name").style.color = textColor;
+        document.getElementById("business-name").style.fontSize = `${
+          baseSize * 1.5
+        }px`;
+
+        const navLinks = document.querySelectorAll("nav a:not([id])");
+        navLinks.forEach((link) => {
+          link.style.color = textColor;
+          link.style.fontSize = `${baseSize * 0.875}px`;
+        });
+
+        document.getElementById("header-cta").style.backgroundColor =
+          primaryButtonColor;
+        document.getElementById("header-cta").style.color = cardColor;
+        document.getElementById("header-cta").style.fontSize = `${
+          baseSize * 0.875
+        }px`;
+
+        document.getElementById("hero-title").textContent =
+          config.hero_title || defaultConfig.hero_title;
+        document.getElementById("hero-title").style.color = textColor;
+        document.getElementById("hero-title").style.fontSize = `${
+          baseSize * 3.75
+        }px`;
+
+        document.getElementById("hero-subtitle").textContent =
+          config.hero_subtitle || defaultConfig.hero_subtitle;
+        document.getElementById("hero-subtitle").style.color = textColor;
+        document.getElementById("hero-subtitle").style.fontSize = `${
+          baseSize * 1.25
+        }px`;
+
+        document.getElementById("hero-cta").textContent =
+          config.cta_button || defaultConfig.cta_button;
+        document.getElementById("hero-cta").style.backgroundColor =
+          primaryButtonColor;
+        document.getElementById("hero-cta").style.color = cardColor;
+        document.getElementById("hero-cta").style.fontSize = `${
+          baseSize * 1.125
+        }px`;
+
+        document.getElementById("product-section-title").textContent =
+          config.product_title || defaultConfig.product_title;
+        document.getElementById("product-section-title").style.color =
+          textColor;
+        document.getElementById("product-section-title").style.fontSize = `${
+          baseSize * 2.5
+        }px`;
+
+        const productCards = document.querySelectorAll(
+          "#produk > div > div > div"
+        );
+        productCards.forEach((card) => {
+          card.style.backgroundColor = cardColor;
+          card.style.color = textColor;
+
+          const emojiDiv = card.querySelector("div:first-child");
+          emojiDiv.style.backgroundColor = secondarySurfaceColor;
+
+          const title = card.querySelector("h3");
+          title.style.color = textColor;
+          title.style.fontSize = `${baseSize * 1.5}px`;
+
+          const description = card.querySelector("p");
+          description.style.color = textColor;
+          description.style.fontSize = `${baseSize * 0.875}px`;
+
+          const price = card.querySelector(".text-2xl");
+          price.style.color = textColor;
+          price.style.fontSize = `${baseSize * 1.5}px`;
+
+          const button = card.querySelector("button");
+          button.style.backgroundColor = primaryButtonColor;
+          button.style.color = cardColor;
+          button.style.fontSize = `${baseSize * 0.875}px`;
+        });
+
+        document.getElementById("testimonial-section-title").textContent =
+          config.testimonial_title || defaultConfig.testimonial_title;
+        document.getElementById("testimonial-section-title").style.color =
+          textColor;
+        document.getElementById(
+          "testimonial-section-title"
+        ).style.fontSize = `${baseSize * 2.5}px`;
+
+        const testimonialCards = document.querySelectorAll(
+          "#testimoni > div > div > div"
+        );
+        testimonialCards.forEach((card) => {
+          card.style.backgroundColor = cardColor;
+          card.style.color = textColor;
+
+          const name = card.querySelector(".font-bold");
+          name.style.color = textColor;
+          name.style.fontSize = `${baseSize}px`;
+
+          const location = card.querySelector(".text-sm.opacity-70");
+          location.style.color = textColor;
+          location.style.fontSize = `${baseSize * 0.875}px`;
+
+          const testimonialText = card.querySelector("p");
+          testimonialText.style.color = textColor;
+          testimonialText.style.fontSize = `${baseSize * 0.875}px`;
+        });
+
+        document.getElementById("faq-section-title").textContent =
+          config.faq_title || defaultConfig.faq_title;
+        document.getElementById("faq-section-title").style.color = textColor;
+        document.getElementById("faq-section-title").style.fontSize = `${
+          baseSize * 2.5
+        }px`;
+
+        const faqButtons = document.querySelectorAll(".faq-button");
+        faqButtons.forEach((button) => {
+          button.style.backgroundColor = cardColor;
+          button.style.color = textColor;
+          button.style.fontSize = `${baseSize}px`;
+        });
+
+        const faqAnswers = document.querySelectorAll(".accordion-content p");
+        faqAnswers.forEach((answer) => {
+          answer.style.color = textColor;
+          answer.style.fontSize = `${baseSize * 0.875}px`;
+        });
+
+        document.getElementById("contact-section-title").textContent =
+          config.contact_title || defaultConfig.contact_title;
+        document.getElementById("contact-section-title").style.color =
+          textColor;
+        document.getElementById("contact-section-title").style.fontSize = `${
+          baseSize * 2.5
+        }px`;
+
+        document.getElementById("contact-description").textContent =
+          config.contact_description || defaultConfig.contact_description;
+        document.getElementById("contact-description").style.color = textColor;
+        document.getElementById("contact-description").style.fontSize = `${
+          baseSize * 1.125
+        }px`;
+
+        const contactCards = document.querySelectorAll(
+          "#kontak > div > div:first-of-type > a"
+        );
+        contactCards.forEach((card) => {
+          card.style.backgroundColor = cardColor;
+          card.style.color = textColor;
+
+          const title = card.querySelector(".font-bold");
+          title.style.color = textColor;
+          title.style.fontSize = `${baseSize * 1.125}px`;
+
+          const subtitle = card.querySelector(".text-sm");
+          subtitle.style.color = textColor;
+          subtitle.style.fontSize = `${baseSize * 0.875}px`;
+        });
+
+        const formInputs = document.querySelectorAll(
+          "#kontak input, #kontak textarea"
+        );
+        formInputs.forEach((input) => {
+          input.style.backgroundColor = cardColor;
+          input.style.color = textColor;
+          input.style.borderColor = secondarySurfaceColor;
+          input.style.fontSize = `${baseSize}px`;
+        });
+
+        document.getElementById("submit-button").style.backgroundColor =
+          primaryButtonColor;
+        document.getElementById("submit-button").style.color = cardColor;
+        document.getElementById("submit-button").style.fontSize = `${
+          baseSize * 1.125
+        }px`;
+
+        document.getElementById("success-message").style.backgroundColor =
+          secondarySurfaceColor;
+        document.getElementById("success-message").style.color = textColor;
+
+        const footer = document.querySelector("footer");
+        footer.style.backgroundColor = backgroundColor;
+        footer.style.borderColor = secondarySurfaceColor;
+        footer.style.color = textColor;
+
+        document.getElementById("footer-business-name").textContent =
+          config.business_name || defaultConfig.business_name;
+        document.getElementById("footer-business-name").style.color = textColor;
+        document.getElementById("footer-business-name").style.fontSize = `${
+          baseSize * 1.5
+        }px`;
+
+        const footerLinks = footer.querySelectorAll("a");
+        footerLinks.forEach((link) => {
+          link.style.color = textColor;
+          link.style.fontSize = `${baseSize * 0.875}px`;
+        });
+
+        const footerText = footer.querySelectorAll("p");
+        footerText.forEach((text) => {
+          text.style.color = textColor;
+        });
+      }
+
+      function mapToCapabilities(config) {
+        return {
+          recolorables: [
+            {
+              get: () =>
+                config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                if (window.elementSdk) {
+                  window.elementSdk.setConfig({ background_color: value });
+                }
+              },
+            },
+            {
+              get: () => config.card_color || defaultConfig.card_color,
+              set: (value) => {
+                config.card_color = value;
+                if (window.elementSdk) {
+                  window.elementSdk.setConfig({ card_color: value });
+                }
+              },
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                if (window.elementSdk) {
+                  window.elementSdk.setConfig({ text_color: value });
+                }
+              },
+            },
+            {
+              get: () =>
+                config.primary_button_color ||
+                defaultConfig.primary_button_color,
+              set: (value) => {
+                config.primary_button_color = value;
+                if (window.elementSdk) {
+                  window.elementSdk.setConfig({ primary_button_color: value });
+                }
+              },
+            },
+            {
+              get: () =>
+                config.secondary_surface_color ||
+                defaultConfig.secondary_surface_color,
+              set: (value) => {
+                config.secondary_surface_color = value;
+                if (window.elementSdk) {
+                  window.elementSdk.setConfig({
+                    secondary_surface_color: value,
+                  });
+                }
+              },
+            },
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ font_family: value });
+              }
+            },
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ font_size: value });
+              }
+            },
+          },
+        };
+      }
+
+      function mapToEditPanelValues(config) {
+        return new Map([
+          [
+            "business_name",
+            config.business_name || defaultConfig.business_name,
+          ],
+          ["hero_title", config.hero_title || defaultConfig.hero_title],
+          [
+            "hero_subtitle",
+            config.hero_subtitle || defaultConfig.hero_subtitle,
+          ],
+          ["cta_button", config.cta_button || defaultConfig.cta_button],
+          [
+            "product_title",
+            config.product_title || defaultConfig.product_title,
+          ],
+          [
+            "testimonial_title",
+            config.testimonial_title || defaultConfig.testimonial_title,
+          ],
+          ["faq_title", config.faq_title || defaultConfig.faq_title],
+          [
+            "contact_title",
+            config.contact_title || defaultConfig.contact_title,
+          ],
+          [
+            "contact_description",
+            config.contact_description || defaultConfig.contact_description,
+          ],
+        ]);
+      }
+
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities,
+          mapToEditPanelValues,
+        });
+      }
+
+      // FAQ Accordion
+      const faqButtons = document.querySelectorAll(".faq-button");
+      faqButtons.forEach((button, index) => {
+        button.addEventListener("click", () => {
+          const content = button.nextElementSibling;
+          const icon = button.querySelector(".faq-icon");
+          const isActive = content.classList.contains("active");
+
+          document
+            .querySelectorAll(".accordion-content")
+            .forEach((c) => c.classList.remove("active"));
+          document.querySelectorAll(".faq-icon").forEach((i) => {
+            i.textContent = "+";
+            i.style.transform = "rotate(0deg)";
+          });
+
+          if (!isActive) {
+            content.classList.add("active");
+            icon.textContent = "−";
+            icon.style.transform = "rotate(180deg)";
+          }
+        });
+      });
+
+      // Header scroll effect
+      let lastScroll = 0;
+      window.addEventListener("scroll", () => {
+        const header = document.getElementById("header");
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > 50) {
+          header.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
+        } else {
+          header.style.boxShadow = "none";
+        }
+
+        lastScroll = currentScroll;
+      });
+
+      // Form submission
+      function handleSubmit(event) {
+        event.preventDefault();
+
+        const submitButton = document.getElementById("submit-button");
+        const successMessage = document.getElementById("success-message");
+        const nameInput = document.getElementById("name-input");
+        const emailInput = document.getElementById("email-input");
+        const messageInput = document.getElementById("message-input");
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Mengirim...";
+        submitButton.style.opacity = "0.7";
+
+        setTimeout(() => {
+          nameInput.value = "";
+          emailInput.value = "";
+          messageInput.value = "";
+
+          submitButton.disabled = false;
+          submitButton.textContent = "Kirim Pesan";
+          submitButton.style.opacity = "1";
+
+          successMessage.classList.remove("hidden");
+
+          setTimeout(() => {
+            successMessage.classList.add("hidden");
+          }, 5000);
+        }, 1500);
+      }
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            const headerHeight = document.getElementById("header").offsetHeight;
+            const targetPosition = target.offsetTop - headerHeight;
+            window.scrollTo({
+              top: targetPosition,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'9a0bdd2914f5fd31',t:'MTc2MzUxNTAwNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
