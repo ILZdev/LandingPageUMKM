@@ -75,3 +75,5 @@ Ini paket paling lengkap, bukan kelas main-main.
 • Optimasi keamanan dan performa
 Cocok buat yang mau tampil sebagai bisnis resmi, bukan toko rumahan yang cuma ngandelin BA.
 rima gue tutup: ini paket paling solid, website lu berdiri tegas, siap narik klien tanpa bikin malu di mata banyak orang yang lewat di dunia maya.
+
+referensi : https://landingpage.wall.id/
