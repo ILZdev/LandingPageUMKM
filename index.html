@@ -60,6 +60,15 @@
       .accordion-content.active {
         max-height: 500px;
       }
+
+      .btn-primary {
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        opacity: 0.85;
+        transform: translateY(-2px);
+      }
     </style>
     <style>
       @view-transition {
@@ -71,49 +80,57 @@
   <body class="smooth-scroll">
     <!-- Header Navigation -->
     <header
-      class="fixed top-0 w-full z-50 transition-all duration-300"
+      class="fixed top-0 w-full z-50 transition-all duration-300 bg-white shadow-sm"
       id="header"
     >
       <nav
         class="container mx-auto px-6 py-4 flex justify-between items-center"
       >
-        <div id="business-name" class="text-2xl font-bold tracking-tight">
+        <div
+          id="business-name"
+          class="text-2xl font-bold tracking-tight text-gray-900"
+        >
           BrandKu
         </div>
         <div class="flex gap-8 items-center">
           <a
             href="#produk"
-            class="text-sm font-medium hover:opacity-70 transition-opacity"
+            class="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
             >Produk</a
           >
           <a
             href="#testimoni"
-            class="text-sm font-medium hover:opacity-70 transition-opacity"
+            class="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
             >Testimoni</a
           >
           <a
             href="#faq"
-            class="text-sm font-medium hover:opacity-70 transition-opacity"
+            class="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
             >FAQ</a
           >
           <a
             href="#kontak"
             id="header-cta"
-            class="px-6 py-2 rounded-lg text-sm font-semibold transition-all duration-300"
+            class="btn-primary px-6 py-2 bg-gray-900 text-white rounded-lg text-sm font-semibold"
             >Hubungi</a
           >
         </div>
       </nav>
     </header>
     <!-- Hero Section -->
-    <section class="min-h-full flex items-center justify-center px-6 pt-20">
+    <section
+      class="min-h-full flex items-center justify-center px-6 pt-20 bg-gray-50"
+    >
       <div class="container mx-auto max-w-4xl text-center fade-in">
-        <h1 id="hero-title" class="text-6xl font-bold mb-6 leading-tight">
+        <h1
+          id="hero-title"
+          class="text-6xl font-bold mb-6 leading-tight text-gray-900"
+        >
           Produk Berkualitas untuk Kebutuhan Anda
         </h1>
         <p
           id="hero-subtitle"
-          class="text-xl mb-10 opacity-80 max-w-2xl mx-auto"
+          class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto"
         >
           Kami berkomitmen memberikan produk terbaik dengan harga terjangkau dan
           layanan profesional
@@ -121,34 +138,42 @@
         <a
           href="#kontak"
           id="hero-cta"
-          class="inline-block px-10 py-4 rounded-lg text-lg font-bold transition-all duration-300 hover-lift"
+          class="btn-primary inline-block px-10 py-4 bg-gray-900 text-white rounded-lg text-lg font-bold"
           >Hubungi Kami Sekarang</a
         >
       </div>
     </section>
     <!-- Product Section -->
-    <section id="produk" class="py-24 px-6">
+    <section id="produk" class="py-24 px-6 bg-white">
       <div class="container mx-auto max-w-6xl">
         <h2
           id="product-section-title"
-          class="text-4xl font-bold text-center mb-16"
+          class="text-4xl font-bold text-center mb-16 text-gray-900"
         >
           Produk Unggulan
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <!-- Product 1 -->
-          <div class="rounded-2xl overflow-hidden hover-lift">
-            <div class="h-64 flex items-center justify-center text-6xl">📦</div>
+          <div
+            class="bg-white rounded-2xl overflow-hidden hover-lift shadow-md border border-gray-100"
+          >
+            <div
+              class="h-64 bg-gray-100 flex items-center justify-center text-6xl"
+            >
+              📦
+            </div>
             <div class="p-6">
-              <h3 class="text-2xl font-bold mb-2">Produk Premium A</h3>
-              <p class="mb-4 opacity-75 text-sm leading-relaxed">
+              <h3 class="text-2xl font-bold mb-2 text-gray-900">
+                Produk Premium A
+              </h3>
+              <p class="mb-4 text-gray-600 text-sm leading-relaxed">
                 Kualitas terbaik dengan bahan pilihan dan proses produksi yang
                 teliti
               </p>
               <div class="flex justify-between items-center">
-                <span class="text-2xl font-bold">Rp 250.000</span>
+                <span class="text-2xl font-bold text-gray-900">Rp 250.000</span>
                 <button
-                  class="px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-300"
+                  class="btn-primary px-5 py-2 bg-gray-900 text-white rounded-lg text-sm font-semibold"
                 >
                   Pesan
                 </button>
@@ -156,17 +181,25 @@
             </div>
           </div>
           <!-- Product 2 -->
-          <div class="rounded-2xl overflow-hidden hover-lift">
-            <div class="h-64 flex items-center justify-center text-6xl">🎁</div>
+          <div
+            class="bg-white rounded-2xl overflow-hidden hover-lift shadow-md border border-gray-100"
+          >
+            <div
+              class="h-64 bg-gray-100 flex items-center justify-center text-6xl"
+            >
+              🎁
+            </div>
             <div class="p-6">
-              <h3 class="text-2xl font-bold mb-2">Produk Eksklusif B</h3>
-              <p class="mb-4 opacity-75 text-sm leading-relaxed">
+              <h3 class="text-2xl font-bold mb-2 text-gray-900">
+                Produk Eksklusif B
+              </h3>
+              <p class="mb-4 text-gray-600 text-sm leading-relaxed">
                 Desain unik dan eksklusif, cocok untuk hadiah spesial Anda
               </p>
               <div class="flex justify-between items-center">
-                <span class="text-2xl font-bold">Rp 350.000</span>
+                <span class="text-2xl font-bold text-gray-900">Rp 350.000</span>
                 <button
-                  class="px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-300"
+                  class="btn-primary px-5 py-2 bg-gray-900 text-white rounded-lg text-sm font-semibold"
                 >
                   Pesan
                 </button>
@@ -174,18 +207,26 @@
             </div>
           </div>
           <!-- Product 3 -->
-          <div class="rounded-2xl overflow-hidden hover-lift">
-            <div class="h-64 flex items-center justify-center text-6xl">⭐</div>
+          <div
+            class="bg-white rounded-2xl overflow-hidden hover-lift shadow-md border border-gray-100"
+          >
+            <div
+              class="h-64 bg-gray-100 flex items-center justify-center text-6xl"
+            >
+              ⭐
+            </div>
             <div class="p-6">
-              <h3 class="text-2xl font-bold mb-2">Produk Favorit C</h3>
-              <p class="mb-4 opacity-75 text-sm leading-relaxed">
+              <h3 class="text-2xl font-bold mb-2 text-gray-900">
+                Produk Favorit C
+              </h3>
+              <p class="mb-4 text-gray-600 text-sm leading-relaxed">
                 Pilihan terlaris pelanggan dengan rating tinggi dan review
                 positif
               </p>
               <div class="flex justify-between items-center">
-                <span class="text-2xl font-bold">Rp 180.000</span>
+                <span class="text-2xl font-bold text-gray-900">Rp 180.000</span>
                 <button
-                  class="px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-300"
+                  class="btn-primary px-5 py-2 bg-gray-900 text-white rounded-lg text-sm font-semibold"
                 >
                   Pesan
                 </button>
@@ -196,67 +237,67 @@
       </div>
     </section>
     <!-- Testimonial Section -->
-    <section id="testimoni" class="py-24 px-6">
+    <section id="testimoni" class="py-24 px-6 bg-gray-50">
       <div class="container mx-auto max-w-6xl">
         <h2
           id="testimonial-section-title"
-          class="text-4xl font-bold text-center mb-16"
+          class="text-4xl font-bold text-center mb-16 text-gray-900"
         >
           Apa Kata Pelanggan
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <!-- Testimonial 1 -->
-          <div class="p-8 rounded-2xl">
+          <div class="p-8 rounded-2xl bg-white shadow-sm">
             <div class="flex items-center mb-4">
               <div
-                class="w-12 h-12 rounded-full flex items-center justify-center text-2xl mr-4"
+                class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-2xl mr-4"
               >
                 👤
               </div>
               <div>
-                <div class="font-bold">Sarah M.</div>
-                <div class="text-sm opacity-70">Jakarta</div>
+                <div class="font-bold text-gray-900">Sarah M.</div>
+                <div class="text-sm text-gray-600">Jakarta</div>
               </div>
             </div>
-            <p class="text-sm leading-relaxed opacity-80">
+            <p class="text-sm leading-relaxed text-gray-700">
               "Kualitas produknya benar-benar memuaskan! Pelayanan cepat dan
               ramah. Akan order lagi pasti."
             </p>
             <div class="mt-4 text-yellow-500">⭐⭐⭐⭐⭐</div>
           </div>
           <!-- Testimonial 2 -->
-          <div class="p-8 rounded-2xl">
+          <div class="p-8 rounded-2xl bg-white shadow-sm">
             <div class="flex items-center mb-4">
               <div
-                class="w-12 h-12 rounded-full flex items-center justify-center text-2xl mr-4"
+                class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-2xl mr-4"
               >
                 👤
               </div>
               <div>
-                <div class="font-bold">Budi S.</div>
-                <div class="text-sm opacity-70">Bandung</div>
+                <div class="font-bold text-gray-900">Budi S.</div>
+                <div class="text-sm text-gray-600">Bandung</div>
               </div>
             </div>
-            <p class="text-sm leading-relaxed opacity-80">
+            <p class="text-sm leading-relaxed text-gray-700">
               "Harga terjangkau dengan kualitas premium. Packaging juga rapi
               banget, cocok buat kado!"
             </p>
             <div class="mt-4 text-yellow-500">⭐⭐⭐⭐⭐</div>
           </div>
           <!-- Testimonial 3 -->
-          <div class="p-8 rounded-2xl">
+          <div class="p-8 rounded-2xl bg-white shadow-sm">
             <div class="flex items-center mb-4">
               <div
-                class="w-12 h-12 rounded-full flex items-center justify-center text-2xl mr-4"
+                class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-2xl mr-4"
               >
                 👤
               </div>
               <div>
-                <div class="font-bold">Linda T.</div>
-                <div class="text-sm opacity-70">Surabaya</div>
+                <div class="font-bold text-gray-900">Linda T.</div>
+                <div class="text-sm text-gray-600">Surabaya</div>
               </div>
             </div>
-            <p class="text-sm leading-relaxed opacity-80">
+            <p class="text-sm leading-relaxed text-gray-700">
               "Sudah langganan 6 bulan, gak pernah kecewa. Produknya konsisten
               bagus terus!"
             </p>
@@ -266,24 +307,27 @@
       </div>
     </section>
     <!-- FAQ Section -->
-    <section id="faq" class="py-24 px-6">
+    <section id="faq" class="py-24 px-6 bg-white">
       <div class="container mx-auto max-w-3xl">
-        <h2 id="faq-section-title" class="text-4xl font-bold text-center mb-16">
+        <h2
+          id="faq-section-title"
+          class="text-4xl font-bold text-center mb-16 text-gray-900"
+        >
           Pertanyaan Umum
         </h2>
         <div class="space-y-4">
           <!-- FAQ 1 -->
-          <div class="rounded-xl overflow-hidden">
+          <div class="rounded-xl overflow-hidden bg-gray-50">
             <button
-              class="w-full px-6 py-5 text-left font-semibold flex justify-between items-center transition-colors duration-300 faq-button"
+              class="w-full px-6 py-5 text-left font-semibold flex justify-between items-center transition-colors duration-300 faq-button text-gray-900 hover:bg-gray-100"
             >
               <span>Bagaimana cara memesan produk?</span>
               <span class="text-2xl transition-transform duration-300 faq-icon"
                 >+</span
               >
             </button>
-            <div class="accordion-content px-6">
-              <p class="pb-5 opacity-80 text-sm leading-relaxed">
+            <div class="accordion-content px-6 bg-white">
+              <p class="pb-5 text-gray-700 text-sm leading-relaxed">
                 Anda bisa menghubungi kami melalui WhatsApp, Instagram, atau
                 form kontak di bawah. Tim kami akan membantu proses pemesanan
                 Anda dengan cepat dan mudah.
@@ -291,17 +335,17 @@
             </div>
           </div>
           <!-- FAQ 2 -->
-          <div class="rounded-xl overflow-hidden">
+          <div class="rounded-xl overflow-hidden bg-gray-50">
             <button
-              class="w-full px-6 py-5 text-left font-semibold flex justify-between items-center transition-colors duration-300 faq-button"
+              class="w-full px-6 py-5 text-left font-semibold flex justify-between items-center transition-colors duration-300 faq-button text-gray-900 hover:bg-gray-100"
             >
               <span>Apakah ada garansi produk?</span>
               <span class="text-2xl transition-transform duration-300 faq-icon"
                 >+</span
               >
             </button>
-            <div class="accordion-content px-6">
-              <p class="pb-5 opacity-80 text-sm leading-relaxed">
+            <div class="accordion-content px-6 bg-white">
+              <p class="pb-5 text-gray-700 text-sm leading-relaxed">
                 Ya, semua produk kami dilengkapi dengan garansi kualitas. Jika
                 ada kerusakan atau cacat produksi, kami akan mengganti produk
                 Anda tanpa biaya tambahan.
@@ -309,17 +353,17 @@
             </div>
           </div>
           <!-- FAQ 3 -->
-          <div class="rounded-xl overflow-hidden">
+          <div class="rounded-xl overflow-hidden bg-gray-50">
             <button
-              class="w-full px-6 py-5 text-left font-semibold flex justify-between items-center transition-colors duration-300 faq-button"
+              class="w-full px-6 py-5 text-left font-semibold flex justify-between items-center transition-colors duration-300 faq-button text-gray-900 hover:bg-gray-100"
             >
               <span>Berapa lama waktu pengiriman?</span>
               <span class="text-2xl transition-transform duration-300 faq-icon"
                 >+</span
               >
             </button>
-            <div class="accordion-content px-6">
-              <p class="pb-5 opacity-80 text-sm leading-relaxed">
+            <div class="accordion-content px-6 bg-white">
+              <p class="pb-5 text-gray-700 text-sm leading-relaxed">
                 Untuk wilayah Jabodetabek 1-2 hari kerja, luar kota 3-5 hari
                 kerja. Kami menggunakan jasa ekspedisi terpercaya untuk
                 memastikan produk sampai dengan aman.
@@ -327,17 +371,17 @@
             </div>
           </div>
           <!-- FAQ 4 -->
-          <div class="rounded-xl overflow-hidden">
+          <div class="rounded-xl overflow-hidden bg-gray-50">
             <button
-              class="w-full px-6 py-5 text-left font-semibold flex justify-between items-center transition-colors duration-300 faq-button"
+              class="w-full px-6 py-5 text-left font-semibold flex justify-between items-center transition-colors duration-300 faq-button text-gray-900 hover:bg-gray-100"
             >
               <span>Apakah bisa custom atau request desain?</span>
               <span class="text-2xl transition-transform duration-300 faq-icon"
                 >+</span
               >
             </button>
-            <div class="accordion-content px-6">
-              <p class="pb-5 opacity-80 text-sm leading-relaxed">
+            <div class="accordion-content px-6 bg-white">
+              <p class="pb-5 text-gray-700 text-sm leading-relaxed">
                 Tentu saja! Kami menerima custom order dan request desain sesuai
                 keinginan Anda. Hubungi kami untuk diskusi lebih lanjut mengenai
                 kebutuhan custom Anda.
@@ -348,12 +392,15 @@
       </div>
     </section>
     <!-- Contact Section -->
-    <section id="kontak" class="py-24 px-6">
+    <section id="kontak" class="py-24 px-6 bg-gray-50">
       <div class="container mx-auto max-w-4xl text-center">
-        <h2 id="contact-section-title" class="text-4xl font-bold mb-6">
+        <h2
+          id="contact-section-title"
+          class="text-4xl font-bold mb-6 text-gray-900"
+        >
           Hubungi Kami
         </h2>
-        <p id="contact-description" class="text-lg mb-12 opacity-80">
+        <p id="contact-description" class="text-lg mb-12 text-gray-600">
           Siap melayani Anda dengan sepenuh hati. Tim kami akan merespon dengan
           cepat!
         </p>
@@ -362,68 +409,71 @@
             href="https://wa.me/6281234567890"
             target="_blank"
             rel="noopener noreferrer"
-            class="p-8 rounded-2xl hover-lift transition-all duration-300"
+            class="p-8 rounded-2xl hover-lift transition-all duration-300 bg-white shadow-sm"
           >
             <div class="text-5xl mb-4">💬</div>
-            <div class="font-bold text-lg mb-2">WhatsApp</div>
-            <div class="text-sm opacity-70">Chat langsung</div></a
+            <div class="font-bold text-lg mb-2 text-gray-900">WhatsApp</div>
+            <div class="text-sm text-gray-600">Chat langsung</div></a
           >
           <a
             href="https://instagram.com"
             target="_blank"
             rel="noopener noreferrer"
-            class="p-8 rounded-2xl hover-lift transition-all duration-300"
+            class="p-8 rounded-2xl hover-lift transition-all duration-300 bg-white shadow-sm"
           >
             <div class="text-5xl mb-4">📸</div>
-            <div class="font-bold text-lg mb-2">Instagram</div>
-            <div class="text-sm opacity-70">@brandku</div></a
+            <div class="font-bold text-lg mb-2 text-gray-900">Instagram</div>
+            <div class="text-sm text-gray-600">@brandku</div></a
           >
           <a
             href="mailto:info@brandku.com"
             target="_blank"
             rel="noopener noreferrer"
-            class="p-8 rounded-2xl hover-lift transition-all duration-300"
+            class="p-8 rounded-2xl hover-lift transition-all duration-300 bg-white shadow-sm"
           >
             <div class="text-5xl mb-4">✉️</div>
-            <div class="font-bold text-lg mb-2">Email</div>
-            <div class="text-sm opacity-70">info@brandku.com</div></a
+            <div class="font-bold text-lg mb-2 text-gray-900">Email</div>
+            <div class="text-sm text-gray-600">info@brandku.com</div></a
           >
         </div>
         <form
-          class="max-w-2xl mx-auto space-y-4"
+          class="max-w-2xl mx-auto space-y-4 bg-white p-8 rounded-2xl shadow-sm"
           onsubmit="handleSubmit(event)"
         >
           <input
             type="text"
             placeholder="Nama Anda"
             required
-            class="w-full px-6 py-4 rounded-xl border-2 transition-colors duration-300 focus:outline-none"
+            class="w-full px-6 py-4 rounded-xl border-2 border-gray-200 transition-colors duration-300 focus:outline-none focus:border-gray-400 text-gray-900"
             id="name-input"
           />
           <input
             type="email"
             placeholder="Email Anda"
             required
-            class="w-full px-6 py-4 rounded-xl border-2 transition-colors duration-300 focus:outline-none"
+            class="w-full px-6 py-4 rounded-xl border-2 border-gray-200 transition-colors duration-300 focus:outline-none focus:border-gray-400 text-gray-900"
             id="email-input"
           />
           <textarea
             placeholder="Pesan Anda"
             rows="5"
             required
-            class="w-full px-6 py-4 rounded-xl border-2 transition-colors duration-300 focus:outline-none"
+            class="w-full px-6 py-4 rounded-xl border-2 border-gray-200 transition-colors duration-300 focus:outline-none focus:border-gray-400 text-gray-900"
             id="message-input"
           ></textarea>
           <button
             type="submit"
-            class="w-full py-4 rounded-xl font-bold text-lg transition-all duration-300 hover-lift"
+            class="btn-primary w-full py-4 rounded-xl font-bold text-lg bg-gray-900 text-white"
             id="submit-button"
           >
             Kirim Pesan
           </button>
         </form>
-        <div id="success-message" class="mt-6 p-4 rounded-xl hidden">
-          <p class="font-semibold">
+        <div
+          id="success-message"
+          class="mt-6 p-4 rounded-xl bg-green-50 border border-green-200 hidden"
+        >
+          <p class="font-semibold text-green-800">
             ✓ Terima kasih! Pesan Anda telah terkirim. Kami akan segera
             menghubungi Anda.
           </p>
@@ -431,40 +481,51 @@
       </div>
     </section>
     <!-- Footer -->
-    <footer class="py-12 px-6 border-t">
+    <footer class="py-12 px-6 border-t border-gray-200 bg-white">
       <div class="container mx-auto text-center">
-        <div id="footer-business-name" class="text-2xl font-bold mb-4">
+        <div
+          id="footer-business-name"
+          class="text-2xl font-bold mb-4 text-gray-900"
+        >
           BrandKu
         </div>
-        <p class="text-sm opacity-70 mb-6">
+        <p class="text-sm text-gray-600 mb-6">
           Produk Berkualitas, Layanan Profesional
         </p>
         <div class="flex justify-center gap-6 mb-6">
-          <a href="#produk" class="text-sm hover:opacity-70 transition-opacity"
+          <a
+            href="#produk"
+            class="text-sm text-gray-600 hover:text-gray-900 transition-colors"
             >Produk</a
           >
           <a
             href="#testimoni"
-            class="text-sm hover:opacity-70 transition-opacity"
+            class="text-sm text-gray-600 hover:text-gray-900 transition-colors"
             >Testimoni</a
           >
-          <a href="#faq" class="text-sm hover:opacity-70 transition-opacity"
+          <a
+            href="#faq"
+            class="text-sm text-gray-600 hover:text-gray-900 transition-colors"
             >FAQ</a
           >
-          <a href="#kontak" class="text-sm hover:opacity-70 transition-opacity"
+          <a
+            href="#kontak"
+            class="text-sm text-gray-600 hover:text-gray-900 transition-colors"
             >Kontak</a
           >
         </div>
-        <p class="text-xs opacity-60">© 2024 BrandKu. All rights reserved.</p>
+        <p class="text-xs text-gray-500">
+          © 2024 BrandKu. All rights reserved.
+        </p>
       </div>
     </footer>
     <script>
       const defaultConfig = {
-        background_color: "#f8f9fa",
+        background_color: "#f9fafb",
         card_color: "#ffffff",
-        text_color: "#1a1a1a",
-        primary_button_color: "#2d3748",
-        secondary_surface_color: "#e9ecef",
+        text_color: "#111827",
+        primary_button_color: "#111827",
+        secondary_surface_color: "#f3f4f6",
         font_family: "system-ui",
         font_size: 16,
         business_name: "BrandKu",
@@ -494,35 +555,11 @@
         const baseSize = config.font_size || defaultConfig.font_size;
         const baseFontStack = "system-ui, -apple-system, sans-serif";
 
-        document.body.style.backgroundColor = backgroundColor;
-        document.body.style.color = textColor;
         document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
 
-        document.getElementById("header").style.backgroundColor = cardColor;
-        document.getElementById("header").style.color = textColor;
-        document.getElementById(
-          "header"
-        ).style.borderBottom = `1px solid ${secondarySurfaceColor}`;
-
-        document.getElementById("business-name").textContent =
-          config.business_name || defaultConfig.business_name;
-        document.getElementById("business-name").style.color = textColor;
-        document.getElementById("business-name").style.fontSize = `${
-          baseSize * 1.5
-        }px`;
-
-        const navLinks = document.querySelectorAll("nav a:not([id])");
-        navLinks.forEach((link) => {
-          link.style.color = textColor;
-          link.style.fontSize = `${baseSize * 0.875}px`;
-        });
-
-        document.getElementById("header-cta").style.backgroundColor =
-          primaryButtonColor;
-        document.getElementById("header-cta").style.color = cardColor;
-        document.getElementById("header-cta").style.fontSize = `${
-          baseSize * 0.875
-        }px`;
+        // Hero Section
+        const heroSection = document.querySelector("section:nth-of-type(1)");
+        heroSection.style.backgroundColor = backgroundColor;
 
         document.getElementById("hero-title").textContent =
           config.hero_title || defaultConfig.hero_title;
@@ -538,14 +575,35 @@
           baseSize * 1.25
         }px`;
 
-        document.getElementById("hero-cta").textContent =
-          config.cta_button || defaultConfig.cta_button;
-        document.getElementById("hero-cta").style.backgroundColor =
-          primaryButtonColor;
-        document.getElementById("hero-cta").style.color = cardColor;
-        document.getElementById("hero-cta").style.fontSize = `${
-          baseSize * 1.125
+        const heroCta = document.getElementById("hero-cta");
+        heroCta.textContent = config.cta_button || defaultConfig.cta_button;
+        heroCta.style.backgroundColor = primaryButtonColor;
+        heroCta.style.color = cardColor;
+        heroCta.style.fontSize = `${baseSize * 1.125}px`;
+
+        // Header
+        document.getElementById("header").style.backgroundColor = cardColor;
+
+        document.getElementById("business-name").textContent =
+          config.business_name || defaultConfig.business_name;
+        document.getElementById("business-name").style.color = textColor;
+        document.getElementById("business-name").style.fontSize = `${
+          baseSize * 1.5
         }px`;
+
+        const navLinks = document.querySelectorAll("nav a:not(#header-cta)");
+        navLinks.forEach((link) => {
+          link.style.color = textColor;
+          link.style.fontSize = `${baseSize * 0.875}px`;
+        });
+
+        const headerCta = document.getElementById("header-cta");
+        headerCta.style.backgroundColor = primaryButtonColor;
+        headerCta.style.color = cardColor;
+        headerCta.style.fontSize = `${baseSize * 0.875}px`;
+
+        // Product Section
+        document.querySelector("#produk").style.backgroundColor = cardColor;
 
         document.getElementById("product-section-title").textContent =
           config.product_title || defaultConfig.product_title;
@@ -555,12 +613,9 @@
           baseSize * 2.5
         }px`;
 
-        const productCards = document.querySelectorAll(
-          "#produk > div > div > div"
-        );
+        const productCards = document.querySelectorAll("#produk .grid > div");
         productCards.forEach((card) => {
           card.style.backgroundColor = cardColor;
-          card.style.color = textColor;
 
           const emojiDiv = card.querySelector("div:first-child");
           emojiDiv.style.backgroundColor = secondarySurfaceColor;
@@ -573,7 +628,7 @@
           description.style.color = textColor;
           description.style.fontSize = `${baseSize * 0.875}px`;
 
-          const price = card.querySelector(".text-2xl");
+          const price = card.querySelector("span");
           price.style.color = textColor;
           price.style.fontSize = `${baseSize * 1.5}px`;
 
@@ -582,6 +637,10 @@
           button.style.color = cardColor;
           button.style.fontSize = `${baseSize * 0.875}px`;
         });
+
+        // Testimonial Section
+        document.querySelector("#testimoni").style.backgroundColor =
+          backgroundColor;
 
         document.getElementById("testimonial-section-title").textContent =
           config.testimonial_title || defaultConfig.testimonial_title;
@@ -592,17 +651,19 @@
         ).style.fontSize = `${baseSize * 2.5}px`;
 
         const testimonialCards = document.querySelectorAll(
-          "#testimoni > div > div > div"
+          "#testimoni .grid > div"
         );
         testimonialCards.forEach((card) => {
           card.style.backgroundColor = cardColor;
-          card.style.color = textColor;
+
+          const avatar = card.querySelector(".rounded-full");
+          avatar.style.backgroundColor = secondarySurfaceColor;
 
           const name = card.querySelector(".font-bold");
           name.style.color = textColor;
           name.style.fontSize = `${baseSize}px`;
 
-          const location = card.querySelector(".text-sm.opacity-70");
+          const location = card.querySelectorAll(".text-sm")[0];
           location.style.color = textColor;
           location.style.fontSize = `${baseSize * 0.875}px`;
 
@@ -611,6 +672,9 @@
           testimonialText.style.fontSize = `${baseSize * 0.875}px`;
         });
 
+        // FAQ Section
+        document.querySelector("#faq").style.backgroundColor = cardColor;
+
         document.getElementById("faq-section-title").textContent =
           config.faq_title || defaultConfig.faq_title;
         document.getElementById("faq-section-title").style.color = textColor;
@@ -618,18 +682,25 @@
           baseSize * 2.5
         }px`;
 
-        const faqButtons = document.querySelectorAll(".faq-button");
-        faqButtons.forEach((button) => {
-          button.style.backgroundColor = cardColor;
+        const faqItems = document.querySelectorAll("#faq .space-y-4 > div");
+        faqItems.forEach((item) => {
+          item.style.backgroundColor = secondarySurfaceColor;
+
+          const button = item.querySelector(".faq-button");
           button.style.color = textColor;
           button.style.fontSize = `${baseSize}px`;
-        });
 
-        const faqAnswers = document.querySelectorAll(".accordion-content p");
-        faqAnswers.forEach((answer) => {
+          const content = item.querySelector(".accordion-content");
+          content.style.backgroundColor = cardColor;
+
+          const answer = content.querySelector("p");
           answer.style.color = textColor;
           answer.style.fontSize = `${baseSize * 0.875}px`;
         });
+
+        // Contact Section
+        document.querySelector("#kontak").style.backgroundColor =
+          backgroundColor;
 
         document.getElementById("contact-section-title").textContent =
           config.contact_title || defaultConfig.contact_title;
@@ -646,12 +717,9 @@
           baseSize * 1.125
         }px`;
 
-        const contactCards = document.querySelectorAll(
-          "#kontak > div > div:first-of-type > a"
-        );
+        const contactCards = document.querySelectorAll("#kontak .grid > a");
         contactCards.forEach((card) => {
           card.style.backgroundColor = cardColor;
-          card.style.color = textColor;
 
           const title = card.querySelector(".font-bold");
           title.style.color = textColor;
@@ -661,6 +729,9 @@
           subtitle.style.color = textColor;
           subtitle.style.fontSize = `${baseSize * 0.875}px`;
         });
+
+        const form = document.querySelector("form");
+        form.style.backgroundColor = cardColor;
 
         const formInputs = document.querySelectorAll(
           "#kontak input, #kontak textarea"
@@ -672,21 +743,15 @@
           input.style.fontSize = `${baseSize}px`;
         });
 
-        document.getElementById("submit-button").style.backgroundColor =
-          primaryButtonColor;
-        document.getElementById("submit-button").style.color = cardColor;
-        document.getElementById("submit-button").style.fontSize = `${
-          baseSize * 1.125
-        }px`;
+        const submitButton = document.getElementById("submit-button");
+        submitButton.style.backgroundColor = primaryButtonColor;
+        submitButton.style.color = cardColor;
+        submitButton.style.fontSize = `${baseSize * 1.125}px`;
 
-        document.getElementById("success-message").style.backgroundColor =
-          secondarySurfaceColor;
-        document.getElementById("success-message").style.color = textColor;
-
+        // Footer
         const footer = document.querySelector("footer");
-        footer.style.backgroundColor = backgroundColor;
+        footer.style.backgroundColor = cardColor;
         footer.style.borderColor = secondarySurfaceColor;
-        footer.style.color = textColor;
 
         document.getElementById("footer-business-name").textContent =
           config.business_name || defaultConfig.business_name;
@@ -695,15 +760,15 @@
           baseSize * 1.5
         }px`;
 
+        const footerText = footer.querySelectorAll("p");
+        footerText.forEach((text) => {
+          text.style.color = textColor;
+        });
+
         const footerLinks = footer.querySelectorAll("a");
         footerLinks.forEach((link) => {
           link.style.color = textColor;
           link.style.fontSize = `${baseSize * 0.875}px`;
-        });
-
-        const footerText = footer.querySelectorAll("p");
-        footerText.forEach((text) => {
-          text.style.color = textColor;
         });
       }
 
@@ -828,7 +893,7 @@
 
       // FAQ Accordion
       const faqButtons = document.querySelectorAll(".faq-button");
-      faqButtons.forEach((button, index) => {
+      faqButtons.forEach((button) => {
         button.addEventListener("click", () => {
           const content = button.nextElementSibling;
           const icon = button.querySelector(".faq-icon");
@@ -851,7 +916,6 @@
       });
 
       // Header scroll effect
-      let lastScroll = 0;
       window.addEventListener("scroll", () => {
         const header = document.getElementById("header");
         const currentScroll = window.pageYOffset;
@@ -859,10 +923,8 @@
         if (currentScroll > 50) {
           header.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
         } else {
-          header.style.boxShadow = "none";
+          header.style.boxShadow = "0 1px 3px rgba(0, 0, 0, 0.05)";
         }
-
-        lastScroll = currentScroll;
       });
 
       // Form submission
@@ -919,7 +981,7 @@
           if (b) {
             var d = b.createElement("script");
             d.innerHTML =
-              "window.__CF$cv$params={r:'9a0bdd2914f5fd31',t:'MTc2MzUxNTAwNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+              "window.__CF$cv$params={r:'9a0bee9ec20cfd79',t:'MTc2MzUxNTcxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
             b.getElementsByTagName("head")[0].appendChild(d);
           }
         }
