@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UMKM Landing Page</title>
+    <title>UMKM Product Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/_sdk/element_sdk.js"></script>
     <style>
@@ -20,54 +20,128 @@
       html,
       body {
         height: 100%;
-        overflow-x: hidden;
       }
 
-      .smooth-scroll {
-        scroll-behavior: smooth;
+      .page {
+        display: none;
+        animation: fadeIn 0.3s ease-in;
       }
 
-      .fade-in {
-        animation: fadeIn 0.6s ease-in;
+      .page.active {
+        display: block;
       }
 
       @keyframes fadeIn {
         from {
           opacity: 0;
-          transform: translateY(20px);
         }
         to {
           opacity: 1;
-          transform: translateY(0);
         }
       }
 
-      .hover-lift {
+      .product-card {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
       }
 
-      .hover-lift:hover {
+      .product-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
       }
 
-      .accordion-content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
+      .theme-toggle {
+        transition: all 0.3s ease;
       }
 
-      .accordion-content.active {
-        max-height: 500px;
+      /* Light theme */
+      body.light {
+        background-color: #ffffff;
+        color: #1f2937;
+      }
+
+      body.light .nav-bar {
+        background-color: #ffffff;
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      body.light .card-bg {
+        background-color: #f9fafb;
+      }
+
+      body.light .text-primary {
+        color: #1f2937;
+      }
+
+      body.light .text-secondary {
+        color: #6b7280;
+      }
+
+      body.light .border-color {
+        border-color: #e5e7eb;
+      }
+
+      /* Dark theme */
+      body.dark {
+        background-color: #111827;
+        color: #f9fafb;
+      }
+
+      body.dark .nav-bar {
+        background-color: #1f2937;
+        border-bottom: 1px solid #374151;
+      }
+
+      body.dark .card-bg {
+        background-color: #1f2937;
+      }
+
+      body.dark .text-primary {
+        color: #f9fafb;
+      }
+
+      body.dark .text-secondary {
+        color: #9ca3af;
+      }
+
+      body.dark .border-color {
+        border-color: #374151;
       }
 
       .btn-primary {
+        background-color: #10b981;
+        color: white;
         transition: all 0.3s ease;
       }
 
       .btn-primary:hover {
-        opacity: 0.85;
+        background-color: #059669;
         transform: translateY(-2px);
+      }
+
+      .admin-panel {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 100;
+      }
+
+      .admin-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        overflow-y: auto;
+      }
+
+      .admin-modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     </style>
     <style>
@@ -77,698 +151,642 @@
     </style>
     <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   </head>
-  <body class="smooth-scroll">
-    <!-- Header Navigation -->
-    <header
-      class="fixed top-0 w-full z-50 transition-all duration-300 bg-white shadow-sm"
-      id="header"
-    >
-      <nav
-        class="container mx-auto px-6 py-4 flex justify-between items-center"
+  <body class="light">
+    <!-- Navigation Bar -->
+    <nav class="nav-bar fixed top-0 w-full z-50 shadow-sm">
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+          <h1
+            id="nav-store-name"
+            class="text-2xl font-bold text-primary cursor-pointer"
+            onclick="navigateTo('home')"
+          >
+            TokoKu
+          </h1>
+          <div class="flex items-center gap-6">
+            <a
+              onclick="navigateTo('home')"
+              class="text-sm font-medium text-secondary hover:text-primary cursor-pointer"
+              >Beranda</a
+            >
+            <a
+              onclick="navigateTo('products')"
+              class="text-sm font-medium text-secondary hover:text-primary cursor-pointer"
+              >Produk</a
+            >
+            <a
+              onclick="navigateTo('contact')"
+              class="text-sm font-medium text-secondary hover:text-primary cursor-pointer"
+              >Kontak</a
+            >
+            <a
+              onclick="navigateTo('testimonials')"
+              class="text-sm font-medium text-secondary hover:text-primary cursor-pointer"
+              >Testimoni</a
+            >
+            <button
+              onclick="toggleTheme()"
+              class="theme-toggle px-4 py-2 rounded-lg text-sm font-medium card-bg"
+            >
+              <span id="theme-icon">🌙</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Home Page -->
+    <div id="home" class="page active" style="padding-top: 80px">
+      <!-- Banner Promo -->
+      <section class="card-bg py-20">
+        <div class="container mx-auto px-6 text-center">
+          <div
+            class="inline-block px-4 py-2 bg-red-500 text-white rounded-full text-sm font-bold mb-4"
+          >
+            PROMO SPESIAL
+          </div>
+          <h2
+            id="promo-banner-text"
+            class="text-5xl font-bold text-primary mb-4"
+          >
+            Diskon 50% Untuk Semua Produk!
+          </h2>
+          <p class="text-xl text-secondary mb-8">
+            Buruan order sebelum kehabisan stok
+          </p>
+          <button
+            onclick="navigateTo('products')"
+            class="btn-primary px-8 py-4 rounded-lg font-bold text-lg"
+          >
+            Lihat Produk
+          </button>
+        </div>
+      </section>
+      <!-- Featured Products -->
+      <section class="py-16">
+        <div class="container mx-auto px-6">
+          <h2 class="text-3xl font-bold text-primary mb-8 text-center">
+            Produk Unggulan
+          </h2>
+          <div
+            class="grid grid-cols-1 md:grid-cols-3 gap-8"
+            id="featured-products"
+          >
+            <!-- Products will be loaded here -->
+          </div>
+          <div class="text-center mt-10">
+            <button
+              onclick="navigateTo('products')"
+              class="btn-primary px-6 py-3 rounded-lg font-semibold"
+            >
+              Lihat Semua Produk
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Products Page -->
+    <div id="products" class="page" style="padding-top: 80px">
+      <section class="py-16">
+        <div class="container mx-auto px-6">
+          <h2 class="text-4xl font-bold text-primary mb-10 text-center">
+            Semua Produk
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6" id="all-products">
+            <!-- Products will be loaded here -->
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Product Detail Page -->
+    <div id="product-detail" class="page" style="padding-top: 80px">
+      <section class="py-16">
+        <div class="container mx-auto px-6">
+          <button
+            onclick="navigateBack()"
+            class="text-secondary hover:text-primary mb-6 flex items-center gap-2"
+          >
+            <span>←</span> Kembali
+          </button>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div>
+              <div
+                id="detail-image"
+                class="card-bg rounded-2xl flex items-center justify-center"
+                style="height: 500px"
+              >
+                <span class="text-8xl">📦</span>
+              </div>
+            </div>
+            <div>
+              <h1 id="detail-name" class="text-4xl font-bold text-primary mb-4">
+                Nama Produk
+              </h1>
+              <div
+                id="detail-price"
+                class="text-3xl font-bold text-green-600 mb-6"
+              >
+                Rp 100.000
+              </div>
+              <div class="mb-8">
+                <h3 class="text-lg font-semibold text-primary mb-3">
+                  Deskripsi Produk
+                </h3>
+                <p
+                  id="detail-description"
+                  class="text-secondary leading-relaxed"
+                >
+                  Deskripsi lengkap produk akan muncul di sini.
+                </p>
+              </div>
+              <button
+                onclick="orderViaWhatsApp()"
+                class="btn-primary w-full py-4 rounded-lg font-bold text-lg flex items-center justify-center gap-3"
+              >
+                <span>💬</span> Pesan via WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Contact Page -->
+    <div id="contact" class="page" style="padding-top: 80px">
+      <section class="py-16">
+        <div class="container mx-auto px-6 max-w-4xl">
+          <h2 class="text-4xl font-bold text-primary mb-10 text-center">
+            Hubungi Kami
+          </h2>
+          <div class="card-bg rounded-2xl p-8 mb-10">
+            <h3 class="text-2xl font-bold text-primary mb-6">Profil Toko</h3>
+            <div class="space-y-4">
+              <div>
+                <label class="text-sm font-semibold text-secondary"
+                  >Nama Toko</label
+                >
+                <p id="contact-store-name" class="text-lg text-primary">
+                  TokoKu
+                </p>
+              </div>
+              <div>
+                <label class="text-sm font-semibold text-secondary"
+                  >Deskripsi</label
+                >
+                <p id="contact-description" class="text-lg text-primary">
+                  Toko online terpercaya menyediakan berbagai produk berkualitas
+                  dengan harga terjangkau.
+                </p>
+              </div>
+              <div>
+                <label class="text-sm font-semibold text-secondary"
+                  >Lokasi</label
+                >
+                <p id="contact-location" class="text-lg text-primary">
+                  Jakarta, Indonesia
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <a
+              id="whatsapp-link"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="card-bg rounded-xl p-6 text-center hover:shadow-lg transition-shadow"
+            >
+              <div class="text-5xl mb-3">💬</div>
+              <div class="font-bold text-primary mb-2">WhatsApp</div>
+              <div id="display-whatsapp" class="text-sm text-secondary">
+                +62 812-3456-789
+              </div></a
+            >
+            <a
+              id="instagram-link"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="card-bg rounded-xl p-6 text-center hover:shadow-lg transition-shadow"
+            >
+              <div class="text-5xl mb-3">📸</div>
+              <div class="font-bold text-primary mb-2">Instagram</div>
+              <div id="display-instagram" class="text-sm text-secondary">
+                @tokoku
+              </div></a
+            >
+            <a
+              id="facebook-link"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="card-bg rounded-xl p-6 text-center hover:shadow-lg transition-shadow"
+            >
+              <div class="text-5xl mb-3">👥</div>
+              <div class="font-bold text-primary mb-2">Facebook</div>
+              <div id="display-facebook" class="text-sm text-secondary">
+                TokoKu Official
+              </div></a
+            >
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Testimonials Page -->
+    <div id="testimonials" class="page" style="padding-top: 80px">
+      <section class="py-16">
+        <div class="container mx-auto px-6 max-w-5xl">
+          <h2 class="text-4xl font-bold text-primary mb-10 text-center">
+            Testimoni Pelanggan
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="card-bg rounded-xl p-8">
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center text-2xl mr-4"
+                >
+                  👤
+                </div>
+                <div>
+                  <div class="font-bold text-primary">Siti Aminah</div>
+                  <div class="text-sm text-secondary">Jakarta</div>
+                </div>
+              </div>
+              <p class="text-secondary leading-relaxed mb-4">
+                "Produknya bagus banget! Pengiriman cepat dan packingnya rapi.
+                Puas banget belanja di sini."
+              </p>
+              <div class="text-yellow-500">⭐⭐⭐⭐⭐</div>
+            </div>
+            <div class="card-bg rounded-xl p-8">
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center text-2xl mr-4"
+                >
+                  👤
+                </div>
+                <div>
+                  <div class="font-bold text-primary">Budi Santoso</div>
+                  <div class="text-sm text-secondary">Bandung</div>
+                </div>
+              </div>
+              <p class="text-secondary leading-relaxed mb-4">
+                "Harga terjangkau, kualitas oke. Udah langganan beberapa kali,
+                selalu puas. Recommended!"
+              </p>
+              <div class="text-yellow-500">⭐⭐⭐⭐⭐</div>
+            </div>
+            <div class="card-bg rounded-xl p-8">
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center text-2xl mr-4"
+                >
+                  👤
+                </div>
+                <div>
+                  <div class="font-bold text-primary">Dewi Lestari</div>
+                  <div class="text-sm text-secondary">Surabaya</div>
+                </div>
+              </div>
+              <p class="text-secondary leading-relaxed mb-4">
+                "Pelayanannya ramah, respon cepat. Produknya sesuai deskripsi.
+                Top markotop deh!"
+              </p>
+              <div class="text-yellow-500">⭐⭐⭐⭐⭐</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Admin Panel Button -->
+    <div class="admin-panel">
+      <button
+        onclick="toggleAdminModal()"
+        class="bg-blue-600 text-white px-6 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 transition-all"
       >
-        <div
-          id="business-name"
-          class="text-2xl font-bold tracking-tight text-gray-900"
-        >
-          BrandKu
+        ⚙️ Admin
+      </button>
+    </div>
+    <!-- Admin Modal -->
+    <div id="admin-modal" class="admin-modal">
+      <div class="card-bg rounded-2xl p-8 m-6 max-w-2xl w-full">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold text-primary">Panel Admin</h2>
+          <button
+            onclick="toggleAdminModal()"
+            class="text-2xl text-secondary hover:text-primary"
+          >
+            ×
+          </button>
         </div>
-        <div class="flex gap-8 items-center">
-          <a
-            href="#produk"
-            class="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
-            >Produk</a
-          >
-          <a
-            href="#testimoni"
-            class="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
-            >Testimoni</a
-          >
-          <a
-            href="#faq"
-            class="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
-            >FAQ</a
-          >
-          <a
-            href="#kontak"
-            id="header-cta"
-            class="btn-primary px-6 py-2 bg-gray-900 text-white rounded-lg text-sm font-semibold"
-            >Hubungi</a
-          >
-        </div>
-      </nav>
-    </header>
-    <!-- Hero Section -->
-    <section
-      class="min-h-full flex items-center justify-center px-6 pt-20 bg-gray-50"
-    >
-      <div class="container mx-auto max-w-4xl text-center fade-in">
-        <h1
-          id="hero-title"
-          class="text-6xl font-bold mb-6 leading-tight text-gray-900"
-        >
-          Produk Berkualitas untuk Kebutuhan Anda
-        </h1>
-        <p
-          id="hero-subtitle"
-          class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto"
-        >
-          Kami berkomitmen memberikan produk terbaik dengan harga terjangkau dan
-          layanan profesional
-        </p>
-        <a
-          href="#kontak"
-          id="hero-cta"
-          class="btn-primary inline-block px-10 py-4 bg-gray-900 text-white rounded-lg text-lg font-bold"
-          >Hubungi Kami Sekarang</a
-        >
-      </div>
-    </section>
-    <!-- Product Section -->
-    <section id="produk" class="py-24 px-6 bg-white">
-      <div class="container mx-auto max-w-6xl">
-        <h2
-          id="product-section-title"
-          class="text-4xl font-bold text-center mb-16 text-gray-900"
-        >
-          Produk Unggulan
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Product 1 -->
-          <div
-            class="bg-white rounded-2xl overflow-hidden hover-lift shadow-md border border-gray-100"
-          >
-            <div
-              class="h-64 bg-gray-100 flex items-center justify-center text-6xl"
+        <form id="admin-form" class="space-y-4">
+          <div>
+            <label class="block text-sm font-semibold text-primary mb-2"
+              >Nama Toko</label
             >
-              📦
-            </div>
-            <div class="p-6">
-              <h3 class="text-2xl font-bold mb-2 text-gray-900">
-                Produk Premium A
-              </h3>
-              <p class="mb-4 text-gray-600 text-sm leading-relaxed">
-                Kualitas terbaik dengan bahan pilihan dan proses produksi yang
-                teliti
-              </p>
-              <div class="flex justify-between items-center">
-                <span class="text-2xl font-bold text-gray-900">Rp 250.000</span>
-                <button
-                  class="btn-primary px-5 py-2 bg-gray-900 text-white rounded-lg text-sm font-semibold"
-                >
-                  Pesan
-                </button>
-              </div>
-            </div>
+            <input
+              type="text"
+              id="admin-store-name"
+              class="w-full px-4 py-3 rounded-lg border-2 border-color bg-transparent text-primary"
+              value="TokoKu"
+            />
           </div>
-          <!-- Product 2 -->
-          <div
-            class="bg-white rounded-2xl overflow-hidden hover-lift shadow-md border border-gray-100"
-          >
-            <div
-              class="h-64 bg-gray-100 flex items-center justify-center text-6xl"
+          <div>
+            <label class="block text-sm font-semibold text-primary mb-2"
+              >Nomor WhatsApp (format: 628123456789)</label
             >
-              🎁
-            </div>
-            <div class="p-6">
-              <h3 class="text-2xl font-bold mb-2 text-gray-900">
-                Produk Eksklusif B
-              </h3>
-              <p class="mb-4 text-gray-600 text-sm leading-relaxed">
-                Desain unik dan eksklusif, cocok untuk hadiah spesial Anda
-              </p>
-              <div class="flex justify-between items-center">
-                <span class="text-2xl font-bold text-gray-900">Rp 350.000</span>
-                <button
-                  class="btn-primary px-5 py-2 bg-gray-900 text-white rounded-lg text-sm font-semibold"
-                >
-                  Pesan
-                </button>
-              </div>
-            </div>
+            <input
+              type="text"
+              id="admin-whatsapp"
+              class="w-full px-4 py-3 rounded-lg border-2 border-color bg-transparent text-primary"
+              value="628123456789"
+            />
           </div>
-          <!-- Product 3 -->
-          <div
-            class="bg-white rounded-2xl overflow-hidden hover-lift shadow-md border border-gray-100"
-          >
-            <div
-              class="h-64 bg-gray-100 flex items-center justify-center text-6xl"
+          <div>
+            <label class="block text-sm font-semibold text-primary mb-2"
+              >Teks Promo Banner</label
             >
-              ⭐
-            </div>
-            <div class="p-6">
-              <h3 class="text-2xl font-bold mb-2 text-gray-900">
-                Produk Favorit C
-              </h3>
-              <p class="mb-4 text-gray-600 text-sm leading-relaxed">
-                Pilihan terlaris pelanggan dengan rating tinggi dan review
-                positif
-              </p>
-              <div class="flex justify-between items-center">
-                <span class="text-2xl font-bold text-gray-900">Rp 180.000</span>
-                <button
-                  class="btn-primary px-5 py-2 bg-gray-900 text-white rounded-lg text-sm font-semibold"
-                >
-                  Pesan
-                </button>
-              </div>
-            </div>
+            <input
+              type="text"
+              id="admin-promo"
+              class="w-full px-4 py-3 rounded-lg border-2 border-color bg-transparent text-primary"
+              value="Diskon 50% Untuk Semua Produk!"
+            />
           </div>
-        </div>
-      </div>
-    </section>
-    <!-- Testimonial Section -->
-    <section id="testimoni" class="py-24 px-6 bg-gray-50">
-      <div class="container mx-auto max-w-6xl">
-        <h2
-          id="testimonial-section-title"
-          class="text-4xl font-bold text-center mb-16 text-gray-900"
-        >
-          Apa Kata Pelanggan
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <!-- Testimonial 1 -->
-          <div class="p-8 rounded-2xl bg-white shadow-sm">
-            <div class="flex items-center mb-4">
-              <div
-                class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-2xl mr-4"
-              >
-                👤
-              </div>
-              <div>
-                <div class="font-bold text-gray-900">Sarah M.</div>
-                <div class="text-sm text-gray-600">Jakarta</div>
-              </div>
-            </div>
-            <p class="text-sm leading-relaxed text-gray-700">
-              "Kualitas produknya benar-benar memuaskan! Pelayanan cepat dan
-              ramah. Akan order lagi pasti."
-            </p>
-            <div class="mt-4 text-yellow-500">⭐⭐⭐⭐⭐</div>
-          </div>
-          <!-- Testimonial 2 -->
-          <div class="p-8 rounded-2xl bg-white shadow-sm">
-            <div class="flex items-center mb-4">
-              <div
-                class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-2xl mr-4"
-              >
-                👤
-              </div>
-              <div>
-                <div class="font-bold text-gray-900">Budi S.</div>
-                <div class="text-sm text-gray-600">Bandung</div>
-              </div>
-            </div>
-            <p class="text-sm leading-relaxed text-gray-700">
-              "Harga terjangkau dengan kualitas premium. Packaging juga rapi
-              banget, cocok buat kado!"
-            </p>
-            <div class="mt-4 text-yellow-500">⭐⭐⭐⭐⭐</div>
-          </div>
-          <!-- Testimonial 3 -->
-          <div class="p-8 rounded-2xl bg-white shadow-sm">
-            <div class="flex items-center mb-4">
-              <div
-                class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-2xl mr-4"
-              >
-                👤
-              </div>
-              <div>
-                <div class="font-bold text-gray-900">Linda T.</div>
-                <div class="text-sm text-gray-600">Surabaya</div>
-              </div>
-            </div>
-            <p class="text-sm leading-relaxed text-gray-700">
-              "Sudah langganan 6 bulan, gak pernah kecewa. Produknya konsisten
-              bagus terus!"
-            </p>
-            <div class="mt-4 text-yellow-500">⭐⭐⭐⭐⭐</div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- FAQ Section -->
-    <section id="faq" class="py-24 px-6 bg-white">
-      <div class="container mx-auto max-w-3xl">
-        <h2
-          id="faq-section-title"
-          class="text-4xl font-bold text-center mb-16 text-gray-900"
-        >
-          Pertanyaan Umum
-        </h2>
-        <div class="space-y-4">
-          <!-- FAQ 1 -->
-          <div class="rounded-xl overflow-hidden bg-gray-50">
-            <button
-              class="w-full px-6 py-5 text-left font-semibold flex justify-between items-center transition-colors duration-300 faq-button text-gray-900 hover:bg-gray-100"
+          <div>
+            <label class="block text-sm font-semibold text-primary mb-2"
+              >Deskripsi Toko</label
             >
-              <span>Bagaimana cara memesan produk?</span>
-              <span class="text-2xl transition-transform duration-300 faq-icon"
-                >+</span
-              >
-            </button>
-            <div class="accordion-content px-6 bg-white">
-              <p class="pb-5 text-gray-700 text-sm leading-relaxed">
-                Anda bisa menghubungi kami melalui WhatsApp, Instagram, atau
-                form kontak di bawah. Tim kami akan membantu proses pemesanan
-                Anda dengan cepat dan mudah.
-              </p>
-            </div>
-          </div>
-          <!-- FAQ 2 -->
-          <div class="rounded-xl overflow-hidden bg-gray-50">
-            <button
-              class="w-full px-6 py-5 text-left font-semibold flex justify-between items-center transition-colors duration-300 faq-button text-gray-900 hover:bg-gray-100"
+            <textarea
+              id="admin-description"
+              rows="3"
+              class="w-full px-4 py-3 rounded-lg border-2 border-color bg-transparent text-primary"
             >
-              <span>Apakah ada garansi produk?</span>
-              <span class="text-2xl transition-transform duration-300 faq-icon"
-                >+</span
-              >
-            </button>
-            <div class="accordion-content px-6 bg-white">
-              <p class="pb-5 text-gray-700 text-sm leading-relaxed">
-                Ya, semua produk kami dilengkapi dengan garansi kualitas. Jika
-                ada kerusakan atau cacat produksi, kami akan mengganti produk
-                Anda tanpa biaya tambahan.
-              </p>
-            </div>
-          </div>
-          <!-- FAQ 3 -->
-          <div class="rounded-xl overflow-hidden bg-gray-50">
-            <button
-              class="w-full px-6 py-5 text-left font-semibold flex justify-between items-center transition-colors duration-300 faq-button text-gray-900 hover:bg-gray-100"
+Toko online terpercaya menyediakan berbagai produk berkualitas dengan harga terjangkau.</textarea
             >
-              <span>Berapa lama waktu pengiriman?</span>
-              <span class="text-2xl transition-transform duration-300 faq-icon"
-                >+</span
-              >
-            </button>
-            <div class="accordion-content px-6 bg-white">
-              <p class="pb-5 text-gray-700 text-sm leading-relaxed">
-                Untuk wilayah Jabodetabek 1-2 hari kerja, luar kota 3-5 hari
-                kerja. Kami menggunakan jasa ekspedisi terpercaya untuk
-                memastikan produk sampai dengan aman.
-              </p>
-            </div>
           </div>
-          <!-- FAQ 4 -->
-          <div class="rounded-xl overflow-hidden bg-gray-50">
-            <button
-              class="w-full px-6 py-5 text-left font-semibold flex justify-between items-center transition-colors duration-300 faq-button text-gray-900 hover:bg-gray-100"
+          <div>
+            <label class="block text-sm font-semibold text-primary mb-2"
+              >Lokasi Toko</label
             >
-              <span>Apakah bisa custom atau request desain?</span>
-              <span class="text-2xl transition-transform duration-300 faq-icon"
-                >+</span
-              >
-            </button>
-            <div class="accordion-content px-6 bg-white">
-              <p class="pb-5 text-gray-700 text-sm leading-relaxed">
-                Tentu saja! Kami menerima custom order dan request desain sesuai
-                keinginan Anda. Hubungi kami untuk diskusi lebih lanjut mengenai
-                kebutuhan custom Anda.
-              </p>
-            </div>
+            <input
+              type="text"
+              id="admin-location"
+              class="w-full px-4 py-3 rounded-lg border-2 border-color bg-transparent text-primary"
+              value="Jakarta, Indonesia"
+            />
           </div>
-        </div>
-      </div>
-    </section>
-    <!-- Contact Section -->
-    <section id="kontak" class="py-24 px-6 bg-gray-50">
-      <div class="container mx-auto max-w-4xl text-center">
-        <h2
-          id="contact-section-title"
-          class="text-4xl font-bold mb-6 text-gray-900"
-        >
-          Hubungi Kami
-        </h2>
-        <p id="contact-description" class="text-lg mb-12 text-gray-600">
-          Siap melayani Anda dengan sepenuh hati. Tim kami akan merespon dengan
-          cepat!
-        </p>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <a
-            href="https://wa.me/6281234567890"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="p-8 rounded-2xl hover-lift transition-all duration-300 bg-white shadow-sm"
-          >
-            <div class="text-5xl mb-4">💬</div>
-            <div class="font-bold text-lg mb-2 text-gray-900">WhatsApp</div>
-            <div class="text-sm text-gray-600">Chat langsung</div></a
-          >
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="p-8 rounded-2xl hover-lift transition-all duration-300 bg-white shadow-sm"
-          >
-            <div class="text-5xl mb-4">📸</div>
-            <div class="font-bold text-lg mb-2 text-gray-900">Instagram</div>
-            <div class="text-sm text-gray-600">@brandku</div></a
-          >
-          <a
-            href="mailto:info@brandku.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="p-8 rounded-2xl hover-lift transition-all duration-300 bg-white shadow-sm"
-          >
-            <div class="text-5xl mb-4">✉️</div>
-            <div class="font-bold text-lg mb-2 text-gray-900">Email</div>
-            <div class="text-sm text-gray-600">info@brandku.com</div></a
-          >
-        </div>
-        <form
-          class="max-w-2xl mx-auto space-y-4 bg-white p-8 rounded-2xl shadow-sm"
-          onsubmit="handleSubmit(event)"
-        >
-          <input
-            type="text"
-            placeholder="Nama Anda"
-            required
-            class="w-full px-6 py-4 rounded-xl border-2 border-gray-200 transition-colors duration-300 focus:outline-none focus:border-gray-400 text-gray-900"
-            id="name-input"
-          />
-          <input
-            type="email"
-            placeholder="Email Anda"
-            required
-            class="w-full px-6 py-4 rounded-xl border-2 border-gray-200 transition-colors duration-300 focus:outline-none focus:border-gray-400 text-gray-900"
-            id="email-input"
-          />
-          <textarea
-            placeholder="Pesan Anda"
-            rows="5"
-            required
-            class="w-full px-6 py-4 rounded-xl border-2 border-gray-200 transition-colors duration-300 focus:outline-none focus:border-gray-400 text-gray-900"
-            id="message-input"
-          ></textarea>
+          <div>
+            <label class="block text-sm font-semibold text-primary mb-2"
+              >Instagram Handle</label
+            >
+            <input
+              type="text"
+              id="admin-instagram"
+              class="w-full px-4 py-3 rounded-lg border-2 border-color bg-transparent text-primary"
+              value="@tokoku"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-primary mb-2"
+              >Facebook Handle</label
+            >
+            <input
+              type="text"
+              id="admin-facebook"
+              class="w-full px-4 py-3 rounded-lg border-2 border-color bg-transparent text-primary"
+              value="TokoKu Official"
+            />
+          </div>
           <button
             type="submit"
-            class="btn-primary w-full py-4 rounded-xl font-bold text-lg bg-gray-900 text-white"
-            id="submit-button"
+            class="btn-primary w-full py-3 rounded-lg font-bold"
           >
-            Kirim Pesan
+            Simpan Perubahan
           </button>
         </form>
-        <div
-          id="success-message"
-          class="mt-6 p-4 rounded-xl bg-green-50 border border-green-200 hidden"
-        >
-          <p class="font-semibold text-green-800">
-            ✓ Terima kasih! Pesan Anda telah terkirim. Kami akan segera
-            menghubungi Anda.
-          </p>
-        </div>
       </div>
-    </section>
+    </div>
     <!-- Footer -->
-    <footer class="py-12 px-6 border-t border-gray-200 bg-white">
-      <div class="container mx-auto text-center">
-        <div
-          id="footer-business-name"
-          class="text-2xl font-bold mb-4 text-gray-900"
-        >
-          BrandKu
-        </div>
-        <p class="text-sm text-gray-600 mb-6">
-          Produk Berkualitas, Layanan Profesional
-        </p>
-        <div class="flex justify-center gap-6 mb-6">
-          <a
-            href="#produk"
-            class="text-sm text-gray-600 hover:text-gray-900 transition-colors"
-            >Produk</a
-          >
-          <a
-            href="#testimoni"
-            class="text-sm text-gray-600 hover:text-gray-900 transition-colors"
-            >Testimoni</a
-          >
-          <a
-            href="#faq"
-            class="text-sm text-gray-600 hover:text-gray-900 transition-colors"
-            >FAQ</a
-          >
-          <a
-            href="#kontak"
-            class="text-sm text-gray-600 hover:text-gray-900 transition-colors"
-            >Kontak</a
-          >
-        </div>
-        <p class="text-xs text-gray-500">
-          © 2024 BrandKu. All rights reserved.
+    <footer class="nav-bar border-t border-color py-8 mt-20">
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-secondary text-sm">
+          © 2024 <span id="footer-store-name">TokoKu</span>. All rights
+          reserved.
         </p>
       </div>
     </footer>
     <script>
+      // Product Data (Lo bisa edit manual di sini)
+      const products = [
+        {
+          id: 1,
+          name: "Tas Kulit Premium",
+          price: 250000,
+          description:
+            "Tas kulit asli berkualitas tinggi dengan desain elegan. Cocok untuk acara formal maupun casual. Dilengkapi dengan beberapa kompartemen untuk menyimpan barang-barang penting Anda. Material kulit premium yang tahan lama dan mudah dirawat.",
+          emoji: "👜",
+          featured: true,
+        },
+        {
+          id: 2,
+          name: "Sepatu Sneakers",
+          price: 350000,
+          description:
+            "Sepatu sneakers stylish dan nyaman untuk aktivitas sehari-hari. Desain modern dengan bahan breathable yang membuat kaki tetap nyaman sepanjang hari. Sol empuk memberikan kenyamanan maksimal saat berjalan.",
+          emoji: "👟",
+          featured: true,
+        },
+        {
+          id: 3,
+          name: "Jam Tangan Elegant",
+          price: 450000,
+          description:
+            "Jam tangan dengan desain minimalis dan elegant. Tali stainless steel berkualitas tinggi, tahan air hingga 50 meter. Cocok untuk pria maupun wanita. Movement Jepang yang akurat dan tahan lama.",
+          emoji: "⌚",
+          featured: true,
+        },
+        {
+          id: 4,
+          name: "Dompet Pria Kulit",
+          price: 150000,
+          description:
+            "Dompet kulit asli dengan desain slim dan praktis. Terdapat banyak slot untuk kartu dan uang. Material kulit premium yang awet dan berkelas. Ukuran pas untuk disimpan di saku celana.",
+          emoji: "👛",
+          featured: false,
+        },
+        {
+          id: 5,
+          name: "Kacamata Hitam",
+          price: 200000,
+          description:
+            "Kacamata hitam dengan frame berkualitas dan lensa UV protection. Melindungi mata dari sinar matahari berbahaya. Desain modern dan stylish cocok untuk berbagai bentuk wajah.",
+          emoji: "🕶️",
+          featured: false,
+        },
+        {
+          id: 6,
+          name: "Topi Baseball",
+          price: 80000,
+          description:
+            "Topi baseball casual dengan bahan katun berkualitas. Nyaman dipakai seharian, cocok untuk melindungi dari panas matahari. Desain simple dan timeless.",
+          emoji: "🧢",
+          featured: false,
+        },
+        {
+          id: 7,
+          name: "Kalung Fashion",
+          price: 120000,
+          description:
+            "Kalung fashion dengan desain trendy dan elegan. Material anti karat dan tidak menyebabkan alergi. Cocok untuk melengkapi outfit harian Anda.",
+          emoji: "📿",
+          featured: false,
+        },
+        {
+          id: 8,
+          name: "Gelang Kulit",
+          price: 90000,
+          description:
+            "Gelang kulit dengan desain maskulin dan stylish. Bahan kulit asli yang lentur dan nyaman di pergelangan tangan. Cocok untuk penampilan casual maupun semi formal.",
+          emoji: "📿",
+          featured: false,
+        },
+      ];
+
+      // State Management
+      let currentTheme = "light";
+      let currentProduct = null;
+      let previousPage = "home";
+
       const defaultConfig = {
-        background_color: "#f9fafb",
-        card_color: "#ffffff",
-        text_color: "#111827",
-        primary_button_color: "#111827",
-        secondary_surface_color: "#f3f4f6",
+        background_color: "#ffffff",
+        card_color: "#f9fafb",
+        text_color: "#1f2937",
+        accent_color: "#10b981",
+        secondary_text_color: "#6b7280",
         font_family: "system-ui",
         font_size: 16,
-        business_name: "BrandKu",
-        hero_title: "Produk Berkualitas untuk Kebutuhan Anda",
-        hero_subtitle:
-          "Kami berkomitmen memberikan produk terbaik dengan harga terjangkau dan layanan profesional",
-        cta_button: "Hubungi Kami Sekarang",
-        product_title: "Produk Unggulan",
-        testimonial_title: "Apa Kata Pelanggan",
-        faq_title: "Pertanyaan Umum",
-        contact_title: "Hubungi Kami",
-        contact_description:
-          "Siap melayani Anda dengan sepenuh hati. Tim kami akan merespon dengan cepat!",
+        store_name: "TokoKu",
+        whatsapp_number: "628123456789",
+        promo_text: "Diskon 50% Untuk Semua Produk!",
+        store_description:
+          "Toko online terpercaya menyediakan berbagai produk berkualitas dengan harga terjangkau.",
+        store_location: "Jakarta, Indonesia",
+        instagram_handle: "@tokoku",
+        facebook_handle: "TokoKu Official",
       };
 
+      // Config from Elements SDK
       async function onConfigChange(config) {
+        const storeName = config.store_name || defaultConfig.store_name;
+        const whatsappNumber =
+          config.whatsapp_number || defaultConfig.whatsapp_number;
+        const promoText = config.promo_text || defaultConfig.promo_text;
+        const storeDescription =
+          config.store_description || defaultConfig.store_description;
+        const storeLocation =
+          config.store_location || defaultConfig.store_location;
+        const instagramHandle =
+          config.instagram_handle || defaultConfig.instagram_handle;
+        const facebookHandle =
+          config.facebook_handle || defaultConfig.facebook_handle;
+
         const backgroundColor =
           config.background_color || defaultConfig.background_color;
         const cardColor = config.card_color || defaultConfig.card_color;
         const textColor = config.text_color || defaultConfig.text_color;
-        const primaryButtonColor =
-          config.primary_button_color || defaultConfig.primary_button_color;
-        const secondarySurfaceColor =
-          config.secondary_surface_color ||
-          defaultConfig.secondary_surface_color;
+        const accentColor = config.accent_color || defaultConfig.accent_color;
+        const secondaryTextColor =
+          config.secondary_text_color || defaultConfig.secondary_text_color;
         const customFont = config.font_family || defaultConfig.font_family;
         const baseSize = config.font_size || defaultConfig.font_size;
         const baseFontStack = "system-ui, -apple-system, sans-serif";
 
         document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
 
-        // Hero Section
-        const heroSection = document.querySelector("section:nth-of-type(1)");
-        heroSection.style.backgroundColor = backgroundColor;
-
-        document.getElementById("hero-title").textContent =
-          config.hero_title || defaultConfig.hero_title;
-        document.getElementById("hero-title").style.color = textColor;
-        document.getElementById("hero-title").style.fontSize = `${
-          baseSize * 3.75
-        }px`;
-
-        document.getElementById("hero-subtitle").textContent =
-          config.hero_subtitle || defaultConfig.hero_subtitle;
-        document.getElementById("hero-subtitle").style.color = textColor;
-        document.getElementById("hero-subtitle").style.fontSize = `${
-          baseSize * 1.25
-        }px`;
-
-        const heroCta = document.getElementById("hero-cta");
-        heroCta.textContent = config.cta_button || defaultConfig.cta_button;
-        heroCta.style.backgroundColor = primaryButtonColor;
-        heroCta.style.color = cardColor;
-        heroCta.style.fontSize = `${baseSize * 1.125}px`;
-
-        // Header
-        document.getElementById("header").style.backgroundColor = cardColor;
-
-        document.getElementById("business-name").textContent =
-          config.business_name || defaultConfig.business_name;
-        document.getElementById("business-name").style.color = textColor;
-        document.getElementById("business-name").style.fontSize = `${
-          baseSize * 1.5
-        }px`;
-
-        const navLinks = document.querySelectorAll("nav a:not(#header-cta)");
-        navLinks.forEach((link) => {
-          link.style.color = textColor;
-          link.style.fontSize = `${baseSize * 0.875}px`;
+        // Update store info
+        document.querySelectorAll('[id*="store-name"]').forEach((el) => {
+          el.textContent = storeName;
         });
-
-        const headerCta = document.getElementById("header-cta");
-        headerCta.style.backgroundColor = primaryButtonColor;
-        headerCta.style.color = cardColor;
-        headerCta.style.fontSize = `${baseSize * 0.875}px`;
-
-        // Product Section
-        document.querySelector("#produk").style.backgroundColor = cardColor;
-
-        document.getElementById("product-section-title").textContent =
-          config.product_title || defaultConfig.product_title;
-        document.getElementById("product-section-title").style.color =
-          textColor;
-        document.getElementById("product-section-title").style.fontSize = `${
-          baseSize * 2.5
-        }px`;
-
-        const productCards = document.querySelectorAll("#produk .grid > div");
-        productCards.forEach((card) => {
-          card.style.backgroundColor = cardColor;
-
-          const emojiDiv = card.querySelector("div:first-child");
-          emojiDiv.style.backgroundColor = secondarySurfaceColor;
-
-          const title = card.querySelector("h3");
-          title.style.color = textColor;
-          title.style.fontSize = `${baseSize * 1.5}px`;
-
-          const description = card.querySelector("p");
-          description.style.color = textColor;
-          description.style.fontSize = `${baseSize * 0.875}px`;
-
-          const price = card.querySelector("span");
-          price.style.color = textColor;
-          price.style.fontSize = `${baseSize * 1.5}px`;
-
-          const button = card.querySelector("button");
-          button.style.backgroundColor = primaryButtonColor;
-          button.style.color = cardColor;
-          button.style.fontSize = `${baseSize * 0.875}px`;
-        });
-
-        // Testimonial Section
-        document.querySelector("#testimoni").style.backgroundColor =
-          backgroundColor;
-
-        document.getElementById("testimonial-section-title").textContent =
-          config.testimonial_title || defaultConfig.testimonial_title;
-        document.getElementById("testimonial-section-title").style.color =
-          textColor;
-        document.getElementById(
-          "testimonial-section-title"
-        ).style.fontSize = `${baseSize * 2.5}px`;
-
-        const testimonialCards = document.querySelectorAll(
-          "#testimoni .grid > div"
-        );
-        testimonialCards.forEach((card) => {
-          card.style.backgroundColor = cardColor;
-
-          const avatar = card.querySelector(".rounded-full");
-          avatar.style.backgroundColor = secondarySurfaceColor;
-
-          const name = card.querySelector(".font-bold");
-          name.style.color = textColor;
-          name.style.fontSize = `${baseSize}px`;
-
-          const location = card.querySelectorAll(".text-sm")[0];
-          location.style.color = textColor;
-          location.style.fontSize = `${baseSize * 0.875}px`;
-
-          const testimonialText = card.querySelector("p");
-          testimonialText.style.color = textColor;
-          testimonialText.style.fontSize = `${baseSize * 0.875}px`;
-        });
-
-        // FAQ Section
-        document.querySelector("#faq").style.backgroundColor = cardColor;
-
-        document.getElementById("faq-section-title").textContent =
-          config.faq_title || defaultConfig.faq_title;
-        document.getElementById("faq-section-title").style.color = textColor;
-        document.getElementById("faq-section-title").style.fontSize = `${
-          baseSize * 2.5
-        }px`;
-
-        const faqItems = document.querySelectorAll("#faq .space-y-4 > div");
-        faqItems.forEach((item) => {
-          item.style.backgroundColor = secondarySurfaceColor;
-
-          const button = item.querySelector(".faq-button");
-          button.style.color = textColor;
-          button.style.fontSize = `${baseSize}px`;
-
-          const content = item.querySelector(".accordion-content");
-          content.style.backgroundColor = cardColor;
-
-          const answer = content.querySelector("p");
-          answer.style.color = textColor;
-          answer.style.fontSize = `${baseSize * 0.875}px`;
-        });
-
-        // Contact Section
-        document.querySelector("#kontak").style.backgroundColor =
-          backgroundColor;
-
-        document.getElementById("contact-section-title").textContent =
-          config.contact_title || defaultConfig.contact_title;
-        document.getElementById("contact-section-title").style.color =
-          textColor;
-        document.getElementById("contact-section-title").style.fontSize = `${
-          baseSize * 2.5
-        }px`;
-
+        document.getElementById("promo-banner-text").textContent = promoText;
         document.getElementById("contact-description").textContent =
-          config.contact_description || defaultConfig.contact_description;
-        document.getElementById("contact-description").style.color = textColor;
-        document.getElementById("contact-description").style.fontSize = `${
-          baseSize * 1.125
-        }px`;
+          storeDescription;
+        document.getElementById("contact-location").textContent = storeLocation;
+        document.getElementById("display-instagram").textContent =
+          instagramHandle;
+        document.getElementById("display-facebook").textContent =
+          facebookHandle;
+        document.getElementById("display-whatsapp").textContent =
+          formatPhoneDisplay(whatsappNumber);
 
-        const contactCards = document.querySelectorAll("#kontak .grid > a");
-        contactCards.forEach((card) => {
-          card.style.backgroundColor = cardColor;
+        // Update links
+        document.getElementById(
+          "whatsapp-link"
+        ).href = `https://wa.me/${whatsappNumber}`;
+        document.getElementById(
+          "instagram-link"
+        ).href = `https://instagram.com/${instagramHandle.replace("@", "")}`;
+        document.getElementById(
+          "facebook-link"
+        ).href = `https://facebook.com/${facebookHandle}`;
 
-          const title = card.querySelector(".font-bold");
-          title.style.color = textColor;
-          title.style.fontSize = `${baseSize * 1.125}px`;
+        // Update admin form
+        document.getElementById("admin-store-name").value = storeName;
+        document.getElementById("admin-whatsapp").value = whatsappNumber;
+        document.getElementById("admin-promo").value = promoText;
+        document.getElementById("admin-description").value = storeDescription;
+        document.getElementById("admin-location").value = storeLocation;
+        document.getElementById("admin-instagram").value = instagramHandle;
+        document.getElementById("admin-facebook").value = facebookHandle;
 
-          const subtitle = card.querySelector(".text-sm");
-          subtitle.style.color = textColor;
-          subtitle.style.fontSize = `${baseSize * 0.875}px`;
+        // Apply colors
+        if (currentTheme === "light") {
+          document.body.style.backgroundColor = backgroundColor;
+          document.body.style.color = textColor;
+
+          document.querySelectorAll(".nav-bar").forEach((el) => {
+            el.style.backgroundColor = backgroundColor;
+            el.style.borderColor = cardColor;
+          });
+
+          document.querySelectorAll(".card-bg").forEach((el) => {
+            el.style.backgroundColor = cardColor;
+          });
+
+          document.querySelectorAll(".text-primary").forEach((el) => {
+            el.style.color = textColor;
+          });
+
+          document.querySelectorAll(".text-secondary").forEach((el) => {
+            el.style.color = secondaryTextColor;
+          });
+
+          document.querySelectorAll(".border-color").forEach((el) => {
+            el.style.borderColor = cardColor;
+          });
+        }
+
+        document.querySelectorAll(".btn-primary").forEach((el) => {
+          el.style.backgroundColor = accentColor;
         });
 
-        const form = document.querySelector("form");
-        form.style.backgroundColor = cardColor;
+        // Font sizes
+        const h1Elements = document.querySelectorAll("h1");
+        h1Elements.forEach((el) => (el.style.fontSize = `${baseSize * 2.5}px`));
 
-        const formInputs = document.querySelectorAll(
-          "#kontak input, #kontak textarea"
-        );
-        formInputs.forEach((input) => {
-          input.style.backgroundColor = cardColor;
-          input.style.color = textColor;
-          input.style.borderColor = secondarySurfaceColor;
-          input.style.fontSize = `${baseSize}px`;
-        });
+        const h2Elements = document.querySelectorAll("h2");
+        h2Elements.forEach((el) => (el.style.fontSize = `${baseSize * 2}px`));
 
-        const submitButton = document.getElementById("submit-button");
-        submitButton.style.backgroundColor = primaryButtonColor;
-        submitButton.style.color = cardColor;
-        submitButton.style.fontSize = `${baseSize * 1.125}px`;
+        const h3Elements = document.querySelectorAll("h3");
+        h3Elements.forEach((el) => (el.style.fontSize = `${baseSize * 1.5}px`));
 
-        // Footer
-        const footer = document.querySelector("footer");
-        footer.style.backgroundColor = cardColor;
-        footer.style.borderColor = secondarySurfaceColor;
-
-        document.getElementById("footer-business-name").textContent =
-          config.business_name || defaultConfig.business_name;
-        document.getElementById("footer-business-name").style.color = textColor;
-        document.getElementById("footer-business-name").style.fontSize = `${
-          baseSize * 1.5
-        }px`;
-
-        const footerText = footer.querySelectorAll("p");
-        footerText.forEach((text) => {
-          text.style.color = textColor;
-        });
-
-        const footerLinks = footer.querySelectorAll("a");
-        footerLinks.forEach((link) => {
-          link.style.color = textColor;
-          link.style.fontSize = `${baseSize * 0.875}px`;
+        const pElements = document.querySelectorAll("p, .text-sm, .text-lg");
+        pElements.forEach((el) => {
+          if (el.classList.contains("text-sm")) {
+            el.style.fontSize = `${baseSize * 0.875}px`;
+          } else if (el.classList.contains("text-lg")) {
+            el.style.fontSize = `${baseSize * 1.125}px`;
+          } else {
+            el.style.fontSize = `${baseSize}px`;
+          }
         });
       }
 
@@ -804,26 +822,22 @@
               },
             },
             {
-              get: () =>
-                config.primary_button_color ||
-                defaultConfig.primary_button_color,
+              get: () => config.accent_color || defaultConfig.accent_color,
               set: (value) => {
-                config.primary_button_color = value;
+                config.accent_color = value;
                 if (window.elementSdk) {
-                  window.elementSdk.setConfig({ primary_button_color: value });
+                  window.elementSdk.setConfig({ accent_color: value });
                 }
               },
             },
             {
               get: () =>
-                config.secondary_surface_color ||
-                defaultConfig.secondary_surface_color,
+                config.secondary_text_color ||
+                defaultConfig.secondary_text_color,
               set: (value) => {
-                config.secondary_surface_color = value;
+                config.secondary_text_color = value;
                 if (window.elementSdk) {
-                  window.elementSdk.setConfig({
-                    secondary_surface_color: value,
-                  });
+                  window.elementSdk.setConfig({ secondary_text_color: value });
                 }
               },
             },
@@ -852,32 +866,27 @@
 
       function mapToEditPanelValues(config) {
         return new Map([
+          ["store_name", config.store_name || defaultConfig.store_name],
           [
-            "business_name",
-            config.business_name || defaultConfig.business_name,
+            "whatsapp_number",
+            config.whatsapp_number || defaultConfig.whatsapp_number,
           ],
-          ["hero_title", config.hero_title || defaultConfig.hero_title],
+          ["promo_text", config.promo_text || defaultConfig.promo_text],
           [
-            "hero_subtitle",
-            config.hero_subtitle || defaultConfig.hero_subtitle,
-          ],
-          ["cta_button", config.cta_button || defaultConfig.cta_button],
-          [
-            "product_title",
-            config.product_title || defaultConfig.product_title,
+            "store_description",
+            config.store_description || defaultConfig.store_description,
           ],
           [
-            "testimonial_title",
-            config.testimonial_title || defaultConfig.testimonial_title,
-          ],
-          ["faq_title", config.faq_title || defaultConfig.faq_title],
-          [
-            "contact_title",
-            config.contact_title || defaultConfig.contact_title,
+            "store_location",
+            config.store_location || defaultConfig.store_location,
           ],
           [
-            "contact_description",
-            config.contact_description || defaultConfig.contact_description,
+            "instagram_handle",
+            config.instagram_handle || defaultConfig.instagram_handle,
+          ],
+          [
+            "facebook_handle",
+            config.facebook_handle || defaultConfig.facebook_handle,
           ],
         ]);
       }
@@ -891,88 +900,233 @@
         });
       }
 
-      // FAQ Accordion
-      const faqButtons = document.querySelectorAll(".faq-button");
-      faqButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          const content = button.nextElementSibling;
-          const icon = button.querySelector(".faq-icon");
-          const isActive = content.classList.contains("active");
-
-          document
-            .querySelectorAll(".accordion-content")
-            .forEach((c) => c.classList.remove("active"));
-          document.querySelectorAll(".faq-icon").forEach((i) => {
-            i.textContent = "+";
-            i.style.transform = "rotate(0deg)";
-          });
-
-          if (!isActive) {
-            content.classList.add("active");
-            icon.textContent = "−";
-            icon.style.transform = "rotate(180deg)";
-          }
-        });
-      });
-
-      // Header scroll effect
-      window.addEventListener("scroll", () => {
-        const header = document.getElementById("header");
-        const currentScroll = window.pageYOffset;
-
-        if (currentScroll > 50) {
-          header.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
-        } else {
-          header.style.boxShadow = "0 1px 3px rgba(0, 0, 0, 0.05)";
-        }
-      });
-
-      // Form submission
-      function handleSubmit(event) {
-        event.preventDefault();
-
-        const submitButton = document.getElementById("submit-button");
-        const successMessage = document.getElementById("success-message");
-        const nameInput = document.getElementById("name-input");
-        const emailInput = document.getElementById("email-input");
-        const messageInput = document.getElementById("message-input");
-
-        submitButton.disabled = true;
-        submitButton.textContent = "Mengirim...";
-        submitButton.style.opacity = "0.7";
-
-        setTimeout(() => {
-          nameInput.value = "";
-          emailInput.value = "";
-          messageInput.value = "";
-
-          submitButton.disabled = false;
-          submitButton.textContent = "Kirim Pesan";
-          submitButton.style.opacity = "1";
-
-          successMessage.classList.remove("hidden");
-
-          setTimeout(() => {
-            successMessage.classList.add("hidden");
-          }, 5000);
-        }, 1500);
+      // Initialize
+      function init() {
+        loadProducts();
+        loadAdminData();
       }
 
-      // Smooth scroll for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute("href"));
-          if (target) {
-            const headerHeight = document.getElementById("header").offsetHeight;
-            const targetPosition = target.offsetTop - headerHeight;
-            window.scrollTo({
-              top: targetPosition,
-              behavior: "smooth",
-            });
+      // Format currency
+      function formatCurrency(amount) {
+        return new Intl.NumberFormat("id-ID", {
+          style: "currency",
+          currency: "IDR",
+          minimumFractionDigits: 0,
+        }).format(amount);
+      }
+
+      // Format phone display
+      function formatPhoneDisplay(phone) {
+        if (phone.startsWith("62")) {
+          return (
+            "+" +
+            phone.slice(0, 2) +
+            " " +
+            phone.slice(2, 5) +
+            "-" +
+            phone.slice(5, 9) +
+            "-" +
+            phone.slice(9)
+          );
+        }
+        return phone;
+      }
+
+      // Load products
+      function loadProducts() {
+        const featuredContainer = document.getElementById("featured-products");
+        const allProductsContainer = document.getElementById("all-products");
+
+        featuredContainer.innerHTML = "";
+        allProductsContainer.innerHTML = "";
+
+        products.forEach((product) => {
+          const productCard = createProductCard(product);
+
+          if (product.featured) {
+            featuredContainer.innerHTML += productCard;
           }
+          allProductsContainer.innerHTML += productCard;
         });
-      });
+      }
+
+      // Create product card
+      function createProductCard(product) {
+        return `
+        <div class="product-card card-bg rounded-xl overflow-hidden" onclick="viewProduct(${
+          product.id
+        })">
+          <div class="h-48 flex items-center justify-center text-6xl">
+            ${product.emoji}
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-primary mb-2">${product.name}</h3>
+            <p class="text-secondary text-sm mb-4 line-clamp-2">${product.description.substring(
+              0,
+              80
+            )}...</p>
+            <div class="flex justify-between items-center">
+              <span class="text-xl font-bold text-green-600">${formatCurrency(
+                product.price
+              )}</span>
+              <button class="btn-primary px-4 py-2 rounded-lg text-sm font-semibold">Lihat Detail</button>
+            </div>
+          </div>
+        </div>
+      `;
+      }
+
+      // Navigation
+      function navigateTo(pageName) {
+        document.querySelectorAll(".page").forEach((page) => {
+          page.classList.remove("active");
+        });
+
+        const targetPage = document.getElementById(pageName);
+        if (targetPage) {
+          targetPage.classList.add("active");
+          previousPage = pageName;
+          window.scrollTo(0, 0);
+        }
+      }
+
+      function navigateBack() {
+        navigateTo(previousPage);
+      }
+
+      // View product detail
+      function viewProduct(productId) {
+        const product = products.find((p) => p.id === productId);
+        if (!product) return;
+
+        currentProduct = product;
+
+        document.getElementById(
+          "detail-image"
+        ).innerHTML = `<span class="text-9xl">${product.emoji}</span>`;
+        document.getElementById("detail-name").textContent = product.name;
+        document.getElementById("detail-price").textContent = formatCurrency(
+          product.price
+        );
+        document.getElementById("detail-description").textContent =
+          product.description;
+
+        const currentPage = document.querySelector(".page.active").id;
+        previousPage = currentPage;
+
+        navigateTo("product-detail");
+      }
+
+      // Order via WhatsApp
+      function orderViaWhatsApp() {
+        if (!currentProduct) return;
+
+        const whatsappNumber =
+          window.elementSdk?.config?.whatsapp_number ||
+          defaultConfig.whatsapp_number;
+        const storeName =
+          window.elementSdk?.config?.store_name || defaultConfig.store_name;
+
+        const message =
+          `Halo ${storeName}, saya tertarik dengan produk:\n\n` +
+          `Nama: ${currentProduct.name}\n` +
+          `Harga: ${formatCurrency(currentProduct.price)}\n\n` +
+          `Apakah produk ini masih tersedia?`;
+
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+        window.open(whatsappUrl, "_blank", "noopener noreferrer");
+      }
+
+      // Theme toggle
+      function toggleTheme() {
+        const body = document.body;
+        const themeIcon = document.getElementById("theme-icon");
+
+        if (currentTheme === "light") {
+          body.classList.remove("light");
+          body.classList.add("dark");
+          themeIcon.textContent = "☀️";
+          currentTheme = "dark";
+        } else {
+          body.classList.remove("dark");
+          body.classList.add("light");
+          themeIcon.textContent = "🌙";
+          currentTheme = "light";
+        }
+
+        localStorage.setItem("theme", currentTheme);
+      }
+
+      // Load theme from localStorage
+      function loadTheme() {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark") {
+          document.body.classList.remove("light");
+          document.body.classList.add("dark");
+          document.getElementById("theme-icon").textContent = "☀️";
+          currentTheme = "dark";
+        }
+      }
+
+      // Admin modal
+      function toggleAdminModal() {
+        const modal = document.getElementById("admin-modal");
+        modal.classList.toggle("active");
+      }
+
+      // Load admin data
+      function loadAdminData() {
+        const savedData = localStorage.getItem("adminData");
+        if (savedData) {
+          const data = JSON.parse(savedData);
+
+          if (window.elementSdk) {
+            window.elementSdk.setConfig(data);
+          }
+        }
+      }
+
+      // Admin form submit
+      document
+        .getElementById("admin-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const adminData = {
+            store_name: document.getElementById("admin-store-name").value,
+            whatsapp_number: document.getElementById("admin-whatsapp").value,
+            promo_text: document.getElementById("admin-promo").value,
+            store_description:
+              document.getElementById("admin-description").value,
+            store_location: document.getElementById("admin-location").value,
+            instagram_handle: document.getElementById("admin-instagram").value,
+            facebook_handle: document.getElementById("admin-facebook").value,
+          };
+
+          localStorage.setItem("adminData", JSON.stringify(adminData));
+
+          if (window.elementSdk) {
+            window.elementSdk.setConfig(adminData);
+          }
+
+          toggleAdminModal();
+
+          // Show success feedback
+          const btn = e.target.querySelector('button[type="submit"]');
+          const originalText = btn.textContent;
+          btn.textContent = "✓ Berhasil Disimpan!";
+          btn.style.backgroundColor = "#10b981";
+
+          setTimeout(() => {
+            btn.textContent = originalText;
+          }, 2000);
+        });
+
+      // Initialize on load
+      loadTheme();
+      init();
     </script>
     <script>
       (function () {
@@ -981,7 +1135,7 @@
           if (b) {
             var d = b.createElement("script");
             d.innerHTML =
-              "window.__CF$cv$params={r:'9a0bee9ec20cfd79',t:'MTc2MzUxNTcxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+              "window.__CF$cv$params={r:'9a0bf6d80475ca12',t:'MTc2MzUxNjA1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
             b.getElementsByTagName("head")[0].appendChild(d);
           }
         }
