@@ -1049,14 +1049,114 @@ Toko online terpercaya menyediakan berbagai produk berkualitas dengan harga terj
           body.classList.add("dark");
           themeIcon.textContent = "☀️";
           currentTheme = "dark";
+          applyDarkTheme();
         } else {
           body.classList.remove("dark");
           body.classList.add("light");
           themeIcon.textContent = "🌙";
           currentTheme = "light";
+          applyLightTheme();
         }
 
         localStorage.setItem("theme", currentTheme);
+      }
+
+      // Apply dark theme colors
+      function applyDarkTheme() {
+        document.body.style.backgroundColor = "#111827";
+        document.body.style.color = "#f9fafb";
+
+        document.querySelectorAll(".nav-bar").forEach((el) => {
+          el.style.backgroundColor = "#1f2937";
+          el.style.borderColor = "#374151";
+        });
+
+        document.querySelectorAll(".card-bg").forEach((el) => {
+          el.style.backgroundColor = "#1f2937";
+        });
+
+        document.querySelectorAll(".text-primary").forEach((el) => {
+          el.style.color = "#f9fafb";
+        });
+
+        document.querySelectorAll(".text-secondary").forEach((el) => {
+          el.style.color = "#9ca3af";
+        });
+
+        document.querySelectorAll(".border-color").forEach((el) => {
+          el.style.borderColor = "#374151";
+        });
+
+        document.querySelectorAll("input, textarea").forEach((el) => {
+          el.style.backgroundColor = "#1f2937";
+          el.style.color = "#f9fafb";
+          el.style.borderColor = "#374151";
+        });
+
+        document
+          .querySelectorAll(".product-card h3, #detail-name")
+          .forEach((el) => {
+            el.style.color = "#f9fafb";
+          });
+
+        document
+          .querySelectorAll(".product-card p:not(.text-green-600)")
+          .forEach((el) => {
+            el.style.color = "#9ca3af";
+          });
+      }
+
+      // Apply light theme colors
+      function applyLightTheme() {
+        const config = window.elementSdk?.config || defaultConfig;
+        const backgroundColor =
+          config.background_color || defaultConfig.background_color;
+        const cardColor = config.card_color || defaultConfig.card_color;
+        const textColor = config.text_color || defaultConfig.text_color;
+        const secondaryTextColor =
+          config.secondary_text_color || defaultConfig.secondary_text_color;
+
+        document.body.style.backgroundColor = backgroundColor;
+        document.body.style.color = textColor;
+
+        document.querySelectorAll(".nav-bar").forEach((el) => {
+          el.style.backgroundColor = backgroundColor;
+          el.style.borderColor = "#e5e7eb";
+        });
+
+        document.querySelectorAll(".card-bg").forEach((el) => {
+          el.style.backgroundColor = cardColor;
+        });
+
+        document.querySelectorAll(".text-primary").forEach((el) => {
+          el.style.color = textColor;
+        });
+
+        document.querySelectorAll(".text-secondary").forEach((el) => {
+          el.style.color = secondaryTextColor;
+        });
+
+        document.querySelectorAll(".border-color").forEach((el) => {
+          el.style.borderColor = "#e5e7eb";
+        });
+
+        document.querySelectorAll("input, textarea").forEach((el) => {
+          el.style.backgroundColor = "#ffffff";
+          el.style.color = textColor;
+          el.style.borderColor = "#e5e7eb";
+        });
+
+        document
+          .querySelectorAll(".product-card h3, #detail-name")
+          .forEach((el) => {
+            el.style.color = textColor;
+          });
+
+        document
+          .querySelectorAll(".product-card p:not(.text-green-600)")
+          .forEach((el) => {
+            el.style.color = secondaryTextColor;
+          });
       }
 
       // Load theme from localStorage
@@ -1067,6 +1167,9 @@ Toko online terpercaya menyediakan berbagai produk berkualitas dengan harga terj
           document.body.classList.add("dark");
           document.getElementById("theme-icon").textContent = "☀️";
           currentTheme = "dark";
+          setTimeout(() => applyDarkTheme(), 100);
+        } else {
+          setTimeout(() => applyLightTheme(), 100);
         }
       }
 
@@ -1135,7 +1238,7 @@ Toko online terpercaya menyediakan berbagai produk berkualitas dengan harga terj
           if (b) {
             var d = b.createElement("script");
             d.innerHTML =
-              "window.__CF$cv$params={r:'9a0bf6d80475ca12',t:'MTc2MzUxNjA1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+              "window.__CF$cv$params={r:'9a0bfac9a0c83d99',t:'MTc2MzUxNjIxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
             b.getElementsByTagName("head")[0].appendChild(d);
           }
         }
