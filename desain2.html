@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalyana Apparel - Local Fashion Brand</title>
+    <script src="/_sdk/element_sdk.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background-color: #fafaf8;
+        color: #2b2725;
+        min-height: 100%;
+        box-sizing: border-box;
+        line-height: 1.6;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      /* Header */
+      .header {
+        position: sticky;
+        top: 0;
+        background-color: #ffffff;
+        padding: 1.1rem 6%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 1px 12px rgba(0, 0, 0, 0.04);
+        z-index: 1000;
+      }
+
+      .logo {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #6b5d4f;
+        letter-spacing: -0.3px;
+      }
+
+      .header-buttons {
+        display: flex;
+        gap: 0.9rem;
+      }
+
+      .header-btn {
+        padding: 0.65rem 1.4rem;
+        border: none;
+        border-radius: 7px;
+        font-size: 0.92rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .header-btn-primary {
+        background-color: #6b5d4f;
+        color: #ffffff;
+      }
+
+      .header-btn-primary:hover {
+        background-color: #5a4e42;
+        box-shadow: 0 4px 14px rgba(107, 93, 79, 0.25);
+        transform: translateY(-1px);
+      }
+
+      .header-btn-secondary {
+        background-color: transparent;
+        color: #6b5d4f;
+        border: 1.5px solid #6b5d4f;
+      }
+
+      .header-btn-secondary:hover {
+        background-color: #6b5d4f;
+        color: #ffffff;
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 4.5rem 6% 5.5rem;
+        background: linear-gradient(135deg, #f8f6f3 0%, #fafaf8 100%);
+      }
+
+      .hero-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.15fr 1fr;
+        gap: 4.5rem;
+        align-items: center;
+      }
+
+      .hero-text h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: #2b2725;
+        margin-bottom: 1.3rem;
+        line-height: 1.15;
+        letter-spacing: -1.2px;
+      }
+
+      .hero-text p {
+        font-size: 1.15rem;
+        color: #5d534a;
+        margin-bottom: 2.3rem;
+        line-height: 1.65;
+      }
+
+      .hero-cta-btn {
+        background-color: #9b7c5f;
+        color: #ffffff;
+        padding: 1.05rem 2.8rem;
+        border: none;
+        border-radius: 9px;
+        font-size: 1.05rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-block;
+        box-shadow: 0 5px 18px rgba(155, 124, 95, 0.25);
+      }
+
+      .hero-cta-btn:hover {
+        background-color: #8a6b50;
+        transform: translateY(-2px);
+        box-shadow: 0 7px 22px rgba(155, 124, 95, 0.35);
+      }
+
+      .hero-image {
+        width: 100%;
+        height: 480px;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+        background-color: #f0ede8;
+      }
+
+      .hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Keunggulan Section */
+      .keunggulan-section {
+        padding: 5rem 6%;
+        background-color: #ffffff;
+      }
+
+      .keunggulan-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .keunggulan-section h2 {
+        font-size: 2.6rem;
+        font-weight: 700;
+        color: #2b2725;
+        text-align: center;
+        margin-bottom: 3.8rem;
+        letter-spacing: -0.7px;
+      }
+
+      .keunggulan-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.8rem;
+      }
+
+      .keunggulan-item {
+        display: flex;
+        gap: 1.4rem;
+        padding: 1.8rem;
+        border-radius: 11px;
+        background-color: #f8f6f3;
+        transition: all 0.35s ease;
+        border: 1px solid #f0ede8;
+      }
+
+      .keunggulan-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+        background-color: #f5f2ee;
+      }
+
+      .keunggulan-icon-wrapper {
+        width: 56px;
+        height: 56px;
+        min-width: 56px;
+        background-color: #ffffff;
+        border-radius: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.35s ease;
+        border: 1px solid #e8e4df;
+      }
+
+      .keunggulan-item:hover .keunggulan-icon-wrapper {
+        background-color: #9b7c5f;
+        border-color: #9b7c5f;
+      }
+
+      .keunggulan-icon {
+        width: 28px;
+        height: 28px;
+        stroke: #6b5d4f;
+        fill: none;
+        stroke-width: 2;
+        transition: all 0.35s ease;
+      }
+
+      .keunggulan-item:hover .keunggulan-icon {
+        stroke: #ffffff;
+      }
+
+      .keunggulan-text h3 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #2b2725;
+        margin-bottom: 0.45rem;
+      }
+
+      .keunggulan-text p {
+        font-size: 0.97rem;
+        color: #5d534a;
+        line-height: 1.6;
+      }
+
+      /* Products Section */
+      .products-section {
+        padding: 5rem 6%;
+        background-color: #fafaf8;
+      }
+
+      .products-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .products-section h2 {
+        font-size: 2.6rem;
+        font-weight: 700;
+        color: #2b2725;
+        text-align: center;
+        margin-bottom: 3.8rem;
+        letter-spacing: -0.7px;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+      }
+
+      .product-card {
+        background-color: #ffffff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+        transition: all 0.35s ease;
+        border: 1px solid #f0ede8;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-image {
+        width: 100%;
+        height: 280px;
+        overflow: hidden;
+        background-color: #f8f6f3;
+      }
+
+      .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+      }
+
+      .product-card:hover .product-image img {
+        transform: scale(1.05);
+      }
+
+      .product-info {
+        padding: 1.5rem;
+      }
+
+      .product-name {
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: #2b2725;
+        margin-bottom: 0.4rem;
+      }
+
+      .product-price {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #9b7c5f;
+        margin-bottom: 0.3rem;
+      }
+
+      .product-desc {
+        font-size: 0.9rem;
+        color: #7a6f65;
+        line-height: 1.5;
+      }
+
+      /* Pricing Section */
+      .pricing-section {
+        padding: 5rem 6%;
+        background-color: #ffffff;
+      }
+
+      .pricing-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .pricing-section h2 {
+        font-size: 2.6rem;
+        font-weight: 700;
+        color: #2b2725;
+        text-align: center;
+        margin-bottom: 3.8rem;
+        letter-spacing: -0.7px;
+      }
+
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.3rem;
+      }
+
+      .pricing-card {
+        background-color: #f8f6f3;
+        border-radius: 14px;
+        padding: 2.3rem;
+        box-shadow: 0 6px 26px rgba(0, 0, 0, 0.06);
+        transition: all 0.35s ease;
+        border: 2px solid transparent;
+      }
+
+      .pricing-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 32px rgba(0, 0, 0, 0.1);
+        border-color: #9b7c5f;
+      }
+
+      .pricing-card.featured {
+        border-color: #9b7c5f;
+        position: relative;
+        background-color: #ffffff;
+      }
+
+      .pricing-badge {
+        position: absolute;
+        top: -13px;
+        right: 22px;
+        background-color: #9b7c5f;
+        color: #ffffff;
+        padding: 0.4rem 1.05rem;
+        border-radius: 18px;
+        font-size: 0.83rem;
+        font-weight: 600;
+      }
+
+      .pricing-header h3 {
+        font-size: 1.45rem;
+        font-weight: 700;
+        color: #2b2725;
+        margin-bottom: 0.5rem;
+      }
+
+      .pricing-price {
+        font-size: 2.4rem;
+        font-weight: 800;
+        color: #6b5d4f;
+        margin-bottom: 0.5rem;
+      }
+
+      .pricing-price span {
+        font-size: 0.98rem;
+        font-weight: 500;
+        color: #7a6f65;
+      }
+
+      .pricing-description {
+        font-size: 0.93rem;
+        color: #5d534a;
+        margin-bottom: 1.8rem;
+        padding-bottom: 1.8rem;
+        border-bottom: 1px solid #e8e4df;
+      }
+
+      .pricing-features {
+        list-style: none;
+        margin-bottom: 1.8rem;
+      }
+
+      .pricing-features li {
+        padding: 0.65rem 0;
+        color: #2b2725;
+        font-size: 0.93rem;
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+      }
+
+      .pricing-features li:before {
+        content: "✓";
+        color: #8a9a7f;
+        font-weight: bold;
+        font-size: 1.15rem;
+      }
+
+      .pricing-btn {
+        width: 100%;
+        padding: 0.95rem;
+        background-color: #6b5d4f;
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.98rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .pricing-btn:hover {
+        background-color: #5a4e42;
+        box-shadow: 0 4px 14px rgba(107, 93, 79, 0.25);
+        transform: translateY(-1px);
+      }
+
+      /* FAQ Section */
+      .faq-section {
+        padding: 5rem 6%;
+        background-color: #fafaf8;
+      }
+
+      .faq-container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .faq-section h2 {
+        font-size: 2.6rem;
+        font-weight: 700;
+        color: #2b2725;
+        text-align: center;
+        margin-bottom: 3.8rem;
+        letter-spacing: -0.7px;
+      }
+
+      .faq-item {
+        background-color: #ffffff;
+        border-radius: 11px;
+        padding: 1.9rem;
+        margin-bottom: 1.4rem;
+        transition: all 0.3s ease;
+        border: 1px solid #f0ede8;
+      }
+
+      .faq-item:hover {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        border-color: #e8e4df;
+      }
+
+      .faq-question {
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: #2b2725;
+        margin-bottom: 0.7rem;
+      }
+
+      .faq-answer {
+        font-size: 0.97rem;
+        color: #5d534a;
+        line-height: 1.7;
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .hero-content {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+
+        .hero-text h1 {
+          font-size: 2.8rem;
+        }
+
+        .keunggulan-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .products-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2rem;
+        }
+
+        .pricing-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .header {
+          padding: 0.95rem 4%;
+          flex-wrap: wrap;
+          gap: 0.9rem;
+        }
+
+        .header-buttons {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .logo {
+          font-size: 1.15rem;
+        }
+
+        .header-btn {
+          padding: 0.6rem 1.15rem;
+          font-size: 0.88rem;
+        }
+
+        .hero {
+          padding: 2.8rem 4% 3.5rem;
+        }
+
+        .hero-text h1 {
+          font-size: 2.1rem;
+        }
+
+        .hero-text p {
+          font-size: 1.05rem;
+        }
+
+        .hero-image {
+          height: 320px;
+        }
+
+        .keunggulan-section,
+        .products-section,
+        .pricing-section,
+        .faq-section {
+          padding: 3rem 4%;
+        }
+
+        .keunggulan-section h2,
+        .products-section h2,
+        .pricing-section h2,
+        .faq-section h2 {
+          font-size: 1.9rem;
+        }
+
+        .keunggulan-item {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+
+        .products-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+    <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="logo" id="logo">Kalyana Apparel</div>
+      <div class="header-buttons">
+        <button class="header-btn header-btn-primary" id="header-btn-1">
+          Pesan
+        </button>
+        <button class="header-btn header-btn-secondary" id="header-btn-2">
+          Harga
+        </button>
+      </div>
+    </header>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 id="hero-headline">
+            Fashion Lokal yang Mencerminkan Karakter Anda
+          </h1>
+          <p id="hero-subtitle">
+            Busana berkualitas dengan desain lokal yang timeless. Dibuat dengan
+            perhatian detail untuk kenyamanan dan gaya sehari-hari.
+          </p>
+          <button class="hero-cta-btn" id="hero-cta">Lihat Koleksi</button>
+        </div>
+        <div class="hero-image">
+          <img
+            src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=1200&amp;q=85"
+            alt="Modern apparel collection"
+            onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+          />
+        </div>
+      </div>
+    </section>
+    <!-- Keunggulan Section -->
+    <section class="keunggulan-section">
+      <div class="keunggulan-container">
+        <h2 id="keunggulan-title">Keunggulan</h2>
+        <div class="keunggulan-grid">
+          <div class="keunggulan-item">
+            <div class="keunggulan-icon-wrapper">
+              <svg class="keunggulan-icon" viewbox="0 0 24 24">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z"
+                ></path>
+                <path
+                  d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6Z"
+                ></path>
+              </svg>
+            </div>
+            <div class="keunggulan-text">
+              <h3 id="keunggulan-1-title">Kain Lembut &amp; Nyaman</h3>
+              <p id="keunggulan-1-desc">
+                Material berkualitas tinggi yang lembut di kulit, breathable,
+                dan nyaman dipakai seharian
+              </p>
+            </div>
+          </div>
+          <div class="keunggulan-item">
+            <div class="keunggulan-icon-wrapper">
+              <svg class="keunggulan-icon" viewbox="0 0 24 24">
+                <path
+                  d="M9 2L7.17 4H4C2.9 4 2 4.9 2 6V20C2 21.1 2.9 22 4 22H20C21.1 22 22 21.1 22 20V6C22 4.9 21.1 4 20 4H16.83L15 2H9ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17Z"
+                ></path>
+              </svg>
+            </div>
+            <div class="keunggulan-text">
+              <h3 id="keunggulan-2-title">Jahitan Awet &amp; Rapi</h3>
+              <p id="keunggulan-2-desc">
+                Setiap jahitan dikerjakan dengan teliti untuk memastikan daya
+                tahan produk yang maksimal
+              </p>
+            </div>
+          </div>
+          <div class="keunggulan-item">
+            <div class="keunggulan-icon-wrapper">
+              <svg class="keunggulan-icon" viewbox="0 0 24 24">
+                <path
+                  d="M12 2L2 7V17L12 22L22 17V7L12 2ZM12 4.18L19.05 7.5L12 10.82L4.95 7.5L12 4.18ZM4 9.27L11 12.59V19.73L4 16.41V9.27ZM13 19.73V12.59L20 9.27V16.41L13 19.73Z"
+                ></path>
+              </svg>
+            </div>
+            <div class="keunggulan-text">
+              <h3 id="keunggulan-3-title">Desain Original Lokal</h3>
+              <p id="keunggulan-3-desc">
+                Desain eksklusif karya desainer lokal dengan sentuhan modern
+                yang timeless
+              </p>
+            </div>
+          </div>
+          <div class="keunggulan-item">
+            <div class="keunggulan-icon-wrapper">
+              <svg class="keunggulan-icon" viewbox="0 0 24 24">
+                <path
+                  d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V5H19V19Z"
+                ></path>
+                <path d="M7 12H17V14H7V12Z"></path>
+                <path d="M7 8H17V10H7V8Z"></path>
+                <path d="M7 16H13V18H7V16Z"></path>
+              </svg>
+            </div>
+            <div class="keunggulan-text">
+              <h3 id="keunggulan-4-title">Opsi Custom Available</h3>
+              <p id="keunggulan-4-desc">
+                Bisa request ukuran, warna, atau modifikasi design sesuai
+                kebutuhan personal Anda
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Products Section -->
+    <section class="products-section">
+      <div class="products-container">
+        <h2 id="products-title">Koleksi Terpilih</h2>
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&amp;q=85"
+                alt="Basic Cotton T-Shirt"
+                onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-name">Basic Cotton Tee</div>
+              <div class="product-price">Rp 125.000</div>
+              <div class="product-desc">
+                Kaos basic premium cotton combed 30s dengan fit yang nyaman
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800&amp;q=85"
+                alt="Oversized Hoodie"
+                onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-name">Oversized Hoodie</div>
+              <div class="product-price">Rp 285.000</div>
+              <div class="product-desc">
+                Hoodie premium fleece lembut dengan potongan oversized modern
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&amp;q=85"
+                alt="Linen Shirt"
+                onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-name">Linen Shirt</div>
+              <div class="product-price">Rp 245.000</div>
+              <div class="product-desc">
+                Kemeja linen premium breathable untuk tampilan casual elegant
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&amp;q=85"
+                alt="Canvas Totebag"
+                onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-name">Canvas Totebag</div>
+              <div class="product-price">Rp 95.000</div>
+              <div class="product-desc">
+                Totebag canvas tebal dengan sablon original design lokal
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1622445275576-721325763afe?w=800&amp;q=85"
+                alt="Pocket Tee"
+                onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-name">Pocket Tee</div>
+              <div class="product-price">Rp 145.000</div>
+              <div class="product-desc">
+                T-shirt dengan kantong detail dan warna earth tone minimalis
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=800&amp;q=85"
+                alt="Crewneck Sweatshirt"
+                onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-name">Crewneck Sweatshirt</div>
+              <div class="product-price">Rp 225.000</div>
+              <div class="product-desc">
+                Sweatshirt fleece hangat dengan embroidered logo di dada
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+      <div class="pricing-container">
+        <h2 id="pricing-title">Paket Pembelian</h2>
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <div class="pricing-header">
+              <h3>Basic</h3>
+              <div class="pricing-price">Rp 125K <span>/ item</span></div>
+              <p class="pricing-description">
+                Untuk pembelian satuan produk ready stock
+              </p>
+            </div>
+            <ul class="pricing-features">
+              <li>1 item ready stock</li>
+              <li>Pilihan size standar (S-XL)</li>
+              <li>3-4 pilihan warna tersedia</li>
+              <li>Packaging standar</li>
+              <li>Ongkir normal</li>
+            </ul>
+            <button class="pricing-btn">Pilih Paket</button>
+          </div>
+          <div class="pricing-card featured">
+            <span class="pricing-badge">Rekomendasi</span>
+            <div class="pricing-header">
+              <h3>Standard</h3>
+              <div class="pricing-price">Rp 235K <span>/ item</span></div>
+              <p class="pricing-description">
+                Pilihan terbaik untuk customization
+              </p>
+            </div>
+            <ul class="pricing-features">
+              <li>1 item semi-custom</li>
+              <li>All size available (XS-XXL)</li>
+              <li>Pilihan warna lengkap</li>
+              <li>Minor design adjustment</li>
+              <li>Packaging premium</li>
+              <li>Free ongkir area lokal</li>
+            </ul>
+            <button class="pricing-btn">Pilih Paket</button>
+          </div>
+          <div class="pricing-card">
+            <div class="pricing-header">
+              <h3>Premium</h3>
+              <div class="pricing-price">Rp 380K <span>/ item</span></div>
+              <p class="pricing-description">
+                Full customization untuk kebutuhan spesial
+              </p>
+            </div>
+            <ul class="pricing-features">
+              <li>1 item full custom</li>
+              <li>Custom fit &amp; tailored</li>
+              <li>Design dari awal (optional)</li>
+              <li>Pilihan material upgrade</li>
+              <li>2x fitting session</li>
+              <li>Gift box packaging</li>
+              <li>Free ongkir seluruh Indonesia</li>
+            </ul>
+            <button class="pricing-btn">Pilih Paket</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <div class="faq-container">
+        <h2 id="faq-title">Pertanyaan Umum</h2>
+        <div class="faq-item">
+          <h3 class="faq-question">Bahan apa yang digunakan untuk produk?</h3>
+          <p class="faq-answer">
+            Kami menggunakan berbagai material berkualitas tinggi seperti cotton
+            combed 30s untuk kaos, fleece premium untuk hoodie/sweatshirt, dan
+            linen untuk kemeja. Semua bahan dipilih berdasarkan kenyamanan, daya
+            tahan, dan kemudahan perawatan. Material yang kami gunakan telah
+            melalui quality control ketat.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">
+            Apakah bisa pesan custom design atau ukuran?
+          </h3>
+          <p class="faq-answer">
+            Bisa! Untuk paket Standard, Anda bisa request minor adjustment
+            seperti ukuran custom atau pilihan warna khusus. Untuk paket
+            Premium, kami menyediakan layanan full customization termasuk design
+            dari awal, tailored fit sesuai body measurement, dan pilihan
+            material upgrade. Lead time untuk custom order adalah 7-14 hari
+            kerja tergantung kompleksitas.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">
+            Bagaimana sistem pengiriman dan berapa lama?
+          </h3>
+          <p class="faq-answer">
+            Kami bekerja sama dengan ekspedisi terpercaya (JNE, J&amp;T,
+            SiCepat). Estimasi pengiriman 2-4 hari untuk Jawa-Bali, 4-7 hari
+            untuk luar Jawa. Free ongkir tersedia untuk paket Standard (area
+            lokal) dan Premium (seluruh Indonesia). Semua paket diasuransikan
+            dan dikemas dengan packaging khusus garment. Anda bisa tracking
+            pesanan melalui nomor resi yang diberikan.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">
+            Bisa beli satuan atau harus dalam jumlah banyak?
+          </h3>
+          <p class="faq-answer">
+            Bisa beli satuan! Semua paket kami (Basic, Standard, Premium)
+            tersedia untuk pembelian per item. Tidak ada minimum order. Namun
+            untuk pembelian dalam jumlah banyak (10+ pcs), kami menyediakan
+            harga grosir khusus dan diskon volume. Silakan hubungi customer
+            service kami untuk mendapatkan penawaran wholesale atau untuk
+            kebutuhan seragam tim/komunitas.
+          </p>
+        </div>
+      </div>
+    </section>
+    <script>
+      const defaultConfig = {
+        background_color: "#FAFAF8",
+        surface_color: "#FFFFFF",
+        text_color: "#2B2725",
+        primary_action_color: "#6B5D4F",
+        secondary_action_color: "#9B7C5F",
+        font_family: "Inter",
+        font_size: 16,
+        logo_text: "Kalyana Apparel",
+        header_button_1: "Pesan",
+        header_button_2: "Harga",
+        hero_headline: "Fashion Lokal yang Mencerminkan Karakter Anda",
+        hero_subtitle:
+          "Busana berkualitas dengan desain lokal yang timeless. Dibuat dengan perhatian detail untuk kenyamanan dan gaya sehari-hari.",
+        hero_cta: "Lihat Koleksi",
+        keunggulan_title: "Keunggulan",
+        keunggulan_1_title: "Kain Lembut & Nyaman",
+        keunggulan_1_desc:
+          "Material berkualitas tinggi yang lembut di kulit, breathable, dan nyaman dipakai seharian",
+        keunggulan_2_title: "Jahitan Awet & Rapi",
+        keunggulan_2_desc:
+          "Setiap jahitan dikerjakan dengan teliti untuk memastikan daya tahan produk yang maksimal",
+        keunggulan_3_title: "Desain Original Lokal",
+        keunggulan_3_desc:
+          "Desain eksklusif karya desainer lokal dengan sentuhan modern yang timeless",
+        keunggulan_4_title: "Opsi Custom Available",
+        keunggulan_4_desc:
+          "Bisa request ukuran, warna, atau modifikasi design sesuai kebutuhan personal Anda",
+        products_title: "Koleksi Terpilih",
+        pricing_title: "Paket Pembelian",
+        faq_title: "Pertanyaan Umum",
+      };
+
+      let config = { ...defaultConfig };
+
+      async function onConfigChange(newConfig) {
+        config = { ...config, ...newConfig };
+
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseSize = config.font_size || defaultConfig.font_size;
+        const baseFontStack =
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+
+        document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        document.body.style.backgroundColor =
+          config.background_color || defaultConfig.background_color;
+        document.body.style.color =
+          config.text_color || defaultConfig.text_color;
+
+        const header = document.querySelector(".header");
+        if (header) {
+          header.style.backgroundColor =
+            config.surface_color || defaultConfig.surface_color;
+        }
+
+        const logo = document.getElementById("logo");
+        if (logo) {
+          logo.textContent = config.logo_text || defaultConfig.logo_text;
+          logo.style.color =
+            config.primary_action_color || defaultConfig.primary_action_color;
+          logo.style.fontSize = `${baseSize * 1.35}px`;
+        }
+
+        const headerBtn1 = document.getElementById("header-btn-1");
+        if (headerBtn1) {
+          headerBtn1.textContent =
+            config.header_button_1 || defaultConfig.header_button_1;
+          headerBtn1.style.backgroundColor =
+            config.primary_action_color || defaultConfig.primary_action_color;
+          headerBtn1.style.fontSize = `${baseSize * 0.92}px`;
+        }
+
+        const headerBtn2 = document.getElementById("header-btn-2");
+        if (headerBtn2) {
+          headerBtn2.textContent =
+            config.header_button_2 || defaultConfig.header_button_2;
+          headerBtn2.style.color =
+            config.primary_action_color || defaultConfig.primary_action_color;
+          headerBtn2.style.borderColor =
+            config.primary_action_color || defaultConfig.primary_action_color;
+          headerBtn2.style.fontSize = `${baseSize * 0.92}px`;
+        }
+
+        const heroHeadline = document.getElementById("hero-headline");
+        if (heroHeadline) {
+          heroHeadline.textContent =
+            config.hero_headline || defaultConfig.hero_headline;
+          heroHeadline.style.fontSize = `${baseSize * 3.5}px`;
+          heroHeadline.style.color =
+            config.text_color || defaultConfig.text_color;
+        }
+
+        const heroSubtitle = document.getElementById("hero-subtitle");
+        if (heroSubtitle) {
+          heroSubtitle.textContent =
+            config.hero_subtitle || defaultConfig.hero_subtitle;
+          heroSubtitle.style.fontSize = `${baseSize * 1.15}px`;
+        }
+
+        const heroCta = document.getElementById("hero-cta");
+        if (heroCta) {
+          heroCta.textContent = config.hero_cta || defaultConfig.hero_cta;
+          heroCta.style.backgroundColor =
+            config.secondary_action_color ||
+            defaultConfig.secondary_action_color;
+          heroCta.style.fontSize = `${baseSize * 1.05}px`;
+        }
+
+        const keunggulanSection = document.querySelector(".keunggulan-section");
+        if (keunggulanSection) {
+          keunggulanSection.style.backgroundColor =
+            config.surface_color || defaultConfig.surface_color;
+        }
+
+        const keunggulanTitle = document.getElementById("keunggulan-title");
+        if (keunggulanTitle) {
+          keunggulanTitle.textContent =
+            config.keunggulan_title || defaultConfig.keunggulan_title;
+          keunggulanTitle.style.fontSize = `${baseSize * 2.6}px`;
+          keunggulanTitle.style.color =
+            config.text_color || defaultConfig.text_color;
+        }
+
+        const keunggulan1Title = document.getElementById("keunggulan-1-title");
+        if (keunggulan1Title) {
+          keunggulan1Title.textContent =
+            config.keunggulan_1_title || defaultConfig.keunggulan_1_title;
+          keunggulan1Title.style.fontSize = `${baseSize * 1.2}px`;
+        }
+
+        const keunggulan1Desc = document.getElementById("keunggulan-1-desc");
+        if (keunggulan1Desc) {
+          keunggulan1Desc.textContent =
+            config.keunggulan_1_desc || defaultConfig.keunggulan_1_desc;
+          keunggulan1Desc.style.fontSize = `${baseSize * 0.97}px`;
+        }
+
+        const keunggulan2Title = document.getElementById("keunggulan-2-title");
+        if (keunggulan2Title) {
+          keunggulan2Title.textContent =
+            config.keunggulan_2_title || defaultConfig.keunggulan_2_title;
+          keunggulan2Title.style.fontSize = `${baseSize * 1.2}px`;
+        }
+
+        const keunggulan2Desc = document.getElementById("keunggulan-2-desc");
+        if (keunggulan2Desc) {
+          keunggulan2Desc.textContent =
+            config.keunggulan_2_desc || defaultConfig.keunggulan_2_desc;
+          keunggulan2Desc.style.fontSize = `${baseSize * 0.97}px`;
+        }
+
+        const keunggulan3Title = document.getElementById("keunggulan-3-title");
+        if (keunggulan3Title) {
+          keunggulan3Title.textContent =
+            config.keunggulan_3_title || defaultConfig.keunggulan_3_title;
+          keunggulan3Title.style.fontSize = `${baseSize * 1.2}px`;
+        }
+
+        const keunggulan3Desc = document.getElementById("keunggulan-3-desc");
+        if (keunggulan3Desc) {
+          keunggulan3Desc.textContent =
+            config.keunggulan_3_desc || defaultConfig.keunggulan_3_desc;
+          keunggulan3Desc.style.fontSize = `${baseSize * 0.97}px`;
+        }
+
+        const keunggulan4Title = document.getElementById("keunggulan-4-title");
+        if (keunggulan4Title) {
+          keunggulan4Title.textContent =
+            config.keunggulan_4_title || defaultConfig.keunggulan_4_title;
+          keunggulan4Title.style.fontSize = `${baseSize * 1.2}px`;
+        }
+
+        const keunggulan4Desc = document.getElementById("keunggulan-4-desc");
+        if (keunggulan4Desc) {
+          keunggulan4Desc.textContent =
+            config.keunggulan_4_desc || defaultConfig.keunggulan_4_desc;
+          keunggulan4Desc.style.fontSize = `${baseSize * 0.97}px`;
+        }
+
+        const keunggulanItems = document.querySelectorAll(".keunggulan-item");
+        keunggulanItems.forEach((item) => {
+          item.style.backgroundColor =
+            config.background_color || defaultConfig.background_color;
+        });
+
+        const keunggulanIconWrappers = document.querySelectorAll(
+          ".keunggulan-icon-wrapper"
+        );
+        keunggulanIconWrappers.forEach((wrapper) => {
+          wrapper.style.backgroundColor =
+            config.surface_color || defaultConfig.surface_color;
+        });
+
+        const keunggulanIcons = document.querySelectorAll(".keunggulan-icon");
+        keunggulanIcons.forEach((icon) => {
+          icon.style.stroke =
+            config.primary_action_color || defaultConfig.primary_action_color;
+        });
+
+        const productsTitle = document.getElementById("products-title");
+        if (productsTitle) {
+          productsTitle.textContent =
+            config.products_title || defaultConfig.products_title;
+          productsTitle.style.fontSize = `${baseSize * 2.6}px`;
+          productsTitle.style.color =
+            config.text_color || defaultConfig.text_color;
+        }
+
+        const productCards = document.querySelectorAll(".product-card");
+        productCards.forEach((card) => {
+          card.style.backgroundColor =
+            config.surface_color || defaultConfig.surface_color;
+        });
+
+        const productPrices = document.querySelectorAll(".product-price");
+        productPrices.forEach((price) => {
+          price.style.color =
+            config.secondary_action_color ||
+            defaultConfig.secondary_action_color;
+        });
+
+        const pricingSection = document.querySelector(".pricing-section");
+        if (pricingSection) {
+          pricingSection.style.backgroundColor =
+            config.surface_color || defaultConfig.surface_color;
+        }
+
+        const pricingTitle = document.getElementById("pricing-title");
+        if (pricingTitle) {
+          pricingTitle.textContent =
+            config.pricing_title || defaultConfig.pricing_title;
+          pricingTitle.style.fontSize = `${baseSize * 2.6}px`;
+          pricingTitle.style.color =
+            config.text_color || defaultConfig.text_color;
+        }
+
+        const pricingCardFeatured = document.querySelector(
+          ".pricing-card.featured"
+        );
+        if (pricingCardFeatured) {
+          pricingCardFeatured.style.backgroundColor =
+            config.surface_color || defaultConfig.surface_color;
+          pricingCardFeatured.style.borderColor =
+            config.secondary_action_color ||
+            defaultConfig.secondary_action_color;
+        }
+
+        const pricingBadges = document.querySelectorAll(".pricing-badge");
+        pricingBadges.forEach((badge) => {
+          badge.style.backgroundColor =
+            config.secondary_action_color ||
+            defaultConfig.secondary_action_color;
+        });
+
+        const pricingBtns = document.querySelectorAll(".pricing-btn");
+        pricingBtns.forEach((btn) => {
+          btn.style.backgroundColor =
+            config.primary_action_color || defaultConfig.primary_action_color;
+          btn.style.fontSize = `${baseSize * 0.98}px`;
+        });
+
+        const faqTitle = document.getElementById("faq-title");
+        if (faqTitle) {
+          faqTitle.textContent = config.faq_title || defaultConfig.faq_title;
+          faqTitle.style.fontSize = `${baseSize * 2.6}px`;
+          faqTitle.style.color = config.text_color || defaultConfig.text_color;
+        }
+
+        const faqItems = document.querySelectorAll(".faq-item");
+        faqItems.forEach((item) => {
+          item.style.backgroundColor =
+            config.surface_color || defaultConfig.surface_color;
+        });
+
+        const faqQuestions = document.querySelectorAll(".faq-question");
+        faqQuestions.forEach((q) => {
+          q.style.fontSize = `${baseSize * 1.15}px`;
+          q.style.color = config.text_color || defaultConfig.text_color;
+        });
+      }
+
+      function mapToCapabilities(config) {
+        return {
+          recolorables: [
+            {
+              get: () =>
+                config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              },
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                config.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              },
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              },
+            },
+            {
+              get: () =>
+                config.primary_action_color ||
+                defaultConfig.primary_action_color,
+              set: (value) => {
+                config.primary_action_color = value;
+                window.elementSdk.setConfig({ primary_action_color: value });
+              },
+            },
+            {
+              get: () =>
+                config.secondary_action_color ||
+                defaultConfig.secondary_action_color,
+              set: (value) => {
+                config.secondary_action_color = value;
+                window.elementSdk.setConfig({ secondary_action_color: value });
+              },
+            },
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            },
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            },
+          },
+        };
+      }
+
+      function mapToEditPanelValues(config) {
+        return new Map([
+          ["logo_text", config.logo_text || defaultConfig.logo_text],
+          [
+            "header_button_1",
+            config.header_button_1 || defaultConfig.header_button_1,
+          ],
+          [
+            "header_button_2",
+            config.header_button_2 || defaultConfig.header_button_2,
+          ],
+          [
+            "hero_headline",
+            config.hero_headline || defaultConfig.hero_headline,
+          ],
+          [
+            "hero_subtitle",
+            config.hero_subtitle || defaultConfig.hero_subtitle,
+          ],
+          ["hero_cta", config.hero_cta || defaultConfig.hero_cta],
+          [
+            "keunggulan_title",
+            config.keunggulan_title || defaultConfig.keunggulan_title,
+          ],
+          [
+            "keunggulan_1_title",
+            config.keunggulan_1_title || defaultConfig.keunggulan_1_title,
+          ],
+          [
+            "keunggulan_1_desc",
+            config.keunggulan_1_desc || defaultConfig.keunggulan_1_desc,
+          ],
+          [
+            "keunggulan_2_title",
+            config.keunggulan_2_title || defaultConfig.keunggulan_2_title,
+          ],
+          [
+            "keunggulan_2_desc",
+            config.keunggulan_2_desc || defaultConfig.keunggulan_2_desc,
+          ],
+          [
+            "keunggulan_3_title",
+            config.keunggulan_3_title || defaultConfig.keunggulan_3_title,
+          ],
+          [
+            "keunggulan_3_desc",
+            config.keunggulan_3_desc || defaultConfig.keunggulan_3_desc,
+          ],
+          [
+            "keunggulan_4_title",
+            config.keunggulan_4_title || defaultConfig.keunggulan_4_title,
+          ],
+          [
+            "keunggulan_4_desc",
+            config.keunggulan_4_desc || defaultConfig.keunggulan_4_desc,
+          ],
+          [
+            "products_title",
+            config.products_title || defaultConfig.products_title,
+          ],
+          [
+            "pricing_title",
+            config.pricing_title || defaultConfig.pricing_title,
+          ],
+          ["faq_title", config.faq_title || defaultConfig.faq_title],
+        ]);
+      }
+
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities,
+          mapToEditPanelValues,
+        });
+      }
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'9a15909d41e44083',t:'MTc2MzYxNjcyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
