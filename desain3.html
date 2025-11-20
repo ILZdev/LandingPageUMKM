@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sepatu Lokal Santara - Premium Handmade Shoes</title>
+    <script src="/_sdk/element_sdk.js"></script>
+    <script src="/_sdk/data_sdk.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+        background-color: #fafafa;
+        color: #2c2c2c;
+        min-height: 100%;
+        box-sizing: border-box;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      html,
+      body {
+        height: 100%;
+        scroll-behavior: smooth;
+      }
+
+      /* Header */
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.98);
+        padding: 1.3rem 7%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+        transition: all 0.4s ease;
+      }
+
+      .header.scrolled {
+        padding: 0.9rem 7%;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .logo {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #2c2c2c;
+        letter-spacing: 1px;
+        font-family: "Cinzel", serif;
+      }
+
+      .logo span {
+        color: #c9a054;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: #2c2c2c;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+        font-family: "Inter", sans-serif;
+        letter-spacing: 0.3px;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #c9a054, #d4af6a);
+        transition: width 0.3s ease;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      /* Hero Section */
+      .hero {
+        margin-top: 80px;
+        height: 85%;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+      }
+
+      .hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .hero-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.4;
+        transform: scale(1.1);
+        transition: transform 8s ease-out;
+      }
+
+      .hero:hover .hero-bg img {
+        transform: scale(1);
+      }
+
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(26, 26, 26, 0.85) 0%,
+          rgba(44, 44, 44, 0.75) 100%
+        );
+      }
+
+      .hero-content {
+        position: relative;
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 0 7%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        z-index: 10;
+      }
+
+      .hero-text {
+        opacity: 0;
+        animation: fadeInUp 1.2s ease forwards 0.3s;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-text h1 {
+        font-size: 4.5rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 1.5rem;
+        line-height: 1.15;
+        letter-spacing: -1.5px;
+        font-family: "Cinzel", serif;
+      }
+
+      .hero-text p {
+        font-size: 1.35rem;
+        color: #e0e0e0;
+        margin-bottom: 3rem;
+        max-width: 650px;
+        line-height: 1.8;
+        font-family: "Inter", sans-serif;
+        font-weight: 300;
+      }
+
+      .hero-cta-group {
+        display: flex;
+        gap: 1.5rem;
+        opacity: 0;
+        animation: fadeInUp 1.2s ease forwards 0.6s;
+      }
+
+      .hero-btn {
+        padding: 1.15rem 3.2rem;
+        border: none;
+        border-radius: 4px;
+        font-size: 1.05rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        font-family: "Inter", sans-serif;
+        letter-spacing: 0.5px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-btn::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+
+      .hero-btn:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      .hero-btn span {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-btn-primary {
+        background: linear-gradient(135deg, #c9a054 0%, #d4af6a 100%);
+        color: #ffffff;
+        box-shadow: 0 6px 25px rgba(201, 160, 84, 0.35);
+      }
+
+      .hero-btn-primary:hover {
+        box-shadow: 0 10px 35px rgba(201, 160, 84, 0.5);
+        transform: translateY(-3px);
+      }
+
+      .hero-btn-secondary {
+        background: transparent;
+        color: #ffffff;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+      }
+
+      .hero-btn-secondary:hover {
+        border-color: #c9a054;
+        background: rgba(201, 160, 84, 0.1);
+        transform: translateY(-3px);
+      }
+
+      /* Products Section */
+      .products-section {
+        padding: 7rem 7%;
+        background-color: #ffffff;
+      }
+
+      .products-header {
+        text-align: center;
+        margin-bottom: 5rem;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease;
+      }
+
+      .products-header.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .products-header h2 {
+        font-size: 3.2rem;
+        font-weight: 700;
+        color: #2c2c2c;
+        margin-bottom: 1rem;
+        letter-spacing: -1px;
+        font-family: "Cinzel", serif;
+      }
+
+      .products-header p {
+        font-size: 1.2rem;
+        color: #666666;
+        font-family: "Inter", sans-serif;
+        font-weight: 300;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+        max-width: 1300px;
+        margin: 0 auto;
+      }
+
+      .product-card {
+        background-color: #fafafa;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.5s ease;
+        opacity: 0;
+        transform: translateY(40px);
+        position: relative;
+        cursor: pointer;
+      }
+
+      .product-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .product-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+      }
+
+      .product-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, #c9a054, #d4af6a);
+        transform: scaleX(0);
+        transition: transform 0.5s ease;
+      }
+
+      .product-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .product-image {
+        width: 100%;
+        height: 350px;
+        overflow: hidden;
+        background-color: #f0f0f0;
+        position: relative;
+      }
+
+      .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+      }
+
+      .product-card:hover .product-image img {
+        transform: scale(1.08);
+      }
+
+      .product-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: linear-gradient(135deg, #c9a054 0%, #d4af6a 100%);
+        color: #ffffff;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        font-family: "Inter", sans-serif;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        box-shadow: 0 4px 15px rgba(201, 160, 84, 0.4);
+      }
+
+      .product-info {
+        padding: 2rem;
+      }
+
+      .product-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2c2c2c;
+        margin-bottom: 0.8rem;
+        font-family: "Cinzel", serif;
+      }
+
+      .product-desc {
+        font-size: 1rem;
+        color: #666666;
+        line-height: 1.7;
+        margin-bottom: 1.2rem;
+        font-family: "Inter", sans-serif;
+        font-weight: 300;
+      }
+
+      .product-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1rem;
+        border-top: 1px solid #e0e0e0;
+      }
+
+      .product-price {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #c9a054;
+        font-family: "Cinzel", serif;
+      }
+
+      .product-cta {
+        background: transparent;
+        color: #2c2c2c;
+        border: 2px solid #2c2c2c;
+        padding: 0.6rem 1.5rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: "Inter", sans-serif;
+        letter-spacing: 0.3px;
+      }
+
+      .product-cta:hover {
+        background-color: #2c2c2c;
+        color: #ffffff;
+        transform: translateY(-2px);
+      }
+
+      /* Story Section */
+      .story-section {
+        padding: 7rem 7%;
+        background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+      }
+
+      .story-container {
+        max-width: 1300px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 5rem;
+        align-items: center;
+      }
+
+      .story-content {
+        opacity: 0;
+        transform: translateX(-40px);
+        transition: all 0.8s ease;
+      }
+
+      .story-content.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .story-content h2 {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #2c2c2c;
+        margin-bottom: 1rem;
+        letter-spacing: -1px;
+        font-family: "Cinzel", serif;
+      }
+
+      .story-content .subtitle {
+        font-size: 1.15rem;
+        color: #c9a054;
+        margin-bottom: 2rem;
+        font-family: "Inter", sans-serif;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+      }
+
+      .story-content p {
+        font-size: 1.1rem;
+        color: #555555;
+        line-height: 1.9;
+        margin-bottom: 1.5rem;
+        font-family: "Inter", sans-serif;
+        font-weight: 300;
+      }
+
+      .story-image {
+        width: 100%;
+        height: 500px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 15px 60px rgba(0, 0, 0, 0.15);
+        opacity: 0;
+        transform: translateX(40px);
+        transition: all 0.8s ease;
+      }
+
+      .story-image.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .story-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+      }
+
+      .story-section:hover .story-image img {
+        transform: scale(1.05);
+      }
+
+      /* Contact Section */
+      .contact-section {
+        padding: 7rem 7%;
+        background-color: #ffffff;
+      }
+
+      .contact-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .contact-header {
+        text-align: center;
+        margin-bottom: 4rem;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease;
+      }
+
+      .contact-header.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .contact-header h2 {
+        font-size: 3.2rem;
+        font-weight: 700;
+        color: #2c2c2c;
+        margin-bottom: 1rem;
+        letter-spacing: -1px;
+        font-family: "Cinzel", serif;
+      }
+
+      .contact-header p {
+        font-size: 1.2rem;
+        color: #666666;
+        font-family: "Inter", sans-serif;
+        font-weight: 300;
+      }
+
+      .contact-form {
+        background-color: #fafafa;
+        padding: 3rem;
+        border-radius: 8px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s ease;
+      }
+
+      .contact-form.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .form-group {
+        margin-bottom: 2rem;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 0.95rem;
+        color: #2c2c2c;
+        margin-bottom: 0.6rem;
+        font-weight: 600;
+        font-family: "Inter", sans-serif;
+        letter-spacing: 0.3px;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 1rem 1.3rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-family: "Inter", sans-serif;
+        color: #2c2c2c;
+        background-color: #ffffff;
+        transition: all 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: #c9a054;
+        box-shadow: 0 0 0 3px rgba(201, 160, 84, 0.1);
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 140px;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 1.2rem;
+        background: linear-gradient(135deg, #c9a054 0%, #d4af6a 100%);
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: "Inter", sans-serif;
+        letter-spacing: 0.5px;
+        transition: all 0.4s ease;
+        box-shadow: 0 6px 25px rgba(201, 160, 84, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .submit-btn:hover:not(:disabled) {
+        box-shadow: 0 10px 35px rgba(201, 160, 84, 0.45);
+        transform: translateY(-2px);
+      }
+
+      .submit-btn:active:not(:disabled) {
+        animation: vibrate 0.3s ease;
+      }
+
+      .submit-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      @keyframes vibrate {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-3px);
+        }
+        75% {
+          transform: translateX(3px);
+        }
+      }
+
+      .success-message {
+        background-color: #d4edda;
+        color: #155724;
+        padding: 1.2rem;
+        border-radius: 4px;
+        margin-top: 1.5rem;
+        text-align: center;
+        font-family: "Inter", sans-serif;
+        font-weight: 500;
+        display: none;
+        animation: slideDown 0.5s ease;
+      }
+
+      .success-message.show {
+        display: block;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .error-message {
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 1.2rem;
+        border-radius: 4px;
+        margin-top: 1.5rem;
+        text-align: center;
+        font-family: "Inter", sans-serif;
+        font-weight: 500;
+        display: none;
+      }
+
+      .error-message.show {
+        display: block;
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .hero-text h1 {
+          font-size: 3.2rem;
+        }
+
+        .products-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2.5rem;
+        }
+
+        .story-container {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+
+        .story-image {
+          order: -1;
+        }
+
+        .form-row {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .header {
+          padding: 1rem 5%;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .nav-links {
+          gap: 1.5rem;
+        }
+
+        .nav-links a {
+          font-size: 0.9rem;
+        }
+
+        .hero {
+          height: 70%;
+        }
+
+        .hero-text h1 {
+          font-size: 2.3rem;
+        }
+
+        .hero-text p {
+          font-size: 1.1rem;
+        }
+
+        .hero-cta-group {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .hero-btn {
+          width: 100%;
+          text-align: center;
+        }
+
+        .products-section,
+        .story-section,
+        .contact-section {
+          padding: 4rem 5%;
+        }
+
+        .products-header h2,
+        .contact-header h2 {
+          font-size: 2.2rem;
+        }
+
+        .products-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .story-content h2 {
+          font-size: 2.2rem;
+        }
+
+        .contact-form {
+          padding: 2rem;
+        }
+      }
+    </style>
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header" id="header">
+      <div class="logo" id="brand-name">Santara <span>Shoes</span></div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#products" id="nav-link-1">Products</a></li>
+          <li><a href="#story" id="nav-link-2">Craftsmanship</a></li>
+          <li><a href="#contact" id="nav-link-3">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-bg">
+        <img
+          src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=2000&amp;q=85"
+          alt="Premium handmade leather shoes"
+          onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+        />
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 id="hero-headline">Handcrafted Elegance, Timeless Quality</h1>
+          <p id="hero-subtitle">
+            Sepatu premium yang dibuat dengan tangan oleh pengrajin
+            berpengalaman. Setiap detail dirancang untuk kenyamanan dan gaya
+            yang tak lekang waktu.
+          </p>
+        </div>
+        <div class="hero-cta-group">
+          <button
+            class="hero-btn hero-btn-primary"
+            id="hero-cta-1"
+            onclick="document.getElementById('products').scrollIntoView({behavior:'smooth', block:'start'})"
+          >
+            <span>Lihat Koleksi</span>
+          </button>
+          <button
+            class="hero-btn hero-btn-secondary"
+            id="hero-cta-2"
+            onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth', block:'start'})"
+          >
+            <span>Hubungi Kami</span>
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+      <div class="products-header">
+        <h2 id="products-title">Koleksi Premium</h2>
+        <p id="products-subtitle">
+          Handcrafted shoes untuk setiap momen istimewa Anda
+        </p>
+      </div>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-image">
+            <img
+              src="https://images.unsplash.com/photo-1638247025967-b4e38f787b76?w=800&amp;q=85"
+              alt="Classic Leather Boots"
+              onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+            />
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Classic Leather Boots</h3>
+            <p class="product-desc">
+              Premium full-grain leather boots dengan konstruksi Goodyear welt
+              untuk daya tahan maksimal.
+            </p>
+            <div class="product-footer">
+              <div class="product-price">Rp 1.850.000</div>
+              <button class="product-cta">Detail</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <img
+              src="https://images.unsplash.com/photo-1614252369475-531eba835eb1?w=800&amp;q=85"
+              alt="Oxford Formal Shoes"
+              onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+            />
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Oxford Formal Shoes</h3>
+            <p class="product-desc">
+              Sepatu formal klasik dengan kulit calf berkualitas tinggi,
+              sempurna untuk acara resmi.
+            </p>
+            <div class="product-footer">
+              <div class="product-price">Rp 1.650.000</div>
+              <button class="product-cta">Detail</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <img
+              src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&amp;q=85"
+              alt="Premium Sneakers"
+              onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+            />
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Premium Sneakers</h3>
+            <p class="product-desc">
+              Sneakers handmade dengan leather lining dan insole memory foam
+              untuk kenyamanan premium.
+            </p>
+            <div class="product-footer">
+              <div class="product-price">Rp 1.450.000</div>
+              <button class="product-cta">Detail</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <img
+              src="https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=800&amp;q=85"
+              alt="Comfort Slip-Ons"
+              onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+            />
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Comfort Slip-Ons</h3>
+            <p class="product-desc">
+              Slip-on shoes dengan soft leather dan flexible sole, ideal untuk
+              daily wear casual.
+            </p>
+            <div class="product-footer">
+              <div class="product-price">Rp 1.250.000</div>
+              <button class="product-cta">Detail</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <img
+              src="https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=800&amp;q=85"
+              alt="Derby Dress Shoes"
+              onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+            />
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Derby Dress Shoes</h3>
+            <p class="product-desc">
+              Derby shoes dengan open lacing system, kombinasi sempurna antara
+              formal dan casual.
+            </p>
+            <div class="product-footer">
+              <div class="product-price">Rp 1.750.000</div>
+              <button class="product-cta">Detail</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <div class="product-badge">Limited</div>
+            <img
+              src="https://images.unsplash.com/photo-1560343090-f0409e92791a?w=800&amp;q=85"
+              alt="Limited Edition Series"
+              onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+            />
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Limited Edition Series</h3>
+            <p class="product-desc">
+              Koleksi eksklusif dengan exotic leather dan hand-painted patina
+              finish. Hanya 50 pasang.
+            </p>
+            <div class="product-footer">
+              <div class="product-price">Rp 2.450.000</div>
+              <button class="product-cta">Detail</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Story Section -->
+    <section class="story-section" id="story">
+      <div class="story-container">
+        <div class="story-content">
+          <h2 id="story-title">Crafted with Passion</h2>
+          <p class="subtitle" id="story-subtitle">
+            Setiap Jahitan Menceritakan Dedikasi
+          </p>
+          <p id="story-text">
+            Di workshop kami, setiap pasang sepatu dibuat dengan penuh perhatian
+            dan keahlian yang telah diasah selama puluhan tahun. Kami
+            menggunakan kulit premium pilihan dan teknik tradisional yang
+            dipadukan dengan sentuhan modern. Dari pemilihan material,
+            pemotongan presisi, hingga jahitan akhir—semuanya dilakukan dengan
+            standar kualitas tertinggi untuk memastikan produk yang tahan lama
+            dan nyaman digunakan.
+          </p>
+        </div>
+        <div class="story-image">
+          <img
+            src="https://images.unsplash.com/photo-1605348532760-6753d2c43329?w=1200&amp;q=85"
+            alt="Artisan shoemaker workshop"
+            onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+          />
+        </div>
+      </div>
+    </section>
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+      <div class="contact-container">
+        <div class="contact-header">
+          <h2 id="contact-title">Mari Berkolaborasi</h2>
+          <p id="contact-subtitle">
+            Ceritakan proyek Anda dan mari kita wujudkan bersama
+          </p>
+        </div>
+        <form class="contact-form" id="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Nama Lengkap</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="whatsapp">Nomor WhatsApp</label>
+              <input
+                type="tel"
+                id="whatsapp"
+                name="whatsapp"
+                placeholder="08123456789"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="budget">Budget Range</label>
+              <select id="budget" name="budget" required>
+                <option value="">Pilih budget</option>
+                <option value="< 2 juta">&lt; 2 juta</option>
+                <option value="2 - 5 juta">2 - 5 juta</option>
+                <option value="5 - 10 juta">5 - 10 juta</option>
+                <option value="> 10 juta">&gt; 10 juta</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="project_type">Jenis Pemesanan</label>
+              <select id="project_type" name="project_type" required>
+                <option value="">Pilih jenis</option>
+                <option value="Ready Stock">Ready Stock</option>
+                <option value="Custom Order">Custom Order</option>
+                <option value="Bespoke">Bespoke (Full Custom)</option>
+                <option value="Bulk Order">Bulk Order (10+ pasang)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">Pesan / Detail Pemesanan</label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Ceritakan detail pemesanan Anda..."
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="submit-btn" id="submit-btn">
+            Kirim Pesan
+          </button>
+          <div class="success-message" id="success-message">
+            Terima kasih! Pesan Anda telah terkirim. Kami akan segera
+            menghubungi Anda.
+          </div>
+          <div class="error-message" id="error-message">
+            Terjadi kesalahan. Silakan coba lagi.
+          </div>
+        </form>
+      </div>
+    </section>
+    <script>
+      const defaultConfig = {
+        background_color: "#FAFAFA",
+        surface_color: "#FFFFFF",
+        text_color: "#2C2C2C",
+        primary_action_color: "#C9A054",
+        secondary_action_color: "#2C2C2C",
+        font_family: "Cormorant Garamond",
+        font_size: 16,
+        brand_name: "Santara Shoes",
+        nav_link_1: "Products",
+        nav_link_2: "Craftsmanship",
+        nav_link_3: "Contact",
+        hero_headline: "Handcrafted Elegance, Timeless Quality",
+        hero_subtitle:
+          "Sepatu premium yang dibuat dengan tangan oleh pengrajin berpengalaman. Setiap detail dirancang untuk kenyamanan dan gaya yang tak lekang waktu.",
+        hero_cta_1: "Lihat Koleksi",
+        hero_cta_2: "Hubungi Kami",
+        products_title: "Koleksi Premium",
+        products_subtitle: "Handcrafted shoes untuk setiap momen istimewa Anda",
+        story_title: "Crafted with Passion",
+        story_subtitle: "Setiap Jahitan Menceritakan Dedikasi",
+        story_text:
+          "Di workshop kami, setiap pasang sepatu dibuat dengan penuh perhatian dan keahlian yang telah diasah selama puluhan tahun. Kami menggunakan kulit premium pilihan dan teknik tradisional yang dipadukan dengan sentuhan modern. Dari pemilihan material, pemotongan presisi, hingga jahitan akhir—semuanya dilakukan dengan standar kualitas tertinggi untuk memastikan produk yang tahan lama dan nyaman digunakan.",
+        contact_title: "Mari Berkolaborasi",
+        contact_subtitle:
+          "Ceritakan proyek Anda dan mari kita wujudkan bersama",
+      };
+
+      let config = { ...defaultConfig };
+      let allRecords = [];
+
+      // Scroll animations
+      const observerOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      function initScrollAnimations() {
+        const elements = document.querySelectorAll(
+          ".products-header, .product-card, .story-content, .story-image, .contact-header, .contact-form"
+        );
+        elements.forEach((el) => observer.observe(el));
+      }
+
+      // Header scroll effect
+      window.addEventListener("scroll", () => {
+        const header = document.getElementById("header");
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+
+      // Smooth scroll for nav links
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute("href").substring(1);
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            const headerHeight = document.getElementById("header").offsetHeight;
+            const targetPosition = targetElement.offsetTop - headerHeight;
+            window.scrollTo({
+              top: targetPosition,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+
+      // Data SDK
+      const dataHandler = {
+        onDataChanged(data) {
+          allRecords = data;
+        },
+      };
+
+      async function initDataSdk() {
+        if (window.dataSdk) {
+          const result = await window.dataSdk.init(dataHandler);
+          if (!result.isOk) {
+            console.error("Failed to initialize Data SDK");
+          }
+        }
+      }
+
+      // Form submission
+      const contactForm = document.getElementById("contact-form");
+      const submitBtn = document.getElementById("submit-btn");
+      const successMessage = document.getElementById("success-message");
+      const errorMessage = document.getElementById("error-message");
+
+      contactForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        if (allRecords.length >= 999) {
+          errorMessage.textContent =
+            "Maximum limit of 999 submissions reached. Please contact us directly.";
+          errorMessage.classList.add("show");
+          setTimeout(() => errorMessage.classList.remove("show"), 5000);
+          return;
+        }
+
+        successMessage.classList.remove("show");
+        errorMessage.classList.remove("show");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Mengirim...";
+
+        const formData = {
+          name: document.getElementById("name").value,
+          whatsapp: document.getElementById("whatsapp").value,
+          budget: document.getElementById("budget").value,
+          project_type: document.getElementById("project_type").value,
+          message: document.getElementById("message").value,
+          submitted_at: new Date().toISOString(),
+        };
+
+        if (window.dataSdk) {
+          const result = await window.dataSdk.create(formData);
+
+          if (result.isOk) {
+            successMessage.classList.add("show");
+            contactForm.reset();
+            setTimeout(() => successMessage.classList.remove("show"), 5000);
+          } else {
+            errorMessage.textContent = "Terjadi kesalahan. Silakan coba lagi.";
+            errorMessage.classList.add("show");
+            setTimeout(() => errorMessage.classList.remove("show"), 5000);
+          }
+        }
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Kirim Pesan";
+      });
+
+      // Element SDK
+      async function onConfigChange(newConfig) {
+        config = { ...config, ...newConfig };
+
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseSize = config.font_size || defaultConfig.font_size;
+        const baseFontStack = "Georgia, serif";
+
+        document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        document.body.style.backgroundColor =
+          config.background_color || defaultConfig.background_color;
+        document.body.style.color =
+          config.text_color || defaultConfig.text_color;
+
+        const header = document.querySelector(".header");
+        if (header) {
+          header.style.backgroundColor =
+            config.surface_color || defaultConfig.surface_color;
+        }
+
+        const brandName = document.getElementById("brand-name");
+        if (brandName) {
+          const parts = (config.brand_name || defaultConfig.brand_name).split(
+            " "
+          );
+          if (parts.length >= 2) {
+            brandName.innerHTML = `${parts[0]} <span>${parts
+              .slice(1)
+              .join(" ")}</span>`;
+          } else {
+            brandName.textContent =
+              config.brand_name || defaultConfig.brand_name;
+          }
+          brandName.style.color = config.text_color || defaultConfig.text_color;
+          brandName.style.fontSize = `${baseSize * 1.6}px`;
+        }
+
+        const logoSpan = document.querySelector(".logo span");
+        if (logoSpan) {
+          logoSpan.style.color =
+            config.primary_action_color || defaultConfig.primary_action_color;
+        }
+
+        const navLink1 = document.getElementById("nav-link-1");
+        if (navLink1) {
+          navLink1.textContent = config.nav_link_1 || defaultConfig.nav_link_1;
+          navLink1.style.color = config.text_color || defaultConfig.text_color;
+          navLink1.style.fontSize = `${baseSize}px`;
+        }
+
+        const navLink2 = document.getElementById("nav-link-2");
+        if (navLink2) {
+          navLink2.textContent = config.nav_link_2 || defaultConfig.nav_link_2;
+          navLink2.style.color = config.text_color || defaultConfig.text_color;
+          navLink2.style.fontSize = `${baseSize}px`;
+        }
+
+        const navLink3 = document.getElementById("nav-link-3");
+        if (navLink3) {
+          navLink3.textContent = config.nav_link_3 || defaultConfig.nav_link_3;
+          navLink3.style.color = config.text_color || defaultConfig.text_color;
+          navLink3.style.fontSize = `${baseSize}px`;
+        }
+
+        const heroHeadline = document.getElementById("hero-headline");
+        if (heroHeadline) {
+          heroHeadline.textContent =
+            config.hero_headline || defaultConfig.hero_headline;
+          heroHeadline.style.fontSize = `${baseSize * 4.5}px`;
+        }
+
+        const heroSubtitle = document.getElementById("hero-subtitle");
+        if (heroSubtitle) {
+          heroSubtitle.textContent =
+            config.hero_subtitle || defaultConfig.hero_subtitle;
+          heroSubtitle.style.fontSize = `${baseSize * 1.35}px`;
+        }
+
+        const heroCta1 = document.getElementById("hero-cta-1");
+        if (heroCta1) {
+          heroCta1.querySelector("span").textContent =
+            config.hero_cta_1 || defaultConfig.hero_cta_1;
+          heroCta1.style.background = `linear-gradient(135deg, ${
+            config.primary_action_color || defaultConfig.primary_action_color
+          } 0%, ${
+            config.primary_action_color || defaultConfig.primary_action_color
+          } 100%)`;
+          heroCta1.style.fontSize = `${baseSize * 1.05}px`;
+        }
+
+        const heroCta2 = document.getElementById("hero-cta-2");
+        if (heroCta2) {
+          heroCta2.querySelector("span").textContent =
+            config.hero_cta_2 || defaultConfig.hero_cta_2;
+          heroCta2.style.fontSize = `${baseSize * 1.05}px`;
+        }
+
+        const productsTitle = document.getElementById("products-title");
+        if (productsTitle) {
+          productsTitle.textContent =
+            config.products_title || defaultConfig.products_title;
+          productsTitle.style.color =
+            config.text_color || defaultConfig.text_color;
+          productsTitle.style.fontSize = `${baseSize * 3.2}px`;
+        }
+
+        const productsSubtitle = document.getElementById("products-subtitle");
+        if (productsSubtitle) {
+          productsSubtitle.textContent =
+            config.products_subtitle || defaultConfig.products_subtitle;
+          productsSubtitle.style.fontSize = `${baseSize * 1.2}px`;
+        }
+
+        const productCards = document.querySelectorAll(".product-card");
+        productCards.forEach((card) => {
+          card.style.backgroundColor =
+            config.background_color || defaultConfig.background_color;
+        });
+
+        const productPrices = document.querySelectorAll(".product-price");
+        productPrices.forEach((price) => {
+          price.style.color =
+            config.primary_action_color || defaultConfig.primary_action_color;
+        });
+
+        const productCtas = document.querySelectorAll(".product-cta");
+        productCtas.forEach((cta) => {
+          cta.style.borderColor =
+            config.secondary_action_color ||
+            defaultConfig.secondary_action_color;
+          cta.style.color =
+            config.secondary_action_color ||
+            defaultConfig.secondary_action_color;
+        });
+
+        const productBadges = document.querySelectorAll(".product-badge");
+        productBadges.forEach((badge) => {
+          badge.style.background = `linear-gradient(135deg, ${
+            config.primary_action_color || defaultConfig.primary_action_color
+          } 0%, ${
+            config.primary_action_color || defaultConfig.primary_action_color
+          } 100%)`;
+        });
+
+        const storyTitle = document.getElementById("story-title");
+        if (storyTitle) {
+          storyTitle.textContent =
+            config.story_title || defaultConfig.story_title;
+          storyTitle.style.color =
+            config.text_color || defaultConfig.text_color;
+          storyTitle.style.fontSize = `${baseSize * 3}px`;
+        }
+
+        const storySubtitle = document.getElementById("story-subtitle");
+        if (storySubtitle) {
+          storySubtitle.textContent =
+            config.story_subtitle || defaultConfig.story_subtitle;
+          storySubtitle.style.color =
+            config.primary_action_color || defaultConfig.primary_action_color;
+          storySubtitle.style.fontSize = `${baseSize * 1.15}px`;
+        }
+
+        const storyText = document.getElementById("story-text");
+        if (storyText) {
+          storyText.textContent = config.story_text || defaultConfig.story_text;
+          storyText.style.fontSize = `${baseSize * 1.1}px`;
+        }
+
+        const contactTitle = document.getElementById("contact-title");
+        if (contactTitle) {
+          contactTitle.textContent =
+            config.contact_title || defaultConfig.contact_title;
+          contactTitle.style.color =
+            config.text_color || defaultConfig.text_color;
+          contactTitle.style.fontSize = `${baseSize * 3.2}px`;
+        }
+
+        const contactSubtitle = document.getElementById("contact-subtitle");
+        if (contactSubtitle) {
+          contactSubtitle.textContent =
+            config.contact_subtitle || defaultConfig.contact_subtitle;
+          contactSubtitle.style.fontSize = `${baseSize * 1.2}px`;
+        }
+
+        const contactFormEl = document.querySelector(".contact-form");
+        if (contactFormEl) {
+          contactFormEl.style.backgroundColor =
+            config.background_color || defaultConfig.background_color;
+        }
+
+        const submitButton = document.getElementById("submit-btn");
+        if (submitButton) {
+          submitButton.style.background = `linear-gradient(135deg, ${
+            config.primary_action_color || defaultConfig.primary_action_color
+          } 0%, ${
+            config.primary_action_color || defaultConfig.primary_action_color
+          } 100%)`;
+          submitButton.style.fontSize = `${baseSize * 1.1}px`;
+        }
+      }
+
+      function mapToCapabilities(config) {
+        return {
+          recolorables: [
+            {
+              get: () =>
+                config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              },
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                config.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              },
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              },
+            },
+            {
+              get: () =>
+                config.primary_action_color ||
+                defaultConfig.primary_action_color,
+              set: (value) => {
+                config.primary_action_color = value;
+                window.elementSdk.setConfig({ primary_action_color: value });
+              },
+            },
+            {
+              get: () =>
+                config.secondary_action_color ||
+                defaultConfig.secondary_action_color,
+              set: (value) => {
+                config.secondary_action_color = value;
+                window.elementSdk.setConfig({ secondary_action_color: value });
+              },
+            },
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            },
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            },
+          },
+        };
+      }
+
+      function mapToEditPanelValues(config) {
+        return new Map([
+          ["brand_name", config.brand_name || defaultConfig.brand_name],
+          ["nav_link_1", config.nav_link_1 || defaultConfig.nav_link_1],
+          ["nav_link_2", config.nav_link_2 || defaultConfig.nav_link_2],
+          ["nav_link_3", config.nav_link_3 || defaultConfig.nav_link_3],
+          [
+            "hero_headline",
+            config.hero_headline || defaultConfig.hero_headline,
+          ],
+          [
+            "hero_subtitle",
+            config.hero_subtitle || defaultConfig.hero_subtitle,
+          ],
+          ["hero_cta_1", config.hero_cta_1 || defaultConfig.hero_cta_1],
+          ["hero_cta_2", config.hero_cta_2 || defaultConfig.hero_cta_2],
+          [
+            "products_title",
+            config.products_title || defaultConfig.products_title,
+          ],
+          [
+            "products_subtitle",
+            config.products_subtitle || defaultConfig.products_subtitle,
+          ],
+          ["story_title", config.story_title || defaultConfig.story_title],
+          [
+            "story_subtitle",
+            config.story_subtitle || defaultConfig.story_subtitle,
+          ],
+          ["story_text", config.story_text || defaultConfig.story_text],
+          [
+            "contact_title",
+            config.contact_title || defaultConfig.contact_title,
+          ],
+          [
+            "contact_subtitle",
+            config.contact_subtitle || defaultConfig.contact_subtitle,
+          ],
+        ]);
+      }
+
+      // Initialize
+      initScrollAnimations();
+      initDataSdk();
+
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities,
+          mapToEditPanelValues,
+        });
+      }
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'9a159a539253b5ac',t:'MTc2MzYxNzEyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
