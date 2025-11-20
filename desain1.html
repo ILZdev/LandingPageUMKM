@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paket Nongol Dari Got</title>
+    <script src="/_sdk/element_sdk.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background-color: #faf8f5;
+        color: #3e3731;
+        min-height: 100%;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      /* Header */
+      .header {
+        position: sticky;
+        top: 0;
+        background-color: #ffffff;
+        padding: 1.25rem 6%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        z-index: 1000;
+      }
+
+      .logo {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #9b7e5c;
+        letter-spacing: -0.5px;
+      }
+
+      .header-btn {
+        background-color: #9b7e5c;
+        color: #ffffff;
+        padding: 0.7rem 1.6rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .header-btn:hover {
+        background-color: #7d6548;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(155, 126, 92, 0.3);
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 5rem 6% 6rem;
+        background: linear-gradient(135deg, #faf8f5 0%, #f5f0e8 100%);
+      }
+
+      .hero-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+        align-items: center;
+      }
+
+      .hero-text h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: #3e3731;
+        margin-bottom: 1.5rem;
+        line-height: 1.15;
+        letter-spacing: -1px;
+      }
+
+      .hero-text p {
+        font-size: 1.25rem;
+        color: #6b5d52;
+        margin-bottom: 2.5rem;
+        line-height: 1.6;
+      }
+
+      .hero-cta {
+        background-color: #d4a574;
+        color: #ffffff;
+        padding: 1.1rem 2.8rem;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-block;
+        box-shadow: 0 6px 20px rgba(212, 165, 116, 0.3);
+      }
+
+      .hero-cta:hover {
+        background-color: #c08f5e;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(212, 165, 116, 0.4);
+      }
+
+      .hero-image {
+        position: relative;
+        width: 100%;
+        height: 450px;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        background-color: #f5f0e8;
+      }
+
+      .hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Why Section */
+      .why-section {
+        padding: 5rem 6%;
+        background-color: #ffffff;
+      }
+
+      .why-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .why-section h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #3e3731;
+        margin-bottom: 3rem;
+        letter-spacing: -0.5px;
+      }
+
+      .why-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+        margin-top: 3rem;
+      }
+
+      .why-item {
+        text-align: center;
+      }
+
+      .icon-wrapper {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 1.5rem;
+        background-color: #f5f0e8;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .why-icon {
+        width: 40px;
+        height: 40px;
+        stroke: #9b7e5c;
+        fill: none;
+        stroke-width: 2;
+      }
+
+      .why-item p {
+        font-size: 1.1rem;
+        color: #6b5d52;
+        line-height: 1.6;
+        font-weight: 500;
+      }
+
+      /* Gallery Section */
+      .gallery-section {
+        padding: 5rem 6%;
+        background-color: #faf8f5;
+      }
+
+      .gallery-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .gallery-section h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #3e3731;
+        text-align: center;
+        margin-bottom: 3.5rem;
+        letter-spacing: -0.5px;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+      }
+
+      .gallery-item {
+        position: relative;
+        width: 100%;
+        height: 320px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: #f5f0e8;
+      }
+
+      .gallery-item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Testimonial Section */
+      .testimonial-section {
+        padding: 5rem 6%;
+        background-color: #ffffff;
+      }
+
+      .testimonial-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .testimonial-section h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #3e3731;
+        text-align: center;
+        margin-bottom: 3.5rem;
+        letter-spacing: -0.5px;
+      }
+
+      .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+      }
+
+      .testimonial-card {
+        background-color: #f5f0e8;
+        padding: 2.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      }
+
+      .testimonial-text {
+        font-size: 1rem;
+        color: #6b5d52;
+        line-height: 1.7;
+        font-style: italic;
+        margin-bottom: 1.5rem;
+      }
+
+      .testimonial-author {
+        width: 50px;
+        height: 50px;
+        background-color: #d4a574;
+        border-radius: 50%;
+        margin: 0 auto;
+      }
+
+      /* Responsive */
+      @media (max-width: 968px) {
+        .hero-content {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+
+        .hero-text h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero-image {
+          height: 350px;
+        }
+
+        .why-grid,
+        .gallery-grid,
+        .testimonial-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .gallery-item {
+          height: 280px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .header {
+          padding: 1rem 4%;
+        }
+
+        .logo {
+          font-size: 1.15rem;
+        }
+
+        .header-btn {
+          padding: 0.6rem 1.2rem;
+          font-size: 0.85rem;
+        }
+
+        .hero {
+          padding: 3rem 4% 4rem;
+        }
+
+        .hero-text h1 {
+          font-size: 2rem;
+        }
+
+        .hero-text p {
+          font-size: 1.1rem;
+        }
+
+        .why-section,
+        .gallery-section,
+        .testimonial-section {
+          padding: 3rem 4%;
+        }
+
+        .why-section h2,
+        .gallery-section h2,
+        .testimonial-section h2 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+    <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="logo" id="logo">Paket Nongol Dari Got</div>
+      <button class="header-btn" id="header-btn">Pesan Sekarang</button>
+    </header>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 id="hero-title">Bikin Usaha Lu Nongol di Halaman Pertama</h1>
+          <p id="hero-subtitle">
+            Landing page profesional yang bikin brand lu keliatan lebih
+            meyakinkan dan dipercaya pelanggan.
+          </p>
+          <button class="hero-cta" id="hero-cta">Mulai Sekarang</button>
+        </div>
+        <div class="hero-image">
+          <img
+            src="https://images.unsplash.com/photo-1509440159596-0249088772ff"
+            alt="Fresh artisan bread"
+            onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+          />
+        </div>
+      </div>
+    </section>
+    <!-- Why Section -->
+    <section class="why-section">
+      <div class="why-container">
+        <h2 id="why-title">Kenapa usaha lu layak dilihat?</h2>
+        <div class="why-grid">
+          <div class="why-item">
+            <div class="icon-wrapper">
+              <svg class="why-icon" viewbox="0 0 24 24">
+                <path
+                  d="M12 2L2 7L12 12L22 7L12 2ZM12 22C7 20 2 16 2 12V8.5L12 14L22 8.5V12C22 16 17 20 12 22Z"
+                />
+              </svg>
+            </div>
+            <p id="bullet-1">
+              Bahan pilihan berkualitas tinggi untuk rasa terbaik
+            </p>
+          </div>
+          <div class="why-item">
+            <div class="icon-wrapper">
+              <svg class="why-icon" viewbox="0 0 24 24">
+                <path
+                  d="M12 2C10.34 2 9 3.34 9 5C9 6.31 9.84 7.42 11 7.83V9H4C2.9 9 2 9.9 2 11V20C2 21.1 2.9 22 4 22H20C21.1 22 22 21.1 22 20V11C22 9.9 21.1 9 20 9H13V7.83C14.16 7.42 15 6.31 15 5C15 3.34 13.66 2 12 2ZM12 4C12.55 4 13 4.45 13 5C13 5.55 12.55 6 12 6C11.45 6 11 5.55 11 5C11 4.45 11.45 4 12 4ZM4 11H20V20H4V11Z"
+                />
+              </svg>
+            </div>
+            <p id="bullet-2">Dibuat fresh setiap hari dengan resep rumahan</p>
+          </div>
+          <div class="why-item">
+            <div class="icon-wrapper">
+              <svg class="why-icon" viewbox="0 0 24 24">
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+            <p id="bullet-3">Dibuat dengan cinta untuk keluarga Indonesia</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+      <div class="gallery-container">
+        <h2 id="gallery-title">Produk Kami</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df"
+              alt="Homemade bread loaf"
+              onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73"
+              alt="Artisan sourdough bread"
+              onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1555507036-ab1f4038808a"
+              alt="Fresh baked bread assortment"
+              onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Testimonial Section -->
+    <section class="testimonial-section">
+      <div class="testimonial-container">
+        <h2 id="testimonial-title">Kata Mereka</h2>
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-text">
+              "Rotinya lembut banget dan wanginya bikin nagih. Bener-bener
+              kerasa buatan rumahan yang berkualitas."
+            </p>
+            <div class="testimonial-author"></div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">
+              "Seneng banget nemu roti homemade yang rasanya konsisten enak.
+              Keluarga jadi langganan terus."
+            </p>
+            <div class="testimonial-author"></div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">
+              "Packagingnya rapi, rasanya enak, dan pelayanannya ramah.
+              Recommended banget!"
+            </p>
+            <div class="testimonial-author"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      const defaultConfig = {
+        background_color: "#FAF8F5",
+        surface_color: "#FFFFFF",
+        text_color: "#3E3731",
+        primary_action_color: "#9B7E5C",
+        secondary_action_color: "#D4A574",
+        font_family: "Inter",
+        font_size: 16,
+        logo_text: "Paket Nongol Dari Got",
+        header_button_text: "Pesan Sekarang",
+        hero_title: "Bikin Usaha Lu Nongol di Halaman Pertama",
+        hero_subtitle:
+          "Landing page profesional yang bikin brand lu keliatan lebih meyakinkan dan dipercaya pelanggan.",
+        hero_button_text: "Mulai Sekarang",
+        why_title: "Kenapa usaha lu layak dilihat?",
+        bullet_1: "Bahan pilihan berkualitas tinggi untuk rasa terbaik",
+        bullet_2: "Dibuat fresh setiap hari dengan resep rumahan",
+        bullet_3: "Dibuat dengan cinta untuk keluarga Indonesia",
+        gallery_title: "Produk Kami",
+        testimonial_title: "Kata Mereka",
+      };
+
+      let config = { ...defaultConfig };
+
+      async function onConfigChange(newConfig) {
+        config = { ...config, ...newConfig };
+
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseSize = config.font_size || defaultConfig.font_size;
+        const baseFontStack =
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+
+        document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        document.body.style.backgroundColor =
+          config.background_color || defaultConfig.background_color;
+        document.body.style.color =
+          config.text_color || defaultConfig.text_color;
+
+        const header = document.querySelector(".header");
+        if (header) {
+          header.style.backgroundColor =
+            config.surface_color || defaultConfig.surface_color;
+        }
+
+        const logo = document.getElementById("logo");
+        if (logo) {
+          logo.textContent = config.logo_text || defaultConfig.logo_text;
+          logo.style.color =
+            config.primary_action_color || defaultConfig.primary_action_color;
+          logo.style.fontSize = `${baseSize * 1.35}px`;
+        }
+
+        const headerBtn = document.getElementById("header-btn");
+        if (headerBtn) {
+          headerBtn.textContent =
+            config.header_button_text || defaultConfig.header_button_text;
+          headerBtn.style.backgroundColor =
+            config.primary_action_color || defaultConfig.primary_action_color;
+          headerBtn.style.fontSize = `${baseSize * 0.95}px`;
+        }
+
+        const heroTitle = document.getElementById("hero-title");
+        if (heroTitle) {
+          heroTitle.textContent = config.hero_title || defaultConfig.hero_title;
+          heroTitle.style.fontSize = `${baseSize * 3.5}px`;
+        }
+
+        const heroSubtitle = document.getElementById("hero-subtitle");
+        if (heroSubtitle) {
+          heroSubtitle.textContent =
+            config.hero_subtitle || defaultConfig.hero_subtitle;
+          heroSubtitle.style.fontSize = `${baseSize * 1.25}px`;
+        }
+
+        const heroCta = document.getElementById("hero-cta");
+        if (heroCta) {
+          heroCta.textContent =
+            config.hero_button_text || defaultConfig.hero_button_text;
+          heroCta.style.backgroundColor =
+            config.secondary_action_color ||
+            defaultConfig.secondary_action_color;
+          heroCta.style.fontSize = `${baseSize * 1.1}px`;
+        }
+
+        const whySections = document.querySelectorAll(
+          ".why-section, .gallery-section, .testimonial-section"
+        );
+        whySections.forEach((section) => {
+          section.style.backgroundColor =
+            config.surface_color || defaultConfig.surface_color;
+        });
+
+        const whyTitle = document.getElementById("why-title");
+        if (whyTitle) {
+          whyTitle.textContent = config.why_title || defaultConfig.why_title;
+          whyTitle.style.fontSize = `${baseSize * 2.5}px`;
+        }
+
+        const bullet1 = document.getElementById("bullet-1");
+        if (bullet1) {
+          bullet1.textContent = config.bullet_1 || defaultConfig.bullet_1;
+          bullet1.style.fontSize = `${baseSize * 1.1}px`;
+        }
+
+        const bullet2 = document.getElementById("bullet-2");
+        if (bullet2) {
+          bullet2.textContent = config.bullet_2 || defaultConfig.bullet_2;
+          bullet2.style.fontSize = `${baseSize * 1.1}px`;
+        }
+
+        const bullet3 = document.getElementById("bullet-3");
+        if (bullet3) {
+          bullet3.textContent = config.bullet_3 || defaultConfig.bullet_3;
+          bullet3.style.fontSize = `${baseSize * 1.1}px`;
+        }
+
+        const whyIcons = document.querySelectorAll(".why-icon");
+        whyIcons.forEach((icon) => {
+          icon.style.stroke =
+            config.primary_action_color || defaultConfig.primary_action_color;
+        });
+
+        const iconWrappers = document.querySelectorAll(".icon-wrapper");
+        iconWrappers.forEach((wrapper) => {
+          wrapper.style.backgroundColor =
+            config.background_color || defaultConfig.background_color;
+        });
+
+        const galleryTitle = document.getElementById("gallery-title");
+        if (galleryTitle) {
+          galleryTitle.textContent =
+            config.gallery_title || defaultConfig.gallery_title;
+          galleryTitle.style.fontSize = `${baseSize * 2.5}px`;
+        }
+
+        const testimonialTitle = document.getElementById("testimonial-title");
+        if (testimonialTitle) {
+          testimonialTitle.textContent =
+            config.testimonial_title || defaultConfig.testimonial_title;
+          testimonialTitle.style.fontSize = `${baseSize * 2.5}px`;
+        }
+
+        const testimonialCards = document.querySelectorAll(".testimonial-card");
+        testimonialCards.forEach((card) => {
+          card.style.backgroundColor =
+            config.background_color || defaultConfig.background_color;
+        });
+
+        const testimonialAuthors = document.querySelectorAll(
+          ".testimonial-author"
+        );
+        testimonialAuthors.forEach((author) => {
+          author.style.backgroundColor =
+            config.secondary_action_color ||
+            defaultConfig.secondary_action_color;
+        });
+      }
+
+      function mapToCapabilities(config) {
+        return {
+          recolorables: [
+            {
+              get: () =>
+                config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              },
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                config.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              },
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              },
+            },
+            {
+              get: () =>
+                config.primary_action_color ||
+                defaultConfig.primary_action_color,
+              set: (value) => {
+                config.primary_action_color = value;
+                window.elementSdk.setConfig({ primary_action_color: value });
+              },
+            },
+            {
+              get: () =>
+                config.secondary_action_color ||
+                defaultConfig.secondary_action_color,
+              set: (value) => {
+                config.secondary_action_color = value;
+                window.elementSdk.setConfig({ secondary_action_color: value });
+              },
+            },
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            },
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            },
+          },
+        };
+      }
+
+      function mapToEditPanelValues(config) {
+        return new Map([
+          ["logo_text", config.logo_text || defaultConfig.logo_text],
+          [
+            "header_button_text",
+            config.header_button_text || defaultConfig.header_button_text,
+          ],
+          ["hero_title", config.hero_title || defaultConfig.hero_title],
+          [
+            "hero_subtitle",
+            config.hero_subtitle || defaultConfig.hero_subtitle,
+          ],
+          [
+            "hero_button_text",
+            config.hero_button_text || defaultConfig.hero_button_text,
+          ],
+          ["why_title", config.why_title || defaultConfig.why_title],
+          ["bullet_1", config.bullet_1 || defaultConfig.bullet_1],
+          ["bullet_2", config.bullet_2 || defaultConfig.bullet_2],
+          ["bullet_3", config.bullet_3 || defaultConfig.bullet_3],
+          [
+            "gallery_title",
+            config.gallery_title || defaultConfig.gallery_title,
+          ],
+          [
+            "testimonial_title",
+            config.testimonial_title || defaultConfig.testimonial_title,
+          ],
+        ]);
+      }
+
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities,
+          mapToEditPanelValues,
+        });
+      }
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'9a157605427eea7f',t:'MTc2MzYxNTYzNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
