@@ -3,38 +3,697 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Clothes Store - Koleksi Terbaru</title>
+    <title>Landing Page Jasa Profesional</title>
     <script src="/_sdk/element_sdk.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/_sdk/data_sdk.js"></script>
     <style>
       body {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #ffffff;
+        color: #333333;
+        overflow-x: hidden;
       }
 
       * {
         box-sizing: border-box;
       }
 
-      .hero-gradient {
-        background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+      .page-container {
+        width: 100%;
+        min-height: 100%;
       }
 
-      .product-card {
-        transition: transform 0.2s ease;
+      /* Header Section */
+      .hero-section {
+        background: linear-gradient(135deg, #ff6b35 0%, #ff8f5c 100%);
+        color: white;
+        padding: 80px 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
       }
 
-      .product-card:hover {
-        transform: translateY(-4px);
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 400px;
+        height: 400px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .hero-section::after {
+        content: "";
+        position: absolute;
+        bottom: -30%;
+        left: -5%;
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        animation: float 8s ease-in-out infinite reverse;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) translateX(0px);
+        }
+        50% {
+          transform: translateY(-30px) translateX(20px);
+        }
+      }
+
+      .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .company-name {
+        font-size: 48px;
+        font-weight: bold;
+        margin: 0 0 20px 0;
+        animation: fadeInDown 1s ease-out;
+      }
+
+      .tagline {
+        font-size: 24px;
+        margin: 0 0 40px 0;
+        opacity: 0.95;
+        animation: fadeInUp 1s ease-out 0.2s both;
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       .cta-button {
-        transition: all 0.2s ease;
+        background: white;
+        color: #ff6b35;
+        border: none;
+        padding: 18px 48px;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        animation: fadeInUp 1s ease-out 0.4s both;
       }
 
       .cta-button:hover {
-        transform: scale(1.02);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Products Section */
+      .products-section {
+        padding: 80px 20px;
+        background: white;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 36px;
+        font-weight: bold;
+        color: #333333;
+        margin: 0 0 60px 0;
+      }
+
+      .products-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 40px;
+      }
+
+      .product-card {
+        background: #f5f5f5;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        animation: fadeIn 1s ease-out both;
+        cursor: pointer;
+      }
+
+      .product-card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .product-card:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .product-image {
+        width: 100%;
+        height: 250px;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px;
+      }
+
+      .product-content {
+        padding: 30px;
+        background: white;
+      }
+
+      .product-name {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333333;
+        margin: 0 0 10px 0;
+      }
+
+      .product-price {
+        font-size: 28px;
+        font-weight: bold;
+        color: #ff6b35;
+        margin: 0 0 15px 0;
+      }
+
+      .product-description {
+        font-size: 16px;
+        color: #555555;
+        line-height: 1.6;
+        margin: 0 0 25px 0;
+      }
+
+      .order-button {
+        width: 100%;
+        background: #ff6b35;
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .order-button:hover {
+        background: #e55a2b;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+      }
+
+      /* Services Section */
+      .services-section {
+        padding: 80px 20px;
+        background: #f5f5f5;
+      }
+
+      .services-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+      }
+
+      .service-card {
+        background: white;
+        padding: 40px 30px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        animation: fadeIn 1s ease-out both;
+      }
+
+      .service-card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .service-card:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .service-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        background: #ff6b35;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+      }
+
+      .service-card:nth-child(2) .service-icon {
+        background: #4caf50;
+      }
+
+      .service-card:nth-child(3) .service-icon {
+        background: #2196f3;
+      }
+
+      .service-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333333;
+        margin: 0 0 15px 0;
+      }
+
+      .service-description {
+        font-size: 16px;
+        color: #555555;
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      /* Testimonials Section */
+      .testimonials-section {
+        padding: 80px 20px;
+        background: white;
+      }
+
+      .testimonials-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 40px;
+      }
+
+      .testimonial-card {
+        background: #f5f5f5;
+        padding: 40px;
+        border-radius: 20px;
+        border-left: 5px solid #ff6b35;
+        transition: all 0.3s ease;
+      }
+
+      .testimonial-card:hover {
+        transform: translateX(10px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .testimonial-text {
+        font-size: 18px;
+        font-style: italic;
+        color: #555555;
+        margin: 0 0 20px 0;
+        line-height: 1.6;
+      }
+
+      .testimonial-author {
+        font-size: 16px;
+        font-weight: bold;
+        color: #ff6b35;
+        margin: 0;
+      }
+
+      /* Contact Form Section */
+      .contact-section {
+        padding: 80px 20px;
+        background: linear-gradient(135deg, #ff6b35 0%, #ff8f5c 100%);
+      }
+
+      .contact-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: white;
+        padding: 50px;
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .contact-title {
+        font-size: 32px;
+        font-weight: bold;
+        color: #333333;
+        margin: 0 0 30px 0;
+        text-align: center;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 16px;
+        font-weight: 600;
+        color: #333333;
+        margin-bottom: 8px;
+      }
+
+      .form-input,
+      .form-select,
+      .form-textarea {
+        width: 100%;
+        padding: 15px;
+        font-size: 16px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        font-family: inherit;
+      }
+
+      .form-input:focus,
+      .form-select:focus,
+      .form-textarea:focus {
+        outline: none;
+        border-color: #ff6b35;
+        box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+      }
+
+      .form-textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      .submit-button {
+        width: 100%;
+        background: #ff6b35;
+        color: white;
+        border: none;
+        padding: 18px;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .submit-button:hover:not(:disabled) {
+        background: #e55a2b;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+      }
+
+      .submit-button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .success-message {
+        background: #4caf50;
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        margin-bottom: 20px;
+        display: none;
+      }
+
+      .error-message {
+        background: #f44336;
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        margin-bottom: 20px;
+        display: none;
+      }
+
+      .limit-warning {
+        background: #ff9800;
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        margin-bottom: 20px;
+        display: none;
+      }
+
+      /* Product Modal */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        animation: fadeIn 0.3s ease-out;
+      }
+
+      .modal-overlay.active {
+        display: flex;
+      }
+
+      .modal-content {
+        background: white;
+        border-radius: 20px;
+        max-width: 800px;
+        width: 100%;
+        max-height: 90%;
+        overflow-y: auto;
+        position: relative;
+        animation: slideUp 0.3s ease-out;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: #ff6b35;
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        z-index: 10;
+      }
+
+      .modal-close:hover {
+        background: #e55a2b;
+        transform: rotate(90deg);
+      }
+
+      .modal-image {
+        width: 100%;
+        height: 400px;
+        background: #f5f5f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px 20px 0 0;
+        padding: 40px;
+      }
+
+      .modal-body {
+        padding: 40px;
+      }
+
+      .modal-title {
+        font-size: 32px;
+        font-weight: bold;
+        color: #333333;
+        margin: 0 0 15px 0;
+      }
+
+      .modal-price {
+        font-size: 36px;
+        font-weight: bold;
+        color: #ff6b35;
+        margin: 0 0 25px 0;
+      }
+
+      .modal-description {
+        font-size: 18px;
+        color: #555555;
+        line-height: 1.8;
+        margin: 0 0 30px 0;
+      }
+
+      .modal-order-button {
+        width: 100%;
+        background: #ff6b35;
+        color: white;
+        border: none;
+        padding: 18px 30px;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .modal-order-button:hover {
+        background: #e55a2b;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+      }
+
+      .variants-section {
+        margin: 30px 0;
+        padding: 25px;
+        background: #f5f5f5;
+        border-radius: 15px;
+      }
+
+      .variants-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333333;
+        margin: 0 0 20px 0;
+      }
+
+      .variants-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 15px;
+      }
+
+      .variant-card {
+        background: white;
+        padding: 15px;
+        border-radius: 12px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 3px solid transparent;
+      }
+
+      .variant-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border-color: #ff6b35;
+      }
+
+      .variant-card.selected {
+        border-color: #ff6b35;
+        background: #fff5f0;
+      }
+
+      .variant-image {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+
+      .variant-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: #333333;
+        margin: 0 0 5px 0;
+      }
+
+      .variant-price {
+        font-size: 16px;
+        font-weight: bold;
+        color: #ff6b35;
+        margin: 0;
+      }
+
+      /* Footer */
+      .footer {
+        background: #333333;
+        color: white;
+        text-align: center;
+        padding: 30px 20px;
+      }
+
+      .footer-text {
+        margin: 0;
+        font-size: 16px;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .company-name {
+          font-size: 36px;
+        }
+
+        .tagline {
+          font-size: 18px;
+        }
+
+        .section-title {
+          font-size: 28px;
+        }
+
+        .products-grid,
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .testimonials-container {
+          grid-template-columns: 1fr;
+        }
+
+        .contact-container {
+          padding: 30px 20px;
+        }
       }
     </style>
     <style>
@@ -42,891 +701,991 @@
         navigation: auto;
       }
     </style>
-    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+    <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
   </head>
   <body>
-    <div
-      id="app"
-      class="w-full min-h-full"
-      style="
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-          sans-serif;
-      "
-    >
-      <!-- Navigation -->
-      <nav class="w-full px-6 py-4 bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-          <div class="text-2xl font-bold" style="color: #2d2d2d">FASHION</div>
-          <div class="flex gap-8 text-sm font-medium">
-            <a href="#catalog" style="color: #2d2d2d" class="hover:opacity-70"
-              >Katalog</a
-            >
-            <a href="#features" style="color: #2d2d2d" class="hover:opacity-70"
-              >Keunggulan</a
-            >
-            <a
-              href="#testimonials"
-              style="color: #2d2d2d"
-              class="hover:opacity-70"
-              >Testimoni</a
-            >
-          </div>
-        </div>
-      </nav>
+    <div class="page-container">
       <!-- Hero Section -->
-      <section class="w-full hero-gradient px-6 py-20">
-        <div
-          class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12"
-        >
-          <div class="flex-1 text-center md:text-left">
-            <h1
-              id="hero-title"
-              class="text-5xl md:text-6xl font-bold mb-6"
-              style="color: #2d2d2d; line-height: 1.2"
-            >
-              Koleksi Fashion Terbaru
-            </h1>
-            <p id="hero-subtitle" class="text-xl mb-8" style="color: #5a5a5a">
-              Temukan gaya Anda dengan koleksi eksklusif kami. Kualitas premium,
-              desain modern.
+      <section class="hero-section">
+        <div class="hero-content">
+          <h1 class="company-name" id="company-name">Fashion Store</h1>
+          <p class="tagline" id="tagline">
+            Koleksi Pakaian Berkualitas Tinggi untuk Gaya Hidup Modern Anda
+          </p>
+          <button
+            class="cta-button"
+            id="cta-button"
+            onclick="scrollToContact()"
+          >
+            Pesan Sekarang
+          </button>
+        </div>
+      </section>
+      <!-- Products Section -->
+      <section class="products-section">
+        <h2 class="section-title">Koleksi Terbaru</h2>
+        <div class="products-grid">
+          <!-- Product 1 -->
+          <div class="product-card" onclick="openProductModal(1)">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&amp;q=80"
+                alt="Kaos Premium Cotton"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  border-radius: 0;
+                "
+                onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+              />
+            </div>
+            <div class="product-content">
+              <h3 class="product-name" id="product-1-name">
+                Kaos Premium Cotton
+              </h3>
+              <p class="product-price" id="product-1-price">Rp 150.000</p>
+              <p class="product-description" id="product-1-desc">
+                Kaos berbahan cotton premium yang nyaman dan adem. Tersedia
+                berbagai warna.
+              </p>
+              <button
+                class="order-button"
+                onclick="event.stopPropagation(); openOrderForm('Kaos Premium Cotton')"
+              >
+                Pesan Sekarang
+              </button>
+            </div>
+          </div>
+          <!-- Product 2 -->
+          <div class="product-card" onclick="openProductModal(2)">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&amp;q=80"
+                alt="Kemeja Formal Pria"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  border-radius: 0;
+                "
+                onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+              />
+            </div>
+            <div class="product-content">
+              <h3 class="product-name" id="product-2-name">
+                Kemeja Formal Pria
+              </h3>
+              <p class="product-price" id="product-2-price">Rp 250.000</p>
+              <p class="product-description" id="product-2-desc">
+                Kemeja formal dengan bahan katun halus, cocok untuk acara formal
+                dan kerja.
+              </p>
+              <button
+                class="order-button"
+                onclick="event.stopPropagation(); openOrderForm('Kemeja Formal Pria')"
+              >
+                Pesan Sekarang
+              </button>
+            </div>
+          </div>
+          <!-- Product 3 -->
+          <div class="product-card" onclick="openProductModal(3)">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&amp;q=80"
+                alt="Jaket Denim Premium"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  border-radius: 0;
+                "
+                onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+              />
+            </div>
+            <div class="product-content">
+              <h3 class="product-name" id="product-3-name">
+                Jaket Denim Premium
+              </h3>
+              <p class="product-price" id="product-3-price">Rp 450.000</p>
+              <p class="product-description" id="product-3-desc">
+                Jaket denim berkualitas tinggi dengan desain modern dan stylish
+                untuk tampil keren.
+              </p>
+              <button
+                class="order-button"
+                onclick="event.stopPropagation(); openOrderForm('Jaket Denim Premium')"
+              >
+                Pesan Sekarang
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Services Section -->
+      <section class="services-section">
+        <h2 class="section-title">Layanan Kami</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">🎨</div>
+            <h3 class="service-title" id="service-1-title">Desain Website</h3>
+            <p class="service-description" id="service-1-desc">
+              Desain website modern dan responsif yang menarik perhatian
+              pengunjung Anda
             </p>
-            <button
-              id="cta-button"
-              class="cta-button px-8 py-4 text-lg font-semibold rounded-md"
-              style="background-color: #2d2d2d; color: #ffffff"
-            >
-              Belanja Sekarang
-            </button>
           </div>
-          <div class="flex-1">
-            <div
-              class="w-full aspect-square rounded-lg overflow-hidden shadow-2xl"
-              style="background-color: #ffffff"
-            >
-              <svg viewbox="0 0 400 400" class="w-full h-full">
-                <!-- Model silhouette with clothing -->
-                <rect x="0" y="0" width="400" height="400" fill="#f5f5f5" />
-                <!-- Clothing item - Dress -->
-                <path
-                  d="M150 120 L250 120 L260 180 Q265 250 260 300 L260 350 L140 350 L140 300 Q135 250 140 180 Z"
-                  fill="#2d2d2d"
-                  opacity="0.9"
-                />
-                <!-- Decorative elements -->
-                <circle cx="200" cy="80" r="30" fill="#2d2d2d" opacity="0.8" />
-                <rect
-                  x="185"
-                  y="140"
-                  width="30"
-                  height="3"
-                  fill="#ffffff"
-                  opacity="0.3"
-                />
-                <rect
-                  x="185"
-                  y="155"
-                  width="30"
-                  height="3"
-                  fill="#ffffff"
-                  opacity="0.3"
-                />
-                <!-- Fashion accent -->
-                <circle cx="320" cy="80" r="40" fill="#e8e8e8" />
-                <circle cx="80" cy="320" r="50" fill="#e8e8e8" />
-              </svg>
-            </div>
+          <div class="service-card">
+            <div class="service-icon">📱</div>
+            <h3 class="service-title" id="service-2-title">Aplikasi Mobile</h3>
+            <p class="service-description" id="service-2-desc">
+              Aplikasi mobile yang user-friendly untuk iOS dan Android
+            </p>
           </div>
-        </div>
-      </section>
-      <!-- Catalog Section -->
-      <section
-        id="catalog"
-        class="w-full px-6 py-20"
-        style="background-color: #ffffff"
-      >
-        <div class="max-w-7xl mx-auto">
-          <h2
-            id="catalog-title"
-            class="text-4xl font-bold text-center mb-12"
-            style="color: #2d2d2d"
-          >
-            Produk Unggulan
-          </h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Product 1 -->
-            <div
-              class="product-card rounded-lg overflow-hidden shadow-md"
-              style="background-color: #ffffff"
-            >
-              <div
-                class="w-full aspect-square"
-                style="background-color: #f5f5f5"
-              >
-                <svg viewbox="0 0 300 300" class="w-full h-full">
-                  <rect fill="#e8e8e8" width="300" height="300" />
-                  <path
-                    d="M100 80 L200 80 L210 120 Q215 180 210 220 L210 260 L90 260 L90 220 Q85 180 90 120 Z"
-                    fill="#2d2d2d"
-                  />
-                </svg>
-              </div>
-              <div class="p-4">
-                <h3 class="font-semibold text-lg mb-2" style="color: #2d2d2d">
-                  Dress Elegant
-                </h3>
-                <p class="text-xl font-bold" style="color: #2d2d2d">
-                  Rp 349.000
-                </p>
-              </div>
-            </div>
-            <!-- Product 2 -->
-            <div
-              class="product-card rounded-lg overflow-hidden shadow-md"
-              style="background-color: #ffffff"
-            >
-              <div
-                class="w-full aspect-square"
-                style="background-color: #f5f5f5"
-              >
-                <svg viewbox="0 0 300 300" class="w-full h-full">
-                  <rect fill="#e8e8e8" width="300" height="300" />
-                  <rect
-                    x="80"
-                    y="80"
-                    width="140"
-                    height="100"
-                    rx="5"
-                    fill="#5a5a5a"
-                  />
-                  <rect x="100" y="180" width="50" height="80" fill="#5a5a5a" />
-                  <rect x="150" y="180" width="50" height="80" fill="#5a5a5a" />
-                </svg>
-              </div>
-              <div class="p-4">
-                <h3 class="font-semibold text-lg mb-2" style="color: #2d2d2d">
-                  Blazer Formal
-                </h3>
-                <p class="text-xl font-bold" style="color: #2d2d2d">
-                  Rp 599.000
-                </p>
-              </div>
-            </div>
-            <!-- Product 3 -->
-            <div
-              class="product-card rounded-lg overflow-hidden shadow-md"
-              style="background-color: #ffffff"
-            >
-              <div
-                class="w-full aspect-square"
-                style="background-color: #f5f5f5"
-              >
-                <svg viewbox="0 0 300 300" class="w-full h-full">
-                  <rect fill="#e8e8e8" width="300" height="300" />
-                  <rect
-                    x="70"
-                    y="100"
-                    width="160"
-                    height="120"
-                    rx="3"
-                    fill="#2d2d2d"
-                  />
-                  <circle cx="110" cy="160" r="8" fill="#ffffff" />
-                  <circle cx="190" cy="160" r="8" fill="#ffffff" />
-                </svg>
-              </div>
-              <div class="p-4">
-                <h3 class="font-semibold text-lg mb-2" style="color: #2d2d2d">
-                  Kemeja Kasual
-                </h3>
-                <p class="text-xl font-bold" style="color: #2d2d2d">
-                  Rp 279.000
-                </p>
-              </div>
-            </div>
-            <!-- Product 4 -->
-            <div
-              class="product-card rounded-lg overflow-hidden shadow-md"
-              style="background-color: #ffffff"
-            >
-              <div
-                class="w-full aspect-square"
-                style="background-color: #f5f5f5"
-              >
-                <svg viewbox="0 0 300 300" class="w-full h-full">
-                  <rect fill="#e8e8e8" width="300" height="300" />
-                  <rect
-                    x="90"
-                    y="90"
-                    width="120"
-                    height="140"
-                    rx="8"
-                    fill="#5a5a5a"
-                  />
-                  <line
-                    x1="150"
-                    y1="90"
-                    x2="150"
-                    y2="230"
-                    stroke="#2d2d2d"
-                    stroke-width="3"
-                  />
-                </svg>
-              </div>
-              <div class="p-4">
-                <h3 class="font-semibold text-lg mb-2" style="color: #2d2d2d">
-                  Coat Winter
-                </h3>
-                <p class="text-xl font-bold" style="color: #2d2d2d">
-                  Rp 749.000
-                </p>
-              </div>
-            </div>
-            <!-- Product 5 -->
-            <div
-              class="product-card rounded-lg overflow-hidden shadow-md"
-              style="background-color: #ffffff"
-            >
-              <div
-                class="w-full aspect-square"
-                style="background-color: #f5f5f5"
-              >
-                <svg viewbox="0 0 300 300" class="w-full h-full">
-                  <rect fill="#e8e8e8" width="300" height="300" />
-                  <rect
-                    x="100"
-                    y="110"
-                    width="100"
-                    height="80"
-                    rx="5"
-                    fill="#2d2d2d"
-                  />
-                  <rect x="110" y="190" width="35" height="70" fill="#2d2d2d" />
-                  <rect x="155" y="190" width="35" height="70" fill="#2d2d2d" />
-                </svg>
-              </div>
-              <div class="p-4">
-                <h3 class="font-semibold text-lg mb-2" style="color: #2d2d2d">
-                  Celana Jeans
-                </h3>
-                <p class="text-xl font-bold" style="color: #2d2d2d">
-                  Rp 399.000
-                </p>
-              </div>
-            </div>
-            <!-- Product 6 -->
-            <div
-              class="product-card rounded-lg overflow-hidden shadow-md"
-              style="background-color: #ffffff"
-            >
-              <div
-                class="w-full aspect-square"
-                style="background-color: #f5f5f5"
-              >
-                <svg viewbox="0 0 300 300" class="w-full h-full">
-                  <rect fill="#e8e8e8" width="300" height="300" />
-                  <circle cx="150" cy="140" r="70" fill="#5a5a5a" />
-                  <rect x="120" y="140" width="60" height="90" fill="#5a5a5a" />
-                </svg>
-              </div>
-              <div class="p-4">
-                <h3 class="font-semibold text-lg mb-2" style="color: #2d2d2d">
-                  T-Shirt Premium
-                </h3>
-                <p class="text-xl font-bold" style="color: #2d2d2d">
-                  Rp 199.000
-                </p>
-              </div>
-            </div>
-            <!-- Product 7 -->
-            <div
-              class="product-card rounded-lg overflow-hidden shadow-md"
-              style="background-color: #ffffff"
-            >
-              <div
-                class="w-full aspect-square"
-                style="background-color: #f5f5f5"
-              >
-                <svg viewbox="0 0 300 300" class="w-full h-full">
-                  <rect fill="#e8e8e8" width="300" height="300" />
-                  <path
-                    d="M110 100 L190 100 L200 140 Q205 200 200 240 L200 270 L100 270 L100 240 Q95 200 100 140 Z"
-                    fill="#2d2d2d"
-                  />
-                  <rect
-                    x="130"
-                    y="120"
-                    width="40"
-                    height="3"
-                    fill="#ffffff"
-                    opacity="0.5"
-                  />
-                </svg>
-              </div>
-              <div class="p-4">
-                <h3 class="font-semibold text-lg mb-2" style="color: #2d2d2d">
-                  Rok Mini
-                </h3>
-                <p class="text-xl font-bold" style="color: #2d2d2d">
-                  Rp 259.000
-                </p>
-              </div>
-            </div>
-            <!-- Product 8 -->
-            <div
-              class="product-card rounded-lg overflow-hidden shadow-md"
-              style="background-color: #ffffff"
-            >
-              <div
-                class="w-full aspect-square"
-                style="background-color: #f5f5f5"
-              >
-                <svg viewbox="0 0 300 300" class="w-full h-full">
-                  <rect fill="#e8e8e8" width="300" height="300" />
-                  <rect
-                    x="80"
-                    y="100"
-                    width="140"
-                    height="100"
-                    rx="10"
-                    fill="#5a5a5a"
-                  />
-                  <rect
-                    x="100"
-                    y="130"
-                    width="100"
-                    height="40"
-                    fill="#2d2d2d"
-                  />
-                </svg>
-              </div>
-              <div class="p-4">
-                <h3 class="font-semibold text-lg mb-2" style="color: #2d2d2d">
-                  Sweater Hoodie
-                </h3>
-                <p class="text-xl font-bold" style="color: #2d2d2d">
-                  Rp 449.000
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Features Section -->
-      <section
-        id="features"
-        class="w-full px-6 py-20"
-        style="background-color: #f5f5f5"
-      >
-        <div class="max-w-7xl mx-auto">
-          <h2
-            id="features-title"
-            class="text-4xl font-bold text-center mb-16"
-            style="color: #2d2d2d"
-          >
-            Mengapa Memilih Kami
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Feature 1 -->
-            <div
-              class="text-center p-8 rounded-lg"
-              style="background-color: #ffffff"
-            >
-              <div
-                class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center"
-                style="background-color: #2d2d2d"
-              >
-                <svg width="40" height="40" viewbox="0 0 40 40" fill="none">
-                  <path
-                    d="M20 5 L25 15 L35 16 L27 24 L29 35 L20 29 L11 35 L13 24 L5 16 L15 15 Z"
-                    fill="#ffffff"
-                  />
-                </svg>
-              </div>
-              <h3 class="text-xl font-bold mb-4" style="color: #2d2d2d">
-                Kualitas Premium
-              </h3>
-              <p style="color: #5a5a5a">
-                Bahan pilihan berkualitas tinggi yang nyaman dan tahan lama
-                untuk keseharian Anda.
-              </p>
-            </div>
-            <!-- Feature 2 -->
-            <div
-              class="text-center p-8 rounded-lg"
-              style="background-color: #ffffff"
-            >
-              <div
-                class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center"
-                style="background-color: #2d2d2d"
-              >
-                <svg width="40" height="40" viewbox="0 0 40 40" fill="none">
-                  <path
-                    d="M20 5 L20 20 M20 20 L30 15 M20 20 L10 25"
-                    stroke="#ffffff"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                  />
-                  <circle
-                    cx="20"
-                    cy="20"
-                    r="12"
-                    stroke="#ffffff"
-                    stroke-width="3"
-                    fill="none"
-                  />
-                </svg>
-              </div>
-              <h3 class="text-xl font-bold mb-4" style="color: #2d2d2d">
-                Pengiriman Cepat
-              </h3>
-              <p style="color: #5a5a5a">
-                Proses 1-2 hari kerja. Pesanan Anda sampai dengan aman dan tepat
-                waktu.
-              </p>
-            </div>
-            <!-- Feature 3 -->
-            <div
-              class="text-center p-8 rounded-lg"
-              style="background-color: #ffffff"
-            >
-              <div
-                class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center"
-                style="background-color: #2d2d2d"
-              >
-                <svg width="40" height="40" viewbox="0 0 40 40" fill="none">
-                  <rect
-                    x="10"
-                    y="15"
-                    width="8"
-                    height="20"
-                    rx="2"
-                    fill="#ffffff"
-                  />
-                  <rect
-                    x="16"
-                    y="10"
-                    width="8"
-                    height="25"
-                    rx="2"
-                    fill="#ffffff"
-                  />
-                  <rect
-                    x="22"
-                    y="18"
-                    width="8"
-                    height="17"
-                    rx="2"
-                    fill="#ffffff"
-                  />
-                </svg>
-              </div>
-              <h3 class="text-xl font-bold mb-4" style="color: #2d2d2d">
-                Ukuran Lengkap
-              </h3>
-              <p style="color: #5a5a5a">
-                Tersedia ukuran S hingga XXL. Semua orang bisa menemukan ukuran
-                yang pas.
-              </p>
-            </div>
+          <div class="service-card">
+            <div class="service-icon">🚀</div>
+            <h3 class="service-title" id="service-3-title">
+              Digital Marketing
+            </h3>
+            <p class="service-description" id="service-3-desc">
+              Strategi pemasaran digital yang efektif untuk meningkatkan bisnis
+              Anda
+            </p>
           </div>
         </div>
       </section>
       <!-- Testimonials Section -->
-      <section
-        id="testimonials"
-        class="w-full px-6 py-20"
-        style="background-color: #ffffff"
-      >
-        <div class="max-w-7xl mx-auto">
-          <h2
-            id="testimonial-title"
-            class="text-4xl font-bold text-center mb-16"
-            style="color: #2d2d2d"
-          >
-            Kata Pelanggan
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Testimonial 1 -->
-            <div
-              class="p-8 rounded-lg shadow-md"
-              style="background-color: #f5f5f5"
-            >
-              <div class="flex items-center mb-4">
-                <div
-                  class="w-12 h-12 rounded-full mr-4"
-                  style="background-color: #2d2d2d"
-                ></div>
-                <div>
-                  <p class="font-semibold" style="color: #2d2d2d">
-                    Sari Wulandari
-                  </p>
-                  <p class="text-sm" style="color: #5a5a5a">Jakarta</p>
-                </div>
-              </div>
-              <p style="color: #5a5a5a">
-                "Bahannya adem dan nyaman banget! Jahitannya rapi. Puas belanja
-                di sini, pasti balik lagi."
-              </p>
-            </div>
-            <!-- Testimonial 2 -->
-            <div
-              class="p-8 rounded-lg shadow-md"
-              style="background-color: #f5f5f5"
-            >
-              <div class="flex items-center mb-4">
-                <div
-                  class="w-12 h-12 rounded-full mr-4"
-                  style="background-color: #2d2d2d"
-                ></div>
-                <div>
-                  <p class="font-semibold" style="color: #2d2d2d">
-                    Andi Pratama
-                  </p>
-                  <p class="text-sm" style="color: #5a5a5a">Bandung</p>
-                </div>
-              </div>
-              <p style="color: #5a5a5a">
-                "Pengiriman super cepat! Packingnya aman dan rapi. Modelnya
-                keren, cocok buat kerja dan santai."
-              </p>
-            </div>
-            <!-- Testimonial 3 -->
-            <div
-              class="p-8 rounded-lg shadow-md"
-              style="background-color: #f5f5f5"
-            >
-              <div class="flex items-center mb-4">
-                <div
-                  class="w-12 h-12 rounded-full mr-4"
-                  style="background-color: #2d2d2d"
-                ></div>
-                <div>
-                  <p class="font-semibold" style="color: #2d2d2d">
-                    Rina Kusuma
-                  </p>
-                  <p class="text-sm" style="color: #5a5a5a">Surabaya</p>
-                </div>
-              </div>
-              <p style="color: #5a5a5a">
-                "Harganya worth it! Kualitas premium tapi tidak menguras
-                kantong. Recommended untuk semua!"
-              </p>
-            </div>
+      <section class="testimonials-section">
+        <h2 class="section-title">Apa Kata Klien Kami</h2>
+        <div class="testimonials-container">
+          <div class="testimonial-card">
+            <p class="testimonial-text" id="testimonial-1-text">
+              "Pelayanan yang sangat profesional dan hasil kerja melampaui
+              ekspektasi. Tim sangat responsif dan memahami kebutuhan bisnis
+              kami."
+            </p>
+            <p class="testimonial-author" id="testimonial-1-author">
+              - Budi Santoso, CEO TechStart
+            </p>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text" id="testimonial-2-text">
+              "Website yang dibuat sangat menarik dan fungsional. Traffic kami
+              meningkat 200% dalam 3 bulan pertama!"
+            </p>
+            <p class="testimonial-author" id="testimonial-2-author">
+              - Siti Nurhaliza, Owner Fashion Store
+            </p>
           </div>
         </div>
       </section>
-      <!-- Footer -->
-      <footer
-        class="w-full px-6 py-16"
-        style="background-color: #2d2d2d; color: #ffffff"
-      >
-        <div class="max-w-7xl mx-auto">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-8">
-            <!-- Company Info -->
-            <div>
-              <h3 class="text-2xl font-bold mb-4">FASHION</h3>
-              <p id="footer-tagline" class="mb-4" style="color: #e8e8e8">
-                Fashion untuk setiap gaya hidup Anda
-              </p>
-            </div>
-            <!-- Contact -->
-            <div>
-              <h4 class="text-lg font-semibold mb-4">Kontak</h4>
-              <p class="mb-2" style="color: #e8e8e8">
-                📧 hello@fashionstore.com
-              </p>
-              <p class="mb-2" style="color: #e8e8e8">📱 +62 812-3456-7890</p>
-              <p style="color: #e8e8e8">📍 Jakarta, Indonesia</p>
-            </div>
-            <!-- Social Media -->
-            <div>
-              <h4 class="text-lg font-semibold mb-4">Ikuti Kami</h4>
-              <div class="flex gap-4">
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="w-10 h-10 rounded-full flex items-center justify-center hover:opacity-70"
-                  style="background-color: #5a5a5a"
-                >
-                  <span style="font-size: 20px">📷</span>
-                </a>
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="w-10 h-10 rounded-full flex items-center justify-center hover:opacity-70"
-                  style="background-color: #5a5a5a"
-                >
-                  <span style="font-size: 20px">👤</span>
-                </a>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="w-10 h-10 rounded-full flex items-center justify-center hover:opacity-70"
-                  style="background-color: #5a5a5a"
-                >
-                  <span style="font-size: 20px">🐦</span>
-                </a>
+      <!-- Product Modal -->
+      <div class="modal-overlay" id="product-modal">
+        <div class="modal-content">
+          <button class="modal-close" onclick="closeProductModal()">×</button>
+          <div class="modal-image" id="modal-image">
+            <!-- SVG will be inserted here -->
+          </div>
+          <div class="modal-body">
+            <h3 class="modal-title" id="modal-title">Nama Produk</h3>
+            <p class="modal-price" id="modal-price">Rp 0</p>
+            <p class="modal-description" id="modal-description">
+              Deskripsi produk akan muncul di sini
+            </p>
+            <div class="variants-section" id="variants-section">
+              <h4 class="variants-title">Pilih Varian:</h4>
+              <div class="variants-grid" id="variants-grid">
+                <!-- Variants will be inserted here -->
               </div>
             </div>
-          </div>
-          <div
-            class="border-t pt-8 text-center"
-            style="border-color: #5a5a5a; color: #e8e8e8"
-          >
-            <p>© 2024 Fashion Store. All rights reserved.</p>
+            <button
+              class="modal-order-button"
+              id="modal-order-button"
+              onclick="orderFromModal()"
+            >
+              Pesan Sekarang
+            </button>
           </div>
         </div>
+      </div>
+      <!-- Contact Form Section -->
+      <section class="contact-section" id="contact-section">
+        <div class="contact-container">
+          <h2 class="contact-title" id="contact-title">Hubungi Kami</h2>
+          <div class="success-message" id="success-message">
+            Pesan Anda berhasil dikirim! Kami akan segera menghubungi Anda.
+          </div>
+          <div class="error-message" id="error-message">
+            Terjadi kesalahan. Silakan coba lagi.
+          </div>
+          <div class="limit-warning" id="limit-warning">
+            Maksimal 999 pesan telah tercapai. Silakan hubungi kami langsung.
+          </div>
+          <form id="contact-form">
+            <div class="form-group">
+              <label for="name" class="form-label">Nama Lengkap</label>
+              <input
+                type="text"
+                id="name"
+                class="form-input"
+                required
+                placeholder="Masukkan nama Anda"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                id="email"
+                class="form-input"
+                required
+                placeholder="nama@email.com"
+              />
+            </div>
+            <div class="form-group">
+              <label for="product" class="form-label"
+                >Produk yang Dibutuhkan</label
+              >
+              <select id="product" class="form-select" required>
+                <option value="">Pilih produk</option>
+                <option value="Kaos Premium Cotton">Kaos Premium Cotton</option>
+                <option value="Kemeja Formal Pria">Kemeja Formal Pria</option>
+                <option value="Jaket Denim Premium">Jaket Denim Premium</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message" class="form-label">Pesan</label>
+              <textarea
+                id="message"
+                class="form-textarea"
+                required
+                placeholder="Ceritakan kebutuhan Anda..."
+              ></textarea>
+            </div>
+            <button type="submit" class="submit-button" id="submit-button">
+              Kirim Pesan
+            </button>
+          </form>
+        </div>
+      </section>
+      <!-- Footer -->
+      <footer class="footer">
+        <p class="footer-text" id="footer-text">
+          © 2024 Fashion Store. Semua hak cipta dilindungi.
+        </p>
       </footer>
     </div>
     <script>
       const defaultConfig = {
-        background_color: "#f5f5f5",
-        surface_color: "#ffffff",
-        text_color: "#2d2d2d",
-        primary_action_color: "#2d2d2d",
-        secondary_text_color: "#5a5a5a",
-        font_family: "Inter",
+        background_color: "#FF6B35",
+        surface_color: "#FFFFFF",
+        text_color: "#333333",
+        primary_action_color: "#FF6B35",
+        secondary_action_color: "#4CAF50",
+        font_family: "Segoe UI",
         font_size: 16,
-        hero_title: "Koleksi Fashion Terbaru",
-        hero_subtitle:
-          "Temukan gaya Anda dengan koleksi eksklusif kami. Kualitas premium, desain modern.",
-        cta_button: "Belanja Sekarang",
-        catalog_title: "Produk Unggulan",
-        features_title: "Mengapa Memilih Kami",
-        testimonial_title: "Kata Pelanggan",
-        footer_tagline: "Fashion untuk setiap gaya hidup Anda",
+        company_name: "Fashion Store",
+        tagline:
+          "Koleksi Pakaian Berkualitas Tinggi untuk Gaya Hidup Modern Anda",
+        product_1_name: "Kaos Premium Cotton",
+        product_1_price: "Rp 150.000",
+        product_1_desc:
+          "Kaos berbahan cotton premium yang nyaman dan adem. Tersedia berbagai warna.",
+        product_1_detail:
+          "Kaos premium dengan bahan 100% cotton combed 30s yang lembut dan nyaman dipakai seharian. Jahitan rapi dan awet, tidak mudah melar. Tersedia dalam berbagai ukuran (S, M, L, XL, XXL) dan warna menarik. Cocok untuk aktivitas sehari-hari, olahraga, atau hangout santai. Mudah dicuci dan cepat kering.",
+        product_2_name: "Kemeja Formal Pria",
+        product_2_price: "Rp 250.000",
+        product_2_desc:
+          "Kemeja formal dengan bahan katun halus, cocok untuk acara formal dan kerja.",
+        product_2_detail:
+          "Kemeja formal berkualitas tinggi dengan bahan katun premium yang lembut dan tidak panas. Desain slim fit modern yang membuat penampilan lebih profesional dan rapi. Tersedia ukuran S hingga XXL dengan berbagai pilihan warna elegan. Cocok untuk ke kantor, meeting, atau acara formal lainnya. Mudah disetrika dan tahan lama.",
+        product_3_name: "Jaket Denim Premium",
+        product_3_price: "Rp 450.000",
+        product_3_desc:
+          "Jaket denim berkualitas tinggi dengan desain modern dan stylish untuk tampil keren.",
+        product_3_detail:
+          "Jaket denim premium dengan bahan denim berkualitas tinggi yang tebal dan awet. Desain klasik dengan sentuhan modern yang cocok untuk berbagai gaya. Dilengkapi dengan saku dalam dan luar yang fungsional. Tersedia dalam ukuran S sampai XXL. Perfect untuk cuaca dingin atau sebagai fashion item. Washing treatment yang memberi kesan vintage dan stylish.",
+        service_1_title: "Desain Website",
+        service_1_desc:
+          "Desain website modern dan responsif yang menarik perhatian pengunjung Anda",
+        service_2_title: "Aplikasi Mobile",
+        service_2_desc:
+          "Aplikasi mobile yang user-friendly untuk iOS dan Android",
+        service_3_title: "Digital Marketing",
+        service_3_desc:
+          "Strategi pemasaran digital yang efektif untuk meningkatkan bisnis Anda",
+        testimonial_1_text:
+          '"Pelayanan yang sangat profesional dan hasil kerja melampaui ekspektasi. Tim sangat responsif dan memahami kebutuhan bisnis kami."',
+        testimonial_1_author: "- Budi Santoso, CEO TechStart",
+        testimonial_2_text:
+          '"Website yang dibuat sangat menarik dan fungsional. Traffic kami meningkat 200% dalam 3 bulan pertama!"',
+        testimonial_2_author: "- Siti Nurhaliza, Owner Fashion Store",
+        cta_button_text: "Pesan Sekarang",
+        contact_title: "Hubungi Kami",
+        footer_text: "© 2024 Fashion Store. Semua hak cipta dilindungi.",
       };
+
+      let submissionCount = 0;
 
       async function onConfigChange(config) {
         const customFont = config.font_family || defaultConfig.font_family;
-        const baseFontStack =
-          '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
         const baseSize = config.font_size || defaultConfig.font_size;
-
-        const bgColor =
-          config.background_color || defaultConfig.background_color;
-        const surfaceColor =
-          config.surface_color || defaultConfig.surface_color;
-        const textColor = config.text_color || defaultConfig.text_color;
-        const primaryColor =
-          config.primary_action_color || defaultConfig.primary_action_color;
-        const secondaryTextColor =
-          config.secondary_text_color || defaultConfig.secondary_text_color;
-
-        // Apply font family
-        document.getElementById(
-          "app"
-        ).style.fontFamily = `${customFont}, ${baseFontStack}`;
-
-        // Apply font sizes
-        document.getElementById("hero-title").style.fontSize = `${
-          baseSize * 3.5
-        }px`;
-        document.getElementById("hero-subtitle").style.fontSize = `${
-          baseSize * 1.25
-        }px`;
-        document.getElementById("cta-button").style.fontSize = `${
-          baseSize * 1.125
-        }px`;
-        document.getElementById("catalog-title").style.fontSize = `${
-          baseSize * 2.5
-        }px`;
-        document.getElementById("features-title").style.fontSize = `${
-          baseSize * 2.5
-        }px`;
-        document.getElementById("testimonial-title").style.fontSize = `${
-          baseSize * 2.5
-        }px`;
+        const baseFontStack = "Tahoma, Geneva, Verdana, sans-serif";
 
         // Apply colors
-        document.body.style.backgroundColor = bgColor;
-        document.querySelector(
-          ".hero-gradient"
-        ).style.background = `linear-gradient(135deg, ${bgColor} 0%, ${surfaceColor} 100%)`;
+        const heroSection = document.querySelector(".hero-section");
+        const contactSection = document.querySelector(".contact-section");
+        heroSection.style.background = `linear-gradient(135deg, ${
+          config.background_color || defaultConfig.background_color
+        } 0%, ${
+          config.background_color || defaultConfig.background_color
+        }DD 100%)`;
+        contactSection.style.background = `linear-gradient(135deg, ${
+          config.background_color || defaultConfig.background_color
+        } 0%, ${
+          config.background_color || defaultConfig.background_color
+        }DD 100%)`;
 
-        const nav = document.querySelector("nav");
-        nav.style.backgroundColor = surfaceColor;
+        const ctaButton = document.getElementById("cta-button");
+        ctaButton.style.background =
+          config.surface_color || defaultConfig.surface_color;
+        ctaButton.style.color =
+          config.primary_action_color || defaultConfig.primary_action_color;
 
-        document.getElementById("hero-title").style.color = textColor;
-        document.getElementById("hero-subtitle").style.color =
-          secondaryTextColor;
-        document.getElementById("cta-button").style.backgroundColor =
-          primaryColor;
-        document.getElementById("cta-button").style.color = surfaceColor;
+        const submitButton = document.getElementById("submit-button");
+        submitButton.style.background =
+          config.primary_action_color || defaultConfig.primary_action_color;
 
-        document.getElementById("catalog-title").style.color = textColor;
-        document.getElementById("features-title").style.color = textColor;
-        document.getElementById("testimonial-title").style.color = textColor;
-
-        const productCards = document.querySelectorAll(".product-card");
-        productCards.forEach((card) => {
-          card.style.backgroundColor = surfaceColor;
-          const title = card.querySelector("h3");
-          const price = card.querySelector("p");
-          if (title) title.style.color = textColor;
-          if (price) price.style.color = textColor;
+        document.querySelectorAll(".order-button").forEach((btn) => {
+          btn.style.background =
+            config.primary_action_color || defaultConfig.primary_action_color;
         });
 
-        const featureBoxes = document.querySelectorAll(
-          "#features > div > div > div"
+        document
+          .querySelectorAll(".service-card, .product-content")
+          .forEach((card) => {
+            card.style.background =
+              config.surface_color || defaultConfig.surface_color;
+          });
+
+        const contactContainer = document.querySelector(".contact-container");
+        contactContainer.style.background =
+          config.surface_color || defaultConfig.surface_color;
+
+        document
+          .querySelectorAll(
+            ".section-title, .service-title, .contact-title, .product-name"
+          )
+          .forEach((el) => {
+            el.style.color = config.text_color || defaultConfig.text_color;
+          });
+
+        document.querySelectorAll(".product-price").forEach((el) => {
+          el.style.color =
+            config.primary_action_color || defaultConfig.primary_action_color;
+        });
+
+        const serviceIcon1 = document.querySelector(
+          ".service-card:nth-child(1) .service-icon"
         );
-        featureBoxes.forEach((box) => {
-          box.style.backgroundColor = surfaceColor;
-          const iconBg = box.querySelector("div > div");
-          if (iconBg) iconBg.style.backgroundColor = primaryColor;
-          const heading = box.querySelector("h3");
-          const para = box.querySelector("p");
-          if (heading) heading.style.color = textColor;
-          if (para) para.style.color = secondaryTextColor;
-        });
+        serviceIcon1.style.background =
+          config.primary_action_color || defaultConfig.primary_action_color;
 
-        const testimonialCards = document.querySelectorAll(
-          "#testimonials .shadow-md"
+        const serviceIcon2 = document.querySelector(
+          ".service-card:nth-child(2) .service-icon"
         );
-        testimonialCards.forEach((card) => {
-          card.style.backgroundColor = bgColor;
-          const avatar = card.querySelector(".rounded-full");
-          if (avatar) avatar.style.backgroundColor = primaryColor;
-          const name = card.querySelector(".font-semibold");
-          const location = card.querySelector(".text-sm");
-          const text = card.querySelectorAll("p")[2];
-          if (name) name.style.color = textColor;
-          if (location) location.style.color = secondaryTextColor;
-          if (text) text.style.color = secondaryTextColor;
+        serviceIcon2.style.background =
+          config.secondary_action_color || defaultConfig.secondary_action_color;
+
+        const serviceIcon3 = document.querySelector(
+          ".service-card:nth-child(3) .service-icon"
+        );
+        serviceIcon3.style.background = "#2196F3";
+
+        document.querySelectorAll(".testimonial-card").forEach((card) => {
+          card.style.borderLeftColor =
+            config.primary_action_color || defaultConfig.primary_action_color;
         });
 
-        const footer = document.querySelector("footer");
-        footer.style.backgroundColor = primaryColor;
-        footer.style.color = surfaceColor;
+        document.querySelectorAll(".testimonial-author").forEach((el) => {
+          el.style.color =
+            config.primary_action_color || defaultConfig.primary_action_color;
+        });
 
-        // Update text content
-        document.getElementById("hero-title").textContent =
-          config.hero_title || defaultConfig.hero_title;
-        document.getElementById("hero-subtitle").textContent =
-          config.hero_subtitle || defaultConfig.hero_subtitle;
+        // Apply fonts
+        document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+
+        document.querySelector(".company-name").style.fontSize = `${
+          baseSize * 3
+        }px`;
+        document.querySelector(".tagline").style.fontSize = `${
+          baseSize * 1.5
+        }px`;
+        document.querySelectorAll(".section-title").forEach((el) => {
+          el.style.fontSize = `${baseSize * 2.25}px`;
+        });
+        document
+          .querySelectorAll(".service-title, .product-name")
+          .forEach((el) => {
+            el.style.fontSize = `${baseSize * 1.5}px`;
+          });
+        document
+          .querySelectorAll(".service-description, .product-description")
+          .forEach((el) => {
+            el.style.fontSize = `${baseSize}px`;
+          });
+        document.querySelectorAll(".product-price").forEach((el) => {
+          el.style.fontSize = `${baseSize * 1.75}px`;
+        });
+        document.querySelectorAll(".testimonial-text").forEach((el) => {
+          el.style.fontSize = `${baseSize * 1.125}px`;
+        });
+        document.querySelector(".contact-title").style.fontSize = `${
+          baseSize * 2
+        }px`;
+        document.querySelectorAll(".form-label").forEach((el) => {
+          el.style.fontSize = `${baseSize}px`;
+        });
+        document
+          .querySelectorAll(".form-input, .form-select, .form-textarea")
+          .forEach((el) => {
+            el.style.fontSize = `${baseSize}px`;
+          });
+
+        // Apply text content
+        document.getElementById("company-name").textContent =
+          config.company_name || defaultConfig.company_name;
+        document.getElementById("tagline").textContent =
+          config.tagline || defaultConfig.tagline;
+        document.getElementById("product-1-name").textContent =
+          config.product_1_name || defaultConfig.product_1_name;
+        document.getElementById("product-1-price").textContent =
+          config.product_1_price || defaultConfig.product_1_price;
+        document.getElementById("product-1-desc").textContent =
+          config.product_1_desc || defaultConfig.product_1_desc;
+        document.getElementById("product-2-name").textContent =
+          config.product_2_name || defaultConfig.product_2_name;
+        document.getElementById("product-2-price").textContent =
+          config.product_2_price || defaultConfig.product_2_price;
+        document.getElementById("product-2-desc").textContent =
+          config.product_2_desc || defaultConfig.product_2_desc;
+        document.getElementById("product-3-name").textContent =
+          config.product_3_name || defaultConfig.product_3_name;
+        document.getElementById("product-3-price").textContent =
+          config.product_3_price || defaultConfig.product_3_price;
+        document.getElementById("product-3-desc").textContent =
+          config.product_3_desc || defaultConfig.product_3_desc;
+
+        // Update modal colors
+        const modalOrderButton = document.getElementById("modal-order-button");
+        if (modalOrderButton) {
+          modalOrderButton.style.background =
+            config.primary_action_color || defaultConfig.primary_action_color;
+        }
+        const modalClose = document.querySelector(".modal-close");
+        if (modalClose) {
+          modalClose.style.background =
+            config.primary_action_color || defaultConfig.primary_action_color;
+        }
+        document.getElementById("service-1-title").textContent =
+          config.service_1_title || defaultConfig.service_1_title;
+        document.getElementById("service-1-desc").textContent =
+          config.service_1_desc || defaultConfig.service_1_desc;
+        document.getElementById("service-2-title").textContent =
+          config.service_2_title || defaultConfig.service_2_title;
+        document.getElementById("service-2-desc").textContent =
+          config.service_2_desc || defaultConfig.service_2_desc;
+        document.getElementById("service-3-title").textContent =
+          config.service_3_title || defaultConfig.service_3_title;
+        document.getElementById("service-3-desc").textContent =
+          config.service_3_desc || defaultConfig.service_3_desc;
+        document.getElementById("testimonial-1-text").textContent =
+          config.testimonial_1_text || defaultConfig.testimonial_1_text;
+        document.getElementById("testimonial-1-author").textContent =
+          config.testimonial_1_author || defaultConfig.testimonial_1_author;
+        document.getElementById("testimonial-2-text").textContent =
+          config.testimonial_2_text || defaultConfig.testimonial_2_text;
+        document.getElementById("testimonial-2-author").textContent =
+          config.testimonial_2_author || defaultConfig.testimonial_2_author;
         document.getElementById("cta-button").textContent =
-          config.cta_button || defaultConfig.cta_button;
-        document.getElementById("catalog-title").textContent =
-          config.catalog_title || defaultConfig.catalog_title;
-        document.getElementById("features-title").textContent =
-          config.features_title || defaultConfig.features_title;
-        document.getElementById("testimonial-title").textContent =
-          config.testimonial_title || defaultConfig.testimonial_title;
-        document.getElementById("footer-tagline").textContent =
-          config.footer_tagline || defaultConfig.footer_tagline;
+          config.cta_button_text || defaultConfig.cta_button_text;
+        document.getElementById("contact-title").textContent =
+          config.contact_title || defaultConfig.contact_title;
+        document.getElementById("footer-text").textContent =
+          config.footer_text || defaultConfig.footer_text;
       }
 
-      function mapToCapabilities(config) {
-        return {
-          recolorables: [
-            {
-              get: () =>
-                config.background_color || defaultConfig.background_color,
-              set: (value) => {
-                config.background_color = value;
-                window.elementSdk.setConfig({ background_color: value });
-              },
-            },
-            {
-              get: () => config.surface_color || defaultConfig.surface_color,
-              set: (value) => {
-                config.surface_color = value;
-                window.elementSdk.setConfig({ surface_color: value });
-              },
-            },
-            {
-              get: () => config.text_color || defaultConfig.text_color,
-              set: (value) => {
-                config.text_color = value;
-                window.elementSdk.setConfig({ text_color: value });
-              },
-            },
-            {
-              get: () =>
-                config.primary_action_color ||
-                defaultConfig.primary_action_color,
-              set: (value) => {
-                config.primary_action_color = value;
-                window.elementSdk.setConfig({ primary_action_color: value });
-              },
-            },
-            {
-              get: () =>
-                config.secondary_text_color ||
-                defaultConfig.secondary_text_color,
-              set: (value) => {
-                config.secondary_text_color = value;
-                window.elementSdk.setConfig({ secondary_text_color: value });
-              },
-            },
-          ],
-          borderables: [],
-          fontEditable: {
-            get: () => config.font_family || defaultConfig.font_family,
-            set: (value) => {
-              config.font_family = value;
-              window.elementSdk.setConfig({ font_family: value });
-            },
-          },
-          fontSizeable: {
-            get: () => config.font_size || defaultConfig.font_size,
-            set: (value) => {
-              config.font_size = value;
-              window.elementSdk.setConfig({ font_size: value });
-            },
-          },
-        };
-      }
+      let currentProduct = "";
+      let currentProductId = 1;
+      let selectedVariant = null;
 
-      function mapToEditPanelValues(config) {
-        return new Map([
-          ["hero_title", config.hero_title || defaultConfig.hero_title],
-          [
-            "hero_subtitle",
-            config.hero_subtitle || defaultConfig.hero_subtitle,
+      const productDetails = {
+        1: {
+          image:
+            "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80",
+          variants: [
+            {
+              name: "Hitam",
+              price: "Rp 150.000",
+              image:
+                "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=400&q=80",
+            },
+            {
+              name: "Putih",
+              price: "Rp 150.000",
+              image:
+                "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=80",
+            },
+            {
+              name: "Merah",
+              price: "Rp 150.000",
+              image:
+                "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&q=80",
+            },
+            {
+              name: "Biru Navy",
+              price: "Rp 150.000",
+              image:
+                "https://images.unsplash.com/photo-1622445275576-721325763afe?w=400&q=80",
+            },
+            {
+              name: "Abu-abu",
+              price: "Rp 150.000",
+              image:
+                "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=400&q=80",
+            },
           ],
-          ["cta_button", config.cta_button || defaultConfig.cta_button],
-          [
-            "catalog_title",
-            config.catalog_title || defaultConfig.catalog_title,
+        },
+        2: {
+          image:
+            "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&q=80",
+          variants: [
+            {
+              name: "Putih",
+              price: "Rp 250.000",
+              image:
+                "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&q=80",
+            },
+            {
+              name: "Biru Muda",
+              price: "Rp 250.000",
+              image:
+                "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=400&q=80",
+            },
+            {
+              name: "Abu-abu",
+              price: "Rp 250.000",
+              image:
+                "https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?w=400&q=80",
+            },
+            {
+              name: "Hitam",
+              price: "Rp 250.000",
+              image:
+                "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=400&q=80",
+            },
           ],
-          [
-            "features_title",
-            config.features_title || defaultConfig.features_title,
+        },
+        3: {
+          image:
+            "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=80",
+          variants: [
+            {
+              name: "Biru Tua",
+              price: "Rp 450.000",
+              image:
+                "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&q=80",
+            },
+            {
+              name: "Hitam",
+              price: "Rp 450.000",
+              image:
+                "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&q=80",
+            },
+            {
+              name: "Coklat",
+              price: "Rp 450.000",
+              image:
+                "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&q=80",
+            },
+            {
+              name: "Abu-abu",
+              price: "Rp 450.000",
+              image:
+                "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&q=80",
+            },
           ],
-          [
-            "testimonial_title",
-            config.testimonial_title || defaultConfig.testimonial_title,
-          ],
-          [
-            "footer_tagline",
-            config.footer_tagline || defaultConfig.footer_tagline,
-          ],
-        ]);
-      }
+        },
+      };
 
-      if (window.elementSdk) {
-        window.elementSdk.init({
-          defaultConfig,
-          onConfigChange,
-          mapToCapabilities,
-          mapToEditPanelValues,
+      function openProductModal(productId) {
+        const modal = document.getElementById("product-modal");
+        const config = window.elementSdk
+          ? window.elementSdk.config
+          : defaultConfig;
+
+        currentProductId = productId;
+        selectedVariant = null;
+
+        const modalImage = document.getElementById("modal-image");
+        const modalTitle = document.getElementById("modal-title");
+        const modalPrice = document.getElementById("modal-price");
+        const modalDescription = document.getElementById("modal-description");
+        const variantsGrid = document.getElementById("variants-grid");
+
+        modalImage.innerHTML = `<img src="${
+          productDetails[productId].image
+        }" alt="${
+          config[`product_${productId}_name`] ||
+          defaultConfig[`product_${productId}_name`]
+        }" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px 20px 0 0;" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">`;
+        modalTitle.textContent =
+          config[`product_${productId}_name`] ||
+          defaultConfig[`product_${productId}_name`];
+        modalPrice.textContent =
+          config[`product_${productId}_price`] ||
+          defaultConfig[`product_${productId}_price`];
+        modalDescription.textContent =
+          config[`product_${productId}_detail`] ||
+          defaultConfig[`product_${productId}_detail`];
+
+        currentProduct =
+          config[`product_${productId}_name`] ||
+          defaultConfig[`product_${productId}_name`];
+
+        // Render variants
+        variantsGrid.innerHTML = "";
+        productDetails[productId].variants.forEach((variant, index) => {
+          const variantCard = document.createElement("div");
+          variantCard.className = "variant-card";
+          variantCard.onclick = () => selectVariant(productId, index);
+
+          variantCard.innerHTML = `
+          <div class="variant-image"><img src="${variant.image}" alt="${variant.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"></div>
+          <p class="variant-name">${variant.name}</p>
+          <p class="variant-price">${variant.price}</p>
+        `;
+
+          variantsGrid.appendChild(variantCard);
         });
+
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
       }
 
-      // Smooth scroll for navigation
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute("href"));
-          if (target) {
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
+      function selectVariant(productId, variantIndex) {
+        selectedVariant = productDetails[productId].variants[variantIndex];
+        const config = window.elementSdk
+          ? window.elementSdk.config
+          : defaultConfig;
+
+        // Update main image and price
+        const modalImage = document.getElementById("modal-image");
+        const modalPrice = document.getElementById("modal-price");
+
+        modalImage.innerHTML = `<img src="${selectedVariant.image}" alt="${selectedVariant.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px 20px 0 0;" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">`;
+        modalPrice.textContent = selectedVariant.price;
+
+        // Update selected state
+        const variantCards = document.querySelectorAll(".variant-card");
+        variantCards.forEach((card, index) => {
+          if (index === variantIndex) {
+            card.classList.add("selected");
+          } else {
+            card.classList.remove("selected");
           }
         });
+
+        // Update current product name with variant
+        const productName =
+          config[`product_${productId}_name`] ||
+          defaultConfig[`product_${productId}_name`];
+        currentProduct = `${productName} - ${selectedVariant.name}`;
+      }
+
+      function closeProductModal() {
+        const modal = document.getElementById("product-modal");
+        modal.classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+
+      function orderFromModal() {
+        closeProductModal();
+        openOrderForm(currentProduct);
+      }
+
+      function scrollToContact() {
+        document
+          .getElementById("contact-section")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      function openOrderForm(productName) {
+        document.getElementById("product").value = productName;
+        scrollToContact();
+      }
+
+      // Close modal when clicking outside
+      document.addEventListener("click", function (e) {
+        const modal = document.getElementById("product-modal");
+        if (e.target === modal) {
+          closeProductModal();
+        }
       });
+
+      // Data SDK Handler
+      const dataHandler = {
+        onDataChanged(data) {
+          submissionCount = data.length;
+        },
+      };
+
+      // Form submission handler
+      document
+        .getElementById("contact-form")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          if (submissionCount >= 999) {
+            const limitWarning = document.getElementById("limit-warning");
+            limitWarning.style.display = "block";
+            setTimeout(() => {
+              limitWarning.style.display = "none";
+            }, 5000);
+            return;
+          }
+
+          const submitButton = document.getElementById("submit-button");
+          const successMessage = document.getElementById("success-message");
+          const errorMessage = document.getElementById("error-message");
+
+          submitButton.disabled = true;
+          submitButton.textContent = "Mengirim...";
+
+          const formData = {
+            id: Date.now().toString(),
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            product: document.getElementById("product").value,
+            message: document.getElementById("message").value,
+            timestamp: new Date().toISOString(),
+          };
+
+          const result = await window.dataSdk.create(formData);
+
+          if (result.isOk) {
+            successMessage.style.display = "block";
+            errorMessage.style.display = "none";
+            document.getElementById("contact-form").reset();
+
+            setTimeout(() => {
+              successMessage.style.display = "none";
+            }, 5000);
+          } else {
+            errorMessage.style.display = "block";
+            successMessage.style.display = "none";
+            errorMessage.textContent = `Terjadi kesalahan: ${result.error.message}`;
+
+            setTimeout(() => {
+              errorMessage.style.display = "none";
+            }, 5000);
+          }
+
+          submitButton.disabled = false;
+          submitButton.textContent = "Kirim Pesan";
+        });
+
+      // Initialize SDKs
+      (async function init() {
+        if (window.dataSdk) {
+          const initResult = await window.dataSdk.init(dataHandler);
+          if (!initResult.isOk) {
+            console.error("Failed to initialize data SDK");
+          }
+        }
+
+        if (window.elementSdk) {
+          window.elementSdk.init({
+            defaultConfig,
+            onConfigChange,
+            mapToCapabilities: (config) => ({
+              recolorables: [
+                {
+                  get: () =>
+                    config.background_color || defaultConfig.background_color,
+                  set: (value) => {
+                    config.background_color = value;
+                    window.elementSdk.setConfig({ background_color: value });
+                  },
+                },
+                {
+                  get: () =>
+                    config.surface_color || defaultConfig.surface_color,
+                  set: (value) => {
+                    config.surface_color = value;
+                    window.elementSdk.setConfig({ surface_color: value });
+                  },
+                },
+                {
+                  get: () => config.text_color || defaultConfig.text_color,
+                  set: (value) => {
+                    config.text_color = value;
+                    window.elementSdk.setConfig({ text_color: value });
+                  },
+                },
+                {
+                  get: () =>
+                    config.primary_action_color ||
+                    defaultConfig.primary_action_color,
+                  set: (value) => {
+                    config.primary_action_color = value;
+                    window.elementSdk.setConfig({
+                      primary_action_color: value,
+                    });
+                  },
+                },
+                {
+                  get: () =>
+                    config.secondary_action_color ||
+                    defaultConfig.secondary_action_color,
+                  set: (value) => {
+                    config.secondary_action_color = value;
+                    window.elementSdk.setConfig({
+                      secondary_action_color: value,
+                    });
+                  },
+                },
+              ],
+              borderables: [],
+              fontEditable: {
+                get: () => config.font_family || defaultConfig.font_family,
+                set: (value) => {
+                  config.font_family = value;
+                  window.elementSdk.setConfig({ font_family: value });
+                },
+              },
+              fontSizeable: {
+                get: () => config.font_size || defaultConfig.font_size,
+                set: (value) => {
+                  config.font_size = value;
+                  window.elementSdk.setConfig({ font_size: value });
+                },
+              },
+            }),
+            mapToEditPanelValues: (config) =>
+              new Map([
+                [
+                  "company_name",
+                  config.company_name || defaultConfig.company_name,
+                ],
+                ["tagline", config.tagline || defaultConfig.tagline],
+                [
+                  "product_1_name",
+                  config.product_1_name || defaultConfig.product_1_name,
+                ],
+                [
+                  "product_1_price",
+                  config.product_1_price || defaultConfig.product_1_price,
+                ],
+                [
+                  "product_1_desc",
+                  config.product_1_desc || defaultConfig.product_1_desc,
+                ],
+                [
+                  "product_1_detail",
+                  config.product_1_detail || defaultConfig.product_1_detail,
+                ],
+                [
+                  "product_2_name",
+                  config.product_2_name || defaultConfig.product_2_name,
+                ],
+                [
+                  "product_2_price",
+                  config.product_2_price || defaultConfig.product_2_price,
+                ],
+                [
+                  "product_2_desc",
+                  config.product_2_desc || defaultConfig.product_2_desc,
+                ],
+                [
+                  "product_2_detail",
+                  config.product_2_detail || defaultConfig.product_2_detail,
+                ],
+                [
+                  "product_3_name",
+                  config.product_3_name || defaultConfig.product_3_name,
+                ],
+                [
+                  "product_3_price",
+                  config.product_3_price || defaultConfig.product_3_price,
+                ],
+                [
+                  "product_3_desc",
+                  config.product_3_desc || defaultConfig.product_3_desc,
+                ],
+                [
+                  "product_3_detail",
+                  config.product_3_detail || defaultConfig.product_3_detail,
+                ],
+                [
+                  "service_1_title",
+                  config.service_1_title || defaultConfig.service_1_title,
+                ],
+                [
+                  "service_1_desc",
+                  config.service_1_desc || defaultConfig.service_1_desc,
+                ],
+                [
+                  "service_2_title",
+                  config.service_2_title || defaultConfig.service_2_title,
+                ],
+                [
+                  "service_2_desc",
+                  config.service_2_desc || defaultConfig.service_2_desc,
+                ],
+                [
+                  "service_3_title",
+                  config.service_3_title || defaultConfig.service_3_title,
+                ],
+                [
+                  "service_3_desc",
+                  config.service_3_desc || defaultConfig.service_3_desc,
+                ],
+                [
+                  "testimonial_1_text",
+                  config.testimonial_1_text || defaultConfig.testimonial_1_text,
+                ],
+                [
+                  "testimonial_1_author",
+                  config.testimonial_1_author ||
+                    defaultConfig.testimonial_1_author,
+                ],
+                [
+                  "testimonial_2_text",
+                  config.testimonial_2_text || defaultConfig.testimonial_2_text,
+                ],
+                [
+                  "testimonial_2_author",
+                  config.testimonial_2_author ||
+                    defaultConfig.testimonial_2_author,
+                ],
+                [
+                  "cta_button_text",
+                  config.cta_button_text || defaultConfig.cta_button_text,
+                ],
+                [
+                  "contact_title",
+                  config.contact_title || defaultConfig.contact_title,
+                ],
+                [
+                  "footer_text",
+                  config.footer_text || defaultConfig.footer_text,
+                ],
+              ]),
+          });
+        }
+      })();
     </script>
     <script>
       (function () {
@@ -935,7 +1694,7 @@
           if (b) {
             var d = b.createElement("script");
             d.innerHTML =
-              "window.__CF$cv$params={r:'9a56d82130b79fb0',t:'MTc2NDMwMTIzMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+              "window.__CF$cv$params={r:'9a6181ec30d7008f',t:'MTc2NDQxMzA0My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
             b.getElementsByTagName("head")[0].appendChild(d);
           }
         }
