@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kursus Online Bahasa Inggris</title>
+    <script src="/_sdk/data_sdk.js"></script>
+    <script src="/_sdk/element_sdk.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        box-sizing: border-box;
+      }
+
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+      * {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+      }
+
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+
+      .fade-in-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .hero-background {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .feature-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .cta-button {
+        transition: all 0.3s ease;
+      }
+
+      .cta-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+      }
+
+      .form-input {
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .form-input:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        outline: none;
+      }
+
+      .success-message {
+        animation: slideDown 0.5s ease-out;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- Hero Section -->
+    <section class="hero-background w-full min-h-full text-white">
+      <div class="max-w-7xl mx-auto px-6 py-20">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+          <div class="flex-1 fade-in-up">
+            <h1
+              id="hero-title"
+              class="text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+            >
+              Kuasai Bahasa Inggris dengan Mudah
+            </h1>
+            <p id="hero-subtitle" class="text-xl lg:text-2xl mb-8 opacity-90">
+              Belajar dari native speaker dengan metode interaktif dan
+              menyenangkan
+            </p>
+            <button
+              onclick="scrollToForm()"
+              class="cta-button bg-white text-purple-700 px-8 py-4 rounded-full text-lg font-semibold"
+            >
+              Daftar Sekarang 🚀
+            </button>
+          </div>
+          <div class="flex-1 fade-in-up">
+            <svg
+              class="w-full max-w-md mx-auto"
+              viewbox="0 0 400 400"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="200" cy="200" r="180" fill="rgba(255,255,255,0.1)" />
+              <circle cx="200" cy="200" r="140" fill="rgba(255,255,255,0.15)" />
+              <rect
+                x="120"
+                y="120"
+                width="160"
+                height="200"
+                rx="10"
+                fill="white"
+                opacity="0.95"
+              />
+              <rect
+                x="140"
+                y="150"
+                width="120"
+                height="8"
+                rx="4"
+                fill="#667eea"
+              />
+              <rect
+                x="140"
+                y="175"
+                width="90"
+                height="8"
+                rx="4"
+                fill="#764ba2"
+                opacity="0.6"
+              />
+              <rect
+                x="140"
+                y="200"
+                width="100"
+                height="8"
+                rx="4"
+                fill="#667eea"
+                opacity="0.4"
+              />
+              <circle cx="160" cy="265" r="15" fill="#667eea" />
+              <text
+                x="190"
+                y="273"
+                fill="#333"
+                font-size="18"
+                font-weight="600"
+              >
+                ABC
+              </text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Features Section -->
+    <section class="w-full bg-gray-50 py-20">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2
+          id="features-title"
+          class="text-4xl lg:text-5xl font-bold text-center mb-4 text-gray-800 fade-in-up"
+        >
+          Mengapa Memilih Kami?
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8 mt-16">
+          <div
+            class="feature-card bg-white p-8 rounded-2xl shadow-lg fade-in-up"
+          >
+            <div class="text-5xl mb-4">👨‍🏫</div>
+            <h3
+              id="feature-1-title"
+              class="text-2xl font-bold mb-3 text-gray-800"
+            >
+              Pengajar Berpengalaman
+            </h3>
+            <p id="feature-1-description" class="text-gray-600 leading-relaxed">
+              Belajar langsung dari native speaker profesional dengan pengalaman
+              mengajar bertahun-tahun
+            </p>
+          </div>
+          <div
+            class="feature-card bg-white p-8 rounded-2xl shadow-lg fade-in-up"
+          >
+            <div class="text-5xl mb-4">⏰</div>
+            <h3
+              id="feature-2-title"
+              class="text-2xl font-bold mb-3 text-gray-800"
+            >
+              Jadwal Fleksibel
+            </h3>
+            <p id="feature-2-description" class="text-gray-600 leading-relaxed">
+              Atur jadwal belajar sesuai dengan waktu luang Anda, tersedia 24/7
+            </p>
+          </div>
+          <div
+            class="feature-card bg-white p-8 rounded-2xl shadow-lg fade-in-up"
+          >
+            <div class="text-5xl mb-4">📱</div>
+            <h3
+              id="feature-3-title"
+              class="text-2xl font-bold mb-3 text-gray-800"
+            >
+              Materi Interaktif
+            </h3>
+            <p id="feature-3-description" class="text-gray-600 leading-relaxed">
+              Akses materi pembelajaran interaktif kapan saja di perangkat apa
+              pun
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Registration Form -->
+    <section id="registration-form" class="w-full bg-white py-20">
+      <div class="max-w-2xl mx-auto px-6">
+        <div class="fade-in-up">
+          <h2
+            id="form-title"
+            class="text-4xl lg:text-5xl font-bold text-center mb-4 text-gray-800"
+          >
+            Mulai Perjalanan Anda
+          </h2>
+          <p id="form-subtitle" class="text-center text-gray-600 text-lg mb-12">
+            Daftar sekarang dan dapatkan kelas trial gratis!
+          </p>
+          <div
+            id="success-message"
+            class="hidden success-message bg-green-50 border-2 border-green-500 rounded-xl p-6 mb-6"
+          >
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">✅</span>
+              <div>
+                <p class="text-green-800 font-semibold text-lg">
+                  Pendaftaran Berhasil!
+                </p>
+                <p class="text-green-700">Kami akan menghubungi Anda segera.</p>
+              </div>
+            </div>
+          </div>
+          <form
+            id="registration-form-element"
+            class="bg-gray-50 rounded-2xl p-8 shadow-lg"
+          >
+            <div class="mb-6">
+              <label for="name" class="block text-gray-700 font-semibold mb-2"
+                >Nama Lengkap</label
+              >
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="form-input w-full px-4 py-3 rounded-lg border-2 border-gray-300"
+                placeholder="Masukkan nama lengkap Anda"
+              />
+            </div>
+            <div class="mb-6">
+              <label for="email" class="block text-gray-700 font-semibold mb-2"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="form-input w-full px-4 py-3 rounded-lg border-2 border-gray-300"
+                placeholder="contoh@email.com"
+              />
+            </div>
+            <div class="mb-8">
+              <label for="level" class="block text-gray-700 font-semibold mb-2"
+                >Level Bahasa Inggris</label
+              >
+              <select
+                id="level"
+                name="level"
+                required
+                class="form-input w-full px-4 py-3 rounded-lg border-2 border-gray-300 bg-white"
+              >
+                <option value="">Pilih level Anda</option>
+                <option value="Beginner">Beginner (Pemula)</option>
+                <option value="Intermediate">Intermediate (Menengah)</option>
+                <option value="Advanced">Advanced (Mahir)</option>
+              </select>
+            </div>
+            <button
+              type="submit"
+              id="submit-button"
+              class="cta-button w-full bg-purple-600 text-white py-4 rounded-lg text-lg font-semibold hover:bg-purple-700"
+            >
+              <span id="button-text">Daftar Sekarang</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <script>
+      const defaultConfig = {
+        hero_title: "Kuasai Bahasa Inggris dengan Mudah",
+        hero_subtitle:
+          "Belajar dari native speaker dengan metode interaktif dan menyenangkan",
+        features_title: "Mengapa Memilih Kami?",
+        feature_1_title: "Pengajar Berpengalaman",
+        feature_1_description:
+          "Belajar langsung dari native speaker profesional dengan pengalaman mengajar bertahun-tahun",
+        feature_2_title: "Jadwal Fleksibel",
+        feature_2_description:
+          "Atur jadwal belajar sesuai dengan waktu luang Anda, tersedia 24/7",
+        feature_3_title: "Materi Interaktif",
+        feature_3_description:
+          "Akses materi pembelajaran interaktif kapan saja di perangkat apa pun",
+        form_title: "Mulai Perjalanan Anda",
+        form_subtitle: "Daftar sekarang dan dapatkan kelas trial gratis!",
+        cta_button_text: "Daftar Sekarang",
+        background_color: "#667eea",
+        surface_color: "#ffffff",
+        text_color: "#1f2937",
+        primary_action_color: "#667eea",
+        secondary_action_color: "#764ba2",
+        font_family: "Inter",
+        font_size: 16,
+      };
+
+      async function onConfigChange(config) {
+        const heroTitle = document.getElementById("hero-title");
+        const heroSubtitle = document.getElementById("hero-subtitle");
+        const featuresTitle = document.getElementById("features-title");
+        const feature1Title = document.getElementById("feature-1-title");
+        const feature1Description = document.getElementById(
+          "feature-1-description"
+        );
+        const feature2Title = document.getElementById("feature-2-title");
+        const feature2Description = document.getElementById(
+          "feature-2-description"
+        );
+        const feature3Title = document.getElementById("feature-3-title");
+        const feature3Description = document.getElementById(
+          "feature-3-description"
+        );
+        const formTitle = document.getElementById("form-title");
+        const formSubtitle = document.getElementById("form-subtitle");
+        const buttonText = document.getElementById("button-text");
+
+        heroTitle.textContent = config.hero_title || defaultConfig.hero_title;
+        heroSubtitle.textContent =
+          config.hero_subtitle || defaultConfig.hero_subtitle;
+        featuresTitle.textContent =
+          config.features_title || defaultConfig.features_title;
+        feature1Title.textContent =
+          config.feature_1_title || defaultConfig.feature_1_title;
+        feature1Description.textContent =
+          config.feature_1_description || defaultConfig.feature_1_description;
+        feature2Title.textContent =
+          config.feature_2_title || defaultConfig.feature_2_title;
+        feature2Description.textContent =
+          config.feature_2_description || defaultConfig.feature_2_description;
+        feature3Title.textContent =
+          config.feature_3_title || defaultConfig.feature_3_title;
+        feature3Description.textContent =
+          config.feature_3_description || defaultConfig.feature_3_description;
+        formTitle.textContent = config.form_title || defaultConfig.form_title;
+        formSubtitle.textContent =
+          config.form_subtitle || defaultConfig.form_subtitle;
+        buttonText.textContent =
+          config.cta_button_text || defaultConfig.cta_button_text;
+
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack = "Arial, sans-serif";
+        const baseSize = config.font_size || defaultConfig.font_size;
+
+        document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        heroTitle.style.fontSize = `${baseSize * 3.5}px`;
+        heroSubtitle.style.fontSize = `${baseSize * 1.5}px`;
+        featuresTitle.style.fontSize = `${baseSize * 3}px`;
+
+        const featureTitles = document.querySelectorAll(".feature-card h3");
+        featureTitles.forEach((title) => {
+          title.style.fontSize = `${baseSize * 1.5}px`;
+        });
+
+        const featureDescriptions =
+          document.querySelectorAll(".feature-card p");
+        featureDescriptions.forEach((desc) => {
+          desc.style.fontSize = `${baseSize}px`;
+        });
+
+        formTitle.style.fontSize = `${baseSize * 3}px`;
+        formSubtitle.style.fontSize = `${baseSize * 1.125}px`;
+
+        const heroSection = document.querySelector(".hero-background");
+        heroSection.style.background = `linear-gradient(135deg, ${
+          config.background_color || defaultConfig.background_color
+        } 0%, ${
+          config.secondary_action_color || defaultConfig.secondary_action_color
+        } 100%)`;
+
+        const featureCards = document.querySelectorAll(".feature-card");
+        featureCards.forEach((card) => {
+          card.style.backgroundColor =
+            config.surface_color || defaultConfig.surface_color;
+        });
+
+        const textElements = document.querySelectorAll("h2, h3, p, label");
+        textElements.forEach((el) => {
+          if (
+            !el.closest(".hero-background") &&
+            !el.classList.contains("text-white")
+          ) {
+            el.style.color = config.text_color || defaultConfig.text_color;
+          }
+        });
+
+        const submitButton = document.getElementById("submit-button");
+        submitButton.style.backgroundColor =
+          config.primary_action_color || defaultConfig.primary_action_color;
+
+        const ctaButtons = document.querySelectorAll(".cta-button");
+        ctaButtons.forEach((btn) => {
+          if (btn.id !== "submit-button") {
+            btn.style.color =
+              config.primary_action_color || defaultConfig.primary_action_color;
+          }
+        });
+      }
+
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities: (config) => ({
+            recolorables: [
+              {
+                get: () =>
+                  config.background_color || defaultConfig.background_color,
+                set: (value) => {
+                  config.background_color = value;
+                  window.elementSdk.setConfig({ background_color: value });
+                },
+              },
+              {
+                get: () => config.surface_color || defaultConfig.surface_color,
+                set: (value) => {
+                  config.surface_color = value;
+                  window.elementSdk.setConfig({ surface_color: value });
+                },
+              },
+              {
+                get: () => config.text_color || defaultConfig.text_color,
+                set: (value) => {
+                  config.text_color = value;
+                  window.elementSdk.setConfig({ text_color: value });
+                },
+              },
+              {
+                get: () =>
+                  config.primary_action_color ||
+                  defaultConfig.primary_action_color,
+                set: (value) => {
+                  config.primary_action_color = value;
+                  window.elementSdk.setConfig({ primary_action_color: value });
+                },
+              },
+              {
+                get: () =>
+                  config.secondary_action_color ||
+                  defaultConfig.secondary_action_color,
+                set: (value) => {
+                  config.secondary_action_color = value;
+                  window.elementSdk.setConfig({
+                    secondary_action_color: value,
+                  });
+                },
+              },
+            ],
+            borderables: [],
+            fontEditable: {
+              get: () => config.font_family || defaultConfig.font_family,
+              set: (value) => {
+                config.font_family = value;
+                window.elementSdk.setConfig({ font_family: value });
+              },
+            },
+            fontSizeable: {
+              get: () => config.font_size || defaultConfig.font_size,
+              set: (value) => {
+                config.font_size = value;
+                window.elementSdk.setConfig({ font_size: value });
+              },
+            },
+          }),
+          mapToEditPanelValues: (config) =>
+            new Map([
+              ["hero_title", config.hero_title || defaultConfig.hero_title],
+              [
+                "hero_subtitle",
+                config.hero_subtitle || defaultConfig.hero_subtitle,
+              ],
+              [
+                "features_title",
+                config.features_title || defaultConfig.features_title,
+              ],
+              [
+                "feature_1_title",
+                config.feature_1_title || defaultConfig.feature_1_title,
+              ],
+              [
+                "feature_1_description",
+                config.feature_1_description ||
+                  defaultConfig.feature_1_description,
+              ],
+              [
+                "feature_2_title",
+                config.feature_2_title || defaultConfig.feature_2_title,
+              ],
+              [
+                "feature_2_description",
+                config.feature_2_description ||
+                  defaultConfig.feature_2_description,
+              ],
+              [
+                "feature_3_title",
+                config.feature_3_title || defaultConfig.feature_3_title,
+              ],
+              [
+                "feature_3_description",
+                config.feature_3_description ||
+                  defaultConfig.feature_3_description,
+              ],
+              ["form_title", config.form_title || defaultConfig.form_title],
+              [
+                "form_subtitle",
+                config.form_subtitle || defaultConfig.form_subtitle,
+              ],
+              [
+                "cta_button_text",
+                config.cta_button_text || defaultConfig.cta_button_text,
+              ],
+            ]),
+        });
+      }
+
+      const dataHandler = {
+        onDataChanged(data) {
+          console.log("Registrations received:", data.length);
+        },
+      };
+
+      let isInitialized = false;
+
+      async function initializeApp() {
+        if (isInitialized || !window.dataSdk) return;
+
+        const initResult = await window.dataSdk.init(dataHandler);
+        if (initResult.isOk) {
+          isInitialized = true;
+        }
+      }
+
+      initializeApp();
+
+      function scrollToForm() {
+        document.getElementById("registration-form").scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+
+      const form = document.getElementById("registration-form-element");
+      const successMessage = document.getElementById("success-message");
+      const submitButton = document.getElementById("submit-button");
+      const buttonText = document.getElementById("button-text");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        if (!window.dataSdk) return;
+
+        const formData = new FormData(form);
+        const registration = {
+          name: formData.get("name"),
+          email: formData.get("email"),
+          level: formData.get("level"),
+          timestamp: new Date().toISOString(),
+        };
+
+        submitButton.disabled = true;
+        buttonText.textContent = "Mengirim...";
+
+        const result = await window.dataSdk.create(registration);
+
+        if (result.isOk) {
+          successMessage.classList.remove("hidden");
+          form.reset();
+          setTimeout(() => {
+            successMessage.classList.add("hidden");
+          }, 5000);
+        } else {
+          const errorDiv = document.createElement("div");
+          errorDiv.className =
+            "success-message bg-red-50 border-2 border-red-500 rounded-xl p-6 mb-6";
+          errorDiv.innerHTML = `
+          <div class="flex items-center gap-3">
+            <span class="text-3xl">❌</span>
+            <div>
+              <p class="text-red-800 font-semibold text-lg">Terjadi Kesalahan</p>
+              <p class="text-red-700">Silakan coba lagi nanti.</p>
+            </div>
+          </div>
+        `;
+          form.parentElement.insertBefore(errorDiv, form);
+          setTimeout(() => errorDiv.remove(), 5000);
+        }
+
+        submitButton.disabled = false;
+        buttonText.textContent =
+          window.elementSdk?.config?.cta_button_text ||
+          defaultConfig.cta_button_text;
+      });
+
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const animatedElements = document.querySelectorAll(".fade-in-up");
+        animatedElements.forEach((el) => observer.observe(el));
+      });
+
+      const animatedElements = document.querySelectorAll(".fade-in-up");
+      animatedElements.forEach((el) => observer.observe(el));
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'9a6187c550472ce1',t:'MTc2NDQxMzI4Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
