@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photography Studio &amp; Dashboard</title>
+    <script src="/_sdk/element_sdk.js"></script>
+    <script src="/_sdk/data_sdk.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        box-sizing: border-box;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .hover-scale {
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+
+      .hover-scale:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-hover {
+        transition: all 0.3s ease;
+      }
+
+      .btn-hover:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .portfolio-item:hover .overlay {
+        opacity: 1;
+      }
+
+      .toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 16px 24px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 500;
+        z-index: 1000;
+        opacity: 0;
+        transform: translateX(400px);
+        transition: all 0.3s ease;
+      }
+
+      .toast.show {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .toast.success {
+        background-color: #10b981;
+      }
+
+      .toast.error {
+        background-color: #ef4444;
+      }
+
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .modal.show {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .modal-content {
+        background: white;
+        border-radius: 12px;
+        max-width: 500px;
+        width: 90%;
+        max-height: 90%;
+        overflow-y: auto;
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+      }
+
+      .modal.show .modal-content {
+        transform: scale(1);
+      }
+
+      .tab-button {
+        padding: 12px 24px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-bottom: 3px solid transparent;
+      }
+
+      .tab-button.active {
+        border-bottom-color: currentColor;
+        font-weight: 600;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2rem !important;
+        }
+      }
+    </style>
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="toast" class="toast"></div>
+    <!-- Main App Container -->
+    <div id="app" class="w-full min-h-full">
+      <!-- Navigation -->
+      <nav
+        class="w-full fixed top-0 z-50"
+        style="
+          background-color: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(10px);
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        "
+      >
+        <div
+          class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center"
+        >
+          <h1
+            id="nav-studio-name"
+            class="text-2xl font-bold"
+            style="color: #1f2937"
+          >
+            PhotoStudio
+          </h1>
+          <button
+            id="admin-login-btn"
+            class="px-6 py-2 rounded-lg font-semibold btn-hover"
+            style="background-color: #2563eb; color: white"
+          >
+            Admin Login
+          </button>
+        </div>
+      </nav>
+      <!-- Landing Page Content -->
+      <div id="landing-page">
+        <!-- Hero Section -->
+        <section
+          class="w-full relative"
+          style="
+            margin-top: 72px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            padding: 120px 20px;
+          "
+        >
+          <div class="max-w-6xl mx-auto text-center text-white">
+            <h2
+              id="hero-title"
+              class="hero-title font-bold mb-6"
+              style="font-size: 3.5rem; line-height: 1.2"
+            >
+              Abadikan Momen Terbaik Anda
+            </h2>
+            <p
+              id="hero-subtitle"
+              class="mb-8 max-w-2xl mx-auto"
+              style="font-size: 1.25rem; opacity: 0.95"
+            >
+              Layanan fotografi profesional untuk wedding, prewedding,
+              commercial, dan event
+            </p>
+            <button
+              id="cta-button"
+              class="btn-hover px-8 py-4 text-lg font-semibold rounded-lg"
+              style="background-color: #ffffff; color: #2563eb"
+            >
+              Booking Sekarang
+            </button>
+          </div>
+        </section>
+        <!-- Portfolio Section -->
+        <section
+          class="w-full py-20 px-6 fade-in"
+          style="background-color: #f9fafb"
+        >
+          <div class="max-w-7xl mx-auto">
+            <h2
+              id="portfolio-title"
+              class="text-4xl font-bold text-center mb-12"
+              style="color: #1f2937"
+            >
+              Portfolio Kami
+            </h2>
+            <div
+              id="portfolio-grid"
+              class="grid grid-cols-1 md:grid-cols-3 gap-6"
+            ></div>
+          </div>
+        </section>
+        <!-- Services Section -->
+        <section
+          class="w-full py-20 px-6 fade-in"
+          style="background-color: #ffffff"
+        >
+          <div class="max-w-7xl mx-auto">
+            <h2
+              id="services-title"
+              class="text-4xl font-bold text-center mb-12"
+              style="color: #1f2937"
+            >
+              Paket Layanan
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div
+                class="hover-scale p-8 rounded-xl text-center"
+                style="background-color: #f9fafb"
+              >
+                <div
+                  class="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center"
+                  style="background-color: #dbeafe"
+                >
+                  <svg
+                    width="32"
+                    height="32"
+                    viewbox="0 0 24 24"
+                    fill="none"
+                    stroke="#2563eb"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+                    ></path>
+                    <circle cx="12" cy="13" r="4"></circle>
+                  </svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4" style="color: #1f2937">
+                  Wedding
+                </h3>
+                <p class="mb-4" style="color: #6b7280">
+                  Paket lengkap dokumentasi pernikahan dengan 2 fotografer
+                  profesional
+                </p>
+                <p class="text-3xl font-bold mb-4" style="color: #2563eb">
+                  Rp 8.500.000
+                </p>
+                <ul class="text-left space-y-2" style="color: #6b7280">
+                  <li>✓ Full day coverage</li>
+                  <li>✓ 500+ edited photos</li>
+                  <li>✓ Album premium</li>
+                  <li>✓ Free prewedding</li>
+                </ul>
+              </div>
+              <div
+                class="hover-scale p-8 rounded-xl text-center"
+                style="background-color: #f0fdf4"
+              >
+                <div
+                  class="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center"
+                  style="background-color: #dcfce7"
+                >
+                  <svg
+                    width="32"
+                    height="32"
+                    viewbox="0 0 24 24"
+                    fill="none"
+                    stroke="#10b981"
+                    stroke-width="2"
+                  >
+                    <rect
+                      x="3"
+                      y="3"
+                      width="18"
+                      height="18"
+                      rx="2"
+                      ry="2"
+                    ></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
+                  </svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4" style="color: #1f2937">
+                  Prewedding
+                </h3>
+                <p class="mb-4" style="color: #6b7280">
+                  Sesi foto prewedding indoor/outdoor dengan konsep custom
+                </p>
+                <p class="text-3xl font-bold mb-4" style="color: #10b981">
+                  Rp 3.500.000
+                </p>
+                <ul class="text-left space-y-2" style="color: #6b7280">
+                  <li>✓ 2 lokasi pilihan</li>
+                  <li>✓ 50+ edited photos</li>
+                  <li>✓ All files included</li>
+                  <li>✓ Makeup &amp; wardrobe</li>
+                </ul>
+              </div>
+              <div
+                class="hover-scale p-8 rounded-xl text-center"
+                style="background-color: #fef3c7"
+              >
+                <div
+                  class="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center"
+                  style="background-color: #fde68a"
+                >
+                  <svg
+                    width="32"
+                    height="32"
+                    viewbox="0 0 24 24"
+                    fill="none"
+                    stroke="#f59e0b"
+                    stroke-width="2"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4" style="color: #1f2937">
+                  Commercial
+                </h3>
+                <p class="mb-4" style="color: #6b7280">
+                  Fotografi produk dan corporate untuk kebutuhan bisnis
+                </p>
+                <p class="text-3xl font-bold mb-4" style="color: #f59e0b">
+                  Rp 2.000.000
+                </p>
+                <ul class="text-left space-y-2" style="color: #6b7280">
+                  <li>✓ Product photography</li>
+                  <li>✓ 30+ edited photos</li>
+                  <li>✓ Studio setup</li>
+                  <li>✓ Commercial license</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Testimonials Section -->
+        <section
+          class="w-full py-20 px-6 fade-in"
+          style="background-color: #f9fafb"
+        >
+          <div class="max-w-7xl mx-auto">
+            <h2
+              id="testimonials-title"
+              class="text-4xl font-bold text-center mb-12"
+              style="color: #1f2937"
+            >
+              Testimoni Klien
+            </h2>
+            <div
+              id="testimonials-grid"
+              class="grid grid-cols-1 md:grid-cols-2 gap-8"
+            ></div>
+          </div>
+        </section>
+        <!-- Blog Section -->
+        <section
+          class="w-full py-20 px-6 fade-in"
+          style="background-color: #ffffff"
+        >
+          <div class="max-w-7xl mx-auto">
+            <h2
+              id="blog-title"
+              class="text-4xl font-bold text-center mb-12"
+              style="color: #1f2937"
+            >
+              Berita &amp; Tips
+            </h2>
+            <div
+              id="blog-grid"
+              class="grid grid-cols-1 md:grid-cols-3 gap-8"
+            ></div>
+          </div>
+        </section>
+        <!-- Contact Section -->
+        <section
+          class="w-full py-20 px-6 fade-in"
+          style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)"
+        >
+          <div class="max-w-2xl mx-auto">
+            <h2
+              id="contact-title"
+              class="text-4xl font-bold text-center mb-4 text-white"
+            >
+              Hubungi Kami
+            </h2>
+            <p
+              id="contact-subtitle"
+              class="text-center text-white mb-12 text-lg"
+              style="opacity: 0.95"
+            >
+              Mari ciptakan karya yang indah bersama
+            </p>
+            <form
+              id="contact-form"
+              class="p-8 rounded-xl"
+              style="background-color: #ffffff"
+            >
+              <div class="mb-6">
+                <label
+                  for="name"
+                  class="block mb-2 font-semibold"
+                  style="color: #1f2937"
+                  >Nama Lengkap</label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  required
+                  class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
+                  style="border-color: #e5e7eb"
+                />
+              </div>
+              <div class="mb-6">
+                <label
+                  for="email"
+                  class="block mb-2 font-semibold"
+                  style="color: #1f2937"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  required
+                  class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
+                  style="border-color: #e5e7eb"
+                />
+              </div>
+              <div class="mb-6">
+                <label
+                  for="phone"
+                  class="block mb-2 font-semibold"
+                  style="color: #1f2937"
+                  >Nomor Telepon</label
+                >
+                <input
+                  type="tel"
+                  id="phone"
+                  required
+                  class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
+                  style="border-color: #e5e7eb"
+                />
+              </div>
+              <div class="mb-6">
+                <label
+                  for="message"
+                  class="block mb-2 font-semibold"
+                  style="color: #1f2937"
+                  >Pesan</label
+                >
+                <textarea
+                  id="message"
+                  required
+                  rows="4"
+                  class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
+                  style="border-color: #e5e7eb"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                id="submit-button"
+                class="w-full btn-hover px-8 py-4 text-lg font-semibold rounded-lg text-white"
+                style="background-color: #2563eb"
+              >
+                <span id="submit-text">Kirim Pesan</span>
+                <span id="loading-spinner" style="display: none"
+                  >Mengirim...</span
+                >
+              </button>
+            </form>
+          </div>
+        </section>
+        <!-- Footer -->
+        <footer
+          class="w-full py-8 px-6 text-center"
+          style="background-color: #1f2937; color: #9ca3af"
+        >
+          <p>© 2024 PhotoStudio. All rights reserved.</p>
+        </footer>
+      </div>
+      <!-- Admin Dashboard -->
+      <div
+        id="admin-dashboard"
+        class="hidden w-full min-h-full"
+        style="background-color: #f3f4f6; padding-top: 72px"
+      >
+        <!-- Dashboard Header -->
+        <div
+          class="w-full"
+          style="
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 20px;
+          "
+        >
+          <div class="max-w-7xl mx-auto flex justify-between items-center px-6">
+            <h2 class="text-2xl font-bold" style="color: #1f2937">
+              Admin Dashboard
+            </h2>
+            <button
+              id="logout-btn"
+              class="px-6 py-2 rounded-lg font-semibold btn-hover"
+              style="background-color: #ef4444; color: white"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+        <!-- Dashboard Tabs -->
+        <div
+          class="w-full"
+          style="background-color: #ffffff; border-bottom: 1px solid #e5e7eb"
+        >
+          <div class="max-w-7xl mx-auto px-6">
+            <div class="flex space-x-4">
+              <button
+                class="tab-button active"
+                data-tab="messages"
+                style="color: #2563eb"
+              >
+                Pesan
+              </button>
+              <button
+                class="tab-button"
+                data-tab="portfolio"
+                style="color: #6b7280"
+              >
+                Portfolio
+              </button>
+              <button
+                class="tab-button"
+                data-tab="testimonials"
+                style="color: #6b7280"
+              >
+                Testimoni
+              </button>
+              <button class="tab-button" data-tab="blog" style="color: #6b7280">
+                Blog
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Dashboard Content -->
+        <div class="max-w-7xl mx-auto px-6 py-8">
+          <!-- Messages Tab -->
+          <div id="messages-tab" class="tab-content">
+            <div class="flex justify-between items-center mb-6">
+              <h3 class="text-2xl font-bold" style="color: #1f2937">
+                Pesan Pelanggan
+              </h3>
+            </div>
+            <div id="messages-list" class="space-y-4"></div>
+          </div>
+          <!-- Portfolio Tab -->
+          <div id="portfolio-tab" class="tab-content hidden">
+            <div class="flex justify-between items-center mb-6">
+              <h3 class="text-2xl font-bold" style="color: #1f2937">
+                Kelola Portfolio
+              </h3>
+              <button
+                id="add-portfolio-btn"
+                class="px-6 py-3 rounded-lg font-semibold btn-hover"
+                style="background-color: #10b981; color: white"
+              >
+                + Tambah Portfolio
+              </button>
+            </div>
+            <div
+              id="portfolio-list"
+              class="grid grid-cols-1 md:grid-cols-3 gap-6"
+            ></div>
+          </div>
+          <!-- Testimonials Tab -->
+          <div id="testimonials-tab" class="tab-content hidden">
+            <div class="flex justify-between items-center mb-6">
+              <h3 class="text-2xl font-bold" style="color: #1f2937">
+                Kelola Testimoni
+              </h3>
+              <button
+                id="add-testimonial-btn"
+                class="px-6 py-3 rounded-lg font-semibold btn-hover"
+                style="background-color: #10b981; color: white"
+              >
+                + Tambah Testimoni
+              </button>
+            </div>
+            <div id="testimonial-list" class="space-y-4"></div>
+          </div>
+          <!-- Blog Tab -->
+          <div id="blog-tab" class="tab-content hidden">
+            <div class="flex justify-between items-center mb-6">
+              <h3 class="text-2xl font-bold" style="color: #1f2937">
+                Kelola Blog
+              </h3>
+              <button
+                id="add-blog-btn"
+                class="px-6 py-3 rounded-lg font-semibold btn-hover"
+                style="background-color: #10b981; color: white"
+              >
+                + Tambah Artikel
+              </button>
+            </div>
+            <div
+              id="blog-list"
+              class="grid grid-cols-1 md:grid-cols-3 gap-6"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+      <div class="modal-content p-8">
+        <h3 class="text-2xl font-bold mb-6" style="color: #1f2937">
+          Admin Login
+        </h3>
+        <form id="login-form">
+          <div class="mb-4">
+            <label
+              for="login-username"
+              class="block mb-2 font-semibold"
+              style="color: #1f2937"
+              >Username</label
+            >
+            <input
+              type="text"
+              id="login-username"
+              required
+              class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
+              style="border-color: #e5e7eb"
+            />
+          </div>
+          <div class="mb-6">
+            <label
+              for="login-password"
+              class="block mb-2 font-semibold"
+              style="color: #1f2937"
+              >Password</label
+            >
+            <input
+              type="password"
+              id="login-password"
+              required
+              class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
+              style="border-color: #e5e7eb"
+            />
+          </div>
+          <div class="flex space-x-4">
+            <button
+              type="submit"
+              class="flex-1 px-6 py-3 rounded-lg font-semibold btn-hover"
+              style="background-color: #2563eb; color: white"
+            >
+              Login
+            </button>
+            <button
+              type="button"
+              id="cancel-login"
+              class="flex-1 px-6 py-3 rounded-lg font-semibold btn-hover"
+              style="background-color: #e5e7eb; color: #1f2937"
+            >
+              Batal
+            </button>
+          </div>
+        </form>
+        <p class="mt-4 text-sm text-center" style="color: #6b7280">
+          Demo: username "admin", password "admin123"
+        </p>
+      </div>
+    </div>
+    <!-- Add Portfolio Modal -->
+    <div id="portfolio-modal" class="modal">
+      <div class="modal-content p-8">
+        <h3 class="text-2xl font-bold mb-6" style="color: #1f2937">
+          Tambah Portfolio
+        </h3>
+        <form id="portfolio-form">
+          <div class="mb-4">
+            <label
+              for="portfolio-title"
+              class="block mb-2 font-semibold"
+              style="color: #1f2937"
+              >Judul</label
+            >
+            <input
+              type="text"
+              id="portfolio-title"
+              required
+              class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
+              style="border-color: #e5e7eb"
+            />
+          </div>
+          <div class="mb-4">
+            <label
+              for="portfolio-category"
+              class="block mb-2 font-semibold"
+              style="color: #1f2937"
+              >Kategori</label
+            >
+            <select
+              id="portfolio-category"
+              required
+              class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
+              style="border-color: #e5e7eb"
+            >
+              <option value="Wedding">Wedding</option>
+              <option value="Prewedding">Prewedding</option>
+              <option value="Commercial">Commercial</option>
+              <option value="Event">Event</option>
+            </select>
+          </div>
+          <div class="mb-6">
+            <label
+              for="portfolio-color"
+              class="block mb-2 font-semibold"
+              style="color: #1f2937"
+              >Warna Gambar</label
+            >
+            <select
+              id="portfolio-color"
+              required
+              class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
+              style="border-color: #e5e7eb"
+            >
+              <option value="#3b82f6">Biru</option>
+              <option value="#10b981">Hijau</option>
+              <option value="#f59e0b">Kuning</option>
+              <option value="#ef4444">Merah</option>
+              <option value="#8b5cf6">Ungu</option>
+            </select>
+          </div>
+          <div class="flex space-x-4">
+            <button
+              type="submit"
+              class="flex-1 px-6 py-3 rounded-lg font-semibold btn-hover"
+              style="background-color: #10b981; color: white"
+            >
+              Simpan
+            </button>
+            <button
+              type="button"
+              class="cancel-modal flex-1 px-6 py-3 rounded-lg font-semibold btn-hover"
+              style="background-color: #e5e7eb; color: #1f2937"
+            >
+              Batal
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Add Testimonial Modal -->
+    <div id="testimonial-modal" class="modal">
+      <div class="modal-content p-8">
+        <h3 class="text-2xl font-bold mb-6" style="color: #1f2937">
+          Tambah Testimoni
+        </h3>
+        <form id="testimonial-form">
+          <div class="mb-4">
+            <label
+              for="testimonial-name"
+              class="block mb-2 font-semibold"
+              style="color: #1f2937"
+              >Nama Klien</label
+            >
+            <input
+              type="text"
+              id="testimonial-name"
+              required
+              class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
+              style="border-color: #e5e7eb"
+            />
+          </div>
+          <div class="mb-4">
+            <label
+              for="testimonial-position"
+              class="block mb-2 font-semibold"
+              style="color: #1f2937"
+              >Posisi/Acara</label
+            >
+            <input
+              type="text"
+              id="testimonial-position"
+              required
+              class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
+              style="border-color: #e5e7eb"
+              placeholder="Contoh: Bride"
+            />
+          </div>
+          <div class="mb-4">
+            <label
+              for="testimonial-message"
+              class="block mb-2 font-semibold"
+              style="color: #1f2937"
+              >Testimoni</label
+            >
+            <textarea
+              id="testimonial-message"
+              required
+              rows="4"
+              class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
+              style="border-color: #e5e7eb"
+            ></textarea>
+          </div>
+          <div class="mb-6">
+            <label
+              for="testimonial-rating"
+              class="block mb-2 font-semibold"
+              style="color: #1f2937"
+              >Rating (1-5)</label
+            >
+            <input
+              type="number"
+              id="testimonial-rating"
+              required
+              min="1"
+              max="5"
+              value="5"
+              class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
+              style="border-color: #e5e7eb"
+            />
+          </div>
+          <div class="flex space-x-4">
+            <button
+              type="submit"
+              class="flex-1 px-6 py-3 rounded-lg font-semibold btn-hover"
+              style="background-color: #10b981; color: white"
+            >
+              Simpan
+            </button>
+            <button
+              type="button"
+              class="cancel-modal flex-1 px-6 py-3 rounded-lg font-semibold btn-hover"
+              style="background-color: #e5e7eb; color: #1f2937"
+            >
+              Batal
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Add Blog Modal -->
+    <div id="blog-modal" class="modal">
+      <div class="modal-content p-8">
+        <h3 class="text-2xl font-bold mb-6" style="color: #1f2937">
+          Tambah Artikel Blog
+        </h3>
+        <form id="blog-form">
+          <div class="mb-4">
+            <label
+              for="blog-title"
+              class="block mb-2 font-semibold"
+              style="color: #1f2937"
+              >Judul Artikel</label
+            >
+            <input
+              type="text"
+              id="blog-title"
+              required
+              class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
+              style="border-color: #e5e7eb"
+            />
+          </div>
+          <div class="mb-4">
+            <label
+              for="blog-subtitle"
+              class="block mb-2 font-semibold"
+              style="color: #1f2937"
+              >Ringkasan</label
+            >
+            <textarea
+              id="blog-subtitle"
+              required
+              rows="3"
+              class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
+              style="border-color: #e5e7eb"
+            ></textarea>
+          </div>
+          <div class="mb-4">
+            <label
+              for="blog-author"
+              class="block mb-2 font-semibold"
+              style="color: #1f2937"
+              >Penulis</label
+            >
+            <input
+              type="text"
+              id="blog-author"
+              required
+              class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
+              style="border-color: #e5e7eb"
+            />
+          </div>
+          <div class="mb-6">
+            <label
+              for="blog-color"
+              class="block mb-2 font-semibold"
+              style="color: #1f2937"
+              >Warna Gambar</label
+            >
+            <select
+              id="blog-color"
+              required
+              class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
+              style="border-color: #e5e7eb"
+            >
+              <option value="#3b82f6">Biru</option>
+              <option value="#10b981">Hijau</option>
+              <option value="#f59e0b">Kuning</option>
+              <option value="#ef4444">Merah</option>
+              <option value="#8b5cf6">Ungu</option>
+            </select>
+          </div>
+          <div class="flex space-x-4">
+            <button
+              type="submit"
+              class="flex-1 px-6 py-3 rounded-lg font-semibold btn-hover"
+              style="background-color: #10b981; color: white"
+            >
+              Simpan
+            </button>
+            <button
+              type="button"
+              class="cancel-modal flex-1 px-6 py-3 rounded-lg font-semibold btn-hover"
+              style="background-color: #e5e7eb; color: #1f2937"
+            >
+              Batal
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      const defaultConfig = {
+        primary_color: "#2563eb",
+        secondary_color: "#3b82f6",
+        surface_color: "#ffffff",
+        text_color: "#1f2937",
+        accent_color: "#10b981",
+        studio_name: "PhotoStudio",
+        hero_title: "Abadikan Momen Terbaik Anda",
+        hero_subtitle:
+          "Layanan fotografi profesional untuk wedding, prewedding, commercial, dan event",
+        cta_button_text: "Booking Sekarang",
+        portfolio_title: "Portfolio Kami",
+        services_title: "Paket Layanan",
+        testimonials_title: "Testimoni Klien",
+        blog_title: "Berita & Tips",
+        contact_title: "Hubungi Kami",
+        contact_subtitle: "Mari ciptakan karya yang indah bersama",
+        font_family: "system-ui",
+        font_size: 16,
+      };
+
+      let allData = [];
+      let isLoggedIn = false;
+
+      const dataHandler = {
+        onDataChanged(data) {
+          allData = data;
+          renderLandingPage();
+          if (isLoggedIn) {
+            renderDashboard();
+          }
+        },
+      };
+
+      async function onConfigChange(config) {
+        const baseFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack = `${baseFont}, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`;
+        const baseSize = config.font_size || defaultConfig.font_size;
+
+        document.body.style.fontFamily = baseFontStack;
+
+        document.getElementById("nav-studio-name").textContent =
+          config.studio_name || defaultConfig.studio_name;
+        document.getElementById("nav-studio-name").style.color =
+          config.text_color || defaultConfig.text_color;
+
+        document.getElementById("hero-title").textContent =
+          config.hero_title || defaultConfig.hero_title;
+        document.getElementById("hero-title").style.fontSize = `${
+          baseSize * 2.2
+        }px`;
+
+        document.getElementById("hero-subtitle").textContent =
+          config.hero_subtitle || defaultConfig.hero_subtitle;
+        document.getElementById("hero-subtitle").style.fontSize = `${
+          baseSize * 1.25
+        }px`;
+
+        document.getElementById("cta-button").textContent =
+          config.cta_button_text || defaultConfig.cta_button_text;
+        document.getElementById("cta-button").style.backgroundColor =
+          config.surface_color || defaultConfig.surface_color;
+        document.getElementById("cta-button").style.color =
+          config.primary_color || defaultConfig.primary_color;
+
+        document.getElementById("portfolio-title").textContent =
+          config.portfolio_title || defaultConfig.portfolio_title;
+        document.getElementById("portfolio-title").style.color =
+          config.text_color || defaultConfig.text_color;
+
+        document.getElementById("services-title").textContent =
+          config.services_title || defaultConfig.services_title;
+        document.getElementById("services-title").style.color =
+          config.text_color || defaultConfig.text_color;
+
+        document.getElementById("testimonials-title").textContent =
+          config.testimonials_title || defaultConfig.testimonials_title;
+        document.getElementById("testimonials-title").style.color =
+          config.text_color || defaultConfig.text_color;
+
+        document.getElementById("blog-title").textContent =
+          config.blog_title || defaultConfig.blog_title;
+        document.getElementById("blog-title").style.color =
+          config.text_color || defaultConfig.text_color;
+
+        document.getElementById("contact-title").textContent =
+          config.contact_title || defaultConfig.contact_title;
+        document.getElementById("contact-subtitle").textContent =
+          config.contact_subtitle || defaultConfig.contact_subtitle;
+
+        const heroSection = document.querySelector("section");
+        heroSection.style.background = `linear-gradient(135deg, ${
+          config.primary_color || defaultConfig.primary_color
+        } 0%, ${config.secondary_color || defaultConfig.secondary_color} 100%)`;
+
+        const contactSection = document.querySelectorAll("section")[5];
+        contactSection.style.background = `linear-gradient(135deg, ${
+          config.primary_color || defaultConfig.primary_color
+        } 0%, ${config.secondary_color || defaultConfig.secondary_color} 100%)`;
+
+        document.getElementById("admin-login-btn").style.backgroundColor =
+          config.primary_color || defaultConfig.primary_color;
+        document.getElementById("submit-button").style.backgroundColor =
+          config.primary_color || defaultConfig.primary_color;
+      }
+
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities: (config) => ({
+            recolorables: [
+              {
+                get: () => config.primary_color || defaultConfig.primary_color,
+                set: (value) => {
+                  config.primary_color = value;
+                  window.elementSdk.setConfig({ primary_color: value });
+                },
+              },
+              {
+                get: () =>
+                  config.secondary_color || defaultConfig.secondary_color,
+                set: (value) => {
+                  config.secondary_color = value;
+                  window.elementSdk.setConfig({ secondary_color: value });
+                },
+              },
+              {
+                get: () => config.surface_color || defaultConfig.surface_color,
+                set: (value) => {
+                  config.surface_color = value;
+                  window.elementSdk.setConfig({ surface_color: value });
+                },
+              },
+              {
+                get: () => config.text_color || defaultConfig.text_color,
+                set: (value) => {
+                  config.text_color = value;
+                  window.elementSdk.setConfig({ text_color: value });
+                },
+              },
+            ],
+            borderables: [],
+            fontEditable: {
+              get: () => config.font_family || defaultConfig.font_family,
+              set: (value) => {
+                config.font_family = value;
+                window.elementSdk.setConfig({ font_family: value });
+              },
+            },
+            fontSizeable: {
+              get: () => config.font_size || defaultConfig.font_size,
+              set: (value) => {
+                config.font_size = value;
+                window.elementSdk.setConfig({ font_size: value });
+              },
+            },
+          }),
+          mapToEditPanelValues: (config) =>
+            new Map([
+              ["studio_name", config.studio_name || defaultConfig.studio_name],
+              ["hero_title", config.hero_title || defaultConfig.hero_title],
+              [
+                "hero_subtitle",
+                config.hero_subtitle || defaultConfig.hero_subtitle,
+              ],
+              [
+                "cta_button_text",
+                config.cta_button_text || defaultConfig.cta_button_text,
+              ],
+              [
+                "portfolio_title",
+                config.portfolio_title || defaultConfig.portfolio_title,
+              ],
+              [
+                "services_title",
+                config.services_title || defaultConfig.services_title,
+              ],
+              [
+                "testimonials_title",
+                config.testimonials_title || defaultConfig.testimonials_title,
+              ],
+              ["blog_title", config.blog_title || defaultConfig.blog_title],
+              [
+                "contact_title",
+                config.contact_title || defaultConfig.contact_title,
+              ],
+              [
+                "contact_subtitle",
+                config.contact_subtitle || defaultConfig.contact_subtitle,
+              ],
+            ]),
+        });
+      }
+
+      if (window.dataSdk) {
+        window.dataSdk.init(dataHandler);
+      }
+
+      function showToast(message, type) {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.className = `toast ${type} show`;
+        setTimeout(() => toast.classList.remove("show"), 3000);
+      }
+
+      function showModal(modalId) {
+        document.getElementById(modalId).classList.add("show");
+      }
+
+      function hideModal(modalId) {
+        document.getElementById(modalId).classList.remove("show");
+      }
+
+      function renderLandingPage() {
+        const portfolioItems = allData.filter(
+          (item) => item.type === "portfolio"
+        );
+        const portfolioGrid = document.getElementById("portfolio-grid");
+
+        if (portfolioItems.length === 0) {
+          portfolioGrid.innerHTML =
+            '<p class="col-span-3 text-center" style="color: #6b7280;">Belum ada portfolio. Admin dapat menambahkan portfolio melalui dashboard.</p>';
+        } else {
+          portfolioGrid.innerHTML = portfolioItems
+            .map(
+              (item) => `
+          <div class="portfolio-item relative rounded-xl overflow-hidden hover-scale" style="height: 300px;">
+            <svg viewBox="0 0 400 400" class="w-full h-full">
+              <rect width="400" height="400" fill="${item.imageColor}"/>
+              <text x="200" y="180" text-anchor="middle" fill="white" font-size="24" font-weight="600">${item.title}</text>
+              <text x="200" y="220" text-anchor="middle" fill="white" font-size="16" opacity="0.9">${item.category}</text>
+            </svg>
+            <div class="overlay flex items-center justify-center">
+              <p class="text-white text-xl font-semibold">${item.title}</p>
+            </div>
+          </div>
+        `
+            )
+            .join("");
+        }
+
+        const testimonialItems = allData.filter(
+          (item) => item.type === "testimonial"
+        );
+        const testimonialsGrid = document.getElementById("testimonials-grid");
+
+        if (testimonialItems.length === 0) {
+          testimonialsGrid.innerHTML =
+            '<p class="col-span-2 text-center" style="color: #6b7280;">Belum ada testimoni. Admin dapat menambahkan testimoni melalui dashboard.</p>';
+        } else {
+          testimonialsGrid.innerHTML = testimonialItems
+            .map(
+              (item) => `
+          <div class="p-8 rounded-xl hover-scale" style="background-color: #ffffff;">
+            <div class="flex mb-4">
+              ${Array(item.rating).fill("⭐").join("")}
+            </div>
+            <p class="mb-4" style="color: #4b5563;">"${item.message}"</p>
+            <div class="flex items-center">
+              <div class="w-12 h-12 rounded-full flex items-center justify-center text-white text-lg font-bold" style="background-color: #3b82f6;">
+                ${item.name.charAt(0)}
+              </div>
+              <div class="ml-4">
+                <h4 class="font-bold" style="color: #1f2937;">${item.name}</h4>
+                <p class="text-sm" style="color: #6b7280;">${item.position}</p>
+              </div>
+            </div>
+          </div>
+        `
+            )
+            .join("");
+        }
+
+        const blogItems = allData.filter((item) => item.type === "blog");
+        const blogGrid = document.getElementById("blog-grid");
+
+        if (blogItems.length === 0) {
+          blogGrid.innerHTML =
+            '<p class="col-span-3 text-center" style="color: #6b7280;">Belum ada artikel. Admin dapat menambahkan artikel melalui dashboard.</p>';
+        } else {
+          blogGrid.innerHTML = blogItems
+            .map(
+              (item) => `
+          <div class="hover-scale rounded-xl overflow-hidden" style="background-color: #ffffff;">
+            <svg viewBox="0 0 400 200" class="w-full">
+              <rect width="400" height="200" fill="${item.imageColor}"/>
+              <text x="200" y="110" text-anchor="middle" fill="white" font-size="20" font-weight="600">📰</text>
+            </svg>
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-2" style="color: #1f2937;">${item.title}</h4>
+              <p class="mb-4" style="color: #6b7280;">${item.subtitle}</p>
+              <p class="text-sm" style="color: #9ca3af;">Oleh ${item.author}</p>
+            </div>
+          </div>
+        `
+            )
+            .join("");
+        }
+      }
+
+      function renderDashboard() {
+        const messages = allData.filter((item) => item.type === "contact");
+        const messagesList = document.getElementById("messages-list");
+
+        if (messages.length === 0) {
+          messagesList.innerHTML =
+            '<p style="color: #6b7280;">Belum ada pesan dari pelanggan.</p>';
+        } else {
+          messagesList.innerHTML = messages
+            .map(
+              (msg) => `
+          <div class="p-6 rounded-xl" style="background-color: #ffffff; border-left: 4px solid #2563eb;">
+            <div class="flex justify-between items-start mb-2">
+              <h4 class="font-bold text-lg" style="color: #1f2937;">${
+                msg.name
+              }</h4>
+              <span class="px-3 py-1 rounded-full text-sm" style="background-color: ${
+                msg.status === "new" ? "#dbeafe" : "#d1fae5"
+              }; color: ${msg.status === "new" ? "#1e40af" : "#065f46"};">
+                ${msg.status === "new" ? "Baru" : "Dibaca"}
+              </span>
+            </div>
+            <p class="text-sm mb-2" style="color: #6b7280;">${msg.email} | ${
+                msg.phone
+              }</p>
+            <p class="mb-3" style="color: #4b5563;">${msg.message}</p>
+            <div class="flex justify-between items-center">
+              <p class="text-sm" style="color: #9ca3af;">${new Date(
+                msg.submittedAt
+              ).toLocaleString("id-ID")}</p>
+              ${
+                msg.status === "new"
+                  ? `<button class="mark-read-btn px-4 py-2 rounded-lg text-sm font-semibold btn-hover" data-id="${msg.__backendId}" style="background-color: #10b981; color: white;">Tandai Dibaca</button>`
+                  : ""
+              }
+            </div>
+          </div>
+        `
+            )
+            .join("");
+
+          document.querySelectorAll(".mark-read-btn").forEach((btn) => {
+            btn.addEventListener("click", async (e) => {
+              const id = e.target.dataset.id;
+              const message = allData.find((item) => item.__backendId === id);
+              if (message) {
+                message.status = "read";
+                const result = await window.dataSdk.update(message);
+                if (result.isOk) {
+                  showToast("Status diperbarui", "success");
+                }
+              }
+            });
+          });
+        }
+
+        const portfolioItems = allData.filter(
+          (item) => item.type === "portfolio"
+        );
+        const portfolioList = document.getElementById("portfolio-list");
+
+        if (portfolioItems.length === 0) {
+          portfolioList.innerHTML =
+            '<p class="col-span-3" style="color: #6b7280;">Belum ada portfolio.</p>';
+        } else {
+          portfolioList.innerHTML = portfolioItems
+            .map(
+              (item) => `
+          <div class="rounded-xl overflow-hidden" style="background-color: #ffffff;">
+            <svg viewBox="0 0 400 300" class="w-full">
+              <rect width="400" height="300" fill="${item.imageColor}"/>
+              <text x="200" y="150" text-anchor="middle" fill="white" font-size="24" font-weight="600">${item.title}</text>
+            </svg>
+            <div class="p-4">
+              <h4 class="font-bold mb-2" style="color: #1f2937;">${item.title}</h4>
+              <p class="text-sm mb-3" style="color: #6b7280;">${item.category}</p>
+              <button class="delete-portfolio-btn w-full px-4 py-2 rounded-lg font-semibold btn-hover" data-id="${item.__backendId}" style="background-color: #ef4444; color: white;">Hapus</button>
+            </div>
+          </div>
+        `
+            )
+            .join("");
+
+          document.querySelectorAll(".delete-portfolio-btn").forEach((btn) => {
+            btn.addEventListener("click", async (e) => {
+              const id = e.target.dataset.id;
+              const item = allData.find((item) => item.__backendId === id);
+              if (item) {
+                const result = await window.dataSdk.delete(item);
+                if (result.isOk) {
+                  showToast("Portfolio dihapus", "success");
+                }
+              }
+            });
+          });
+        }
+
+        const testimonialItems = allData.filter(
+          (item) => item.type === "testimonial"
+        );
+        const testimonialList = document.getElementById("testimonial-list");
+
+        if (testimonialItems.length === 0) {
+          testimonialList.innerHTML =
+            '<p style="color: #6b7280;">Belum ada testimoni.</p>';
+        } else {
+          testimonialList.innerHTML = testimonialItems
+            .map(
+              (item) => `
+          <div class="p-6 rounded-xl" style="background-color: #ffffff;">
+            <div class="flex justify-between items-start mb-3">
+              <div>
+                <h4 class="font-bold" style="color: #1f2937;">${item.name}</h4>
+                <p class="text-sm" style="color: #6b7280;">${item.position}</p>
+                <div class="mt-2">${Array(item.rating)
+                  .fill("⭐")
+                  .join("")}</div>
+              </div>
+              <button class="delete-testimonial-btn px-4 py-2 rounded-lg font-semibold btn-hover" data-id="${
+                item.__backendId
+              }" style="background-color: #ef4444; color: white;">Hapus</button>
+            </div>
+            <p style="color: #4b5563;">"${item.message}"</p>
+          </div>
+        `
+            )
+            .join("");
+
+          document
+            .querySelectorAll(".delete-testimonial-btn")
+            .forEach((btn) => {
+              btn.addEventListener("click", async (e) => {
+                const id = e.target.dataset.id;
+                const item = allData.find((item) => item.__backendId === id);
+                if (item) {
+                  const result = await window.dataSdk.delete(item);
+                  if (result.isOk) {
+                    showToast("Testimoni dihapus", "success");
+                  }
+                }
+              });
+            });
+        }
+
+        const blogItems = allData.filter((item) => item.type === "blog");
+        const blogList = document.getElementById("blog-list");
+
+        if (blogItems.length === 0) {
+          blogList.innerHTML =
+            '<p class="col-span-3" style="color: #6b7280;">Belum ada artikel.</p>';
+        } else {
+          blogList.innerHTML = blogItems
+            .map(
+              (item) => `
+          <div class="rounded-xl overflow-hidden" style="background-color: #ffffff;">
+            <svg viewBox="0 0 400 200" class="w-full">
+              <rect width="400" height="200" fill="${item.imageColor}"/>
+              <text x="200" y="110" text-anchor="middle" fill="white" font-size="24">📰</text>
+            </svg>
+            <div class="p-4">
+              <h4 class="font-bold mb-2" style="color: #1f2937;">${item.title}</h4>
+              <p class="text-sm mb-2" style="color: #6b7280;">${item.subtitle}</p>
+              <p class="text-sm mb-3" style="color: #9ca3af;">Oleh ${item.author}</p>
+              <button class="delete-blog-btn w-full px-4 py-2 rounded-lg font-semibold btn-hover" data-id="${item.__backendId}" style="background-color: #ef4444; color: white;">Hapus</button>
+            </div>
+          </div>
+        `
+            )
+            .join("");
+
+          document.querySelectorAll(".delete-blog-btn").forEach((btn) => {
+            btn.addEventListener("click", async (e) => {
+              const id = e.target.dataset.id;
+              const item = allData.find((item) => item.__backendId === id);
+              if (item) {
+                const result = await window.dataSdk.delete(item);
+                if (result.isOk) {
+                  showToast("Artikel dihapus", "success");
+                }
+              }
+            });
+          });
+        }
+      }
+
+      document
+        .getElementById("contact-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          if (allData.length >= 999) {
+            showToast("Batas maksimum data tercapai", "error");
+            return;
+          }
+
+          const submitButton = document.getElementById("submit-button");
+          const submitText = document.getElementById("submit-text");
+          const loadingSpinner = document.getElementById("loading-spinner");
+
+          submitButton.disabled = true;
+          submitText.style.display = "none";
+          loadingSpinner.style.display = "inline";
+
+          const formData = {
+            type: "contact",
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            phone: document.getElementById("phone").value,
+            message: document.getElementById("message").value,
+            submittedAt: new Date().toISOString(),
+            status: "new",
+          };
+
+          const result = await window.dataSdk.create(formData);
+
+          submitButton.disabled = false;
+          submitText.style.display = "inline";
+          loadingSpinner.style.display = "none";
+
+          if (result.isOk) {
+            showToast("Pesan berhasil dikirim!", "success");
+            document.getElementById("contact-form").reset();
+          } else {
+            showToast("Terjadi kesalahan", "error");
+          }
+        });
+
+      document.getElementById("cta-button").addEventListener("click", () => {
+        document
+          .getElementById("contact-form")
+          .scrollIntoView({ behavior: "smooth" });
+      });
+
+      document
+        .getElementById("admin-login-btn")
+        .addEventListener("click", () => {
+          showModal("login-modal");
+        });
+
+      document.getElementById("cancel-login").addEventListener("click", () => {
+        hideModal("login-modal");
+      });
+
+      document.getElementById("login-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const username = document.getElementById("login-username").value;
+        const password = document.getElementById("login-password").value;
+
+        if (username === "admin" && password === "admin123") {
+          isLoggedIn = true;
+          hideModal("login-modal");
+          document.getElementById("landing-page").classList.add("hidden");
+          document.getElementById("admin-dashboard").classList.remove("hidden");
+          renderDashboard();
+          showToast("Login berhasil", "success");
+          document.getElementById("login-form").reset();
+        } else {
+          showToast("Username atau password salah", "error");
+        }
+      });
+
+      document.getElementById("logout-btn").addEventListener("click", () => {
+        isLoggedIn = false;
+        document.getElementById("landing-page").classList.remove("hidden");
+        document.getElementById("admin-dashboard").classList.add("hidden");
+        showToast("Logout berhasil", "success");
+      });
+
+      document.querySelectorAll(".tab-button").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          document.querySelectorAll(".tab-button").forEach((b) => {
+            b.classList.remove("active");
+            b.style.color = "#6b7280";
+          });
+          e.target.classList.add("active");
+          e.target.style.color = "#2563eb";
+
+          document.querySelectorAll(".tab-content").forEach((content) => {
+            content.classList.add("hidden");
+          });
+          document
+            .getElementById(e.target.dataset.tab + "-tab")
+            .classList.remove("hidden");
+        });
+      });
+
+      document
+        .getElementById("add-portfolio-btn")
+        .addEventListener("click", () => {
+          showModal("portfolio-modal");
+        });
+
+      document
+        .getElementById("add-testimonial-btn")
+        .addEventListener("click", () => {
+          showModal("testimonial-modal");
+        });
+
+      document.getElementById("add-blog-btn").addEventListener("click", () => {
+        showModal("blog-modal");
+      });
+
+      document.querySelectorAll(".cancel-modal").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const modal = e.target.closest(".modal");
+          hideModal(modal.id);
+        });
+      });
+
+      document
+        .getElementById("portfolio-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          if (allData.length >= 999) {
+            showToast("Batas maksimum data tercapai", "error");
+            return;
+          }
+
+          const formData = {
+            type: "portfolio",
+            title: document.getElementById("portfolio-title").value,
+            category: document.getElementById("portfolio-category").value,
+            imageColor: document.getElementById("portfolio-color").value,
+            submittedAt: new Date().toISOString(),
+          };
+
+          const result = await window.dataSdk.create(formData);
+
+          if (result.isOk) {
+            showToast("Portfolio ditambahkan", "success");
+            hideModal("portfolio-modal");
+            document.getElementById("portfolio-form").reset();
+          } else {
+            showToast("Terjadi kesalahan", "error");
+          }
+        });
+
+      document
+        .getElementById("testimonial-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          if (allData.length >= 999) {
+            showToast("Batas maksimum data tercapai", "error");
+            return;
+          }
+
+          const formData = {
+            type: "testimonial",
+            name: document.getElementById("testimonial-name").value,
+            position: document.getElementById("testimonial-position").value,
+            message: document.getElementById("testimonial-message").value,
+            rating: parseInt(
+              document.getElementById("testimonial-rating").value
+            ),
+            submittedAt: new Date().toISOString(),
+          };
+
+          const result = await window.dataSdk.create(formData);
+
+          if (result.isOk) {
+            showToast("Testimoni ditambahkan", "success");
+            hideModal("testimonial-modal");
+            document.getElementById("testimonial-form").reset();
+          } else {
+            showToast("Terjadi kesalahan", "error");
+          }
+        });
+
+      document
+        .getElementById("blog-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          if (allData.length >= 999) {
+            showToast("Batas maksimum data tercapai", "error");
+            return;
+          }
+
+          const formData = {
+            type: "blog",
+            title: document.getElementById("blog-title").value,
+            subtitle: document.getElementById("blog-subtitle").value,
+            author: document.getElementById("blog-author").value,
+            imageColor: document.getElementById("blog-color").value,
+            submittedAt: new Date().toISOString(),
+          };
+
+          const result = await window.dataSdk.create(formData);
+
+          if (result.isOk) {
+            showToast("Artikel ditambahkan", "success");
+            hideModal("blog-modal");
+            document.getElementById("blog-form").reset();
+          } else {
+            showToast("Terjadi kesalahan", "error");
+          }
+        });
+
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".fade-in").forEach((element) => {
+        observer.observe(element);
+      });
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'9a618d89931f58ef',t:'MTc2NDQxMzUxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>

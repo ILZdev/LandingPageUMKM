@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toko Sepatu Lokal</title>
+    <script src="/_sdk/data_sdk.js"></script>
+    <script src="/_sdk/element_sdk.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        box-sizing: border-box;
+      }
+
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+
+      * {
+        font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .fade-in-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .category-card {
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .category-card:hover {
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .product-card {
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .product-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+      }
+
+      .product-card:hover .product-overlay {
+        opacity: 1;
+      }
+
+      .product-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          180deg,
+          transparent 0%,
+          rgba(0, 0, 0, 0.7) 100%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        display: flex;
+        align-items: flex-end;
+        padding: 1.5rem;
+      }
+
+      .btn-primary {
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .testimonial-card {
+        transition: transform 0.3s ease;
+      }
+
+      .testimonial-card:hover {
+        transform: scale(1.03);
+      }
+
+      .tab-button {
+        transition: all 0.3s ease;
+      }
+
+      .tab-button.active {
+        border-bottom: 3px solid currentColor;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal.active {
+        display: flex;
+      }
+
+      .modal-content {
+        background: white;
+        border-radius: 1rem;
+        max-width: 500px;
+        width: 90%;
+        max-height: 90%;
+        overflow-y: auto;
+        animation: slideUp 0.3s ease-out;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .toast {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background: white;
+        padding: 1rem 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        z-index: 2000;
+        animation: slideIn 0.3s ease-out;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .loading-spinner {
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top-color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        animation: spin 0.8s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- Navigation -->
+    <nav class="w-full bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+      <div
+        class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <div class="flex items-center gap-2">
+          <span class="text-3xl">👟</span>
+          <h1 class="text-2xl font-bold" id="brand-name">ShoesHub</h1>
+        </div>
+        <button
+          onclick="toggleView()"
+          class="btn-primary px-6 py-2 rounded-full font-semibold text-white"
+        >
+          <span id="nav-button-text">Admin</span>
+        </button>
+      </div>
+    </nav>
+    <!-- Customer View -->
+    <div id="customer-view" class="w-full">
+      <!-- Hero Section -->
+      <section
+        class="w-full pt-24 pb-16 px-6"
+        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+      >
+        <div class="max-w-7xl mx-auto">
+          <div class="flex flex-col lg:flex-row items-center gap-12">
+            <div class="flex-1 text-white fade-in-up">
+              <h2
+                id="hero-title"
+                class="text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+              >
+                Koleksi Sepatu Terbaik untuk Gaya Anda
+              </h2>
+              <p id="hero-subtitle" class="text-xl mb-8 opacity-90">
+                Temukan sepatu impian Anda dari berbagai kategori pilihan dengan
+                harga terjangkau
+              </p>
+              <button
+                onclick="scrollToProducts()"
+                id="hero-cta-btn"
+                class="btn-primary bg-white px-8 py-4 rounded-full text-lg font-semibold"
+              >
+                Belanja Sekarang 🛍️
+              </button>
+            </div>
+            <div class="flex-1 fade-in-up">
+              <svg
+                class="w-full max-w-lg mx-auto"
+                viewbox="0 0 500 400"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <ellipse
+                  cx="250"
+                  cy="350"
+                  rx="200"
+                  ry="30"
+                  fill="rgba(255,255,255,0.2)"
+                />
+                <path
+                  d="M150 250 L180 200 L220 180 L280 180 L320 200 L350 250 L330 280 L300 300 L200 300 L170 280 Z"
+                  fill="white"
+                  opacity="0.95"
+                />
+                <path
+                  d="M180 200 L220 180 L280 180 L320 200 L310 220 L270 210 L230 210 L190 220 Z"
+                  fill="#667eea"
+                />
+                <circle cx="200" cy="260" r="8" fill="#764ba2" />
+                <circle cx="250" cy="260" r="8" fill="#764ba2" />
+                <circle cx="300" cy="260" r="8" fill="#764ba2" />
+                <path
+                  d="M220 240 Q250 230 280 240"
+                  stroke="#764ba2"
+                  stroke-width="3"
+                  fill="none"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Categories Section -->
+      <section class="w-full py-16 px-6 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+          <h3
+            id="categories-title"
+            class="text-4xl font-bold text-center mb-12 fade-in-up"
+          >
+            Kategori Sepatu
+          </h3>
+          <div
+            class="grid grid-cols-2 md:grid-cols-4 gap-6"
+            id="categories-container"
+          >
+            <!-- Categories will be populated here -->
+          </div>
+        </div>
+      </section>
+      <!-- Products Section -->
+      <section id="products-section" class="w-full py-16 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+          <h3
+            id="products-title"
+            class="text-4xl font-bold text-center mb-12 fade-in-up"
+          >
+            Produk Terbaik Kami
+          </h3>
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            id="products-container"
+          >
+            <!-- Products will be populated here -->
+          </div>
+        </div>
+      </section>
+      <!-- Testimonials Section -->
+      <section class="w-full py-16 px-6 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+          <h3
+            id="testimonials-title"
+            class="text-4xl font-bold text-center mb-12 fade-in-up"
+          >
+            Apa Kata Pelanggan
+          </h3>
+          <div class="grid md:grid-cols-3 gap-8">
+            <div
+              class="testimonial-card bg-white p-8 rounded-2xl shadow-lg fade-in-up"
+            >
+              <div class="flex items-center gap-4 mb-4">
+                <div
+                  class="w-16 h-16 rounded-full bg-purple-600 flex items-center justify-center text-white text-2xl font-bold"
+                >
+                  A
+                </div>
+                <div>
+                  <h4 class="font-bold text-lg">Ahmad Rizki</h4>
+                  <div class="text-yellow-500">⭐⭐⭐⭐⭐</div>
+                </div>
+              </div>
+              <p class="text-gray-600">
+                Sepatu sneakers yang saya beli sangat nyaman dan berkualitas.
+                Pengiriman cepat!
+              </p>
+            </div>
+            <div
+              class="testimonial-card bg-white p-8 rounded-2xl shadow-lg fade-in-up"
+            >
+              <div class="flex items-center gap-4 mb-4">
+                <div
+                  class="w-16 h-16 rounded-full bg-pink-600 flex items-center justify-center text-white text-2xl font-bold"
+                >
+                  S
+                </div>
+                <div>
+                  <h4 class="font-bold text-lg">Siti Nurhaliza</h4>
+                  <div class="text-yellow-500">⭐⭐⭐⭐⭐</div>
+                </div>
+              </div>
+              <p class="text-gray-600">
+                Harga terjangkau dengan kualitas premium. Sangat puas dengan
+                pelayanannya!
+              </p>
+            </div>
+            <div
+              class="testimonial-card bg-white p-8 rounded-2xl shadow-lg fade-in-up"
+            >
+              <div class="flex items-center gap-4 mb-4">
+                <div
+                  class="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center text-white text-2xl font-bold"
+                >
+                  B
+                </div>
+                <div>
+                  <h4 class="font-bold text-lg">Budi Santoso</h4>
+                  <div class="text-yellow-500">⭐⭐⭐⭐⭐</div>
+                </div>
+              </div>
+              <p class="text-gray-600">
+                Koleksinya lengkap dan selalu update. Toko sepatu favorit saya!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Newsletter Section -->
+      <section
+        class="w-full py-16 px-6 bg-gradient-to-r from-purple-600 to-indigo-600"
+      >
+        <div class="max-w-3xl mx-auto text-center text-white fade-in-up">
+          <h3 id="newsletter-title" class="text-4xl font-bold mb-4">
+            Dapatkan Penawaran Spesial
+          </h3>
+          <p id="newsletter-subtitle" class="text-xl mb-8 opacity-90">
+            Berlangganan newsletter kami dan dapatkan diskon hingga 30%!
+          </p>
+          <form
+            id="newsletter-form"
+            class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
+          >
+            <label for="newsletter-email" class="sr-only">Email</label>
+            <input
+              type="email"
+              id="newsletter-email"
+              placeholder="Masukkan email Anda"
+              required
+              class="flex-1 px-6 py-4 rounded-full text-gray-800"
+            />
+            <button
+              type="submit"
+              id="newsletter-submit"
+              class="btn-primary bg-white px-8 py-4 rounded-full font-semibold"
+            >
+              <span id="newsletter-cta-text">Daftar</span>
+            </button>
+          </form>
+        </div>
+      </section>
+    </div>
+    <!-- Admin Dashboard -->
+    <div id="admin-view" class="w-full hidden pt-20">
+      <div class="max-w-7xl mx-auto px-6 py-8">
+        <h2 class="text-4xl font-bold mb-8">Dashboard Admin</h2>
+        <!-- Tabs -->
+        <div class="flex gap-4 mb-8 border-b-2 border-gray-200">
+          <button
+            onclick="switchTab('products')"
+            class="tab-button active px-6 py-3 font-semibold"
+            id="tab-products"
+          >
+            Kelola Produk
+          </button>
+          <button
+            onclick="switchTab('messages')"
+            class="tab-button px-6 py-3 font-semibold"
+            id="tab-messages"
+          >
+            Pesan
+            <span
+              id="message-count"
+              class="ml-2 bg-red-500 text-white px-2 py-1 rounded-full text-sm"
+              >0</span
+            >
+          </button>
+          <button
+            onclick="switchTab('reports')"
+            class="tab-button px-6 py-3 font-semibold"
+            id="tab-reports"
+          >
+            Laporan
+          </button>
+        </div>
+        <!-- Products Tab -->
+        <div id="products-tab" class="tab-content">
+          <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h3 class="text-2xl font-bold mb-6">Tambah Produk Baru</h3>
+            <form id="add-product-form" class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label for="product-name" class="block font-semibold mb-2"
+                  >Nama Produk</label
+                >
+                <input
+                  type="text"
+                  id="product-name"
+                  required
+                  class="w-full px-4 py-3 rounded-lg border-2 border-gray-300"
+                />
+              </div>
+              <div>
+                <label for="product-category" class="block font-semibold mb-2"
+                  >Kategori</label
+                >
+                <select
+                  id="product-category"
+                  required
+                  class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 bg-white"
+                >
+                  <option value="Sneakers">Sneakers</option>
+                  <option value="Formal">Formal</option>
+                  <option value="Sport">Sport</option>
+                  <option value="Casual">Casual</option>
+                </select>
+              </div>
+              <div>
+                <label for="product-price" class="block font-semibold mb-2"
+                  >Harga (Rp)</label
+                >
+                <input
+                  type="number"
+                  id="product-price"
+                  required
+                  class="w-full px-4 py-3 rounded-lg border-2 border-gray-300"
+                />
+              </div>
+              <div>
+                <label for="product-image" class="block font-semibold mb-2"
+                  >Emoji/Icon</label
+                >
+                <input
+                  type="text"
+                  id="product-image"
+                  placeholder="👟"
+                  required
+                  class="w-full px-4 py-3 rounded-lg border-2 border-gray-300"
+                />
+              </div>
+              <div class="md:col-span-2">
+                <button
+                  type="submit"
+                  class="btn-primary w-full py-4 rounded-lg font-semibold text-white"
+                >
+                  Tambah Produk
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="bg-white rounded-2xl shadow-lg p-8">
+            <h3 class="text-2xl font-bold mb-6">Daftar Produk</h3>
+            <div id="admin-products-list" class="space-y-4">
+              <!-- Products list will be populated here -->
+            </div>
+          </div>
+        </div>
+        <!-- Messages Tab -->
+        <div id="messages-tab" class="tab-content hidden">
+          <div class="bg-white rounded-2xl shadow-lg p-8">
+            <h3 class="text-2xl font-bold mb-6">Pesan dari Pelanggan</h3>
+            <div id="messages-list" class="space-y-4">
+              <p class="text-gray-500 text-center py-8">Belum ada pesan</p>
+            </div>
+          </div>
+        </div>
+        <!-- Reports Tab -->
+        <div id="reports-tab" class="tab-content hidden">
+          <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <div
+              class="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl shadow-lg p-8"
+            >
+              <div class="text-4xl mb-2">📦</div>
+              <h4 class="text-lg opacity-90 mb-2">Total Produk</h4>
+              <p class="text-4xl font-bold" id="total-products">0</p>
+            </div>
+            <div
+              class="bg-gradient-to-br from-green-500 to-green-600 text-white rounded-2xl shadow-lg p-8"
+            >
+              <div class="text-4xl mb-2">💰</div>
+              <h4 class="text-lg opacity-90 mb-2">Total Penjualan</h4>
+              <p class="text-4xl font-bold" id="total-sales">Rp 0</p>
+            </div>
+            <div
+              class="bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-2xl shadow-lg p-8"
+            >
+              <div class="text-4xl mb-2">📧</div>
+              <h4 class="text-lg opacity-90 mb-2">Newsletter</h4>
+              <p class="text-4xl font-bold" id="total-newsletter">0</p>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl shadow-lg p-8">
+            <h3 class="text-2xl font-bold mb-6">Produk per Kategori</h3>
+            <div id="category-stats" class="space-y-4">
+              <!-- Category stats will be populated here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Buy Modal -->
+    <div id="buy-modal" class="modal">
+      <div class="modal-content">
+        <div class="p-8">
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold">Beli Produk</h3>
+            <button onclick="closeBuyModal()" class="text-3xl">×</button>
+          </div>
+          <form id="buy-form">
+            <div class="mb-4">
+              <label for="buy-customer-name" class="block font-semibold mb-2"
+                >Nama Lengkap</label
+              >
+              <input
+                type="text"
+                id="buy-customer-name"
+                required
+                class="w-full px-4 py-3 rounded-lg border-2 border-gray-300"
+              />
+            </div>
+            <div class="mb-4">
+              <label for="buy-customer-email" class="block font-semibold mb-2"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="buy-customer-email"
+                required
+                class="w-full px-4 py-3 rounded-lg border-2 border-gray-300"
+              />
+            </div>
+            <div class="mb-6">
+              <label for="buy-customer-message" class="block font-semibold mb-2"
+                >Catatan (Opsional)</label
+              >
+              <textarea
+                id="buy-customer-message"
+                rows="3"
+                class="w-full px-4 py-3 rounded-lg border-2 border-gray-300"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="btn-primary w-full py-4 rounded-lg font-semibold text-white"
+            >
+              Konfirmasi Pembelian
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      const defaultConfig = {
+        hero_title: "Koleksi Sepatu Terbaik untuk Gaya Anda",
+        hero_subtitle:
+          "Temukan sepatu impian Anda dari berbagai kategori pilihan dengan harga terjangkau",
+        hero_cta: "Belanja Sekarang 🛍️",
+        categories_title: "Kategori Sepatu",
+        products_title: "Produk Terbaik Kami",
+        testimonials_title: "Apa Kata Pelanggan",
+        newsletter_title: "Dapatkan Penawaran Spesial",
+        newsletter_subtitle:
+          "Berlangganan newsletter kami dan dapatkan diskon hingga 30%!",
+        newsletter_cta: "Daftar",
+        background_color: "#667eea",
+        surface_color: "#ffffff",
+        text_color: "#1f2937",
+        primary_action_color: "#667eea",
+        secondary_action_color: "#764ba2",
+        font_family: "Poppins",
+        font_size: 16,
+      };
+
+      async function onConfigChange(config) {
+        document.getElementById("hero-title").textContent =
+          config.hero_title || defaultConfig.hero_title;
+        document.getElementById("hero-subtitle").textContent =
+          config.hero_subtitle || defaultConfig.hero_subtitle;
+        document.getElementById("hero-cta-btn").textContent =
+          config.hero_cta || defaultConfig.hero_cta;
+        document.getElementById("categories-title").textContent =
+          config.categories_title || defaultConfig.categories_title;
+        document.getElementById("products-title").textContent =
+          config.products_title || defaultConfig.products_title;
+        document.getElementById("testimonials-title").textContent =
+          config.testimonials_title || defaultConfig.testimonials_title;
+        document.getElementById("newsletter-title").textContent =
+          config.newsletter_title || defaultConfig.newsletter_title;
+        document.getElementById("newsletter-subtitle").textContent =
+          config.newsletter_subtitle || defaultConfig.newsletter_subtitle;
+        document.getElementById("newsletter-cta-text").textContent =
+          config.newsletter_cta || defaultConfig.newsletter_cta;
+
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack = "Arial, sans-serif";
+        const baseSize = config.font_size || defaultConfig.font_size;
+
+        document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        document.getElementById("hero-title").style.fontSize = `${
+          baseSize * 3.75
+        }px`;
+        document.getElementById("hero-subtitle").style.fontSize = `${
+          baseSize * 1.25
+        }px`;
+
+        const heroSection = document.querySelector("section");
+        heroSection.style.background = `linear-gradient(135deg, ${
+          config.background_color || defaultConfig.background_color
+        } 0%, ${
+          config.secondary_action_color || defaultConfig.secondary_action_color
+        } 100%)`;
+
+        const buttons = document.querySelectorAll(".btn-primary");
+        buttons.forEach((btn) => {
+          if (btn.classList.contains("bg-white")) {
+            btn.style.color =
+              config.primary_action_color || defaultConfig.primary_action_color;
+          } else {
+            btn.style.backgroundColor =
+              config.primary_action_color || defaultConfig.primary_action_color;
+          }
+        });
+      }
+
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities: (config) => ({
+            recolorables: [
+              {
+                get: () =>
+                  config.background_color || defaultConfig.background_color,
+                set: (value) => {
+                  config.background_color = value;
+                  window.elementSdk.setConfig({ background_color: value });
+                },
+              },
+              {
+                get: () => config.surface_color || defaultConfig.surface_color,
+                set: (value) => {
+                  config.surface_color = value;
+                  window.elementSdk.setConfig({ surface_color: value });
+                },
+              },
+              {
+                get: () => config.text_color || defaultConfig.text_color,
+                set: (value) => {
+                  config.text_color = value;
+                  window.elementSdk.setConfig({ text_color: value });
+                },
+              },
+              {
+                get: () =>
+                  config.primary_action_color ||
+                  defaultConfig.primary_action_color,
+                set: (value) => {
+                  config.primary_action_color = value;
+                  window.elementSdk.setConfig({ primary_action_color: value });
+                },
+              },
+              {
+                get: () =>
+                  config.secondary_action_color ||
+                  defaultConfig.secondary_action_color,
+                set: (value) => {
+                  config.secondary_action_color = value;
+                  window.elementSdk.setConfig({
+                    secondary_action_color: value,
+                  });
+                },
+              },
+            ],
+            borderables: [],
+            fontEditable: {
+              get: () => config.font_family || defaultConfig.font_family,
+              set: (value) => {
+                config.font_family = value;
+                window.elementSdk.setConfig({ font_family: value });
+              },
+            },
+            fontSizeable: {
+              get: () => config.font_size || defaultConfig.font_size,
+              set: (value) => {
+                config.font_size = value;
+                window.elementSdk.setConfig({ font_size: value });
+              },
+            },
+          }),
+          mapToEditPanelValues: (config) =>
+            new Map([
+              ["hero_title", config.hero_title || defaultConfig.hero_title],
+              [
+                "hero_subtitle",
+                config.hero_subtitle || defaultConfig.hero_subtitle,
+              ],
+              ["hero_cta", config.hero_cta || defaultConfig.hero_cta],
+              [
+                "categories_title",
+                config.categories_title || defaultConfig.categories_title,
+              ],
+              [
+                "products_title",
+                config.products_title || defaultConfig.products_title,
+              ],
+              [
+                "testimonials_title",
+                config.testimonials_title || defaultConfig.testimonials_title,
+              ],
+              [
+                "newsletter_title",
+                config.newsletter_title || defaultConfig.newsletter_title,
+              ],
+              [
+                "newsletter_subtitle",
+                config.newsletter_subtitle || defaultConfig.newsletter_subtitle,
+              ],
+              [
+                "newsletter_cta",
+                config.newsletter_cta || defaultConfig.newsletter_cta,
+              ],
+            ]),
+        });
+      }
+
+      // Reference data
+      const categories = [
+        { name: "Sneakers", icon: "👟", color: "from-blue-500 to-blue-600" },
+        { name: "Formal", icon: "👞", color: "from-gray-700 to-gray-800" },
+        { name: "Sport", icon: "🏃", color: "from-green-500 to-green-600" },
+        { name: "Casual", icon: "🥿", color: "from-orange-500 to-orange-600" },
+      ];
+
+      let allData = [];
+      let currentBuyProduct = null;
+      let isInitialized = false;
+      let isAdminView = false;
+
+      const dataHandler = {
+        onDataChanged(data) {
+          allData = data;
+          renderCategories();
+          renderProducts();
+          renderAdminProducts();
+          updateReports();
+          updateMessageCount();
+        },
+      };
+
+      async function initializeApp() {
+        if (isInitialized || !window.dataSdk) return;
+        const result = await window.dataSdk.init(dataHandler);
+        if (result.isOk) {
+          isInitialized = true;
+        }
+      }
+
+      initializeApp();
+
+      function renderCategories() {
+        const container = document.getElementById("categories-container");
+        container.innerHTML = categories
+          .map(
+            (cat) => `
+        <div class="category-card bg-gradient-to-br ${
+          cat.color
+        } rounded-2xl p-8 text-white text-center shadow-lg">
+          <div class="text-6xl mb-4">${cat.icon}</div>
+          <h4 class="text-xl font-bold">${cat.name}</h4>
+          <p class="text-sm opacity-90 mt-2">${getProductCountByCategory(
+            cat.name
+          )} produk</p>
+        </div>
+      `
+          )
+          .join("");
+      }
+
+      function getProductCountByCategory(category) {
+        return allData.filter(
+          (item) =>
+            item.type === "product" && item.product_category === category
+        ).length;
+      }
+
+      function renderProducts() {
+        const container = document.getElementById("products-container");
+        const products = allData.filter((item) => item.type === "product");
+
+        if (products.length === 0) {
+          container.innerHTML =
+            '<p class="col-span-full text-center text-gray-500 py-8">Belum ada produk tersedia</p>';
+          return;
+        }
+
+        container.innerHTML = products
+          .map(
+            (product) => `
+        <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden">
+          <div class="h-64 bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center text-8xl relative">
+            ${product.product_image}
+            <div class="product-overlay">
+              <button onclick="openBuyModal('${
+                product.__backendId
+              }')" class="btn-primary bg-white text-purple-600 px-6 py-3 rounded-full font-semibold">
+                Beli Sekarang
+              </button>
+            </div>
+          </div>
+          <div class="p-6">
+            <span class="text-xs font-semibold text-purple-600 bg-purple-100 px-3 py-1 rounded-full">${
+              product.product_category
+            }</span>
+            <h4 class="text-xl font-bold mt-3 mb-2">${product.product_name}</h4>
+            <p class="text-2xl font-bold text-purple-600">Rp ${formatNumber(
+              product.product_price
+            )}</p>
+          </div>
+        </div>
+      `
+          )
+          .join("");
+      }
+
+      function renderAdminProducts() {
+        const container = document.getElementById("admin-products-list");
+        const products = allData.filter((item) => item.type === "product");
+
+        if (products.length === 0) {
+          container.innerHTML =
+            '<p class="text-center text-gray-500 py-8">Belum ada produk</p>';
+          return;
+        }
+
+        container.innerHTML = products
+          .map(
+            (product) => `
+        <div class="flex items-center justify-between p-4 border-2 border-gray-200 rounded-lg">
+          <div class="flex items-center gap-4">
+            <div class="text-4xl">${product.product_image}</div>
+            <div>
+              <h5 class="font-bold">${product.product_name}</h5>
+              <p class="text-sm text-gray-600">${
+                product.product_category
+              } - Rp ${formatNumber(product.product_price)}</p>
+            </div>
+          </div>
+          <button onclick="deleteProduct('${
+            product.__backendId
+          }')" class="text-red-500 hover:text-red-700 font-semibold px-4 py-2 rounded">
+            Hapus
+          </button>
+        </div>
+      `
+          )
+          .join("");
+      }
+
+      function updateReports() {
+        const products = allData.filter((item) => item.type === "product");
+        const orders = allData.filter((item) => item.type === "order");
+        const newsletters = allData.filter(
+          (item) => item.type === "newsletter"
+        );
+
+        document.getElementById("total-products").textContent = products.length;
+
+        const totalSales = orders.reduce(
+          (sum, order) => sum + (order.order_total || 0),
+          0
+        );
+        document.getElementById("total-sales").textContent = `Rp ${formatNumber(
+          totalSales
+        )}`;
+
+        document.getElementById("total-newsletter").textContent =
+          newsletters.length;
+
+        const categoryStats = document.getElementById("category-stats");
+        const stats = categories
+          .map((cat) => {
+            const count = products.filter(
+              (p) => p.product_category === cat.name
+            ).length;
+            const percentage =
+              products.length > 0
+                ? ((count / products.length) * 100).toFixed(0)
+                : 0;
+            return `
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="font-semibold">${cat.icon} ${cat.name}</span>
+              <span class="text-gray-600">${count} produk (${percentage}%)</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+              <div class="bg-gradient-to-r ${cat.color} h-3 rounded-full" style="width: ${percentage}%"></div>
+            </div>
+          </div>
+        `;
+          })
+          .join("");
+        categoryStats.innerHTML = stats;
+      }
+
+      function updateMessageCount() {
+        const messages = allData.filter((item) => item.type === "message");
+        document.getElementById("message-count").textContent = messages.length;
+
+        const messagesList = document.getElementById("messages-list");
+        if (messages.length === 0) {
+          messagesList.innerHTML =
+            '<p class="text-gray-500 text-center py-8">Belum ada pesan</p>';
+          return;
+        }
+
+        messagesList.innerHTML = messages
+          .map(
+            (msg) => `
+        <div class="border-2 border-gray-200 rounded-lg p-6">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <h5 class="font-bold text-lg">${msg.customer_name}</h5>
+              <p class="text-sm text-gray-600">${msg.customer_email}</p>
+            </div>
+            <span class="text-xs text-gray-500">${new Date(
+              msg.timestamp
+            ).toLocaleDateString("id-ID")}</span>
+          </div>
+          <p class="text-gray-700 mb-3">Produk: <strong>${
+            msg.order_product
+          }</strong></p>
+          <p class="text-gray-600">${
+            msg.customer_message || "Tidak ada catatan"
+          }</p>
+        </div>
+      `
+          )
+          .join("");
+      }
+
+      function formatNumber(num) {
+        return new Intl.NumberFormat("id-ID").format(num);
+      }
+
+      function scrollToProducts() {
+        document
+          .getElementById("products-section")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      function toggleView() {
+        isAdminView = !isAdminView;
+        document.getElementById("customer-view").classList.toggle("hidden");
+        document.getElementById("admin-view").classList.toggle("hidden");
+        document.getElementById("nav-button-text").textContent = isAdminView
+          ? "Ke Toko"
+          : "Admin";
+      }
+
+      function switchTab(tabName) {
+        document
+          .querySelectorAll(".tab-button")
+          .forEach((btn) => btn.classList.remove("active"));
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((content) => content.classList.add("hidden"));
+
+        document.getElementById(`tab-${tabName}`).classList.add("active");
+        document.getElementById(`${tabName}-tab`).classList.remove("hidden");
+      }
+
+      function openBuyModal(productId) {
+        currentBuyProduct = allData.find(
+          (item) => item.__backendId === productId
+        );
+        document.getElementById("buy-modal").classList.add("active");
+      }
+
+      function closeBuyModal() {
+        document.getElementById("buy-modal").classList.remove("active");
+        document.getElementById("buy-form").reset();
+        currentBuyProduct = null;
+      }
+
+      function showToast(message, isSuccess = true) {
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.innerHTML = `
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">${isSuccess ? "✅" : "❌"}</span>
+          <p class="font-semibold">${message}</p>
+        </div>
+      `;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+      }
+
+      async function deleteProduct(productId) {
+        if (!window.dataSdk) return;
+
+        const product = allData.find((item) => item.__backendId === productId);
+        if (!product) return;
+
+        const result = await window.dataSdk.delete(product);
+        if (result.isOk) {
+          showToast("Produk berhasil dihapus");
+        } else {
+          showToast("Gagal menghapus produk", false);
+        }
+      }
+
+      document
+        .getElementById("add-product-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (!window.dataSdk) return;
+
+          if (allData.filter((item) => item.type === "product").length >= 999) {
+            showToast("Maksimal 999 produk tercapai", false);
+            return;
+          }
+
+          const formData = new FormData(e.target);
+          const product = {
+            type: "product",
+            product_name: formData.get("product-name"),
+            product_category: document.getElementById("product-category").value,
+            product_price: parseFloat(formData.get("product-price")),
+            product_image: formData.get("product-image"),
+            timestamp: new Date().toISOString(),
+          };
+
+          const result = await window.dataSdk.create(product);
+          if (result.isOk) {
+            showToast("Produk berhasil ditambahkan");
+            e.target.reset();
+          } else {
+            showToast("Gagal menambahkan produk", false);
+          }
+        });
+
+      document
+        .getElementById("buy-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (!window.dataSdk || !currentBuyProduct) return;
+
+          const formData = new FormData(e.target);
+          const order = {
+            type: "message",
+            customer_name: formData.get("buy-customer-name"),
+            customer_email: formData.get("buy-customer-email"),
+            customer_message: document.getElementById("buy-customer-message")
+              .value,
+            order_product: currentBuyProduct.product_name,
+            order_total: currentBuyProduct.product_price,
+            timestamp: new Date().toISOString(),
+          };
+
+          const result = await window.dataSdk.create(order);
+          if (result.isOk) {
+            showToast("Pesanan berhasil dikirim!");
+            closeBuyModal();
+          } else {
+            showToast("Gagal mengirim pesanan", false);
+          }
+        });
+
+      document
+        .getElementById("newsletter-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (!window.dataSdk) return;
+
+          const email = document.getElementById("newsletter-email").value;
+          const newsletter = {
+            type: "newsletter",
+            newsletter_email: email,
+            timestamp: new Date().toISOString(),
+          };
+
+          const submitBtn = document.getElementById("newsletter-submit");
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<div class="loading-spinner mx-auto"></div>';
+
+          const result = await window.dataSdk.create(newsletter);
+          if (result.isOk) {
+            showToast("Terima kasih telah berlangganan!");
+            e.target.reset();
+          } else {
+            showToast("Gagal berlangganan newsletter", false);
+          }
+
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `<span id="newsletter-cta-text">${
+            window.elementSdk?.config?.newsletter_cta ||
+            defaultConfig.newsletter_cta
+          }</span>`;
+        });
+
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document
+          .querySelectorAll(".fade-in-up")
+          .forEach((el) => observer.observe(el));
+      });
+
+      document
+        .querySelectorAll(".fade-in-up")
+        .forEach((el) => observer.observe(el));
+
+      window.addEventListener("click", (e) => {
+        if (e.target.id === "buy-modal") {
+          closeBuyModal();
+        }
+      });
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'9a618d06354958ef',t:'MTc2NDQxMzQ5Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>

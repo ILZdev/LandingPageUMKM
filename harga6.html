@@ -1,0 +1,1942 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Élégance - Luxury Fashion Brand</title>
+    <script src="/_sdk/element_sdk.js"></script>
+    <script src="/_sdk/data_sdk.js"></script>
+    <style>
+      body {
+        box-sizing: border-box;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+      }
+
+      body {
+        font-family: "Cormorant Garamond", "Georgia", serif;
+        line-height: 1.6;
+        overflow-x: hidden;
+        color: #1a1a1a;
+      }
+
+      .page-wrapper {
+        width: 100%;
+        min-height: 100%;
+        background: #fff;
+      }
+
+      /* Navigation */
+      .navbar {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .nav-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1.5rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .brand-logo {
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: #1a1a1a;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        align-items: center;
+      }
+
+      .nav-link {
+        color: #1a1a1a;
+        text-decoration: none;
+        font-size: 0.95rem;
+        letter-spacing: 1px;
+        transition: color 0.3s ease;
+        cursor: pointer;
+      }
+
+      .nav-link:hover {
+        color: #8b7355;
+      }
+
+      .admin-btn {
+        padding: 0.5rem 1.5rem;
+        background: #1a1a1a;
+        color: #fff;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+      }
+
+      .admin-btn:hover {
+        background: #8b7355;
+      }
+
+      /* Hero Section */
+      .hero-section {
+        width: 100%;
+        min-height: 100%;
+        background: linear-gradient(135deg, #f5f1ed 0%, #e8e3dd 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8rem 2rem 4rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-bg-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.03;
+        background-image: repeating-linear-gradient(
+          45deg,
+          #1a1a1a 0,
+          #1a1a1a 1px,
+          transparent 0,
+          transparent 50%
+        );
+        background-size: 20px 20px;
+      }
+
+      .hero-content {
+        max-width: 1200px;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        animation: fadeInUp 1s ease-out;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-title {
+        font-size: 5rem;
+        font-weight: 300;
+        color: #1a1a1a;
+        margin-bottom: 1.5rem;
+        letter-spacing: 2px;
+        line-height: 1.2;
+      }
+
+      .hero-subtitle {
+        font-size: 1.5rem;
+        color: #8b7355;
+        margin-bottom: 3rem;
+        font-style: italic;
+        letter-spacing: 1px;
+      }
+
+      .cta-button {
+        display: inline-block;
+        padding: 1.25rem 3rem;
+        background: #1a1a1a;
+        color: #fff;
+        text-decoration: none;
+        font-size: 1rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border: 2px solid #1a1a1a;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-button:hover {
+        background: transparent;
+        color: #1a1a1a;
+      }
+
+      /* Collection Section */
+      .collection-section {
+        width: 100%;
+        padding: 6rem 2rem;
+        background: #fff;
+      }
+
+      .section-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        font-size: 3rem;
+        font-weight: 300;
+        text-align: center;
+        margin-bottom: 1rem;
+        letter-spacing: 2px;
+        color: #1a1a1a;
+      }
+
+      .section-subtitle {
+        text-align: center;
+        font-size: 1.125rem;
+        color: #666;
+        margin-bottom: 4rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.8;
+      }
+
+      /* Services */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 3rem;
+        margin-bottom: 6rem;
+      }
+
+      .service-card {
+        text-align: center;
+        padding: 2.5rem;
+        background: #f5f1ed;
+        border-radius: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .service-icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .service-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #1a1a1a;
+      }
+
+      .service-description {
+        font-size: 1rem;
+        color: #666;
+        line-height: 1.6;
+      }
+
+      /* Gallery */
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 4rem;
+      }
+
+      .gallery-item {
+        aspect-ratio: 3/4;
+        background: linear-gradient(135deg, #e8e3dd 0%, #d4cfc9 100%);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        transition: transform 0.3s ease;
+      }
+
+      .gallery-item:hover {
+        transform: scale(1.05);
+      }
+
+      .gallery-svg {
+        width: 60%;
+        height: 60%;
+        opacity: 0.3;
+      }
+
+      /* Testimonials */
+      .testimonials-section {
+        width: 100%;
+        padding: 6rem 2rem;
+        background: #f5f1ed;
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .testimonial-card {
+        background: #fff;
+        padding: 2.5rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      }
+
+      .testimonial-rating {
+        color: #8b7355;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .testimonial-text {
+        font-size: 1.125rem;
+        color: #666;
+        margin-bottom: 1.5rem;
+        line-height: 1.7;
+        font-style: italic;
+      }
+
+      .testimonial-author {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1a1a1a;
+      }
+
+      /* FAQ Section */
+      .faq-section {
+        width: 100%;
+        padding: 6rem 2rem;
+        background: #fff;
+      }
+
+      .faq-item {
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid #e8e3dd;
+      }
+
+      .faq-question {
+        padding: 1.5rem 0;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #1a1a1a;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .faq-question:hover {
+        color: #8b7355;
+      }
+
+      .faq-icon {
+        transition: transform 0.3s ease;
+      }
+
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        color: #666;
+        line-height: 1.8;
+      }
+
+      .faq-answer.active {
+        max-height: 500px;
+        padding-bottom: 1.5rem;
+      }
+
+      /* Contact Form */
+      .contact-section {
+        width: 100%;
+        padding: 6rem 2rem;
+        background: #f5f1ed;
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #1a1a1a;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .form-input,
+      .form-textarea {
+        padding: 1rem;
+        border: 1px solid #d4cfc9;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-family: inherit;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-input:focus,
+      .form-textarea:focus {
+        outline: none;
+        border-color: #8b7355;
+      }
+
+      .form-textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      .submit-button {
+        padding: 1rem 2rem;
+        background: #1a1a1a;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .submit-button:hover {
+        background: #8b7355;
+      }
+
+      .submit-button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .info-item {
+        display: flex;
+        gap: 1.5rem;
+        align-items: flex-start;
+      }
+
+      .info-icon {
+        font-size: 2rem;
+        color: #8b7355;
+      }
+
+      .info-content h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+        color: #1a1a1a;
+      }
+
+      .info-content p {
+        color: #666;
+        line-height: 1.6;
+      }
+
+      /* Live Chat Button */
+      .live-chat-btn {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 60px;
+        height: 60px;
+        background: #1a1a1a;
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        z-index: 999;
+      }
+
+      .live-chat-btn:hover {
+        background: #8b7355;
+        transform: scale(1.1);
+      }
+
+      /* Admin Dashboard */
+      .admin-dashboard {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 2000;
+        overflow-y: auto;
+        padding: 2rem;
+      }
+
+      .admin-dashboard.active {
+        display: block;
+      }
+
+      .dashboard-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 15px;
+        padding: 3rem;
+      }
+
+      .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 3rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 2px solid #e8e3dd;
+      }
+
+      .dashboard-title {
+        font-size: 2.5rem;
+        font-weight: 300;
+        color: #1a1a1a;
+      }
+
+      .close-dashboard {
+        padding: 0.75rem 1.5rem;
+        background: #1a1a1a;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        letter-spacing: 1px;
+      }
+
+      .close-dashboard:hover {
+        background: #8b7355;
+      }
+
+      .dashboard-tabs {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 3rem;
+        border-bottom: 2px solid #e8e3dd;
+        flex-wrap: wrap;
+      }
+
+      .tab-button {
+        padding: 1rem 2rem;
+        background: transparent;
+        border: none;
+        border-bottom: 3px solid transparent;
+        cursor: pointer;
+        font-size: 1rem;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        color: #666;
+      }
+
+      .tab-button.active {
+        color: #1a1a1a;
+        border-bottom-color: #8b7355;
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .stat-card {
+        background: linear-gradient(135deg, #f5f1ed 0%, #e8e3dd 100%);
+        padding: 2rem;
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      .stat-value {
+        font-size: 3rem;
+        font-weight: 600;
+        color: #1a1a1a;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-label {
+        font-size: 1rem;
+        color: #666;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 2rem;
+      }
+
+      .data-table th,
+      .data-table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #e8e3dd;
+      }
+
+      .data-table th {
+        background: #f5f1ed;
+        font-weight: 600;
+        color: #1a1a1a;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+      }
+
+      .data-table td {
+        color: #666;
+      }
+
+      .action-button {
+        padding: 0.5rem 1rem;
+        background: #1a1a1a;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        margin-right: 0.5rem;
+        transition: background 0.3s ease;
+      }
+
+      .action-button:hover {
+        background: #8b7355;
+      }
+
+      .action-button.delete {
+        background: #d32f2f;
+      }
+
+      .action-button.delete:hover {
+        background: #b71c1c;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: #666;
+      }
+
+      .empty-state-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        opacity: 0.3;
+      }
+
+      /* Newsletter */
+      .newsletter-section {
+        width: 100%;
+        padding: 4rem 2rem;
+        background: #1a1a1a;
+        color: #fff;
+        text-align: center;
+      }
+
+      .newsletter-title {
+        font-size: 2.5rem;
+        font-weight: 300;
+        margin-bottom: 1rem;
+        letter-spacing: 2px;
+      }
+
+      .newsletter-subtitle {
+        font-size: 1.125rem;
+        color: #d4cfc9;
+        margin-bottom: 2rem;
+      }
+
+      .newsletter-form {
+        max-width: 600px;
+        margin: 0 auto;
+        display: flex;
+        gap: 1rem;
+      }
+
+      .newsletter-input {
+        flex: 1;
+        padding: 1rem 1.5rem;
+        border: 1px solid #8b7355;
+        background: transparent;
+        color: #fff;
+        border-radius: 5px;
+        font-size: 1rem;
+      }
+
+      .newsletter-input::placeholder {
+        color: #999;
+      }
+
+      .newsletter-button {
+        padding: 1rem 2rem;
+        background: #8b7355;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        letter-spacing: 1px;
+        transition: background 0.3s ease;
+      }
+
+      .newsletter-button:hover {
+        background: #6d5a44;
+      }
+
+      /* Footer */
+      .footer {
+        width: 100%;
+        padding: 3rem 2rem;
+        background: #0d0d0d;
+        color: #999;
+        text-align: center;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .footer-link {
+        color: #999;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-link:hover {
+        color: #8b7355;
+      }
+
+      /* Toast Notification */
+      .toast {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background: #1a1a1a;
+        color: #fff;
+        padding: 1rem 2rem;
+        border-radius: 5px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        z-index: 3000;
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+
+      .toast.show {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+      }
+
+      /* Loading Spinner */
+      .loading-spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 0.8s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .hero-title {
+          font-size: 3.5rem;
+        }
+
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .hero-title {
+          font-size: 2.5rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.25rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .newsletter-form {
+          flex-direction: column;
+        }
+
+        .dashboard-container {
+          padding: 1.5rem;
+        }
+
+        .data-table {
+          font-size: 0.85rem;
+        }
+
+        .data-table th,
+        .data-table td {
+          padding: 0.5rem;
+        }
+      }
+    </style>
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <!-- Navigation -->
+      <nav class="navbar">
+        <div class="nav-content">
+          <div class="brand-logo" id="brandLogo">ÉLÉGANCE</div>
+          <div class="nav-links">
+            <a class="nav-link" onclick="scrollToSection('collection')"
+              >Collection</a
+            >
+            <a class="nav-link" onclick="scrollToSection('services')"
+              >Services</a
+            >
+            <a class="nav-link" onclick="scrollToSection('testimonials')"
+              >Testimonials</a
+            >
+            <a class="nav-link" onclick="scrollToSection('contact')">Contact</a>
+            <button class="admin-btn" onclick="toggleAdminDashboard()">
+              Admin
+            </button>
+          </div>
+        </div>
+      </nav>
+      <!-- Hero Section -->
+      <section class="hero-section" id="hero">
+        <div class="hero-bg-pattern"></div>
+        <div class="hero-content">
+          <h1 class="hero-title" id="heroTitle">Timeless Elegance Redefined</h1>
+          <p class="hero-subtitle" id="heroSubtitle">
+            Discover Our Exclusive Spring Collection 2024
+          </p>
+          <a href="#collection" class="cta-button" id="ctaButton"
+            >Explore Collection</a
+          >
+        </div>
+      </section>
+      <!-- Collection Section -->
+      <section class="collection-section" id="collection">
+        <div class="section-container">
+          <h2 class="section-title" id="collectionTitle">
+            Spring/Summer 2024 Collection
+          </h2>
+          <p class="section-subtitle" id="collectionDescription">
+            Immerse yourself in a world of sophisticated design and unparalleled
+            craftsmanship. Our latest collection embodies the essence of modern
+            luxury, featuring premium fabrics, meticulous attention to detail,
+            and timeless silhouettes that transcend seasonal trends.
+          </p>
+          <!-- Services Grid -->
+          <div id="services">
+            <div class="services-grid">
+              <div class="service-card">
+                <div class="service-icon">✨</div>
+                <h3 class="service-title">Custom Orders</h3>
+                <p class="service-description">
+                  Bespoke tailoring service for the perfect fit. Each piece is
+                  crafted to your exact measurements and specifications.
+                </p>
+              </div>
+              <div class="service-card">
+                <div class="service-icon">💎</div>
+                <h3 class="service-title">VIP Loyalty Program</h3>
+                <p class="service-description">
+                  Exclusive benefits, early access to new collections, and
+                  special discounts for our valued members.
+                </p>
+              </div>
+              <div class="service-card">
+                <div class="service-icon">🌍</div>
+                <h3 class="service-title">Global Shipping</h3>
+                <p class="service-description">
+                  Complimentary worldwide delivery with premium packaging and
+                  express shipping options available.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- Gallery -->
+          <h2
+            class="section-title"
+            style="margin-top: 4rem; margin-bottom: 3rem"
+          >
+            Featured Pieces
+          </h2>
+          <div class="gallery-grid">
+            <div class="gallery-item">
+              <svg
+                class="gallery-svg"
+                viewbox="0 0 200 300"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M 100 50 L 80 100 L 80 250 L 120 250 L 120 100 Z"
+                  fill="#8B7355"
+                  opacity="0.8"
+                />
+                <ellipse cx="100" cy="50" rx="30" ry="20" fill="#8B7355" />
+                <rect
+                  x="70"
+                  y="120"
+                  width="60"
+                  height="80"
+                  fill="#1a1a1a"
+                  opacity="0.2"
+                />
+              </svg>
+            </div>
+            <div class="gallery-item">
+              <svg
+                class="gallery-svg"
+                viewbox="0 0 200 300"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  x="60"
+                  y="80"
+                  width="80"
+                  height="180"
+                  rx="5"
+                  fill="#8B7355"
+                  opacity="0.8"
+                />
+                <line
+                  x1="100"
+                  y1="80"
+                  x2="100"
+                  y2="260"
+                  stroke="#1a1a1a"
+                  stroke-width="2"
+                  opacity="0.3"
+                />
+                <circle cx="85" cy="120" r="8" fill="#1a1a1a" opacity="0.2" />
+              </svg>
+            </div>
+            <div class="gallery-item">
+              <svg
+                class="gallery-svg"
+                viewbox="0 0 200 300"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M 100 60 L 70 120 L 70 240 L 130 240 L 130 120 Z"
+                  fill="#8B7355"
+                  opacity="0.8"
+                />
+                <rect
+                  x="80"
+                  y="150"
+                  width="40"
+                  height="50"
+                  fill="#1a1a1a"
+                  opacity="0.2"
+                />
+                <circle cx="100" cy="60" r="25" fill="#8B7355" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Testimonials -->
+      <section class="testimonials-section" id="testimonials">
+        <div class="section-container">
+          <h2 class="section-title">What Our Clients Say</h2>
+          <p class="section-subtitle">
+            Experience luxury through the eyes of those who appreciate
+            excellence
+          </p>
+          <div class="testimonials-grid" id="testimonialsContainer">
+            <!-- Testimonials will be loaded dynamically -->
+          </div>
+        </div>
+      </section>
+      <!-- FAQ Section -->
+      <section class="faq-section" id="faq">
+        <div class="section-container">
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <div class="faq-list">
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>What is your return policy?</span>
+                <span class="faq-icon">+</span>
+              </div>
+              <div class="faq-answer">
+                We offer a 30-day return policy for all unworn items with
+                original tags. Custom orders are final sale. Please contact our
+                customer service team for return authorization.
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>How long does custom tailoring take?</span>
+                <span class="faq-icon">+</span>
+              </div>
+              <div class="faq-answer">
+                Custom orders typically take 4-6 weeks from consultation to
+                delivery. Rush orders may be available for an additional fee.
+                We'll provide a detailed timeline during your consultation.
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>Do you offer international shipping?</span>
+                <span class="faq-icon">+</span>
+              </div>
+              <div class="faq-answer">
+                Yes, we ship worldwide. Standard shipping is complimentary for
+                orders over $500. Express shipping is available at checkout.
+                Customs duties may apply depending on your location.
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>How do I join the VIP Loyalty Program?</span>
+                <span class="faq-icon">+</span>
+              </div>
+              <div class="faq-answer">
+                Our VIP program is invitation-only for clients who have spent
+                $5,000+ with us. Members receive 15% off all purchases, early
+                access to new collections, and exclusive event invitations.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Contact Form -->
+      <section class="contact-section" id="contact">
+        <div class="section-container">
+          <h2 class="section-title">Get In Touch</h2>
+          <p class="section-subtitle">
+            We'd love to hear from you. Send us a message and we'll respond as
+            soon as possible.
+          </p>
+          <div class="contact-grid">
+            <form
+              class="contact-form"
+              id="contactForm"
+              onsubmit="handleContactSubmit(event)"
+            >
+              <div class="form-group">
+                <label for="contactName" class="form-label">Full Name</label>
+                <input
+                  type="text"
+                  id="contactName"
+                  class="form-input"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="contactEmail" class="form-label"
+                  >Email Address</label
+                >
+                <input
+                  type="email"
+                  id="contactEmail"
+                  class="form-input"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="contactMessage" class="form-label">Message</label>
+                <textarea
+                  id="contactMessage"
+                  class="form-textarea"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="submit-button" id="contactSubmitBtn">
+                Send Message
+              </button>
+            </form>
+            <div class="contact-info">
+              <div class="info-item">
+                <div class="info-icon">📍</div>
+                <div class="info-content">
+                  <h3>Visit Our Boutique</h3>
+                  <p>
+                    123 Fashion Avenue<br />
+                    Jakarta, Indonesia 12345
+                  </p>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon">📞</div>
+                <div class="info-content">
+                  <h3>Call Us</h3>
+                  <p>
+                    +62 21 1234 5678<br />
+                    Mon - Sat, 10AM - 8PM
+                  </p>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon">✉️</div>
+                <div class="info-content">
+                  <h3>Email Us</h3>
+                  <p>
+                    contact@elegance.com<br />
+                    info@elegance.com
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Newsletter -->
+      <section class="newsletter-section">
+        <div class="section-container">
+          <h2 class="newsletter-title">Join Our Newsletter</h2>
+          <p class="newsletter-subtitle">
+            Be the first to know about new collections and exclusive offers
+          </p>
+          <form
+            class="newsletter-form"
+            onsubmit="handleNewsletterSubmit(event)"
+          >
+            <input
+              type="email"
+              class="newsletter-input"
+              placeholder="Enter your email"
+              id="newsletterEmail"
+              required
+            />
+            <button type="submit" class="newsletter-button" id="newsletterBtn">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </section>
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-links">
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Terms of Service</a>
+          <a href="#" class="footer-link">Shipping Info</a>
+          <a href="#" class="footer-link">Careers</a>
+        </div>
+        <p>© 2024 Élégance. All rights reserved.</p>
+      </footer>
+      <!-- Live Chat Button -->
+      <div class="live-chat-btn" onclick="openLiveChat()" title="Live Chat">
+        💬
+      </div>
+      <!-- Admin Dashboard -->
+      <div class="admin-dashboard" id="adminDashboard">
+        <div class="dashboard-container">
+          <div class="dashboard-header">
+            <h2 class="dashboard-title">Admin Dashboard</h2>
+            <button class="close-dashboard" onclick="toggleAdminDashboard()">
+              Close
+            </button>
+          </div>
+          <!-- Dashboard Tabs -->
+          <div class="dashboard-tabs">
+            <button class="tab-button active" onclick="switchTab('analytics')">
+              Analytics
+            </button>
+            <button class="tab-button" onclick="switchTab('contacts')">
+              Contact Messages
+            </button>
+            <button class="tab-button" onclick="switchTab('newsletter')">
+              Newsletter
+            </button>
+            <button class="tab-button" onclick="switchTab('testimonials')">
+              Testimonials
+            </button>
+          </div>
+          <!-- Analytics Tab -->
+          <div class="tab-content active" id="analyticsTab">
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-value" id="totalContacts">0</div>
+                <div class="stat-label">Total Messages</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value" id="totalNewsletter">0</div>
+                <div class="stat-label">Newsletter Subscribers</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value" id="totalTestimonials">0</div>
+                <div class="stat-label">Testimonials</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value" id="pendingMessages">0</div>
+                <div class="stat-label">Pending Review</div>
+              </div>
+            </div>
+          </div>
+          <!-- Contacts Tab -->
+          <div class="tab-content" id="contactsTab">
+            <h3 style="margin-bottom: 2rem; font-size: 1.5rem">
+              Contact Messages
+            </h3>
+            <div id="contactsList"></div>
+          </div>
+          <!-- Newsletter Tab -->
+          <div class="tab-content" id="newsletterTab">
+            <h3 style="margin-bottom: 2rem; font-size: 1.5rem">
+              Newsletter Subscribers
+            </h3>
+            <div id="newsletterList"></div>
+          </div>
+          <!-- Testimonials Tab -->
+          <div class="tab-content" id="testimonialsTabContent">
+            <h3 style="margin-bottom: 2rem; font-size: 1.5rem">
+              Manage Testimonials
+            </h3>
+            <div id="testimonialsList"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Toast Notification -->
+      <div class="toast" id="toast"></div>
+    </div>
+    <script>
+      // Configuration
+      const defaultConfig = {
+        brand_name: "ÉLÉGANCE",
+        hero_title: "Timeless Elegance Redefined",
+        hero_subtitle: "Discover Our Exclusive Spring Collection 2024",
+        cta_button_text: "Explore Collection",
+        collection_title: "Spring/Summer 2024 Collection",
+        collection_description:
+          "Immerse yourself in a world of sophisticated design and unparalleled craftsmanship. Our latest collection embodies the essence of modern luxury, featuring premium fabrics, meticulous attention to detail, and timeless silhouettes that transcend seasonal trends.",
+        background_color: "#F5F1ED",
+        surface_color: "#FFFFFF",
+        text_color: "#1a1a1a",
+        primary_action_color: "#1a1a1a",
+        accent_color: "#8B7355",
+        font_family: "Cormorant Garamond, Georgia, serif",
+        font_size: 16,
+      };
+
+      let allData = [];
+
+      // Data SDK Handler
+      const dataHandler = {
+        onDataChanged(data) {
+          allData = data;
+          updateAnalytics();
+          renderContactsList();
+          renderNewsletterList();
+          renderTestimonialsList();
+          renderPublicTestimonials();
+        },
+      };
+
+      // Initialize SDKs
+      async function initializeApp() {
+        if (window.dataSdk) {
+          const result = await window.dataSdk.init(dataHandler);
+          if (!result.isOk) {
+            console.error("Failed to initialize Data SDK");
+          }
+        }
+
+        if (window.elementSdk) {
+          window.elementSdk.init({
+            defaultConfig,
+            onConfigChange,
+            mapToCapabilities,
+            mapToEditPanelValues,
+          });
+        }
+      }
+
+      // Element SDK Functions
+      async function onConfigChange(config) {
+        document.getElementById("brandLogo").textContent =
+          config.brand_name || defaultConfig.brand_name;
+        document.getElementById("heroTitle").textContent =
+          config.hero_title || defaultConfig.hero_title;
+        document.getElementById("heroSubtitle").textContent =
+          config.hero_subtitle || defaultConfig.hero_subtitle;
+        document.getElementById("ctaButton").textContent =
+          config.cta_button_text || defaultConfig.cta_button_text;
+        document.getElementById("collectionTitle").textContent =
+          config.collection_title || defaultConfig.collection_title;
+        document.getElementById("collectionDescription").textContent =
+          config.collection_description || defaultConfig.collection_description;
+
+        const backgroundColor =
+          config.background_color || defaultConfig.background_color;
+        const textColor = config.text_color || defaultConfig.text_color;
+        const primaryActionColor =
+          config.primary_action_color || defaultConfig.primary_action_color;
+        const accentColor = config.accent_color || defaultConfig.accent_color;
+
+        document.querySelector(
+          ".hero-section"
+        ).style.background = `linear-gradient(135deg, ${backgroundColor} 0%, #E8E3DD 100%)`;
+        document
+          .querySelectorAll(".section-title")
+          .forEach((el) => (el.style.color = textColor));
+        document.querySelectorAll(".cta-button").forEach((el) => {
+          el.style.background = primaryActionColor;
+          el.style.borderColor = primaryActionColor;
+        });
+        document
+          .querySelectorAll(".hero-subtitle, .service-icon, .info-icon")
+          .forEach((el) => (el.style.color = accentColor));
+
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack = "Georgia, serif";
+        document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+
+        const baseSize = config.font_size || defaultConfig.font_size;
+        document.querySelector(".hero-title").style.fontSize = `${
+          baseSize * 5
+        }px`;
+        document.querySelector(".hero-subtitle").style.fontSize = `${
+          baseSize * 1.5
+        }px`;
+        document
+          .querySelectorAll(".section-title")
+          .forEach((el) => (el.style.fontSize = `${baseSize * 3}px`));
+        document
+          .querySelectorAll(".section-subtitle")
+          .forEach((el) => (el.style.fontSize = `${baseSize * 1.125}px`));
+      }
+
+      function mapToCapabilities(config) {
+        return {
+          recolorables: [
+            {
+              get: () =>
+                config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              },
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                config.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              },
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              },
+            },
+            {
+              get: () =>
+                config.primary_action_color ||
+                defaultConfig.primary_action_color,
+              set: (value) => {
+                config.primary_action_color = value;
+                window.elementSdk.setConfig({ primary_action_color: value });
+              },
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => {
+                config.accent_color = value;
+                window.elementSdk.setConfig({ accent_color: value });
+              },
+            },
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            },
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            },
+          },
+        };
+      }
+
+      function mapToEditPanelValues(config) {
+        return new Map([
+          ["brand_name", config.brand_name || defaultConfig.brand_name],
+          ["hero_title", config.hero_title || defaultConfig.hero_title],
+          [
+            "hero_subtitle",
+            config.hero_subtitle || defaultConfig.hero_subtitle,
+          ],
+          [
+            "cta_button_text",
+            config.cta_button_text || defaultConfig.cta_button_text,
+          ],
+          [
+            "collection_title",
+            config.collection_title || defaultConfig.collection_title,
+          ],
+          [
+            "collection_description",
+            config.collection_description ||
+              defaultConfig.collection_description,
+          ],
+        ]);
+      }
+
+      // Contact Form Handler
+      async function handleContactSubmit(event) {
+        event.preventDefault();
+
+        const currentRecordCount = allData.filter(
+          (d) => d.type === "contact"
+        ).length;
+        if (currentRecordCount >= 999) {
+          showToast(
+            "Maximum contact limit reached. Please contact administrator."
+          );
+          return;
+        }
+
+        const name = document.getElementById("contactName").value;
+        const email = document.getElementById("contactEmail").value;
+        const message = document.getElementById("contactMessage").value;
+        const submitBtn = document.getElementById("contactSubmitBtn");
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="loading-spinner"></span>';
+
+        const contactData = {
+          id: Date.now().toString(),
+          type: "contact",
+          name: name,
+          email: email,
+          message: message,
+          status: "pending",
+          timestamp: Date.now(),
+        };
+
+        if (window.dataSdk) {
+          const result = await window.dataSdk.create(contactData);
+
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Send Message";
+
+          if (result.isOk) {
+            showToast("Message sent successfully! We'll get back to you soon.");
+            document.getElementById("contactForm").reset();
+          } else {
+            showToast("Failed to send message. Please try again.");
+          }
+        }
+      }
+
+      // Newsletter Handler
+      async function handleNewsletterSubmit(event) {
+        event.preventDefault();
+
+        const currentRecordCount = allData.filter(
+          (d) => d.type === "newsletter"
+        ).length;
+        if (currentRecordCount >= 999) {
+          showToast("Maximum subscriber limit reached.");
+          return;
+        }
+
+        const email = document.getElementById("newsletterEmail").value;
+        const submitBtn = document.getElementById("newsletterBtn");
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="loading-spinner"></span>';
+
+        const newsletterData = {
+          id: Date.now().toString(),
+          type: "newsletter",
+          email: email,
+          status: "active",
+          timestamp: Date.now(),
+        };
+
+        if (window.dataSdk) {
+          const result = await window.dataSdk.create(newsletterData);
+
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Subscribe";
+
+          if (result.isOk) {
+            showToast("Successfully subscribed to our newsletter!");
+            document.getElementById("newsletterEmail").value = "";
+          } else {
+            showToast("Subscription failed. Please try again.");
+          }
+        }
+      }
+
+      // Analytics Update
+      function updateAnalytics() {
+        const contacts = allData.filter((d) => d.type === "contact");
+        const newsletter = allData.filter((d) => d.type === "newsletter");
+        const testimonials = allData.filter((d) => d.type === "testimonial");
+        const pending = contacts.filter((d) => d.status === "pending");
+
+        document.getElementById("totalContacts").textContent = contacts.length;
+        document.getElementById("totalNewsletter").textContent =
+          newsletter.length;
+        document.getElementById("totalTestimonials").textContent =
+          testimonials.length;
+        document.getElementById("pendingMessages").textContent = pending.length;
+      }
+
+      // Render Contacts List
+      function renderContactsList() {
+        const container = document.getElementById("contactsList");
+        const contacts = allData.filter((d) => d.type === "contact");
+
+        if (contacts.length === 0) {
+          container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">📭</div>
+            <p>No contact messages yet</p>
+          </div>
+        `;
+          return;
+        }
+
+        const sortedContacts = [...contacts].sort(
+          (a, b) => b.timestamp - a.timestamp
+        );
+
+        container.innerHTML = `
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Message</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${sortedContacts
+              .map(
+                (contact) => `
+              <tr>
+                <td>${contact.name}</td>
+                <td>${contact.email}</td>
+                <td>${contact.message.substring(0, 50)}...</td>
+                <td>${contact.status}</td>
+                <td>${new Date(contact.timestamp).toLocaleDateString()}</td>
+                <td>
+                  <button class="action-button" onclick="markAsRead('${
+                    contact.__backendId
+                  }')">Mark Read</button>
+                  <button class="action-button delete" onclick="deleteContact('${
+                    contact.__backendId
+                  }')">Delete</button>
+                </td>
+              </tr>
+            `
+              )
+              .join("")}
+          </tbody>
+        </table>
+      `;
+      }
+
+      // Render Newsletter List
+      function renderNewsletterList() {
+        const container = document.getElementById("newsletterList");
+        const subscribers = allData.filter((d) => d.type === "newsletter");
+
+        if (subscribers.length === 0) {
+          container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">📧</div>
+            <p>No newsletter subscribers yet</p>
+          </div>
+        `;
+          return;
+        }
+
+        const sortedSubscribers = [...subscribers].sort(
+          (a, b) => b.timestamp - a.timestamp
+        );
+
+        container.innerHTML = `
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Subscribed Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${sortedSubscribers
+              .map(
+                (sub) => `
+              <tr>
+                <td>${sub.email}</td>
+                <td>${sub.status}</td>
+                <td>${new Date(sub.timestamp).toLocaleDateString()}</td>
+                <td>
+                  <button class="action-button delete" onclick="deleteSubscriber('${
+                    sub.__backendId
+                  }')">Remove</button>
+                </td>
+              </tr>
+            `
+              )
+              .join("")}
+          </tbody>
+        </table>
+      `;
+      }
+
+      // Render Testimonials List (Admin)
+      function renderTestimonialsList() {
+        const container = document.getElementById("testimonialsList");
+        const testimonials = allData.filter((d) => d.type === "testimonial");
+
+        if (testimonials.length === 0) {
+          container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">⭐</div>
+            <p>No testimonials yet</p>
+          </div>
+        `;
+          return;
+        }
+
+        const sortedTestimonials = [...testimonials].sort(
+          (a, b) => b.timestamp - a.timestamp
+        );
+
+        container.innerHTML = `
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Rating</th>
+              <th>Testimonial</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${sortedTestimonials
+              .map(
+                (test) => `
+              <tr>
+                <td>${test.name}</td>
+                <td>${"⭐".repeat(test.rating || 5)}</td>
+                <td>${test.testimonial.substring(0, 50)}...</td>
+                <td>${test.status}</td>
+                <td>${new Date(test.timestamp).toLocaleDateString()}</td>
+                <td>
+                  ${
+                    test.status === "pending"
+                      ? `<button class="action-button" onclick="approveTestimonial('${test.__backendId}')">Approve</button>`
+                      : ""
+                  }
+                  <button class="action-button delete" onclick="deleteTestimonial('${
+                    test.__backendId
+                  }')">Delete</button>
+                </td>
+              </tr>
+            `
+              )
+              .join("")}
+          </tbody>
+        </table>
+      `;
+      }
+
+      // Render Public Testimonials
+      function renderPublicTestimonials() {
+        const container = document.getElementById("testimonialsContainer");
+        const approvedTestimonials = allData.filter(
+          (d) => d.type === "testimonial" && d.status === "approved"
+        );
+
+        if (approvedTestimonials.length === 0) {
+          container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">💬</div>
+            <p>No testimonials to display yet</p>
+          </div>
+        `;
+          return;
+        }
+
+        container.innerHTML = approvedTestimonials
+          .map(
+            (test) => `
+        <div class="testimonial-card">
+          <div class="testimonial-rating">${"⭐".repeat(test.rating || 5)}</div>
+          <p class="testimonial-text">"${test.testimonial}"</p>
+          <p class="testimonial-author">— ${test.name}</p>
+        </div>
+      `
+          )
+          .join("");
+      }
+
+      // Admin Actions
+      async function markAsRead(backendId) {
+        const record = allData.find((d) => d.__backendId === backendId);
+        if (record && window.dataSdk) {
+          record.status = "read";
+          const result = await window.dataSdk.update(record);
+          if (result.isOk) {
+            showToast("Message marked as read");
+          } else {
+            showToast("Failed to update message");
+          }
+        }
+      }
+
+      async function deleteContact(backendId) {
+        const record = allData.find((d) => d.__backendId === backendId);
+        if (record && window.dataSdk) {
+          const result = await window.dataSdk.delete(record);
+          if (result.isOk) {
+            showToast("Contact deleted successfully");
+          } else {
+            showToast("Failed to delete contact");
+          }
+        }
+      }
+
+      async function deleteSubscriber(backendId) {
+        const record = allData.find((d) => d.__backendId === backendId);
+        if (record && window.dataSdk) {
+          const result = await window.dataSdk.delete(record);
+          if (result.isOk) {
+            showToast("Subscriber removed successfully");
+          } else {
+            showToast("Failed to remove subscriber");
+          }
+        }
+      }
+
+      async function approveTestimonial(backendId) {
+        const record = allData.find((d) => d.__backendId === backendId);
+        if (record && window.dataSdk) {
+          record.status = "approved";
+          const result = await window.dataSdk.update(record);
+          if (result.isOk) {
+            showToast("Testimonial approved");
+          } else {
+            showToast("Failed to approve testimonial");
+          }
+        }
+      }
+
+      async function deleteTestimonial(backendId) {
+        const record = allData.find((d) => d.__backendId === backendId);
+        if (record && window.dataSdk) {
+          const result = await window.dataSdk.delete(record);
+          if (result.isOk) {
+            showToast("Testimonial deleted successfully");
+          } else {
+            showToast("Failed to delete testimonial");
+          }
+        }
+      }
+
+      // UI Helper Functions
+      function toggleAdminDashboard() {
+        const dashboard = document.getElementById("adminDashboard");
+        dashboard.classList.toggle("active");
+        if (dashboard.classList.contains("active")) {
+          updateAnalytics();
+        }
+      }
+
+      function switchTab(tabName) {
+        document
+          .querySelectorAll(".tab-button")
+          .forEach((btn) => btn.classList.remove("active"));
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((content) => content.classList.remove("active"));
+
+        event.target.classList.add("active");
+
+        if (tabName === "analytics") {
+          document.getElementById("analyticsTab").classList.add("active");
+        } else if (tabName === "contacts") {
+          document.getElementById("contactsTab").classList.add("active");
+        } else if (tabName === "newsletter") {
+          document.getElementById("newsletterTab").classList.add("active");
+        } else if (tabName === "testimonials") {
+          document
+            .getElementById("testimonialsTabContent")
+            .classList.add("active");
+        }
+      }
+
+      function toggleFAQ(element) {
+        const answer = element.nextElementSibling;
+        const icon = element.querySelector(".faq-icon");
+
+        answer.classList.toggle("active");
+        icon.textContent = answer.classList.contains("active") ? "−" : "+";
+      }
+
+      function scrollToSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+
+      function openLiveChat() {
+        showToast(
+          "Live chat feature would open here. Connect to your preferred chat service!"
+        );
+      }
+
+      function showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.classList.add("show");
+
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3000);
+      }
+
+      // Initialize on load
+      initializeApp();
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'9a618e1f833e9b07',t:'MTc2NDQxMzU0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
