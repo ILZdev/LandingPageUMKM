@@ -3,269 +3,278 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kopi Nusantara - Single Origin Premium</title>
+    <title>Ngopi Santai - Warung Kopi Jalanan</title>
     <script src="/_sdk/element_sdk.js"></script>
     <style>
       body {
         box-sizing: border-box;
-      }
-
-      * {
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #6b4423 0%, #3e2723 100%);
+        min-height: 100%;
       }
 
-      html,
-      body {
-        height: 100%;
-        width: 100%;
-      }
-
-      body {
-        font-family: "Georgia", "Times New Roman", serif;
-        line-height: 1.6;
-        overflow-x: hidden;
-      }
-
-      .page-wrapper {
+      .wrapper {
         width: 100%;
         min-height: 100%;
-        background: linear-gradient(135deg, #f5e6d3 0%, #e8d5c4 100%);
-        display: flex;
-        flex-direction: column;
+        padding: 20px;
       }
 
-      .navbar {
-        width: 100%;
-        padding: 1.5rem 2rem;
-        background: rgba(255, 255, 255, 0.95);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        animation: slideDown 0.6s ease-out;
-      }
-
-      @keyframes slideDown {
-        from {
-          opacity: 0;
-          transform: translateY(-20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .brand-name {
-        font-size: 1.75rem;
-        font-weight: 700;
-        color: #5d4037;
-        text-align: center;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-      }
-
-      .hero-container {
-        max-width: 1200px;
-        width: 100%;
+      .container {
+        max-width: 600px;
         margin: 0 auto;
-        padding: 3rem 2rem;
+        background: #fff8e7;
+        border-radius: 20px;
+        padding: 30px 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 3px solid #8b4513;
+      }
+
+      .title {
+        font-size: 36px;
+        font-weight: bold;
+        color: #3e2723;
+        margin: 0 0 10px 0;
+        font-family: "Georgia", serif;
+        letter-spacing: 1px;
+      }
+
+      .subtitle {
+        font-size: 16px;
+        color: #6b4423;
+        margin: 0;
+        font-style: normal;
+        font-family: "Courier New", monospace;
+        font-weight: 500;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+
+      .gallery-item {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .gallery-item:last-child {
+        grid-column: 1 / -1;
+        max-width: 70%;
+        margin: 0 auto;
+      }
+
+      .gallery-image {
+        width: 100%;
+        height: 0;
+        padding-bottom: 100%;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .gallery-desc {
+        padding: 10px;
+        color: #3e2723;
+        font-size: 13px;
+        line-height: 1.4;
+        text-align: center;
+      }
+
+      .menu-section {
+        margin-bottom: 30px;
+        padding: 20px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .schedule-section {
+        margin-bottom: 30px;
+        padding: 20px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .section-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #3e2723;
+        margin: 0 0 20px 0;
+        text-align: center;
+        font-family: "Georgia", serif;
+        border-bottom: 2px solid #8b4513;
+        padding-bottom: 10px;
+      }
+
+      .menu-list {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        animation: fadeInUp 0.8s ease-out 0.2s both;
+        gap: 15px;
       }
 
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+      .menu-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 15px;
+        background: #fff8e7;
+        border-radius: 10px;
       }
 
-      .coffee-image {
-        width: 100%;
-        max-width: 500px;
-        margin-bottom: 2.5rem;
-        filter: drop-shadow(0 15px 40px rgba(93, 64, 55, 0.3));
-        animation: float 4s ease-in-out infinite;
+      .menu-info {
+        flex: 1;
       }
 
-      @keyframes float {
-        0%,
-        100% {
-          transform: translateY(0px);
-        }
-        50% {
-          transform: translateY(-15px);
-        }
-      }
-
-      .coffee-svg {
-        width: 100%;
-        height: auto;
-      }
-
-      .hero-content {
-        text-align: center;
-        max-width: 700px;
-      }
-
-      .hero-title {
-        font-size: 3rem;
-        font-weight: 700;
+      .menu-name {
+        font-size: 16px;
+        font-weight: bold;
         color: #3e2723;
-        margin-bottom: 1rem;
-        line-height: 1.2;
-        animation: fadeIn 1s ease-out 0.4s both;
+        margin: 0 0 5px 0;
       }
 
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
+      .menu-desc {
+        font-size: 13px;
+        color: #6b4423;
+        margin: 0;
+        line-height: 1.4;
       }
 
-      .hero-subtitle {
-        font-size: 1.25rem;
-        color: #6d4c41;
-        margin-bottom: 2rem;
-        font-style: italic;
-        animation: fadeIn 1s ease-out 0.6s both;
+      .menu-price {
+        font-size: 16px;
+        font-weight: bold;
+        color: #8b4513;
+        white-space: nowrap;
+        margin-left: 15px;
       }
 
-      .taste-description {
-        font-size: 1.125rem;
-        color: #5d4037;
-        line-height: 1.8;
-        margin-bottom: 2.5rem;
-        padding: 0 1rem;
-        animation: fadeIn 1s ease-out 0.8s both;
+      .schedule-box {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
       }
 
-      .features-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-        margin-bottom: 3rem;
-        width: 100%;
-        animation: fadeIn 1s ease-out 1s both;
+      .schedule-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        background: #fff8e7;
+        border-radius: 10px;
       }
 
-      .feature-item {
-        text-align: center;
-        padding: 1.5rem;
-        background: rgba(255, 255, 255, 0.6);
-        border-radius: 15px;
-        transition: transform 0.3s ease;
+      .day {
+        font-size: 15px;
+        font-weight: bold;
+        color: #3e2723;
       }
 
-      .feature-item:hover {
-        transform: translateY(-5px);
-      }
-
-      .feature-icon {
-        font-size: 2.5rem;
-        margin-bottom: 0.5rem;
-      }
-
-      .feature-text {
-        font-size: 0.95rem;
-        color: #5d4037;
-        font-weight: 600;
+      .time {
+        font-size: 15px;
+        font-weight: bold;
+        color: #8b4513;
+        font-family: "Courier New", monospace;
       }
 
       .cta-button {
-        display: inline-block;
-        background: linear-gradient(135deg, #6d4c41 0%, #5d4037 100%);
-        color: #fff;
-        font-size: 1.25rem;
-        font-weight: 700;
-        padding: 1.25rem 3.5rem;
+        display: block;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+        padding: 15px 30px;
+        background: #8b4513;
+        color: white;
+        text-align: center;
         border-radius: 50px;
+        font-size: 18px;
+        font-weight: bold;
         text-decoration: none;
-        transition: all 0.3s ease;
-        box-shadow: 0 10px 30px rgba(93, 64, 55, 0.3);
         border: none;
         cursor: pointer;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        animation: fadeIn 1s ease-out 1.2s both;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
       }
 
       .cta-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 40px rgba(93, 64, 55, 0.4);
-        background: linear-gradient(135deg, #5d4037 0%, #4e342e 100%);
+        background: #a0522d;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
       }
 
       .cta-button:active {
-        transform: translateY(-1px);
+        transform: translateY(0);
+        box-shadow: 0 2px 10px rgba(139, 69, 19, 0.3);
       }
 
-      .footer-section {
-        width: 100%;
-        padding: 2rem;
+      .floating-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 65px;
+        height: 65px;
+        background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+        color: white;
         text-align: center;
-        background: rgba(255, 255, 255, 0.5);
-        color: #6d4c41;
-        font-size: 0.875rem;
-        margin-top: auto;
-        border-top: 1px solid rgba(93, 64, 55, 0.1);
+        border-radius: 50%;
+        font-size: 32px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 8px 25px rgba(0, 123, 255, 0.5);
+        z-index: 1000;
+        animation: pulse 2s infinite;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
-      /* Mobile responsiveness */
-      @media (max-width: 768px) {
-        .brand-name {
-          font-size: 1.5rem;
-          letter-spacing: 2px;
-        }
+      .floating-button:hover {
+        background: linear-gradient(135deg, #0056b3 0%, #003d82 100%);
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 12px 35px rgba(0, 86, 179, 0.6);
+        animation: none;
+      }
 
-        .hero-title {
-          font-size: 2rem;
-        }
+      .floating-button:active {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 6px 20px rgba(0, 86, 179, 0.5);
+      }
 
-        .hero-subtitle {
-          font-size: 1.125rem;
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          box-shadow: 0 8px 25px rgba(0, 123, 255, 0.5);
         }
-
-        .taste-description {
-          font-size: 1rem;
-        }
-
-        .features-grid {
-          grid-template-columns: 1fr;
-          gap: 1.5rem;
-        }
-
-        .cta-button {
-          font-size: 1.125rem;
-          padding: 1rem 2.5rem;
-        }
-
-        .hero-container {
-          padding: 2rem 1.5rem;
+        50% {
+          transform: scale(1.05);
+          box-shadow: 0 10px 30px rgba(0, 123, 255, 0.7);
         }
       }
 
       @media (max-width: 480px) {
-        .hero-title {
-          font-size: 1.75rem;
+        .title {
+          font-size: 26px;
         }
 
-        .cta-button {
-          padding: 1rem 2rem;
-          font-size: 1rem;
+        .subtitle {
+          font-size: 16px;
         }
 
-        .navbar {
-          padding: 1.25rem 1rem;
+        .gallery-image {
+          height: 180px;
         }
       }
     </style>
@@ -278,343 +287,487 @@
     <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
   </head>
   <body>
-    <div class="page-wrapper">
-      <nav class="navbar">
-        <h1 class="brand-name" id="brandName">KOPI NUSANTARA</h1>
-      </nav>
-      <main class="hero-container">
-        <div class="coffee-image">
-          <svg
-            class="coffee-svg"
-            viewbox="0 0 400 400"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <lineargradient
-                id="coffeeGradient"
-                x1="0%"
-                y1="0%"
-                x2="0%"
-                y2="100%"
-              >
-                <stop
-                  offset="0%"
-                  style="stop-color: #6d4c41; stop-opacity: 1"
-                />
-                <stop
-                  offset="100%"
-                  style="stop-color: #3e2723; stop-opacity: 1"
-                />
-              </lineargradient>
-              <lineargradient
-                id="steamGradient"
-                x1="0%"
-                y1="100%"
-                x2="0%"
-                y2="0%"
-              >
-                <stop
-                  offset="0%"
-                  style="stop-color: #d7ccc8; stop-opacity: 1"
-                />
-                <stop
-                  offset="100%"
-                  style="stop-color: #d7ccc8; stop-opacity: 0"
-                />
-              </lineargradient>
-            </defs>
-            <!-- Coffee bag -->
-            <rect
-              x="120"
-              y="150"
-              width="160"
-              height="200"
-              rx="5"
-              fill="url(#coffeeGradient)"
-            />
-            <rect
-              x="125"
-              y="155"
-              width="150"
-              height="190"
-              rx="3"
-              fill="#5D4037"
-            />
-            <!-- Label area -->
-            <rect
-              x="140"
-              y="180"
-              width="120"
-              height="80"
-              rx="5"
-              fill="#F5E6D3"
-            />
-            <!-- Coffee bean icon on label -->
-            <ellipse
-              cx="200"
-              cy="210"
-              rx="15"
-              ry="20"
-              fill="#6D4C41"
-              transform="rotate(-20 200 210)"
-            />
-            <path
-              d="M 200 200 Q 205 210 200 220"
-              stroke="#F5E6D3"
-              stroke-width="2"
-              fill="none"
-            />
-            <!-- Text lines on label -->
-            <rect
-              x="155"
-              y="235"
-              width="90"
-              height="4"
-              rx="2"
-              fill="#6D4C41"
-              opacity="0.6"
-            />
-            <rect
-              x="165"
-              y="245"
-              width="70"
-              height="3"
-              rx="1.5"
-              fill="#6D4C41"
-              opacity="0.4"
-            />
-            <!-- Coffee beans scattered -->
-            <ellipse
-              cx="100"
-              cy="130"
-              rx="8"
-              ry="11"
-              fill="#5D4037"
-              transform="rotate(-30 100 130)"
-            />
-            <path
-              d="M 100 125 Q 102 130 100 135"
-              stroke="#D7CCC8"
-              stroke-width="1.5"
-              fill="none"
-            />
-            <ellipse
-              cx="300"
-              cy="140"
-              rx="9"
-              ry="12"
-              fill="#6D4C41"
-              transform="rotate(20 300 140)"
-            />
-            <path
-              d="M 300 134 Q 303 140 300 146"
-              stroke="#D7CCC8"
-              stroke-width="1.5"
-              fill="none"
-            />
-            <ellipse
-              cx="90"
-              cy="320"
-              rx="10"
-              ry="13"
-              fill="#4E342E"
-              transform="rotate(-45 90 320)"
-            />
-            <path
-              d="M 90 313 Q 93 320 90 327"
-              stroke="#D7CCC8"
-              stroke-width="1.5"
-              fill="none"
-            />
-            <ellipse
-              cx="310"
-              cy="300"
-              rx="8"
-              ry="11"
-              fill="#5D4037"
-              transform="rotate(15 310 300)"
-            />
-            <path
-              d="M 310 295 Q 312 300 310 306"
-              stroke="#D7CCC8"
-              stroke-width="1.5"
-              fill="none"
-            />
-            <ellipse
-              cx="130"
-              cy="360"
-              rx="9"
-              ry="12"
-              fill="#6D4C41"
-              transform="rotate(-15 130 360)"
-            />
-            <path
-              d="M 130 354 Q 133 360 130 366"
-              stroke="#D7CCC8"
-              stroke-width="1.5"
-              fill="none"
-            />
-            <!-- Steam lines -->
-            <path
-              d="M 160 140 Q 155 110 160 80"
-              stroke="url(#steamGradient)"
-              stroke-width="3"
-              fill="none"
-              opacity="0.6"
-            >
-              <animate
-                attributename="d"
-                values="M 160 140 Q 155 110 160 80; M 160 140 Q 165 110 160 80; M 160 140 Q 155 110 160 80"
-                dur="3s"
-                repeatcount="indefinite"
-              />
-            </path>
-            <path
-              d="M 200 140 Q 205 110 200 75"
-              stroke="url(#steamGradient)"
-              stroke-width="3"
-              fill="none"
-              opacity="0.6"
-            >
-              <animate
-                attributename="d"
-                values="M 200 140 Q 205 110 200 75; M 200 140 Q 195 110 200 75; M 200 140 Q 205 110 200 75"
-                dur="2.5s"
-                repeatcount="indefinite"
-              />
-            </path>
-            <path
-              d="M 240 140 Q 235 115 240 85"
-              stroke="url(#steamGradient)"
-              stroke-width="3"
-              fill="none"
-              opacity="0.6"
-            >
-              <animate
-                attributename="d"
-                values="M 240 140 Q 235 115 240 85; M 240 140 Q 245 115 240 85; M 240 140 Q 235 115 240 85"
-                dur="2.8s"
-                repeatcount="indefinite"
-              />
-            </path>
-          </svg>
+    <div class="wrapper">
+      <div class="container">
+        <div class="header">
+          <h1 class="title" id="mainTitle">KOPI JAGO</h1>
+          <p class="subtitle" id="subtitle">
+            Ngopi Enak, Harga Pas, Tempatnya Asyik!
+          </p>
         </div>
-        <div class="hero-content">
-          <h2 class="hero-title" id="heroTitle">
-            Single Origin dari Hati Pegunungan
-          </h2>
-          <p class="hero-subtitle" id="heroSubtitle">
-            Arabica Premium - Dataran Tinggi Gayo
-          </p>
-          <p class="taste-description" id="tasteDescription">
-            Nikmati cita rasa coklat pekat dengan sentuhan karamel manis dan
-            aroma bunga yang memikat. Setiap biji dipilih dengan teliti dari
-            ketinggian 1.500 mdpl, diproses dengan metode natural untuk
-            menghadirkan kompleksitas rasa yang sempurna di setiap tegukan.
-          </p>
-          <div class="features-grid">
-            <div class="feature-item">
-              <div class="feature-icon">🌱</div>
-              <div class="feature-text">100% Organik</div>
+        <div class="gallery">
+          <div class="gallery-item">
+            <div
+              class="gallery-image"
+              style="
+                background: linear-gradient(
+                    rgba(0, 0, 0, 0.1),
+                    rgba(0, 0, 0, 0.1)
+                  ),
+                  url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800')
+                    center/cover;
+              "
+            ></div>
+            <p class="gallery-desc" id="desc1">
+              Kopi premium disajikan dengan cinta dalam setiap tegukan hangat
+            </p>
+          </div>
+          <div class="gallery-item">
+            <div
+              class="gallery-image"
+              style="
+                background: linear-gradient(
+                    rgba(0, 0, 0, 0.1),
+                    rgba(0, 0, 0, 0.1)
+                  ),
+                  url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800')
+                    center/cover;
+              "
+            ></div>
+            <p class="gallery-desc" id="desc2">
+              Area duduk nyaman untuk bersantai bersama teman dan keluarga
+            </p>
+          </div>
+          <div class="gallery-item">
+            <div
+              class="gallery-image"
+              style="
+                background: linear-gradient(
+                    rgba(0, 0, 0, 0.1),
+                    rgba(0, 0, 0, 0.1)
+                  ),
+                  url('https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=800')
+                    center/cover;
+              "
+            ></div>
+            <p class="gallery-desc" id="desc3">
+              Suasana warung yang hangat dan ramah di pinggir jalan
+            </p>
+          </div>
+          <div class="gallery-item">
+            <div
+              class="gallery-image"
+              style="
+                background: linear-gradient(
+                    rgba(0, 0, 0, 0.1),
+                    rgba(0, 0, 0, 0.1)
+                  ),
+                  url('https://i.pinimg.com/1200x/f1/87/96/f18796cd715cf1ebbf3b66b1d85c3432.jpg')
+                    center/cover;
+              "
+            ></div>
+            <p class="gallery-desc" id="desc4">
+              Barista berpengalaman siap melayani dengan senyum tulus
+            </p>
+          </div>
+          <div class="gallery-item">
+            <div
+              class="gallery-image"
+              style="
+                background: linear-gradient(
+                    rgba(0, 0, 0, 0.1),
+                    rgba(0, 0, 0, 0.1)
+                  ),
+                  url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800')
+                    center/cover;
+              "
+            ></div>
+            <p class="gallery-desc" id="desc5">
+              Menu kopi beragam dengan harga yang ramah di kantong
+            </p>
+          </div>
+        </div>
+        <div class="menu-section">
+          <h2 class="section-title">Menu Favorit</h2>
+          <div class="menu-list">
+            <div class="menu-item">
+              <div class="menu-info">
+                <h3 class="menu-name" id="menu1Name">Kopi Hitam Jago</h3>
+                <p class="menu-desc" id="menu1Desc">
+                  Kopi robusta pilihan dengan rasa pahit yang pas
+                </p>
+              </div>
+              <span class="menu-price" id="menu1Price">Rp 8.000</span>
             </div>
-            <div class="feature-item">
-              <div class="feature-icon">⛰️</div>
-              <div class="feature-text">Single Origin</div>
+            <div class="menu-item">
+              <div class="menu-info">
+                <h3 class="menu-name" id="menu2Name">Kopi Susu Mantap</h3>
+                <p class="menu-desc" id="menu2Desc">
+                  Perpaduan sempurna kopi dan susu full cream
+                </p>
+              </div>
+              <span class="menu-price" id="menu2Price">Rp 12.000</span>
             </div>
-            <div class="feature-item">
-              <div class="feature-icon">✨</div>
-              <div class="feature-text">Freshly Roasted</div>
+            <div class="menu-item">
+              <div class="menu-info">
+                <h3 class="menu-name" id="menu3Name">Es Kopi Jago</h3>
+                <p class="menu-desc" id="menu3Desc">
+                  Kopi dingin yang menyegarkan dengan es batu
+                </p>
+              </div>
+              <span class="menu-price" id="menu3Price">Rp 10.000</span>
+            </div>
+            <div class="menu-item">
+              <div class="menu-info">
+                <h3 class="menu-name" id="menu4Name">Cappuccino Spesial</h3>
+                <p class="menu-desc" id="menu4Desc">
+                  Cappuccino dengan foam lembut dan creamy
+                </p>
+              </div>
+              <span class="menu-price" id="menu4Price">Rp 15.000</span>
             </div>
           </div>
-          <a
-            href="https://wa.me/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="cta-button"
-            id="ctaButton"
-          >
-            Pesan Sekarang
-          </a>
         </div>
-      </main>
-      <footer class="footer-section">
-        <p id="footerText">
-          © 2024 Kopi Nusantara. Dibuat dengan cinta untuk pecinta kopi.
-        </p>
-      </footer>
+        <div class="schedule-section">
+          <h2 class="section-title">Jam Buka</h2>
+          <div class="schedule-box">
+            <div class="schedule-item">
+              <span class="day" id="mondayLabel">Senin</span>
+              <span class="time" id="mondayTime">07:00 - 22:00</span>
+            </div>
+            <div class="schedule-item">
+              <span class="day" id="tuesdayLabel">Selasa</span>
+              <span class="time" id="tuesdayTime">07:00 - 22:00</span>
+            </div>
+            <div class="schedule-item">
+              <span class="day" id="wednesdayLabel">Rabu</span>
+              <span class="time" id="wednesdayTime">07:00 - 22:00</span>
+            </div>
+            <div class="schedule-item">
+              <span class="day" id="thursdayLabel">Kamis</span>
+              <span class="time" id="thursdayTime">07:00 - 22:00</span>
+            </div>
+            <div class="schedule-item">
+              <span class="day" id="fridayLabel">Jumat</span>
+              <span class="time" id="fridayTime">07:00 - 22:00</span>
+            </div>
+            <div class="schedule-item">
+              <span class="day" id="saturdayLabel">Sabtu</span>
+              <span class="time" id="saturdayTime">08:00 - 23:00</span>
+            </div>
+            <div class="schedule-item">
+              <span class="day" id="sundayLabel">Minggu</span>
+              <span class="time" id="sundayTime">08:00 - 23:00</span>
+            </div>
+          </div>
+        </div>
+        <a
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="cta-button"
+          id="ctaButton"
+          >Kunjungi Kami</a
+        >
+      </div>
     </div>
+    <a
+      href="promote.html#packages-title"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="floating-button"
+      id="floatingButton"
+      >✉️</a
+    >
     <script>
       const defaultConfig = {
-        brand_name: "KOPI NUSANTARA",
-        hero_title: "Single Origin dari Hati Pegunungan",
-        hero_subtitle: "Arabica Premium - Dataran Tinggi Gayo",
-        taste_description:
-          "Nikmati cita rasa coklat pekat dengan sentuhan karamel manis dan aroma bunga yang memikat. Setiap biji dipilih dengan teliti dari ketinggian 1.500 mdpl, diproses dengan metode natural untuk menghadirkan kompleksitas rasa yang sempurna di setiap tegukan.",
-        cta_button_text: "Pesan Sekarang",
-        footer_text:
-          "© 2024 Kopi Nusantara. Dibuat dengan cinta untuk pecinta kopi.",
-        background_color: "#F5E6D3",
-        surface_color: "#FFFFFF",
+        main_title: "KOPI JAGO",
+        subtitle: "Ngopi Enak, Harga Pas, Tempatnya Asyik!",
+        image1_desc:
+          "Kopi premium disajikan dengan cinta dalam setiap tegukan hangat",
+        image2_desc:
+          "Area duduk nyaman untuk bersantai bersama teman dan keluarga",
+        image3_desc: "Suasana warung yang hangat dan ramah di pinggir jalan",
+        image4_desc: "Barista berpengalaman siap melayani dengan senyum tulus",
+        image5_desc: "Menu kopi beragam dengan harga yang ramah di kantong",
+        menu1_name: "Kopi Hitam Jago",
+        menu1_desc: "Kopi robusta pilihan dengan rasa pahit yang pas",
+        menu1_price: "Rp 8.000",
+        menu2_name: "Kopi Susu Mantap",
+        menu2_desc: "Perpaduan sempurna kopi dan susu full cream",
+        menu2_price: "Rp 12.000",
+        menu3_name: "Es Kopi Jago",
+        menu3_desc: "Kopi dingin yang menyegarkan dengan es batu",
+        menu3_price: "Rp 10.000",
+        menu4_name: "Cappuccino Spesial",
+        menu4_desc: "Cappuccino dengan foam lembut dan creamy",
+        menu4_price: "Rp 15.000",
+        monday_label: "Senin",
+        monday_time: "07:00 - 22:00",
+        tuesday_label: "Selasa",
+        tuesday_time: "07:00 - 22:00",
+        wednesday_label: "Rabu",
+        wednesday_time: "07:00 - 22:00",
+        thursday_label: "Kamis",
+        thursday_time: "07:00 - 22:00",
+        friday_label: "Jumat",
+        friday_time: "07:00 - 22:00",
+        saturday_label: "Sabtu",
+        saturday_time: "08:00 - 23:00",
+        sunday_label: "Minggu",
+        sunday_time: "08:00 - 23:00",
+        button_text: "Kunjungi Kami",
+        primary_color: "#8B4513",
+        background_color: "#FFF8E7",
         text_color: "#3E2723",
-        primary_action_color: "#6D4C41",
-        secondary_text_color: "#5D4037",
-        font_family: "Georgia, 'Times New Roman', serif",
+        accent_color: "#6B4423",
+        button_color: "#8B4513",
+        font_family: "Segoe UI",
         font_size: 16,
       };
 
       async function onConfigChange(config) {
-        const brandName = document.getElementById("brandName");
-        const heroTitle = document.getElementById("heroTitle");
-        const heroSubtitle = document.getElementById("heroSubtitle");
-        const tasteDescription = document.getElementById("tasteDescription");
+        const mainTitle = document.getElementById("mainTitle");
+        const subtitle = document.getElementById("subtitle");
+        const desc1 = document.getElementById("desc1");
+        const desc2 = document.getElementById("desc2");
+        const desc3 = document.getElementById("desc3");
+        const desc4 = document.getElementById("desc4");
+        const desc5 = document.getElementById("desc5");
+        const menu1Name = document.getElementById("menu1Name");
+        const menu1Desc = document.getElementById("menu1Desc");
+        const menu1Price = document.getElementById("menu1Price");
+        const menu2Name = document.getElementById("menu2Name");
+        const menu2Desc = document.getElementById("menu2Desc");
+        const menu2Price = document.getElementById("menu2Price");
+        const menu3Name = document.getElementById("menu3Name");
+        const menu3Desc = document.getElementById("menu3Desc");
+        const menu3Price = document.getElementById("menu3Price");
+        const menu4Name = document.getElementById("menu4Name");
+        const menu4Desc = document.getElementById("menu4Desc");
+        const menu4Price = document.getElementById("menu4Price");
+        const mondayLabel = document.getElementById("mondayLabel");
+        const mondayTime = document.getElementById("mondayTime");
+        const tuesdayLabel = document.getElementById("tuesdayLabel");
+        const tuesdayTime = document.getElementById("tuesdayTime");
+        const wednesdayLabel = document.getElementById("wednesdayLabel");
+        const wednesdayTime = document.getElementById("wednesdayTime");
+        const thursdayLabel = document.getElementById("thursdayLabel");
+        const thursdayTime = document.getElementById("thursdayTime");
+        const fridayLabel = document.getElementById("fridayLabel");
+        const fridayTime = document.getElementById("fridayTime");
+        const saturdayLabel = document.getElementById("saturdayLabel");
+        const saturdayTime = document.getElementById("saturdayTime");
+        const sundayLabel = document.getElementById("sundayLabel");
+        const sundayTime = document.getElementById("sundayTime");
         const ctaButton = document.getElementById("ctaButton");
-        const footerText = document.getElementById("footerText");
-        const pageWrapper = document.querySelector(".page-wrapper");
+        const container = document.querySelector(".container");
 
-        // Update text content
-        brandName.textContent = config.brand_name || defaultConfig.brand_name;
-        heroTitle.textContent = config.hero_title || defaultConfig.hero_title;
-        heroSubtitle.textContent =
-          config.hero_subtitle || defaultConfig.hero_subtitle;
-        tasteDescription.textContent =
-          config.taste_description || defaultConfig.taste_description;
-        ctaButton.textContent =
-          config.cta_button_text || defaultConfig.cta_button_text;
-        footerText.textContent =
-          config.footer_text || defaultConfig.footer_text;
-
-        // Update colors
-        const backgroundColor =
-          config.background_color || defaultConfig.background_color;
-        const surfaceColor =
-          config.surface_color || defaultConfig.surface_color;
-        const textColor = config.text_color || defaultConfig.text_color;
-        const primaryActionColor =
-          config.primary_action_color || defaultConfig.primary_action_color;
-        const secondaryTextColor =
-          config.secondary_text_color || defaultConfig.secondary_text_color;
-
-        pageWrapper.style.background = `linear-gradient(135deg, ${backgroundColor} 0%, #E8D5C4 100%)`;
-        brandName.style.color = secondaryTextColor;
-        heroTitle.style.color = textColor;
-        heroSubtitle.style.color = primaryActionColor;
-        tasteDescription.style.color = secondaryTextColor;
-        ctaButton.style.background = `linear-gradient(135deg, ${primaryActionColor} 0%, #5D4037 100%)`;
-        ctaButton.style.boxShadow = `0 10px 30px ${primaryActionColor}4D`;
-
-        // Update font
         const customFont = config.font_family || defaultConfig.font_family;
-        const baseFontStack = "Georgia, 'Times New Roman', serif";
-        document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        const baseFontSize = config.font_size || defaultConfig.font_size;
+        const baseFontStack = "Tahoma, Geneva, Verdana, sans-serif";
 
-        // Update font size
-        const baseSize = config.font_size || defaultConfig.font_size;
-        brandName.style.fontSize = `${baseSize * 1.75}px`;
-        heroTitle.style.fontSize = `${baseSize * 3}px`;
-        heroSubtitle.style.fontSize = `${baseSize * 1.25}px`;
-        tasteDescription.style.fontSize = `${baseSize * 1.125}px`;
-        ctaButton.style.fontSize = `${baseSize * 1.25}px`;
-        footerText.style.fontSize = `${baseSize * 0.875}px`;
+        mainTitle.textContent = config.main_title || defaultConfig.main_title;
+        mainTitle.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        mainTitle.style.fontSize = `${baseFontSize * 2}px`;
+        mainTitle.style.color = config.text_color || defaultConfig.text_color;
+
+        subtitle.textContent = config.subtitle || defaultConfig.subtitle;
+        subtitle.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        subtitle.style.fontSize = `${baseFontSize * 1.125}px`;
+        subtitle.style.color =
+          config.accent_color || defaultConfig.accent_color;
+
+        desc1.textContent = config.image1_desc || defaultConfig.image1_desc;
+        desc1.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        desc1.style.fontSize = `${baseFontSize * 0.9375}px`;
+        desc1.style.color = config.text_color || defaultConfig.text_color;
+
+        desc2.textContent = config.image2_desc || defaultConfig.image2_desc;
+        desc2.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        desc2.style.fontSize = `${baseFontSize * 0.9375}px`;
+        desc2.style.color = config.text_color || defaultConfig.text_color;
+
+        desc3.textContent = config.image3_desc || defaultConfig.image3_desc;
+        desc3.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        desc3.style.fontSize = `${baseFontSize * 0.9375}px`;
+        desc3.style.color = config.text_color || defaultConfig.text_color;
+
+        desc4.textContent = config.image4_desc || defaultConfig.image4_desc;
+        desc4.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        desc4.style.fontSize = `${baseFontSize * 0.9375}px`;
+        desc4.style.color = config.text_color || defaultConfig.text_color;
+
+        desc5.textContent = config.image5_desc || defaultConfig.image5_desc;
+        desc5.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        desc5.style.fontSize = `${baseFontSize * 0.9375}px`;
+        desc5.style.color = config.text_color || defaultConfig.text_color;
+
+        menu1Name.textContent = config.menu1_name || defaultConfig.menu1_name;
+        menu1Name.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        menu1Name.style.fontSize = `${baseFontSize}px`;
+        menu1Name.style.color = config.text_color || defaultConfig.text_color;
+
+        menu1Desc.textContent = config.menu1_desc || defaultConfig.menu1_desc;
+        menu1Desc.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        menu1Desc.style.fontSize = `${baseFontSize * 0.8125}px`;
+        menu1Desc.style.color =
+          config.accent_color || defaultConfig.accent_color;
+
+        menu1Price.textContent =
+          config.menu1_price || defaultConfig.menu1_price;
+        menu1Price.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        menu1Price.style.fontSize = `${baseFontSize}px`;
+        menu1Price.style.color =
+          config.button_color || defaultConfig.button_color;
+
+        menu2Name.textContent = config.menu2_name || defaultConfig.menu2_name;
+        menu2Name.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        menu2Name.style.fontSize = `${baseFontSize}px`;
+        menu2Name.style.color = config.text_color || defaultConfig.text_color;
+
+        menu2Desc.textContent = config.menu2_desc || defaultConfig.menu2_desc;
+        menu2Desc.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        menu2Desc.style.fontSize = `${baseFontSize * 0.8125}px`;
+        menu2Desc.style.color =
+          config.accent_color || defaultConfig.accent_color;
+
+        menu2Price.textContent =
+          config.menu2_price || defaultConfig.menu2_price;
+        menu2Price.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        menu2Price.style.fontSize = `${baseFontSize}px`;
+        menu2Price.style.color =
+          config.button_color || defaultConfig.button_color;
+
+        menu3Name.textContent = config.menu3_name || defaultConfig.menu3_name;
+        menu3Name.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        menu3Name.style.fontSize = `${baseFontSize}px`;
+        menu3Name.style.color = config.text_color || defaultConfig.text_color;
+
+        menu3Desc.textContent = config.menu3_desc || defaultConfig.menu3_desc;
+        menu3Desc.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        menu3Desc.style.fontSize = `${baseFontSize * 0.8125}px`;
+        menu3Desc.style.color =
+          config.accent_color || defaultConfig.accent_color;
+
+        menu3Price.textContent =
+          config.menu3_price || defaultConfig.menu3_price;
+        menu3Price.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        menu3Price.style.fontSize = `${baseFontSize}px`;
+        menu3Price.style.color =
+          config.button_color || defaultConfig.button_color;
+
+        menu4Name.textContent = config.menu4_name || defaultConfig.menu4_name;
+        menu4Name.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        menu4Name.style.fontSize = `${baseFontSize}px`;
+        menu4Name.style.color = config.text_color || defaultConfig.text_color;
+
+        menu4Desc.textContent = config.menu4_desc || defaultConfig.menu4_desc;
+        menu4Desc.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        menu4Desc.style.fontSize = `${baseFontSize * 0.8125}px`;
+        menu4Desc.style.color =
+          config.accent_color || defaultConfig.accent_color;
+
+        menu4Price.textContent =
+          config.menu4_price || defaultConfig.menu4_price;
+        menu4Price.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        menu4Price.style.fontSize = `${baseFontSize}px`;
+        menu4Price.style.color =
+          config.button_color || defaultConfig.button_color;
+
+        mondayLabel.textContent =
+          config.monday_label || defaultConfig.monday_label;
+        mondayLabel.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        mondayLabel.style.fontSize = `${baseFontSize * 0.9375}px`;
+        mondayLabel.style.color = config.text_color || defaultConfig.text_color;
+
+        mondayTime.textContent =
+          config.monday_time || defaultConfig.monday_time;
+        mondayTime.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        mondayTime.style.fontSize = `${baseFontSize * 0.9375}px`;
+        mondayTime.style.color =
+          config.button_color || defaultConfig.button_color;
+
+        tuesdayLabel.textContent =
+          config.tuesday_label || defaultConfig.tuesday_label;
+        tuesdayLabel.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        tuesdayLabel.style.fontSize = `${baseFontSize * 0.9375}px`;
+        tuesdayLabel.style.color =
+          config.text_color || defaultConfig.text_color;
+
+        tuesdayTime.textContent =
+          config.tuesday_time || defaultConfig.tuesday_time;
+        tuesdayTime.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        tuesdayTime.style.fontSize = `${baseFontSize * 0.9375}px`;
+        tuesdayTime.style.color =
+          config.button_color || defaultConfig.button_color;
+
+        wednesdayLabel.textContent =
+          config.wednesday_label || defaultConfig.wednesday_label;
+        wednesdayLabel.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        wednesdayLabel.style.fontSize = `${baseFontSize * 0.9375}px`;
+        wednesdayLabel.style.color =
+          config.text_color || defaultConfig.text_color;
+
+        wednesdayTime.textContent =
+          config.wednesday_time || defaultConfig.wednesday_time;
+        wednesdayTime.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        wednesdayTime.style.fontSize = `${baseFontSize * 0.9375}px`;
+        wednesdayTime.style.color =
+          config.button_color || defaultConfig.button_color;
+
+        thursdayLabel.textContent =
+          config.thursday_label || defaultConfig.thursday_label;
+        thursdayLabel.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        thursdayLabel.style.fontSize = `${baseFontSize * 0.9375}px`;
+        thursdayLabel.style.color =
+          config.text_color || defaultConfig.text_color;
+
+        thursdayTime.textContent =
+          config.thursday_time || defaultConfig.thursday_time;
+        thursdayTime.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        thursdayTime.style.fontSize = `${baseFontSize * 0.9375}px`;
+        thursdayTime.style.color =
+          config.button_color || defaultConfig.button_color;
+
+        fridayLabel.textContent =
+          config.friday_label || defaultConfig.friday_label;
+        fridayLabel.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        fridayLabel.style.fontSize = `${baseFontSize * 0.9375}px`;
+        fridayLabel.style.color = config.text_color || defaultConfig.text_color;
+
+        fridayTime.textContent =
+          config.friday_time || defaultConfig.friday_time;
+        fridayTime.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        fridayTime.style.fontSize = `${baseFontSize * 0.9375}px`;
+        fridayTime.style.color =
+          config.button_color || defaultConfig.button_color;
+
+        saturdayLabel.textContent =
+          config.saturday_label || defaultConfig.saturday_label;
+        saturdayLabel.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        saturdayLabel.style.fontSize = `${baseFontSize * 0.9375}px`;
+        saturdayLabel.style.color =
+          config.text_color || defaultConfig.text_color;
+
+        saturdayTime.textContent =
+          config.saturday_time || defaultConfig.saturday_time;
+        saturdayTime.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        saturdayTime.style.fontSize = `${baseFontSize * 0.9375}px`;
+        saturdayTime.style.color =
+          config.button_color || defaultConfig.button_color;
+
+        sundayLabel.textContent =
+          config.sunday_label || defaultConfig.sunday_label;
+        sundayLabel.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        sundayLabel.style.fontSize = `${baseFontSize * 0.9375}px`;
+        sundayLabel.style.color = config.text_color || defaultConfig.text_color;
+
+        sundayTime.textContent =
+          config.sunday_time || defaultConfig.sunday_time;
+        sundayTime.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        sundayTime.style.fontSize = `${baseFontSize * 0.9375}px`;
+        sundayTime.style.color =
+          config.button_color || defaultConfig.button_color;
+
+        ctaButton.textContent = config.button_text || defaultConfig.button_text;
+        ctaButton.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        ctaButton.style.fontSize = `${baseFontSize * 1.125}px`;
+        ctaButton.style.backgroundColor =
+          config.button_color || defaultConfig.button_color;
+
+        container.style.backgroundColor =
+          config.background_color || defaultConfig.background_color;
       }
 
       function mapToCapabilities(config) {
@@ -624,40 +777,33 @@
               get: () =>
                 config.background_color || defaultConfig.background_color,
               set: (value) => {
-                config.background_color = value;
-                window.elementSdk.setConfig({ background_color: value });
-              },
-            },
-            {
-              get: () => config.surface_color || defaultConfig.surface_color,
-              set: (value) => {
-                config.surface_color = value;
-                window.elementSdk.setConfig({ surface_color: value });
+                if (window.elementSdk) {
+                  window.elementSdk.setConfig({ background_color: value });
+                }
               },
             },
             {
               get: () => config.text_color || defaultConfig.text_color,
               set: (value) => {
-                config.text_color = value;
-                window.elementSdk.setConfig({ text_color: value });
+                if (window.elementSdk) {
+                  window.elementSdk.setConfig({ text_color: value });
+                }
               },
             },
             {
-              get: () =>
-                config.primary_action_color ||
-                defaultConfig.primary_action_color,
+              get: () => config.accent_color || defaultConfig.accent_color,
               set: (value) => {
-                config.primary_action_color = value;
-                window.elementSdk.setConfig({ primary_action_color: value });
+                if (window.elementSdk) {
+                  window.elementSdk.setConfig({ accent_color: value });
+                }
               },
             },
             {
-              get: () =>
-                config.secondary_text_color ||
-                defaultConfig.secondary_text_color,
+              get: () => config.button_color || defaultConfig.button_color,
               set: (value) => {
-                config.secondary_text_color = value;
-                window.elementSdk.setConfig({ secondary_text_color: value });
+                if (window.elementSdk) {
+                  window.elementSdk.setConfig({ button_color: value });
+                }
               },
             },
           ],
@@ -665,15 +811,17 @@
           fontEditable: {
             get: () => config.font_family || defaultConfig.font_family,
             set: (value) => {
-              config.font_family = value;
-              window.elementSdk.setConfig({ font_family: value });
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ font_family: value });
+              }
             },
           },
           fontSizeable: {
             get: () => config.font_size || defaultConfig.font_size,
             set: (value) => {
-              config.font_size = value;
-              window.elementSdk.setConfig({ font_size: value });
+              if (window.elementSdk) {
+                window.elementSdk.setConfig({ font_size: value });
+              }
             },
           },
         };
@@ -681,21 +829,61 @@
 
       function mapToEditPanelValues(config) {
         return new Map([
-          ["brand_name", config.brand_name || defaultConfig.brand_name],
-          ["hero_title", config.hero_title || defaultConfig.hero_title],
+          ["main_title", config.main_title || defaultConfig.main_title],
+          ["subtitle", config.subtitle || defaultConfig.subtitle],
+          ["image1_desc", config.image1_desc || defaultConfig.image1_desc],
+          ["image2_desc", config.image2_desc || defaultConfig.image2_desc],
+          ["image3_desc", config.image3_desc || defaultConfig.image3_desc],
+          ["image4_desc", config.image4_desc || defaultConfig.image4_desc],
+          ["image5_desc", config.image5_desc || defaultConfig.image5_desc],
+          ["menu1_name", config.menu1_name || defaultConfig.menu1_name],
+          ["menu1_desc", config.menu1_desc || defaultConfig.menu1_desc],
+          ["menu1_price", config.menu1_price || defaultConfig.menu1_price],
+          ["menu2_name", config.menu2_name || defaultConfig.menu2_name],
+          ["menu2_desc", config.menu2_desc || defaultConfig.menu2_desc],
+          ["menu2_price", config.menu2_price || defaultConfig.menu2_price],
+          ["menu3_name", config.menu3_name || defaultConfig.menu3_name],
+          ["menu3_desc", config.menu3_desc || defaultConfig.menu3_desc],
+          ["menu3_price", config.menu3_price || defaultConfig.menu3_price],
+          ["menu4_name", config.menu4_name || defaultConfig.menu4_name],
+          ["menu4_desc", config.menu4_desc || defaultConfig.menu4_desc],
+          ["menu4_price", config.menu4_price || defaultConfig.menu4_price],
+          ["monday_label", config.monday_label || defaultConfig.monday_label],
+          ["monday_time", config.monday_time || defaultConfig.monday_time],
           [
-            "hero_subtitle",
-            config.hero_subtitle || defaultConfig.hero_subtitle,
+            "tuesday_label",
+            config.tuesday_label || defaultConfig.tuesday_label,
+          ],
+          ["tuesday_time", config.tuesday_time || defaultConfig.tuesday_time],
+          [
+            "wednesday_label",
+            config.wednesday_label || defaultConfig.wednesday_label,
           ],
           [
-            "taste_description",
-            config.taste_description || defaultConfig.taste_description,
+            "wednesday_time",
+            config.wednesday_time || defaultConfig.wednesday_time,
           ],
           [
-            "cta_button_text",
-            config.cta_button_text || defaultConfig.cta_button_text,
+            "thursday_label",
+            config.thursday_label || defaultConfig.thursday_label,
           ],
-          ["footer_text", config.footer_text || defaultConfig.footer_text],
+          [
+            "thursday_time",
+            config.thursday_time || defaultConfig.thursday_time,
+          ],
+          ["friday_label", config.friday_label || defaultConfig.friday_label],
+          ["friday_time", config.friday_time || defaultConfig.friday_time],
+          [
+            "saturday_label",
+            config.saturday_label || defaultConfig.saturday_label,
+          ],
+          [
+            "saturday_time",
+            config.saturday_time || defaultConfig.saturday_time,
+          ],
+          ["sunday_label", config.sunday_label || defaultConfig.sunday_label],
+          ["sunday_time", config.sunday_time || defaultConfig.sunday_time],
+          ["button_text", config.button_text || defaultConfig.button_text],
         ]);
       }
 
@@ -715,7 +903,7 @@
           if (b) {
             var d = b.createElement("script");
             d.innerHTML =
-              "window.__CF$cv$params={r:'9a61871dd75ee8a2',t:'MTc2NDQxMzI1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+              "window.__CF$cv$params={r:'9a646475238b3dd8',t:'MTc2NDQ0MzI5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
             b.getElementsByTagName("head")[0].appendChild(d);
           }
         }

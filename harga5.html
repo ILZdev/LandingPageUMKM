@@ -3,8 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Toko Sepatu Lokal</title>
-    <script src="/_sdk/data_sdk.js"></script>
+    <meta
+      name="description"
+      content="UMKM Kuliner - Sajian Lezat dengan Cita Rasa Nusantara"
+    />
+    <meta
+      name="keywords"
+      content="kuliner, makanan, umkm, restoran, catering"
+    />
+    <title>UMKM Kuliner - Sajian Lezat Nusantara</title>
     <script src="/_sdk/element_sdk.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -12,97 +19,279 @@
         box-sizing: border-box;
       }
 
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
-
       * {
-        font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI",
-          sans-serif;
-      }
-
-      html,
-      body {
-        height: 100%;
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
       }
 
-      .fade-in-up {
+      html {
+        scroll-behavior: smooth;
+        height: 100%;
+      }
+
+      body {
+        height: 100%;
+        overflow-x: hidden;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes fadeInRight {
+        from {
+          opacity: 0;
+          transform: translateX(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes scaleIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      .animate-fade-in-up {
         opacity: 0;
-        transform: translateY(40px);
-        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        animation: fadeInUp 0.8s ease forwards;
       }
 
-      .fade-in-up.visible {
+      .animate-fade-in-left {
+        opacity: 0;
+        animation: fadeInLeft 0.8s ease forwards;
+      }
+
+      .animate-fade-in-right {
+        opacity: 0;
+        animation: fadeInRight 0.8s ease forwards;
+      }
+
+      .animate-scale-in {
+        opacity: 0;
+        animation: scaleIn 0.6s ease forwards;
+      }
+
+      .delay-100 {
+        animation-delay: 0.1s;
+      }
+      .delay-200 {
+        animation-delay: 0.2s;
+      }
+      .delay-300 {
+        animation-delay: 0.3s;
+      }
+      .delay-400 {
+        animation-delay: 0.4s;
+      }
+      .delay-500 {
+        animation-delay: 0.5s;
+      }
+      .delay-600 {
+        animation-delay: 0.6s;
+      }
+
+      .scroll-reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+
+      .scroll-reveal.revealed {
         opacity: 1;
         transform: translateY(0);
       }
 
-      .category-card {
-        transition: all 0.3s ease;
-        cursor: pointer;
-      }
-
-      .category-card:hover {
-        transform: translateY(-10px) scale(1.05);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-      }
-
-      .product-card {
-        transition: all 0.4s ease;
+      /* Microinteractions */
+      .btn-primary {
         position: relative;
         overflow: hidden;
+        transition: all 0.3s ease;
       }
 
-      .product-card:hover {
-        transform: translateY(-12px);
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+      .btn-primary::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
       }
 
-      .product-card:hover .product-overlay {
-        opacity: 1;
+      .btn-primary:hover::before {
+        width: 300px;
+        height: 300px;
       }
 
-      .product-overlay {
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-primary:active {
+        transform: translateY(-1px);
+      }
+
+      .card-hover {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .card-hover:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .menu-item {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .menu-item::after {
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
-        right: 0;
-        bottom: 0;
+        width: 100%;
+        height: 100%;
         background: linear-gradient(
           180deg,
           transparent 0%,
           rgba(0, 0, 0, 0.7) 100%
         );
         opacity: 0;
-        transition: opacity 0.4s ease;
-        display: flex;
-        align-items: flex-end;
+        transition: opacity 0.3s ease;
+      }
+
+      .menu-item:hover::after {
+        opacity: 1;
+      }
+
+      .menu-item .menu-overlay {
+        position: absolute;
+        bottom: -100%;
+        left: 0;
+        right: 0;
         padding: 1.5rem;
+        transition: bottom 0.3s ease;
+        z-index: 10;
       }
 
-      .btn-primary {
+      .menu-item:hover .menu-overlay {
+        bottom: 0;
+      }
+
+      .filter-btn {
+        position: relative;
         transition: all 0.3s ease;
       }
 
-      .btn-primary:hover {
-        transform: scale(1.05);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      .filter-btn::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        width: 0;
+        height: 3px;
+        transform: translateX(-50%);
+        transition: width 0.3s ease;
       }
 
-      .testimonial-card {
-        transition: transform 0.3s ease;
+      .filter-btn.active::after {
+        width: 100%;
       }
 
-      .testimonial-card:hover {
-        transform: scale(1.03);
+      .filter-btn:hover {
+        transform: translateY(-2px);
       }
 
-      .tab-button {
+      /* Carousel */
+      .carousel-container {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .carousel-slide {
+        min-width: 100%;
+        padding: 0 1rem;
+      }
+
+      .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
         transition: all 0.3s ease;
+        z-index: 10;
       }
 
-      .tab-button.active {
-        border-bottom: 3px solid currentColor;
+      .carousel-btn:hover {
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .carousel-btn.prev {
+        left: 20px;
+      }
+      .carousel-btn.next {
+        right: 20px;
+      }
+
+      .star-rating {
+        display: inline-flex;
+        gap: 2px;
       }
 
       .modal {
@@ -110,12 +299,22 @@
         position: fixed;
         top: 0;
         left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.7);
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
         z-index: 1000;
         align-items: center;
         justify-content: center;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
       }
 
       .modal.active {
@@ -124,54 +323,40 @@
 
       .modal-content {
         background: white;
-        border-radius: 1rem;
-        max-width: 500px;
+        border-radius: 20px;
+        max-width: 600px;
         width: 90%;
         max-height: 90%;
         overflow-y: auto;
-        animation: slideUp 0.3s ease-out;
+        animation: slideUp 0.4s ease;
       }
 
       @keyframes slideUp {
         from {
-          opacity: 0;
           transform: translateY(50px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .toast {
-        position: fixed;
-        bottom: 2rem;
-        right: 2rem;
-        background: white;
-        padding: 1rem 1.5rem;
-        border-radius: 0.5rem;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        z-index: 2000;
-        animation: slideIn 0.3s ease-out;
-      }
-
-      @keyframes slideIn {
-        from {
           opacity: 0;
-          transform: translateX(100px);
         }
         to {
+          transform: translateY(0);
           opacity: 1;
-          transform: translateX(0);
         }
+      }
+
+      .social-icon {
+        transition: all 0.3s ease;
+      }
+
+      .social-icon:hover {
+        transform: translateY(-5px) rotate(5deg);
       }
 
       .loading-spinner {
-        border: 3px solid rgba(255, 255, 255, 0.3);
-        border-top-color: white;
-        border-radius: 50%;
+        display: inline-block;
         width: 20px;
         height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
         animation: spin 0.8s linear infinite;
       }
 
@@ -180,1008 +365,1157 @@
           transform: rotate(360deg);
         }
       }
+
+      .toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        color: white;
+        font-weight: 600;
+        z-index: 1001;
+        animation: slideInRight 0.4s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      @keyframes slideInRight {
+        from {
+          transform: translateX(400px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .team-member {
+        transition: all 0.3s ease;
+      }
+
+      .team-member:hover {
+        transform: translateY(-5px);
+      }
+
+      .team-member img {
+        transition: transform 0.3s ease;
+      }
+
+      .team-member:hover img {
+        transform: scale(1.1);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .carousel-btn {
+          width: 40px;
+          height: 40px;
+        }
+
+        .carousel-btn.prev {
+          left: 10px;
+        }
+        .carousel-btn.next {
+          right: 10px;
+        }
+      }
+
+      /* Smooth scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
     </style>
     <style>
       @view-transition {
         navigation: auto;
       }
     </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   </head>
-  <body class="antialiased">
-    <!-- Navigation -->
-    <nav class="w-full bg-white shadow-md fixed top-0 left-0 right-0 z-50">
-      <div
-        class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center"
-      >
-        <div class="flex items-center gap-2">
-          <span class="text-3xl">👟</span>
-          <h1 class="text-2xl font-bold" id="brand-name">ShoesHub</h1>
-        </div>
-        <button
-          onclick="toggleView()"
-          class="btn-primary px-6 py-2 rounded-full font-semibold text-white"
-        >
-          <span id="nav-button-text">Admin</span>
-        </button>
-      </div>
-    </nav>
-    <!-- Customer View -->
-    <div id="customer-view" class="w-full">
-      <!-- Hero Section -->
-      <section
-        class="w-full pt-24 pb-16 px-6"
-        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
-      >
-        <div class="max-w-7xl mx-auto">
-          <div class="flex flex-col lg:flex-row items-center gap-12">
-            <div class="flex-1 text-white fade-in-up">
-              <h2
-                id="hero-title"
-                class="text-5xl lg:text-6xl font-bold mb-6 leading-tight"
-              >
-                Koleksi Sepatu Terbaik untuk Gaya Anda
-              </h2>
-              <p id="hero-subtitle" class="text-xl mb-8 opacity-90">
-                Temukan sepatu impian Anda dari berbagai kategori pilihan dengan
-                harga terjangkau
-              </p>
-              <button
-                onclick="scrollToProducts()"
-                id="hero-cta-btn"
-                class="btn-primary bg-white px-8 py-4 rounded-full text-lg font-semibold"
-              >
-                Belanja Sekarang 🛍️
-              </button>
-            </div>
-            <div class="flex-1 fade-in-up">
-              <svg
-                class="w-full max-w-lg mx-auto"
-                viewbox="0 0 500 400"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <ellipse
-                  cx="250"
-                  cy="350"
-                  rx="200"
-                  ry="30"
-                  fill="rgba(255,255,255,0.2)"
-                />
-                <path
-                  d="M150 250 L180 200 L220 180 L280 180 L320 200 L350 250 L330 280 L300 300 L200 300 L170 280 Z"
-                  fill="white"
-                  opacity="0.95"
-                />
-                <path
-                  d="M180 200 L220 180 L280 180 L320 200 L310 220 L270 210 L230 210 L190 220 Z"
-                  fill="#667eea"
-                />
-                <circle cx="200" cy="260" r="8" fill="#764ba2" />
-                <circle cx="250" cy="260" r="8" fill="#764ba2" />
-                <circle cx="300" cy="260" r="8" fill="#764ba2" />
-                <path
-                  d="M220 240 Q250 230 280 240"
-                  stroke="#764ba2"
-                  stroke-width="3"
-                  fill="none"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Categories Section -->
-      <section class="w-full py-16 px-6 bg-gray-50">
-        <div class="max-w-7xl mx-auto">
-          <h3
-            id="categories-title"
-            class="text-4xl font-bold text-center mb-12 fade-in-up"
-          >
-            Kategori Sepatu
-          </h3>
-          <div
-            class="grid grid-cols-2 md:grid-cols-4 gap-6"
-            id="categories-container"
-          >
-            <!-- Categories will be populated here -->
-          </div>
-        </div>
-      </section>
-      <!-- Products Section -->
-      <section id="products-section" class="w-full py-16 px-6 bg-white">
-        <div class="max-w-7xl mx-auto">
-          <h3
-            id="products-title"
-            class="text-4xl font-bold text-center mb-12 fade-in-up"
-          >
-            Produk Terbaik Kami
-          </h3>
-          <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-            id="products-container"
-          >
-            <!-- Products will be populated here -->
-          </div>
-        </div>
-      </section>
-      <!-- Testimonials Section -->
-      <section class="w-full py-16 px-6 bg-gray-50">
-        <div class="max-w-7xl mx-auto">
-          <h3
-            id="testimonials-title"
-            class="text-4xl font-bold text-center mb-12 fade-in-up"
-          >
-            Apa Kata Pelanggan
-          </h3>
-          <div class="grid md:grid-cols-3 gap-8">
-            <div
-              class="testimonial-card bg-white p-8 rounded-2xl shadow-lg fade-in-up"
-            >
-              <div class="flex items-center gap-4 mb-4">
-                <div
-                  class="w-16 h-16 rounded-full bg-purple-600 flex items-center justify-center text-white text-2xl font-bold"
-                >
-                  A
-                </div>
-                <div>
-                  <h4 class="font-bold text-lg">Ahmad Rizki</h4>
-                  <div class="text-yellow-500">⭐⭐⭐⭐⭐</div>
-                </div>
-              </div>
-              <p class="text-gray-600">
-                Sepatu sneakers yang saya beli sangat nyaman dan berkualitas.
-                Pengiriman cepat!
-              </p>
-            </div>
-            <div
-              class="testimonial-card bg-white p-8 rounded-2xl shadow-lg fade-in-up"
-            >
-              <div class="flex items-center gap-4 mb-4">
-                <div
-                  class="w-16 h-16 rounded-full bg-pink-600 flex items-center justify-center text-white text-2xl font-bold"
-                >
-                  S
-                </div>
-                <div>
-                  <h4 class="font-bold text-lg">Siti Nurhaliza</h4>
-                  <div class="text-yellow-500">⭐⭐⭐⭐⭐</div>
-                </div>
-              </div>
-              <p class="text-gray-600">
-                Harga terjangkau dengan kualitas premium. Sangat puas dengan
-                pelayanannya!
-              </p>
-            </div>
-            <div
-              class="testimonial-card bg-white p-8 rounded-2xl shadow-lg fade-in-up"
-            >
-              <div class="flex items-center gap-4 mb-4">
-                <div
-                  class="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center text-white text-2xl font-bold"
-                >
-                  B
-                </div>
-                <div>
-                  <h4 class="font-bold text-lg">Budi Santoso</h4>
-                  <div class="text-yellow-500">⭐⭐⭐⭐⭐</div>
-                </div>
-              </div>
-              <p class="text-gray-600">
-                Koleksinya lengkap dan selalu update. Toko sepatu favorit saya!
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Newsletter Section -->
-      <section
-        class="w-full py-16 px-6 bg-gradient-to-r from-purple-600 to-indigo-600"
-      >
-        <div class="max-w-3xl mx-auto text-center text-white fade-in-up">
-          <h3 id="newsletter-title" class="text-4xl font-bold mb-4">
-            Dapatkan Penawaran Spesial
-          </h3>
-          <p id="newsletter-subtitle" class="text-xl mb-8 opacity-90">
-            Berlangganan newsletter kami dan dapatkan diskon hingga 30%!
-          </p>
-          <form
-            id="newsletter-form"
-            class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
-          >
-            <label for="newsletter-email" class="sr-only">Email</label>
-            <input
-              type="email"
-              id="newsletter-email"
-              placeholder="Masukkan email Anda"
-              required
-              class="flex-1 px-6 py-4 rounded-full text-gray-800"
-            />
-            <button
-              type="submit"
-              id="newsletter-submit"
-              class="btn-primary bg-white px-8 py-4 rounded-full font-semibold"
-            >
-              <span id="newsletter-cta-text">Daftar</span>
-            </button>
-          </form>
-        </div>
-      </section>
-    </div>
-    <!-- Admin Dashboard -->
-    <div id="admin-view" class="w-full hidden pt-20">
-      <div class="max-w-7xl mx-auto px-6 py-8">
-        <h2 class="text-4xl font-bold mb-8">Dashboard Admin</h2>
-        <!-- Tabs -->
-        <div class="flex gap-4 mb-8 border-b-2 border-gray-200">
-          <button
-            onclick="switchTab('products')"
-            class="tab-button active px-6 py-3 font-semibold"
-            id="tab-products"
-          >
-            Kelola Produk
-          </button>
-          <button
-            onclick="switchTab('messages')"
-            class="tab-button px-6 py-3 font-semibold"
-            id="tab-messages"
-          >
-            Pesan
-            <span
-              id="message-count"
-              class="ml-2 bg-red-500 text-white px-2 py-1 rounded-full text-sm"
-              >0</span
-            >
-          </button>
-          <button
-            onclick="switchTab('reports')"
-            class="tab-button px-6 py-3 font-semibold"
-            id="tab-reports"
-          >
-            Laporan
-          </button>
-        </div>
-        <!-- Products Tab -->
-        <div id="products-tab" class="tab-content">
-          <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
-            <h3 class="text-2xl font-bold mb-6">Tambah Produk Baru</h3>
-            <form id="add-product-form" class="grid md:grid-cols-2 gap-6">
-              <div>
-                <label for="product-name" class="block font-semibold mb-2"
-                  >Nama Produk</label
-                >
-                <input
-                  type="text"
-                  id="product-name"
-                  required
-                  class="w-full px-4 py-3 rounded-lg border-2 border-gray-300"
-                />
-              </div>
-              <div>
-                <label for="product-category" class="block font-semibold mb-2"
-                  >Kategori</label
-                >
-                <select
-                  id="product-category"
-                  required
-                  class="w-full px-4 py-3 rounded-lg border-2 border-gray-300 bg-white"
-                >
-                  <option value="Sneakers">Sneakers</option>
-                  <option value="Formal">Formal</option>
-                  <option value="Sport">Sport</option>
-                  <option value="Casual">Casual</option>
-                </select>
-              </div>
-              <div>
-                <label for="product-price" class="block font-semibold mb-2"
-                  >Harga (Rp)</label
-                >
-                <input
-                  type="number"
-                  id="product-price"
-                  required
-                  class="w-full px-4 py-3 rounded-lg border-2 border-gray-300"
-                />
-              </div>
-              <div>
-                <label for="product-image" class="block font-semibold mb-2"
-                  >Emoji/Icon</label
-                >
-                <input
-                  type="text"
-                  id="product-image"
-                  placeholder="👟"
-                  required
-                  class="w-full px-4 py-3 rounded-lg border-2 border-gray-300"
-                />
-              </div>
-              <div class="md:col-span-2">
-                <button
-                  type="submit"
-                  class="btn-primary w-full py-4 rounded-lg font-semibold text-white"
-                >
-                  Tambah Produk
-                </button>
-              </div>
-            </form>
-          </div>
-          <div class="bg-white rounded-2xl shadow-lg p-8">
-            <h3 class="text-2xl font-bold mb-6">Daftar Produk</h3>
-            <div id="admin-products-list" class="space-y-4">
-              <!-- Products list will be populated here -->
-            </div>
-          </div>
-        </div>
-        <!-- Messages Tab -->
-        <div id="messages-tab" class="tab-content hidden">
-          <div class="bg-white rounded-2xl shadow-lg p-8">
-            <h3 class="text-2xl font-bold mb-6">Pesan dari Pelanggan</h3>
-            <div id="messages-list" class="space-y-4">
-              <p class="text-gray-500 text-center py-8">Belum ada pesan</p>
-            </div>
-          </div>
-        </div>
-        <!-- Reports Tab -->
-        <div id="reports-tab" class="tab-content hidden">
-          <div class="grid md:grid-cols-3 gap-6 mb-8">
-            <div
-              class="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl shadow-lg p-8"
-            >
-              <div class="text-4xl mb-2">📦</div>
-              <h4 class="text-lg opacity-90 mb-2">Total Produk</h4>
-              <p class="text-4xl font-bold" id="total-products">0</p>
-            </div>
-            <div
-              class="bg-gradient-to-br from-green-500 to-green-600 text-white rounded-2xl shadow-lg p-8"
-            >
-              <div class="text-4xl mb-2">💰</div>
-              <h4 class="text-lg opacity-90 mb-2">Total Penjualan</h4>
-              <p class="text-4xl font-bold" id="total-sales">Rp 0</p>
-            </div>
-            <div
-              class="bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-2xl shadow-lg p-8"
-            >
-              <div class="text-4xl mb-2">📧</div>
-              <h4 class="text-lg opacity-90 mb-2">Newsletter</h4>
-              <p class="text-4xl font-bold" id="total-newsletter">0</p>
-            </div>
-          </div>
-          <div class="bg-white rounded-2xl shadow-lg p-8">
-            <h3 class="text-2xl font-bold mb-6">Produk per Kategori</h3>
-            <div id="category-stats" class="space-y-4">
-              <!-- Category stats will be populated here -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Buy Modal -->
-    <div id="buy-modal" class="modal">
-      <div class="modal-content">
-        <div class="p-8">
-          <div class="flex justify-between items-center mb-6">
-            <h3 class="text-2xl font-bold">Beli Produk</h3>
-            <button onclick="closeBuyModal()" class="text-3xl">×</button>
-          </div>
-          <form id="buy-form">
-            <div class="mb-4">
-              <label for="buy-customer-name" class="block font-semibold mb-2"
-                >Nama Lengkap</label
-              >
-              <input
-                type="text"
-                id="buy-customer-name"
-                required
-                class="w-full px-4 py-3 rounded-lg border-2 border-gray-300"
-              />
-            </div>
-            <div class="mb-4">
-              <label for="buy-customer-email" class="block font-semibold mb-2"
-                >Email</label
-              >
-              <input
-                type="email"
-                id="buy-customer-email"
-                required
-                class="w-full px-4 py-3 rounded-lg border-2 border-gray-300"
-              />
-            </div>
-            <div class="mb-6">
-              <label for="buy-customer-message" class="block font-semibold mb-2"
-                >Catatan (Opsional)</label
-              >
-              <textarea
-                id="buy-customer-message"
-                rows="3"
-                class="w-full px-4 py-3 rounded-lg border-2 border-gray-300"
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              class="btn-primary w-full py-4 rounded-lg font-semibold text-white"
-            >
-              Konfirmasi Pembelian
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+  <body>
+    <div id="app" class="w-full"></div>
     <script>
       const defaultConfig = {
-        hero_title: "Koleksi Sepatu Terbaik untuk Gaya Anda",
-        hero_subtitle:
-          "Temukan sepatu impian Anda dari berbagai kategori pilihan dengan harga terjangkau",
-        hero_cta: "Belanja Sekarang 🛍️",
-        categories_title: "Kategori Sepatu",
-        products_title: "Produk Terbaik Kami",
-        testimonials_title: "Apa Kata Pelanggan",
-        newsletter_title: "Dapatkan Penawaran Spesial",
-        newsletter_subtitle:
-          "Berlangganan newsletter kami dan dapatkan diskon hingga 30%!",
-        newsletter_cta: "Daftar",
-        background_color: "#667eea",
+        background_color: "#fef3c7",
         surface_color: "#ffffff",
         text_color: "#1f2937",
-        primary_action_color: "#667eea",
-        secondary_action_color: "#764ba2",
+        primary_action: "#f59e0b",
+        secondary_action: "#10b981",
         font_family: "Poppins",
         font_size: 16,
+        hero_title: "Sajian Lezat dengan Cita Rasa Nusantara",
+        hero_subtitle:
+          "Nikmati kelezatan masakan tradisional dan modern yang dibuat dengan bahan pilihan dan penuh cinta",
+        hero_cta: "Lihat Menu Kami",
+        about_title: "Tentang Kami",
+        about_description:
+          "Kami adalah UMKM kuliner yang berkomitmen menghadirkan cita rasa autentik Nusantara dengan standar kebersihan dan kualitas terbaik. Setiap hidangan kami buat dengan penuh dedikasi untuk kepuasan Anda.",
+        about_vision:
+          "Menjadi pilihan utama kuliner Nusantara yang mengutamakan kualitas, kebersihan, dan kepuasan pelanggan",
+        portfolio_title: "Menu Spesial Kami",
+        portfolio_subtitle: "Berbagai pilihan menu lezat untuk setiap selera",
+        services_title: "Layanan Kami",
+        services_subtitle: "Pelayanan terbaik untuk kepuasan Anda",
+        testimonials_title: "Testimoni Pelanggan",
+        contact_title: "Hubungi Kami",
+        contact_subtitle: "Kami siap melayani pesanan dan pertanyaan Anda",
+        contact_address: "Jl. Kuliner No. 123, Jakarta Selatan",
+        contact_phone: "+62 812-3456-7890",
+        contact_email: "hello@umkmkuliner.com",
+        footer_text:
+          "© 2024 UMKM Kuliner. Dibuat dengan ❤️ untuk pecinta kuliner",
       };
 
-      async function onConfigChange(config) {
-        document.getElementById("hero-title").textContent =
-          config.hero_title || defaultConfig.hero_title;
-        document.getElementById("hero-subtitle").textContent =
-          config.hero_subtitle || defaultConfig.hero_subtitle;
-        document.getElementById("hero-cta-btn").textContent =
-          config.hero_cta || defaultConfig.hero_cta;
-        document.getElementById("categories-title").textContent =
-          config.categories_title || defaultConfig.categories_title;
-        document.getElementById("products-title").textContent =
-          config.products_title || defaultConfig.products_title;
-        document.getElementById("testimonials-title").textContent =
-          config.testimonials_title || defaultConfig.testimonials_title;
-        document.getElementById("newsletter-title").textContent =
-          config.newsletter_title || defaultConfig.newsletter_title;
-        document.getElementById("newsletter-subtitle").textContent =
-          config.newsletter_subtitle || defaultConfig.newsletter_subtitle;
-        document.getElementById("newsletter-cta-text").textContent =
-          config.newsletter_cta || defaultConfig.newsletter_cta;
+      let currentFilter = "semua";
+      let currentTestimonialIndex = 0;
 
-        const customFont = config.font_family || defaultConfig.font_family;
-        const baseFontStack = "Arial, sans-serif";
-        const baseSize = config.font_size || defaultConfig.font_size;
-
-        document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
-        document.getElementById("hero-title").style.fontSize = `${
-          baseSize * 3.75
-        }px`;
-        document.getElementById("hero-subtitle").style.fontSize = `${
-          baseSize * 1.25
-        }px`;
-
-        const heroSection = document.querySelector("section");
-        heroSection.style.background = `linear-gradient(135deg, ${
-          config.background_color || defaultConfig.background_color
-        } 0%, ${
-          config.secondary_action_color || defaultConfig.secondary_action_color
-        } 100%)`;
-
-        const buttons = document.querySelectorAll(".btn-primary");
-        buttons.forEach((btn) => {
-          if (btn.classList.contains("bg-white")) {
-            btn.style.color =
-              config.primary_action_color || defaultConfig.primary_action_color;
-          } else {
-            btn.style.backgroundColor =
-              config.primary_action_color || defaultConfig.primary_action_color;
-          }
-        });
-      }
-
-      if (window.elementSdk) {
-        window.elementSdk.init({
-          defaultConfig,
-          onConfigChange,
-          mapToCapabilities: (config) => ({
-            recolorables: [
-              {
-                get: () =>
-                  config.background_color || defaultConfig.background_color,
-                set: (value) => {
-                  config.background_color = value;
-                  window.elementSdk.setConfig({ background_color: value });
-                },
-              },
-              {
-                get: () => config.surface_color || defaultConfig.surface_color,
-                set: (value) => {
-                  config.surface_color = value;
-                  window.elementSdk.setConfig({ surface_color: value });
-                },
-              },
-              {
-                get: () => config.text_color || defaultConfig.text_color,
-                set: (value) => {
-                  config.text_color = value;
-                  window.elementSdk.setConfig({ text_color: value });
-                },
-              },
-              {
-                get: () =>
-                  config.primary_action_color ||
-                  defaultConfig.primary_action_color,
-                set: (value) => {
-                  config.primary_action_color = value;
-                  window.elementSdk.setConfig({ primary_action_color: value });
-                },
-              },
-              {
-                get: () =>
-                  config.secondary_action_color ||
-                  defaultConfig.secondary_action_color,
-                set: (value) => {
-                  config.secondary_action_color = value;
-                  window.elementSdk.setConfig({
-                    secondary_action_color: value,
-                  });
-                },
-              },
-            ],
-            borderables: [],
-            fontEditable: {
-              get: () => config.font_family || defaultConfig.font_family,
-              set: (value) => {
-                config.font_family = value;
-                window.elementSdk.setConfig({ font_family: value });
-              },
-            },
-            fontSizeable: {
-              get: () => config.font_size || defaultConfig.font_size,
-              set: (value) => {
-                config.font_size = value;
-                window.elementSdk.setConfig({ font_size: value });
-              },
-            },
-          }),
-          mapToEditPanelValues: (config) =>
-            new Map([
-              ["hero_title", config.hero_title || defaultConfig.hero_title],
-              [
-                "hero_subtitle",
-                config.hero_subtitle || defaultConfig.hero_subtitle,
-              ],
-              ["hero_cta", config.hero_cta || defaultConfig.hero_cta],
-              [
-                "categories_title",
-                config.categories_title || defaultConfig.categories_title,
-              ],
-              [
-                "products_title",
-                config.products_title || defaultConfig.products_title,
-              ],
-              [
-                "testimonials_title",
-                config.testimonials_title || defaultConfig.testimonials_title,
-              ],
-              [
-                "newsletter_title",
-                config.newsletter_title || defaultConfig.newsletter_title,
-              ],
-              [
-                "newsletter_subtitle",
-                config.newsletter_subtitle || defaultConfig.newsletter_subtitle,
-              ],
-              [
-                "newsletter_cta",
-                config.newsletter_cta || defaultConfig.newsletter_cta,
-              ],
-            ]),
-        });
-      }
-
-      // Reference data
-      const categories = [
-        { name: "Sneakers", icon: "👟", color: "from-blue-500 to-blue-600" },
-        { name: "Formal", icon: "👞", color: "from-gray-700 to-gray-800" },
-        { name: "Sport", icon: "🏃", color: "from-green-500 to-green-600" },
-        { name: "Casual", icon: "🥿", color: "from-orange-500 to-orange-600" },
+      // Sample data for demonstration
+      const sampleMenus = [
+        {
+          type: "menu",
+          title: "Nasi Goreng Spesial",
+          category: "Makanan Utama",
+          price: "Rp 25.000",
+          image: "🍛",
+          description: "Nasi goreng dengan bumbu rahasia dan topping lengkap",
+        },
+        {
+          type: "menu",
+          title: "Soto Ayam",
+          category: "Makanan Utama",
+          price: "Rp 20.000",
+          image: "🍜",
+          description: "Soto ayam kuah bening dengan rempah tradisional",
+        },
+        {
+          type: "menu",
+          title: "Bakso Sapi",
+          category: "Makanan Utama",
+          price: "Rp 18.000",
+          image: "🍲",
+          description: "Bakso sapi kenyal dengan kuah kaldu segar",
+        },
+        {
+          type: "menu",
+          title: "Es Teh Manis",
+          category: "Minuman",
+          price: "Rp 5.000",
+          image: "🧋",
+          description: "Teh manis segar untuk menemani santapan",
+        },
+        {
+          type: "menu",
+          title: "Jus Alpukat",
+          category: "Minuman",
+          price: "Rp 15.000",
+          image: "🥤",
+          description: "Jus alpukat kental dan creamy",
+        },
+        {
+          type: "menu",
+          title: "Pisang Goreng",
+          category: "Dessert",
+          price: "Rp 10.000",
+          image: "🍌",
+          description: "Pisang goreng renyah dengan taburan keju",
+        },
       ];
 
-      let allData = [];
-      let currentBuyProduct = null;
-      let isInitialized = false;
-      let isAdminView = false;
-
-      const dataHandler = {
-        onDataChanged(data) {
-          allData = data;
-          renderCategories();
-          renderProducts();
-          renderAdminProducts();
-          updateReports();
-          updateMessageCount();
+      const sampleServices = [
+        {
+          type: "service",
+          title: "Delivery Cepat",
+          image: "🚚",
+          description:
+            "Pengiriman cepat ke seluruh area dengan kemasan aman dan rapi",
         },
-      };
+        {
+          type: "service",
+          title: "Catering Event",
+          image: "🎉",
+          description:
+            "Layanan catering untuk acara keluarga, kantor, dan pernikahan",
+        },
+        {
+          type: "service",
+          title: "Dine In Nyaman",
+          image: "🪑",
+          description: "Ruang makan yang bersih dan nyaman untuk keluarga",
+        },
+      ];
 
-      async function initializeApp() {
-        if (isInitialized || !window.dataSdk) return;
-        const result = await window.dataSdk.init(dataHandler);
-        if (result.isOk) {
-          isInitialized = true;
-        }
+      const sampleTestimonials = [
+        {
+          type: "testimonial",
+          customerName: "Budi Santoso",
+          rating: 5,
+          description:
+            "Makanannya enak sekali! Porsi besar dan harga terjangkau. Pasti balik lagi!",
+        },
+        {
+          type: "testimonial",
+          customerName: "Siti Nurhaliza",
+          rating: 5,
+          description:
+            "Pelayanan ramah, makanan cepat datang. Soto ayamnya juara!",
+        },
+        {
+          type: "testimonial",
+          customerName: "Andi Wijaya",
+          rating: 5,
+          description:
+            "Sudah langganan 2 tahun, kualitas selalu terjaga. Recommended!",
+        },
+      ];
+
+      const sampleTeam = [
+        { type: "team", name: "Chef Agus", position: "Head Chef", image: "👨‍🍳" },
+        { type: "team", name: "Rina", position: "Sous Chef", image: "👩‍🍳" },
+      ];
+
+      const sampleSocials = [
+        {
+          type: "social",
+          category: "whatsapp",
+          socialLink: "https://wa.me/6281234567890",
+        },
+        {
+          type: "social",
+          category: "instagram",
+          socialLink: "https://instagram.com/umkmkuliner",
+        },
+      ];
+
+      function getConfig(key) {
+        return window.elementSdk?.config?.[key] || defaultConfig[key];
       }
 
-      initializeApp();
-
-      function renderCategories() {
-        const container = document.getElementById("categories-container");
-        container.innerHTML = categories
-          .map(
-            (cat) => `
-        <div class="category-card bg-gradient-to-br ${
-          cat.color
-        } rounded-2xl p-8 text-white text-center shadow-lg">
-          <div class="text-6xl mb-4">${cat.icon}</div>
-          <h4 class="text-xl font-bold">${cat.name}</h4>
-          <p class="text-sm opacity-90 mt-2">${getProductCountByCategory(
-            cat.name
-          )} produk</p>
-        </div>
-      `
-          )
-          .join("");
+      function getBaseFontSize() {
+        return window.elementSdk?.config?.font_size || defaultConfig.font_size;
       }
 
-      function getProductCountByCategory(category) {
-        return allData.filter(
-          (item) =>
-            item.type === "product" && item.product_category === category
-        ).length;
+      function getFontFamily() {
+        const customFont =
+          window.elementSdk?.config?.font_family || defaultConfig.font_family;
+        return `${customFont}, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`;
       }
 
-      function renderProducts() {
-        const container = document.getElementById("products-container");
-        const products = allData.filter((item) => item.type === "product");
+      async function onConfigChange(config) {
+        renderWebsite();
+      }
 
-        if (products.length === 0) {
-          container.innerHTML =
-            '<p class="col-span-full text-center text-gray-500 py-8">Belum ada produk tersedia</p>';
-          return;
-        }
+      function renderWebsite() {
+        const baseSize = getBaseFontSize();
+        const fontFamily = getFontFamily();
+        const backgroundColor = getConfig("background_color");
+        const surfaceColor = getConfig("surface_color");
+        const textColor = getConfig("text_color");
+        const primaryAction = getConfig("primary_action");
+        const secondaryAction = getConfig("secondary_action");
 
-        container.innerHTML = products
-          .map(
-            (product) => `
-        <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden">
-          <div class="h-64 bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center text-8xl relative">
-            ${product.product_image}
-            <div class="product-overlay">
-              <button onclick="openBuyModal('${
-                product.__backendId
-              }')" class="btn-primary bg-white text-purple-600 px-6 py-3 rounded-full font-semibold">
-                Beli Sekarang
-              </button>
+        const menus = sampleMenus;
+        const services = sampleServices;
+        const testimonials = sampleTestimonials;
+        const team = sampleTeam;
+        const socials = sampleSocials;
+
+        const categories = [
+          "semua",
+          ...new Set(menus.map((m) => m.category).filter(Boolean)),
+        ];
+        const filteredMenus =
+          currentFilter === "semua"
+            ? menus
+            : menus.filter((m) => m.category === currentFilter);
+
+        const app = document.getElementById("app");
+        app.style.fontFamily = fontFamily;
+        app.style.fontSize = `${baseSize}px`;
+        app.style.color = textColor;
+
+        app.innerHTML = `
+        <div class="w-full" style="background-color: ${backgroundColor};">
+          <!-- Navigation -->
+          <nav class="w-full sticky top-0 z-50 shadow-lg" style="background-color: ${surfaceColor};">
+            <div class="max-w-7xl mx-auto px-6 py-4">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                  <div class="text-4xl">🍽️</div>
+                  <div>
+                    <h1 class="font-bold" style="font-size: ${
+                      baseSize * 1.5
+                    }px; color: ${primaryAction};">UMKM Kuliner</h1>
+                    <p class="text-xs" style="color: ${textColor}; opacity: 0.7;">Sajian Lezat Nusantara</p>
+                  </div>
+                </div>
+                <div class="hidden md:flex gap-6">
+                  <a href="#home" class="font-semibold hover:opacity-70 transition-opacity" style="color: ${textColor}; font-size: ${baseSize}px;">Beranda</a>
+                  <a href="#about" class="font-semibold hover:opacity-70 transition-opacity" style="color: ${textColor}; font-size: ${baseSize}px;">Tentang</a>
+                  <a href="#portfolio" class="font-semibold hover:opacity-70 transition-opacity" style="color: ${textColor}; font-size: ${baseSize}px;">Menu</a>
+                  <a href="#services" class="font-semibold hover:opacity-70 transition-opacity" style="color: ${textColor}; font-size: ${baseSize}px;">Layanan</a>
+                  <a href="#testimonials" class="font-semibold hover:opacity-70 transition-opacity" style="color: ${textColor}; font-size: ${baseSize}px;">Testimoni</a>
+                  <a href="#contact" class="font-semibold hover:opacity-70 transition-opacity" style="color: ${textColor}; font-size: ${baseSize}px;">Kontak</a>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="p-6">
-            <span class="text-xs font-semibold text-purple-600 bg-purple-100 px-3 py-1 rounded-full">${
-              product.product_category
-            }</span>
-            <h4 class="text-xl font-bold mt-3 mb-2">${product.product_name}</h4>
-            <p class="text-2xl font-bold text-purple-600">Rp ${formatNumber(
-              product.product_price
-            )}</p>
-          </div>
-        </div>
-      `
-          )
-          .join("");
-      }
+          </nav>
 
-      function renderAdminProducts() {
-        const container = document.getElementById("admin-products-list");
-        const products = allData.filter((item) => item.type === "product");
-
-        if (products.length === 0) {
-          container.innerHTML =
-            '<p class="text-center text-gray-500 py-8">Belum ada produk</p>';
-          return;
-        }
-
-        container.innerHTML = products
-          .map(
-            (product) => `
-        <div class="flex items-center justify-between p-4 border-2 border-gray-200 rounded-lg">
-          <div class="flex items-center gap-4">
-            <div class="text-4xl">${product.product_image}</div>
-            <div>
-              <h5 class="font-bold">${product.product_name}</h5>
-              <p class="text-sm text-gray-600">${
-                product.product_category
-              } - Rp ${formatNumber(product.product_price)}</p>
+          <!-- Hero Section -->
+          <section id="home" class="w-full py-24 md:py-32 relative overflow-hidden" style="background: linear-gradient(135deg, ${primaryAction} 0%, ${secondaryAction} 100%);">
+            <div class="absolute inset-0 opacity-10">
+              <div class="text-9xl absolute top-10 left-10 animate-fade-in-left">🍜</div>
+              <div class="text-9xl absolute bottom-10 right-10 animate-fade-in-right">🍛</div>
+              <div class="text-7xl absolute top-1/2 left-1/4 animate-scale-in delay-300">🍲</div>
             </div>
-          </div>
-          <button onclick="deleteProduct('${
-            product.__backendId
-          }')" class="text-red-500 hover:text-red-700 font-semibold px-4 py-2 rounded">
-            Hapus
-          </button>
-        </div>
-      `
-          )
-          .join("");
-      }
-
-      function updateReports() {
-        const products = allData.filter((item) => item.type === "product");
-        const orders = allData.filter((item) => item.type === "order");
-        const newsletters = allData.filter(
-          (item) => item.type === "newsletter"
-        );
-
-        document.getElementById("total-products").textContent = products.length;
-
-        const totalSales = orders.reduce(
-          (sum, order) => sum + (order.order_total || 0),
-          0
-        );
-        document.getElementById("total-sales").textContent = `Rp ${formatNumber(
-          totalSales
-        )}`;
-
-        document.getElementById("total-newsletter").textContent =
-          newsletters.length;
-
-        const categoryStats = document.getElementById("category-stats");
-        const stats = categories
-          .map((cat) => {
-            const count = products.filter(
-              (p) => p.product_category === cat.name
-            ).length;
-            const percentage =
-              products.length > 0
-                ? ((count / products.length) * 100).toFixed(0)
-                : 0;
-            return `
-          <div>
-            <div class="flex justify-between mb-2">
-              <span class="font-semibold">${cat.icon} ${cat.name}</span>
-              <span class="text-gray-600">${count} produk (${percentage}%)</span>
+            <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+              <h2 class="font-bold text-white mb-6 animate-fade-in-up" 
+                style="font-size: ${baseSize * 3}px; line-height: 1.2;">
+                ${getConfig("hero_title")}
+              </h2>
+              <p class="text-white mb-8 max-w-2xl mx-auto animate-fade-in-up delay-200" 
+                style="font-size: ${baseSize * 1.25}px; opacity: 0.95;">
+                ${getConfig("hero_subtitle")}
+              </p>
+              <a href="#portfolio" class="btn-primary inline-block px-10 py-4 rounded-full font-bold text-white shadow-2xl animate-fade-in-up delay-400" 
+                style="background-color: ${surfaceColor}; color: ${primaryAction}; font-size: ${
+          baseSize * 1.125
+        }px;">
+                ${getConfig("hero_cta")} →
+              </a>
             </div>
-            <div class="w-full bg-gray-200 rounded-full h-3">
-              <div class="bg-gradient-to-r ${cat.color} h-3 rounded-full" style="width: ${percentage}%"></div>
+          </section>
+
+          <!-- About Section -->
+          <section id="about" class="w-full py-20" style="background-color: ${surfaceColor};">
+            <div class="max-w-7xl mx-auto px-6">
+              <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="scroll-reveal">
+                  <div class="text-8xl mb-6">👨‍🍳</div>
+                  <h2 class="font-bold mb-4" style="font-size: ${
+                    baseSize * 2.5
+                  }px; color: ${primaryAction};">
+                    ${getConfig("about_title")}
+                  </h2>
+                  <p class="mb-6 leading-relaxed" style="font-size: ${
+                    baseSize * 1.125
+                  }px; color: ${textColor};">
+                    ${getConfig("about_description")}
+                  </p>
+                  <div class="p-6 rounded-2xl" style="background-color: ${backgroundColor};">
+                    <h3 class="font-bold mb-3 flex items-center gap-2" style="font-size: ${
+                      baseSize * 1.25
+                    }px; color: ${primaryAction};">
+                      <span>������</span> Visi Kami
+                    </h3>
+                    <p style="font-size: ${baseSize}px; color: ${textColor};">
+                      ${getConfig("about_vision")}
+                    </p>
+                  </div>
+                </div>
+                <div class="scroll-reveal">
+                  <div class="grid grid-cols-2 gap-6">
+                    <div class="card-hover p-6 rounded-2xl text-center" style="background-color: ${backgroundColor};">
+                      <div class="text-5xl mb-3">🏆</div>
+                      <h4 class="font-bold mb-2" style="font-size: ${
+                        baseSize * 1.5
+                      }px; color: ${primaryAction};">100+</h4>
+                      <p style="font-size: ${
+                        baseSize * 0.875
+                      }px; color: ${textColor};">Menu Tersedia</p>
+                    </div>
+                    <div class="card-hover p-6 rounded-2xl text-center" style="background-color: ${backgroundColor};">
+                      <div class="text-5xl mb-3">😊</div>
+                      <h4 class="font-bold mb-2" style="font-size: ${
+                        baseSize * 1.5
+                      }px; color: ${primaryAction};">1000+</h4>
+                      <p style="font-size: ${
+                        baseSize * 0.875
+                      }px; color: ${textColor};">Pelanggan Puas</p>
+                    </div>
+                    <div class="card-hover p-6 rounded-2xl text-center" style="background-color: ${backgroundColor};">
+                      <div class="text-5xl mb-3">⭐</div>
+                      <h4 class="font-bold mb-2" style="font-size: ${
+                        baseSize * 1.5
+                      }px; color: ${primaryAction};">4.9/5</h4>
+                      <p style="font-size: ${
+                        baseSize * 0.875
+                      }px; color: ${textColor};">Rating</p>
+                    </div>
+                    <div class="card-hover p-6 rounded-2xl text-center" style="background-color: ${backgroundColor};">
+                      <div class="text-5xl mb-3">🚚</div>
+                      <h4 class="font-bold mb-2" style="font-size: ${
+                        baseSize * 1.5
+                      }px; color: ${primaryAction};">Express</h4>
+                      <p style="font-size: ${
+                        baseSize * 0.875
+                      }px; color: ${textColor};">Pengiriman Cepat</p>
+                    </div>
+                  </div>
+                  ${
+                    team.length > 0
+                      ? `
+                    <div class="mt-8">
+                      <h3 class="font-bold mb-4 text-center" style="font-size: ${
+                        baseSize * 1.5
+                      }px; color: ${textColor};">Tim Kami</h3>
+                      <div class="grid grid-cols-2 gap-4">
+                        ${team
+                          .slice(0, 4)
+                          .map(
+                            (member) => `
+                          <div class="team-member p-4 rounded-xl text-center" style="background-color: ${backgroundColor};">
+                            <div class="w-16 h-16 mx-auto mb-3 rounded-full flex items-center justify-center text-3xl" style="background-color: ${primaryAction};">
+                              ${member.image || "👤"}
+                            </div>
+                            <h4 class="font-bold" style="font-size: ${baseSize}px; color: ${textColor};">${
+                              member.name
+                            }</h4>
+                            <p class="text-sm" style="font-size: ${
+                              baseSize * 0.75
+                            }px; color: ${textColor}; opacity: 0.7;">${
+                              member.position
+                            }</p>
+                          </div>
+                        `
+                          )
+                          .join("")}
+                      </div>
+                    </div>
+                  `
+                      : ""
+                  }
+                </div>
+              </div>
             </div>
-          </div>
-        `;
-          })
-          .join("");
-        categoryStats.innerHTML = stats;
-      }
+          </section>
 
-      function updateMessageCount() {
-        const messages = allData.filter((item) => item.type === "message");
-        document.getElementById("message-count").textContent = messages.length;
+          <!-- Portfolio/Menu Section -->
+          <section id="portfolio" class="w-full py-20" style="background-color: ${backgroundColor};">
+            <div class="max-w-7xl mx-auto px-6">
+              <div class="text-center mb-12 scroll-reveal">
+                <h2 class="font-bold mb-4" style="font-size: ${
+                  baseSize * 2.5
+                }px; color: ${primaryAction};">
+                  ${getConfig("portfolio_title")}
+                </h2>
+                <p style="font-size: ${
+                  baseSize * 1.125
+                }px; color: ${textColor}; opacity: 0.8;">
+                  ${getConfig("portfolio_subtitle")}
+                </p>
+              </div>
 
-        const messagesList = document.getElementById("messages-list");
-        if (messages.length === 0) {
-          messagesList.innerHTML =
-            '<p class="text-gray-500 text-center py-8">Belum ada pesan</p>';
-          return;
-        }
+              <!-- Filter Categories -->
+              <div class="flex flex-wrap justify-center gap-3 mb-12 scroll-reveal">
+                ${categories
+                  .map(
+                    (cat) => `
+                  <button class="filter-btn px-6 py-3 rounded-full font-bold transition-all ${
+                    currentFilter === cat ? "active" : ""
+                  }" 
+                    data-category="${cat}"
+                    style="background-color: ${
+                      currentFilter === cat ? primaryAction : surfaceColor
+                    }; 
+                           color: ${
+                             currentFilter === cat ? "white" : textColor
+                           };
+                           font-size: ${baseSize * 0.875}px;
+                           box-shadow: ${
+                             currentFilter === cat
+                               ? "0 8px 20px rgba(0,0,0,0.15)"
+                               : "0 2px 8px rgba(0,0,0,0.1)"
+                           };">
+                    ${cat.charAt(0).toUpperCase() + cat.slice(1)}
+                  </button>
+                `
+                  )
+                  .join("")}
+              </div>
 
-        messagesList.innerHTML = messages
-          .map(
-            (msg) => `
-        <div class="border-2 border-gray-200 rounded-lg p-6">
-          <div class="flex justify-between items-start mb-4">
-            <div>
-              <h5 class="font-bold text-lg">${msg.customer_name}</h5>
-              <p class="text-sm text-gray-600">${msg.customer_email}</p>
+              <!-- Menu Grid -->
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                ${
+                  filteredMenus.length > 0
+                    ? filteredMenus
+                        .map(
+                          (menu, idx) => `
+                  <div class="menu-item card-hover rounded-2xl overflow-hidden shadow-xl scroll-reveal" 
+                    style="background-color: ${surfaceColor}; animation-delay: ${
+                            idx * 0.1
+                          }s;">
+                    <div class="relative h-64 flex items-center justify-center text-8xl" 
+                      style="background: linear-gradient(135deg, ${primaryAction}30, ${secondaryAction}30);">
+                      ${menu.image || "🍽️"}
+                      <div class="menu-overlay text-white">
+                        <h3 class="font-bold mb-2" style="font-size: ${
+                          baseSize * 1.25
+                        }px;">${menu.title}</h3>
+                        <p class="text-sm mb-3" style="font-size: ${
+                          baseSize * 0.875
+                        }px;">${
+                            menu.description ||
+                            "Hidangan lezat yang wajib dicoba"
+                          }</p>
+                        ${
+                          menu.price
+                            ? `<div class="font-bold text-2xl" style="color: ${secondaryAction};">${menu.price}</div>`
+                            : ""
+                        }
+                      </div>
+                    </div>
+                    <div class="p-6">
+                      <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-bold" style="font-size: ${
+                          baseSize * 1.25
+                        }px; color: ${textColor};">${menu.title}</h3>
+                      </div>
+                      ${
+                        menu.category
+                          ? `
+                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold mb-3" 
+                          style="background-color: ${primaryAction}; color: white; font-size: ${
+                              baseSize * 0.75
+                            }px;">
+                          ${menu.category}
+                        </span>
+                      `
+                          : ""
+                      }
+                      ${
+                        menu.price
+                          ? `<div class="font-bold mb-3" style="color: ${primaryAction}; font-size: ${
+                              baseSize * 1.5
+                            }px;">${menu.price}</div>`
+                          : ""
+                      }
+                      <button class="order-btn w-full py-3 rounded-xl font-bold text-white transition-all hover:shadow-lg" 
+                        data-menu="${menu.title}"
+                        style="background-color: ${secondaryAction}; font-size: ${baseSize}px;">
+                        Pesan Sekarang 🛒
+                      </button>
+                    </div>
+                  </div>
+                `
+                        )
+                        .join("")
+                    : `
+                  <div class="col-span-full text-center py-16">
+                    <div class="text-6xl mb-4">🍽️</div>
+                    <p style="color: ${textColor}; opacity: 0.5; font-size: ${
+                        baseSize * 1.125
+                      }px;">
+                      Menu akan segera hadir!
+                    </p>
+                  </div>
+                `
+                }
+              </div>
             </div>
-            <span class="text-xs text-gray-500">${new Date(
-              msg.timestamp
-            ).toLocaleDateString("id-ID")}</span>
-          </div>
-          <p class="text-gray-700 mb-3">Produk: <strong>${
-            msg.order_product
-          }</strong></p>
-          <p class="text-gray-600">${
-            msg.customer_message || "Tidak ada catatan"
-          }</p>
-        </div>
-      `
-          )
-          .join("");
-      }
+          </section>
 
-      function formatNumber(num) {
-        return new Intl.NumberFormat("id-ID").format(num);
-      }
+          <!-- Services Section -->
+          <section id="services" class="w-full py-20" style="background-color: ${surfaceColor};">
+            <div class="max-w-7xl mx-auto px-6">
+              <div class="text-center mb-12 scroll-reveal">
+                <h2 class="font-bold mb-4" style="font-size: ${
+                  baseSize * 2.5
+                }px; color: ${primaryAction};">
+                  ${getConfig("services_title")}
+                </h2>
+                <p style="font-size: ${
+                  baseSize * 1.125
+                }px; color: ${textColor}; opacity: 0.8;">
+                  ${getConfig("services_subtitle")}
+                </p>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                ${
+                  services.length > 0
+                    ? services
+                        .map(
+                          (service, idx) => `
+                  <div class="card-hover p-8 rounded-2xl text-center scroll-reveal" 
+                    style="background-color: ${backgroundColor}; animation-delay: ${
+                            idx * 0.15
+                          }s;">
+                    <div class="text-6xl mb-4">${service.image || "⚡"}</div>
+                    <h3 class="font-bold mb-3" style="font-size: ${
+                      baseSize * 1.5
+                    }px; color: ${textColor};">
+                      ${service.title}
+                    </h3>
+                    <p style="font-size: ${baseSize}px; color: ${textColor}; opacity: 0.8;">
+                      ${service.description}
+                    </p>
+                  </div>
+                `
+                        )
+                        .join("")
+                    : `
+                  <div class="col-span-full text-center py-12">
+                    <div class="text-6xl mb-4">🎯</div>
+                    <p style="color: ${textColor}; opacity: 0.5; font-size: ${baseSize}px;">
+                      Layanan akan segera hadir!
+                    </p>
+                  </div>
+                `
+                }
+              </div>
+            </div>
+          </section>
 
-      function scrollToProducts() {
-        document
-          .getElementById("products-section")
-          .scrollIntoView({ behavior: "smooth" });
-      }
+          <!-- Testimonials Section -->
+          <section id="testimonials" class="w-full py-20" style="background-color: ${backgroundColor};">
+            <div class="max-w-7xl mx-auto px-6">
+              <div class="text-center mb-12 scroll-reveal">
+                <h2 class="font-bold mb-4" style="font-size: ${
+                  baseSize * 2.5
+                }px; color: ${primaryAction};">
+                  ${getConfig("testimonials_title")}
+                </h2>
+              </div>
+              
+              ${
+                testimonials.length > 0
+                  ? `
+                <div class="carousel-container max-w-4xl mx-auto">
+                  <div class="carousel-track" id="testimonialTrack">
+                    ${testimonials
+                      .map(
+                        (testimonial) => `
+                      <div class="carousel-slide">
+                        <div class="p-10 rounded-3xl shadow-2xl" style="background-color: ${surfaceColor};">
+                          <div class="flex items-center justify-center mb-6">
+                            <div class="w-20 h-20 rounded-full flex items-center justify-center text-4xl text-white font-bold" 
+                              style="background-color: ${primaryAction};">
+                              ${testimonial.customerName
+                                .charAt(0)
+                                .toUpperCase()}
+                            </div>
+                          </div>
+                          <div class="text-center mb-4">
+                            <h4 class="font-bold mb-2" style="font-size: ${
+                              baseSize * 1.5
+                            }px; color: ${textColor};">
+                              ${testimonial.customerName}
+                            </h4>
+                            <div class="star-rating justify-center text-3xl mb-4">
+                              ${"⭐".repeat(testimonial.rating || 5)}
+                            </div>
+                          </div>
+                          <p class="text-center italic leading-relaxed" 
+                            style="font-size: ${
+                              baseSize * 1.125
+                            }px; color: ${textColor};">
+                            "${testimonial.description}"
+                          </p>
+                        </div>
+                      </div>
+                    `
+                      )
+                      .join("")}
+                  </div>
+                  ${
+                    testimonials.length > 1
+                      ? `
+                    <button class="carousel-btn prev" id="prevBtn" 
+                      style="background-color: ${primaryAction}; color: white;">
+                      ‹
+                    </button>
+                    <button class="carousel-btn next" id="nextBtn" 
+                      style="background-color: ${primaryAction}; color: white;">
+                      ›
+                    </button>
+                  `
+                      : ""
+                  }
+                </div>
+              `
+                  : `
+                <div class="text-center py-12">
+                  <div class="text-6xl mb-4">💬</div>
+                  <p style="color: ${textColor}; opacity: 0.5; font-size: ${baseSize}px;">
+                    Testimoni akan segera hadir!
+                  </p>
+                </div>
+              `
+              }
+            </div>
+          </section>
 
-      function toggleView() {
-        isAdminView = !isAdminView;
-        document.getElementById("customer-view").classList.toggle("hidden");
-        document.getElementById("admin-view").classList.toggle("hidden");
-        document.getElementById("nav-button-text").textContent = isAdminView
-          ? "Ke Toko"
-          : "Admin";
-      }
+          <!-- Contact Section -->
+          <section id="contact" class="w-full py-20" style="background-color: ${surfaceColor};">
+            <div class="max-w-6xl mx-auto px-6">
+              <div class="text-center mb-12 scroll-reveal">
+                <h2 class="font-bold mb-4" style="font-size: ${
+                  baseSize * 2.5
+                }px; color: ${primaryAction};">
+                  ${getConfig("contact_title")}
+                </h2>
+                <p style="font-size: ${
+                  baseSize * 1.125
+                }px; color: ${textColor}; opacity: 0.8;">
+                  ${getConfig("contact_subtitle")}
+                </p>
+              </div>
 
-      function switchTab(tabName) {
-        document
-          .querySelectorAll(".tab-button")
-          .forEach((btn) => btn.classList.remove("active"));
-        document
-          .querySelectorAll(".tab-content")
-          .forEach((content) => content.classList.add("hidden"));
+              <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div class="scroll-reveal">
+                  <div class="space-y-6 mb-8">
+                    <div class="flex items-start gap-4 p-6 rounded-2xl" style="background-color: ${backgroundColor};">
+                      <div class="text-4xl">📍</div>
+                      <div>
+                        <h4 class="font-bold mb-2" style="font-size: ${
+                          baseSize * 1.125
+                        }px; color: ${textColor};">Alamat</h4>
+                        <p style="font-size: ${baseSize}px; color: ${textColor}; opacity: 0.8;">${getConfig(
+          "contact_address"
+        )}</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start gap-4 p-6 rounded-2xl" style="background-color: ${backgroundColor};">
+                      <div class="text-4xl">📞</div>
+                      <div>
+                        <h4 class="font-bold mb-2" style="font-size: ${
+                          baseSize * 1.125
+                        }px; color: ${textColor};">Telepon</h4>
+                        <p style="font-size: ${baseSize}px; color: ${textColor}; opacity: 0.8;">${getConfig(
+          "contact_phone"
+        )}</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start gap-4 p-6 rounded-2xl" style="background-color: ${backgroundColor};">
+                      <div class="text-4xl">📧</div>
+                      <div>
+                        <h4 class="font-bold mb-2" style="font-size: ${
+                          baseSize * 1.125
+                        }px; color: ${textColor};">Email</h4>
+                        <p style="font-size: ${baseSize}px; color: ${textColor}; opacity: 0.8;">${getConfig(
+          "contact_email"
+        )}</p>
+                      </div>
+                    </div>
+                  </div>
 
-        document.getElementById(`tab-${tabName}`).classList.add("active");
-        document.getElementById(`${tabName}-tab`).classList.remove("hidden");
-      }
+                  <!-- Social Media -->
+                  ${
+                    socials.length > 0
+                      ? `
+                    <div class="p-6 rounded-2xl" style="background-color: ${backgroundColor};">
+                      <h4 class="font-bold mb-4 text-center" style="font-size: ${
+                        baseSize * 1.25
+                      }px; color: ${textColor};">
+                        Follow Us
+                      </h4>
+                      <div class="flex justify-center gap-4">
+                        ${socials
+                          .map((social) => {
+                            const icons = {
+                              instagram: "📷",
+                              whatsapp: "💬",
+                              tiktok: "🎵",
+                              facebook: "📘",
+                              twitter: "🐦",
+                            };
+                            const icon =
+                              icons[social.category?.toLowerCase()] || "🔗";
+                            return `
+                            <a href="${social.socialLink}" target="_blank" rel="noopener noreferrer" 
+                               class="social-icon w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-lg"
+                               style="background-color: ${primaryAction}; color: white;">
+                              ${icon}
+                            </a>
+                          `;
+                          })
+                          .join("")}
+                      </div>
+                    </div>
+                  `
+                      : ""
+                  }
+                </div>
 
-      function openBuyModal(productId) {
-        currentBuyProduct = allData.find(
-          (item) => item.__backendId === productId
-        );
-        document.getElementById("buy-modal").classList.add("active");
-      }
+                <!-- Contact Form -->
+                <div class="scroll-reveal">
+                  <form id="contactForm" class="space-y-4">
+                    <div>
+                      <label class="block mb-2 font-semibold" style="font-size: ${baseSize}px; color: ${textColor};">Nama</label>
+                      <input type="text" id="contactName" required
+                        class="w-full px-4 py-3 rounded-xl border-2 focus:outline-none transition-all"
+                        style="border-color: ${primaryAction}; font-size: ${baseSize}px;"
+                        placeholder="Nama Anda">
+                    </div>
+                    <div>
+                      <label class="block mb-2 font-semibold" style="font-size: ${baseSize}px; color: ${textColor};">Email</label>
+                      <input type="email" id="contactEmail" required
+                        class="w-full px-4 py-3 rounded-xl border-2 focus:outline-none transition-all"
+                        style="border-color: ${primaryAction}; font-size: ${baseSize}px;"
+                        placeholder="email@example.com">
+                    </div>
+                    <div>
+                      <label class="block mb-2 font-semibold" style="font-size: ${baseSize}px; color: ${textColor};">No. HP</label>
+                      <input type="tel" id="contactPhone" required
+                        class="w-full px-4 py-3 rounded-xl border-2 focus:outline-none transition-all"
+                        style="border-color: ${primaryAction}; font-size: ${baseSize}px;"
+                        placeholder="+62 812-3456-7890">
+                    </div>
+                    <div>
+                      <label class="block mb-2 font-semibold" style="font-size: ${baseSize}px; color: ${textColor};">Pesan</label>
+                      <textarea id="contactMessage" rows="5" required
+                        class="w-full px-4 py-3 rounded-xl border-2 focus:outline-none transition-all"
+                        style="border-color: ${primaryAction}; font-size: ${baseSize}px;"
+                        placeholder="Tulis pesan Anda..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary w-full py-4 rounded-xl text-white font-bold"
+                      style="background-color: ${primaryAction}; font-size: ${
+          baseSize * 1.125
+        }px;">
+                      Kirim Pesan 📤
+                    </button>
+                  </form>
+                </div>
+              </div>
 
-      function closeBuyModal() {
-        document.getElementById("buy-modal").classList.remove("active");
-        document.getElementById("buy-form").reset();
-        currentBuyProduct = null;
-      }
+              <!-- Map Placeholder -->
+              <div class="mt-12 scroll-reveal">
+                <div class="h-64 rounded-3xl overflow-hidden flex items-center justify-center text-6xl" 
+                  style="background: linear-gradient(135deg, ${primaryAction}20, ${secondaryAction}20);">
+                  🗺️ Google Maps
+                </div>
+              </div>
+            </div>
+          </section>
 
-      function showToast(message, isSuccess = true) {
-        const toast = document.createElement("div");
-        toast.className = "toast";
-        toast.innerHTML = `
-        <div class="flex items-center gap-3">
-          <span class="text-2xl">${isSuccess ? "✅" : "❌"}</span>
-          <p class="font-semibold">${message}</p>
+          <!-- Newsletter Section -->
+          <section class="w-full py-16" style="background: linear-gradient(135deg, ${primaryAction} 0%, ${secondaryAction} 100%);">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+              <div class="scroll-reveal">
+                <h3 class="font-bold text-white mb-4" style="font-size: ${
+                  baseSize * 2
+                }px;">
+                  Subscribe Newsletter
+                </h3>
+                <p class="text-white mb-8" style="font-size: ${
+                  baseSize * 1.125
+                }px; opacity: 0.95;">
+                  Dapatkan info promo dan menu terbaru langsung ke email Anda
+                </p>
+                <form id="newsletterForm" class="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
+                  <input type="email" id="newsletterEmail" required
+                    class="flex-1 px-6 py-4 rounded-full focus:outline-none"
+                    style="font-size: ${baseSize}px;"
+                    placeholder="Email Anda">
+                  <button type="submit" class="btn-primary px-8 py-4 rounded-full font-bold whitespace-nowrap"
+                    style="background-color: ${surfaceColor}; color: ${primaryAction}; font-size: ${baseSize}px;">
+                    Subscribe 📧
+                  </button>
+                </form>
+              </div>
+            </div>
+          </section>
+
+          <!-- Footer -->
+          <footer class="w-full py-8 text-center" style="background-color: ${surfaceColor}; color: ${textColor};">
+            <p style="font-size: ${baseSize}px;">${getConfig("footer_text")}</p>
+          </footer>
+
+
         </div>
       `;
+
+        setupEventListeners();
+        initScrollReveal();
+        if (testimonials.length > 1) {
+          initCarousel();
+        }
+      }
+
+      function setupEventListeners() {
+        const contactForm = document.getElementById("contactForm");
+        const newsletterForm = document.getElementById("newsletterForm");
+
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        filterButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            currentFilter = btn.dataset.category;
+            renderWebsite();
+          });
+        });
+
+        const orderButtons = document.querySelectorAll(".order-btn");
+        orderButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const menuName = btn.dataset.menu;
+            const whatsappSocial = sampleSocials.find(
+              (item) => item.category === "whatsapp"
+            );
+
+            if (whatsappSocial) {
+              const message = `Halo, saya ingin memesan ${menuName}`;
+              const url = `${
+                whatsappSocial.socialLink
+              }?text=${encodeURIComponent(message)}`;
+              window.open(url, "_blank", "noopener,noreferrer");
+            } else {
+              showToast("Silakan hubungi kami untuk memesan", "info");
+            }
+          });
+        });
+
+        contactForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          const name = document.getElementById("contactName").value;
+          const email = document.getElementById("contactEmail").value;
+          const phone = document.getElementById("contactPhone").value;
+          const message = document.getElementById("contactMessage").value;
+
+          // Redirect to WhatsApp with the message
+          const whatsappSocial = sampleSocials.find(
+            (item) => item.category === "whatsapp"
+          );
+          if (whatsappSocial) {
+            const whatsappMessage = `Halo, saya ${name}.\nEmail: ${email}\nNo HP: ${phone}\n\nPesan: ${message}`;
+            const url = `${whatsappSocial.socialLink}?text=${encodeURIComponent(
+              whatsappMessage
+            )}`;
+            window.open(url, "_blank", "noopener,noreferrer");
+            showToast("Mengarahkan ke WhatsApp... 💬", "success");
+            contactForm.reset();
+          } else {
+            showToast("Pesan berhasil dikirim! 🎉", "success");
+            contactForm.reset();
+          }
+        });
+
+        newsletterForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          showToast("Terima kasih sudah subscribe! 📧", "success");
+          newsletterForm.reset();
+        });
+      }
+
+      function initScrollReveal() {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("revealed");
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        document.querySelectorAll(".scroll-reveal").forEach((el) => {
+          observer.observe(el);
+        });
+      }
+
+      function initCarousel() {
+        const track = document.getElementById("testimonialTrack");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+
+        if (!track || !prevBtn || !nextBtn) return;
+
+        function updateCarousel() {
+          track.style.transform = `translateX(-${
+            currentTestimonialIndex * 100
+          }%)`;
+        }
+
+        prevBtn.addEventListener("click", () => {
+          currentTestimonialIndex =
+            (currentTestimonialIndex - 1 + sampleTestimonials.length) %
+            sampleTestimonials.length;
+          updateCarousel();
+        });
+
+        nextBtn.addEventListener("click", () => {
+          currentTestimonialIndex =
+            (currentTestimonialIndex + 1) % sampleTestimonials.length;
+          updateCarousel();
+        });
+
+        setInterval(() => {
+          currentTestimonialIndex =
+            (currentTestimonialIndex + 1) % sampleTestimonials.length;
+          updateCarousel();
+        }, 5000);
+      }
+
+      function showToast(message, type = "success") {
+        const colors = {
+          success: getConfig("secondary_action"),
+          error: "#ef4444",
+          info: getConfig("primary_action"),
+        };
+
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.textContent = message;
+        toast.style.backgroundColor = colors[type];
         document.body.appendChild(toast);
-        setTimeout(() => toast.remove(), 3000);
+
+        setTimeout(() => {
+          toast.remove();
+        }, 3000);
       }
 
-      async function deleteProduct(productId) {
-        if (!window.dataSdk) return;
+      function init() {
+        // Initial render
+        renderWebsite();
 
-        const product = allData.find((item) => item.__backendId === productId);
-        if (!product) return;
-
-        const result = await window.dataSdk.delete(product);
-        if (result.isOk) {
-          showToast("Produk berhasil dihapus");
-        } else {
-          showToast("Gagal menghapus produk", false);
+        if (window.elementSdk) {
+          window.elementSdk.init({
+            defaultConfig,
+            onConfigChange,
+            mapToCapabilities: (config) => ({
+              recolorables: [
+                {
+                  get: () =>
+                    config.background_color || defaultConfig.background_color,
+                  set: (value) => {
+                    config.background_color = value;
+                    window.elementSdk.setConfig({ background_color: value });
+                  },
+                },
+                {
+                  get: () =>
+                    config.surface_color || defaultConfig.surface_color,
+                  set: (value) => {
+                    config.surface_color = value;
+                    window.elementSdk.setConfig({ surface_color: value });
+                  },
+                },
+                {
+                  get: () => config.text_color || defaultConfig.text_color,
+                  set: (value) => {
+                    config.text_color = value;
+                    window.elementSdk.setConfig({ text_color: value });
+                  },
+                },
+                {
+                  get: () =>
+                    config.primary_action || defaultConfig.primary_action,
+                  set: (value) => {
+                    config.primary_action = value;
+                    window.elementSdk.setConfig({ primary_action: value });
+                  },
+                },
+                {
+                  get: () =>
+                    config.secondary_action || defaultConfig.secondary_action,
+                  set: (value) => {
+                    config.secondary_action = value;
+                    window.elementSdk.setConfig({ secondary_action: value });
+                  },
+                },
+              ],
+              borderables: [],
+              fontEditable: {
+                get: () => config.font_family || defaultConfig.font_family,
+                set: (value) => {
+                  config.font_family = value;
+                  window.elementSdk.setConfig({ font_family: value });
+                },
+              },
+              fontSizeable: {
+                get: () => config.font_size || defaultConfig.font_size,
+                set: (value) => {
+                  config.font_size = value;
+                  window.elementSdk.setConfig({ font_size: value });
+                },
+              },
+            }),
+            mapToEditPanelValues: (config) =>
+              new Map([
+                ["hero_title", config.hero_title || defaultConfig.hero_title],
+                [
+                  "hero_subtitle",
+                  config.hero_subtitle || defaultConfig.hero_subtitle,
+                ],
+                ["hero_cta", config.hero_cta || defaultConfig.hero_cta],
+                [
+                  "about_title",
+                  config.about_title || defaultConfig.about_title,
+                ],
+                [
+                  "about_description",
+                  config.about_description || defaultConfig.about_description,
+                ],
+                [
+                  "about_vision",
+                  config.about_vision || defaultConfig.about_vision,
+                ],
+                [
+                  "portfolio_title",
+                  config.portfolio_title || defaultConfig.portfolio_title,
+                ],
+                [
+                  "portfolio_subtitle",
+                  config.portfolio_subtitle || defaultConfig.portfolio_subtitle,
+                ],
+                [
+                  "services_title",
+                  config.services_title || defaultConfig.services_title,
+                ],
+                [
+                  "services_subtitle",
+                  config.services_subtitle || defaultConfig.services_subtitle,
+                ],
+                [
+                  "testimonials_title",
+                  config.testimonials_title || defaultConfig.testimonials_title,
+                ],
+                [
+                  "contact_title",
+                  config.contact_title || defaultConfig.contact_title,
+                ],
+                [
+                  "contact_subtitle",
+                  config.contact_subtitle || defaultConfig.contact_subtitle,
+                ],
+                [
+                  "contact_address",
+                  config.contact_address || defaultConfig.contact_address,
+                ],
+                [
+                  "contact_phone",
+                  config.contact_phone || defaultConfig.contact_phone,
+                ],
+                [
+                  "contact_email",
+                  config.contact_email || defaultConfig.contact_email,
+                ],
+                [
+                  "footer_text",
+                  config.footer_text || defaultConfig.footer_text,
+                ],
+              ]),
+          });
         }
       }
 
-      document
-        .getElementById("add-product-form")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
-          if (!window.dataSdk) return;
-
-          if (allData.filter((item) => item.type === "product").length >= 999) {
-            showToast("Maksimal 999 produk tercapai", false);
-            return;
-          }
-
-          const formData = new FormData(e.target);
-          const product = {
-            type: "product",
-            product_name: formData.get("product-name"),
-            product_category: document.getElementById("product-category").value,
-            product_price: parseFloat(formData.get("product-price")),
-            product_image: formData.get("product-image"),
-            timestamp: new Date().toISOString(),
-          };
-
-          const result = await window.dataSdk.create(product);
-          if (result.isOk) {
-            showToast("Produk berhasil ditambahkan");
-            e.target.reset();
-          } else {
-            showToast("Gagal menambahkan produk", false);
-          }
-        });
-
-      document
-        .getElementById("buy-form")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
-          if (!window.dataSdk || !currentBuyProduct) return;
-
-          const formData = new FormData(e.target);
-          const order = {
-            type: "message",
-            customer_name: formData.get("buy-customer-name"),
-            customer_email: formData.get("buy-customer-email"),
-            customer_message: document.getElementById("buy-customer-message")
-              .value,
-            order_product: currentBuyProduct.product_name,
-            order_total: currentBuyProduct.product_price,
-            timestamp: new Date().toISOString(),
-          };
-
-          const result = await window.dataSdk.create(order);
-          if (result.isOk) {
-            showToast("Pesanan berhasil dikirim!");
-            closeBuyModal();
-          } else {
-            showToast("Gagal mengirim pesanan", false);
-          }
-        });
-
-      document
-        .getElementById("newsletter-form")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
-          if (!window.dataSdk) return;
-
-          const email = document.getElementById("newsletter-email").value;
-          const newsletter = {
-            type: "newsletter",
-            newsletter_email: email,
-            timestamp: new Date().toISOString(),
-          };
-
-          const submitBtn = document.getElementById("newsletter-submit");
-          submitBtn.disabled = true;
-          submitBtn.innerHTML = '<div class="loading-spinner mx-auto"></div>';
-
-          const result = await window.dataSdk.create(newsletter);
-          if (result.isOk) {
-            showToast("Terima kasih telah berlangganan!");
-            e.target.reset();
-          } else {
-            showToast("Gagal berlangganan newsletter", false);
-          }
-
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = `<span id="newsletter-cta-text">${
-            window.elementSdk?.config?.newsletter_cta ||
-            defaultConfig.newsletter_cta
-          }</span>`;
-        });
-
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px",
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      }, observerOptions);
-
-      document.addEventListener("DOMContentLoaded", () => {
-        document
-          .querySelectorAll(".fade-in-up")
-          .forEach((el) => observer.observe(el));
-      });
-
-      document
-        .querySelectorAll(".fade-in-up")
-        .forEach((el) => observer.observe(el));
-
-      window.addEventListener("click", (e) => {
-        if (e.target.id === "buy-modal") {
-          closeBuyModal();
-        }
-      });
+      init();
     </script>
     <script>
       (function () {
@@ -1190,7 +1524,7 @@
           if (b) {
             var d = b.createElement("script");
             d.innerHTML =
-              "window.__CF$cv$params={r:'9a618d06354958ef',t:'MTc2NDQxMzQ5Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+              "window.__CF$cv$params={r:'9a63f83dc6da6bbb',t:'MTc2NDQzODg2MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
             b.getElementsByTagName("head")[0].appendChild(d);
           }
         }
