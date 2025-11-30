@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Premium Marketplace UMKM Lokal - Platform terpercaya untuk produk lokal berkualitas tinggi dengan pembayaran digital yang aman"
+      content="Iluzè Skincare - Premium skincare dengan formula natural untuk kecantikan alami yang bersinar"
     />
     <meta
       name="keywords"
-      content="UMKM, marketplace, produk lokal, belanja online, pembayaran digital"
+      content="skincare, premium, natural, kecantikan, perawatan kulit"
     />
-    <title>Premium UMKM Marketplace - Belanja Produk Lokal Terbaik</title>
+    <title>Iluzè Skincare - Kecantikan Alami yang Bersinar</title>
     <script src="/_sdk/element_sdk.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
       body {
         box-sizing: border-box;
@@ -25,436 +24,361 @@
         box-sizing: border-box;
       }
 
-      :root {
-        --bg-primary: #0f172a;
-        --bg-secondary: #1e293b;
-        --text-primary: #f1f5f9;
-        --text-secondary: #cbd5e1;
-        --accent-primary: #8b5cf6;
-        --accent-secondary: #06b6d4;
-      }
-
-      body.light-mode {
-        --bg-primary: #ffffff;
-        --bg-secondary: #f8fafc;
-        --text-primary: #1e293b;
-        --text-secondary: #475569;
-        --accent-primary: #8b5cf6;
-        --accent-secondary: #06b6d4;
-      }
-
+      html,
       body {
-        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-          sans-serif;
-        background-color: var(--bg-primary);
-        color: var(--text-primary);
-        overflow-x: hidden;
-        transition: background-color 0.3s ease, color 0.3s ease;
-      }
-
-      .page-wrapper {
-        width: 100%;
-        min-height: 100%;
-      }
-
-      /* Navigation */
-      .navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        background: rgba(15, 23, 42, 0.9);
-        backdrop-filter: blur(10px);
-        z-index: 1000;
-        transition: all 0.3s ease;
-      }
-
-      body.light-mode .navbar {
-        background: rgba(255, 255, 255, 0.9);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      }
-
-      .navbar.scrolled {
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      /* Hero Section */
-      .hero-section {
-        min-height: 100%;
-        padding-top: 80px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .hero-bg-gradient {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(
-          135deg,
-          var(--accent-primary) 0%,
-          var(--accent-secondary) 100%
-        );
-        opacity: 0.1;
-        animation: gradientShift 15s ease infinite;
-      }
-
-      @keyframes gradientShift {
-        0%,
-        100% {
-          transform: scale(1) rotate(0deg);
-        }
-        50% {
-          transform: scale(1.1) rotate(5deg);
-        }
-      }
-
-      .floating-shapes {
-        position: absolute;
-        width: 100%;
         height: 100%;
-        overflow: hidden;
+        width: 100%;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
       }
 
-      .shape {
-        position: absolute;
-        opacity: 0.1;
-        animation: float 20s infinite ease-in-out;
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
-      .shape-1 {
-        top: 20%;
-        left: 10%;
-        width: 100px;
-        height: 100px;
-        background: var(--accent-primary);
-        border-radius: 50%;
-        animation-delay: 0s;
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
       }
 
-      .shape-2 {
-        top: 60%;
-        right: 15%;
-        width: 150px;
-        height: 150px;
-        background: var(--accent-secondary);
-        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-        animation-delay: 2s;
-      }
-
-      .shape-3 {
-        bottom: 10%;
-        left: 20%;
-        width: 80px;
-        height: 80px;
-        background: var(--accent-primary);
-        border-radius: 20% 80% 80% 20% / 80% 20% 20% 80%;
-        animation-delay: 4s;
+      @keyframes scaleIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
       }
 
       @keyframes float {
         0%,
         100% {
-          transform: translateY(0) rotate(0deg);
+          transform: translateY(0px);
         }
         50% {
-          transform: translateY(-30px) rotate(180deg);
+          transform: translateY(-10px);
         }
       }
 
-      /* Buttons */
-      .btn-primary {
-        position: relative;
-        overflow: hidden;
-        transition: all 0.3s ease;
-        z-index: 1;
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
       }
 
-      .btn-primary::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.3);
-        transform: translate(-50%, -50%);
-        transition: width 0.6s ease, height 0.6s ease;
-        z-index: -1;
+      @keyframes shimmer {
+        0% {
+          background-position: -1000px 0;
+        }
+        100% {
+          background-position: 1000px 0;
+        }
       }
 
-      .btn-primary:hover::before {
-        width: 300px;
-        height: 300px;
+      @keyframes glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(212, 165, 116, 0.3);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(212, 165, 116, 0.6);
+        }
       }
 
-      .btn-primary:active {
-        transform: scale(0.95);
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
       }
 
-      /* Scroll Animations */
-      .fade-in {
+      @keyframes bounceIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.3);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        70% {
+          transform: scale(0.9);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes wave {
+        0%,
+        100% {
+          transform: translateX(0) translateY(0);
+        }
+        25% {
+          transform: translateX(5px) translateY(-5px);
+        }
+        75% {
+          transform: translateX(-5px) translateY(5px);
+        }
+      }
+
+      .float-animation {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .pulse-animation {
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      .shimmer-animation {
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        background-size: 1000px 100%;
+        animation: shimmer 3s infinite;
+      }
+
+      .glow-animation {
+        animation: glow 2s ease-in-out infinite;
+      }
+
+      .bounce-in {
+        animation: bounceIn 0.8s ease-out forwards;
         opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.8s ease, transform 0.8s ease;
-      }
-
-      .fade-in.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .slide-in-left {
-        opacity: 0;
-        transform: translateX(-50px);
-        transition: opacity 0.8s ease, transform 0.8s ease;
-      }
-
-      .slide-in-left.visible {
-        opacity: 1;
-        transform: translateX(0);
       }
 
       .slide-in-right {
+        animation: slideInRight 0.8s ease-out forwards;
         opacity: 0;
-        transform: translateX(50px);
-        transition: opacity 0.8s ease, transform 0.8s ease;
       }
 
-      .slide-in-right.visible {
+      .rotate-slow {
+        animation: rotate 20s linear infinite;
+      }
+
+      .wave-animation {
+        animation: wave 2s ease-in-out infinite;
+      }
+
+      .fade-in {
+        animation: fadeIn 0.8s ease-out forwards;
+        opacity: 0;
+      }
+
+      .slide-in {
+        animation: slideIn 0.8s ease-out forwards;
+        opacity: 0;
+      }
+
+      .scale-in {
+        animation: scaleIn 0.6s ease-out forwards;
+        opacity: 0;
+      }
+
+      .delay-1 {
+        animation-delay: 0.1s;
+      }
+      .delay-2 {
+        animation-delay: 0.2s;
+      }
+      .delay-3 {
+        animation-delay: 0.3s;
+      }
+      .delay-4 {
+        animation-delay: 0.4s;
+      }
+      .delay-5 {
+        animation-delay: 0.5s;
+      }
+
+      .section-visible {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease-out;
+      }
+
+      .section-visible.active {
         opacity: 1;
-        transform: translateX(0);
-      }
-
-      /* Product Cards */
-      .product-card {
-        background: var(--bg-secondary);
-        border-radius: 16px;
-        overflow: hidden;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      .product-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 24px rgba(139, 92, 246, 0.3);
-      }
-
-      .product-image {
-        width: 100%;
-        height: 200px;
-        background: linear-gradient(
-          135deg,
-          var(--accent-primary),
-          var(--accent-secondary)
-        );
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 64px;
-        transition: transform 0.3s ease;
-      }
-
-      .product-card:hover .product-image {
-        transform: scale(1.1);
-      }
-
-      /* Service Cards */
-      .service-card {
-        background: var(--bg-secondary);
-        border-radius: 16px;
-        padding: 32px;
-        text-align: center;
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
-      }
-
-      .service-card:hover {
-        border-color: var(--accent-primary);
-        transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(139, 92, 246, 0.2);
-      }
-
-      .service-icon {
-        font-size: 48px;
-        margin-bottom: 16px;
-        display: inline-block;
-        transition: transform 0.3s ease;
-      }
-
-      .service-card:hover .service-icon {
-        transform: rotate(360deg) scale(1.2);
-      }
-
-      /* Testimonial Carousel */
-      .testimonial-carousel {
-        position: relative;
-        overflow: hidden;
-        padding: 40px 0;
-      }
-
-      .testimonial-track {
-        display: flex;
-        transition: transform 0.5s ease;
-      }
-
-      .testimonial-card {
-        min-width: 100%;
-        padding: 0 20px;
-      }
-
-      .testimonial-content {
-        background: var(--bg-secondary);
-        border-radius: 16px;
-        padding: 32px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      /* Filter Buttons */
-      .filter-btn {
-        padding: 8px 24px;
-        border-radius: 24px;
-        border: 2px solid var(--accent-primary);
-        background: transparent;
-        color: var(--text-primary);
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-weight: 600;
-      }
-
-      .filter-btn:hover,
-      .filter-btn.active {
-        background: var(--accent-primary);
-        color: white;
-        transform: scale(1.05);
-      }
-
-      /* Payment Methods */
-      .payment-method {
-        background: var(--bg-secondary);
-        border-radius: 12px;
-        padding: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
-        cursor: pointer;
-      }
-
-      .payment-method:hover {
-        border-color: var(--accent-primary);
-        transform: scale(1.05);
-      }
-
-      /* Form Styles */
-      .form-input {
-        width: 100%;
-        padding: 12px 16px;
-        border-radius: 8px;
-        border: 2px solid var(--bg-secondary);
-        background: var(--bg-secondary);
-        color: var(--text-primary);
-        transition: all 0.3s ease;
-        font-size: 16px;
-      }
-
-      .form-input:focus {
-        outline: none;
-        border-color: var(--accent-primary);
-        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
-      }
-
-      /* Dark Mode Toggle */
-      .theme-toggle {
-        position: relative;
-        width: 60px;
-        height: 30px;
-        background: var(--bg-secondary);
-        border-radius: 15px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-        border: 2px solid var(--accent-primary);
-      }
-
-      .theme-toggle-slider {
-        position: absolute;
-        top: 3px;
-        left: 3px;
-        width: 20px;
-        height: 20px;
-        background: var(--accent-primary);
-        border-radius: 50%;
-        transition: transform 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-      }
-
-      body.light-mode .theme-toggle-slider {
-        transform: translateX(30px);
-      }
-
-      /* Stars Rating */
-      .stars {
-        color: #fbbf24;
-        font-size: 20px;
-        letter-spacing: 2px;
-      }
-
-      /* Mobile Menu */
-      .mobile-menu {
-        display: none;
-        position: fixed;
-        top: 70px;
-        left: 0;
-        right: 0;
-        background: var(--bg-primary);
-        padding: 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transform: translateY(-100%);
-        transition: transform 0.3s ease;
-        z-index: 999;
-      }
-
-      .mobile-menu.active {
         transform: translateY(0);
       }
 
-      /* Responsive */
-      @media (min-width: 768px) {
-        .testimonial-card {
-          min-width: 50%;
-        }
+      .hover-lift {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      @media (min-width: 1024px) {
-        .testimonial-card {
-          min-width: 33.333%;
-        }
+      .hover-lift:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      }
+
+      button,
+      a {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      button:hover,
+      a:hover {
+        transform: translateY(-2px);
+      }
+
+      button:active,
+      a:active {
+        transform: translateY(0px);
+      }
+
+      img {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      img:hover {
+        transform: scale(1.05);
+      }
+
+      .icon-float {
+        display: inline-block;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .icon-pulse {
+        display: inline-block;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      input,
+      textarea {
+        transition: all 0.3s ease;
+      }
+
+      input:focus,
+      textarea:focus {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      }
+
+      details {
+        transition: all 0.3s ease;
+      }
+
+      details:hover {
+        transform: translateX(5px);
+      }
+
+      .nav-sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      .mobile-menu {
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+      }
+
+      .mobile-menu.open {
+        transform: translateX(0);
+      }
+
+      .lightbox {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .lightbox.active {
+        display: flex;
+      }
+
+      .lightbox-content {
+        max-width: 90%;
+        max-height: 90%;
+        position: relative;
+        animation: scaleIn 0.3s ease-out;
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: -40px;
+        right: -40px;
+        width: 40px;
+        height: 40px;
+        background: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .lightbox-close:hover {
+        transform: rotate(90deg);
       }
 
       @media (max-width: 768px) {
-        .hero-section {
-          padding: 100px 20px 60px;
+        .desktop-only {
+          display: none !important;
         }
-
-        .product-image {
-          height: 150px;
-          font-size: 48px;
+        .mobile-grid {
+          grid-template-columns: 1fr !important;
         }
+        .lightbox-close {
+          top: 10px;
+          right: 10px;
+        }
+      }
 
-        .service-icon {
-          font-size: 36px;
+      @media (min-width: 769px) {
+        .mobile-only {
+          display: none !important;
         }
       }
     </style>
@@ -464,1593 +388,2505 @@
       }
     </style>
     <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+    <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
   </head>
   <body>
-    <div class="page-wrapper">
-      <!-- Navigation -->
-      <nav class="navbar">
-        <div
-          style="
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 16px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-          "
-        >
-          <div style="display: flex; align-items: center; gap: 8px">
-            <span style="font-size: 32px">🏪</span>
-            <span
-              style="
-                font-weight: 700;
-                font-size: 24px;
-                color: var(--accent-primary);
-              "
-              >UMKM Market</span
-            >
-          </div>
-          <div
-            style="display: none; gap: 32px; align-items: center"
-            class="desktop-menu"
-          >
-            <a
-              href="#home"
-              style="
-                color: var(--text-primary);
-                text-decoration: none;
-                font-weight: 600;
-                transition: color 0.3s;
-              "
-              onmouseover="this.style.color='var(--accent-primary)'"
-              onmouseout="this.style.color='var(--text-primary)'"
-              >Beranda</a
-            >
-            <a
-              href="#about"
-              style="
-                color: var(--text-primary);
-                text-decoration: none;
-                font-weight: 600;
-                transition: color 0.3s;
-              "
-              onmouseover="this.style.color='var(--accent-primary)'"
-              onmouseout="this.style.color='var(--text-primary)'"
-              >Tentang</a
-            >
-            <a
-              href="#products"
-              style="
-                color: var(--text-primary);
-                text-decoration: none;
-                font-weight: 600;
-                transition: color 0.3s;
-              "
-              onmouseover="this.style.color='var(--accent-primary)'"
-              onmouseout="this.style.color='var(--text-primary)'"
-              >Produk</a
-            >
-            <a
-              href="#services"
-              style="
-                color: var(--text-primary);
-                text-decoration: none;
-                font-weight: 600;
-                transition: color 0.3s;
-              "
-              onmouseover="this.style.color='var(--accent-primary)'"
-              onmouseout="this.style.color='var(--text-primary)'"
-              >Layanan</a
-            >
-            <a
-              href="#testimonials"
-              style="
-                color: var(--text-primary);
-                text-decoration: none;
-                font-weight: 600;
-                transition: color 0.3s;
-              "
-              onmouseover="this.style.color='var(--accent-primary)'"
-              onmouseout="this.style.color='var(--text-primary)'"
-              >Testimoni</a
-            >
-            <a
-              href="#contact"
-              style="
-                color: var(--text-primary);
-                text-decoration: none;
-                font-weight: 600;
-                transition: color 0.3s;
-              "
-              onmouseover="this.style.color='var(--accent-primary)'"
-              onmouseout="this.style.color='var(--text-primary)'"
-              >Kontak</a
-            >
-          </div>
-          <div style="display: flex; align-items: center; gap: 16px">
-            <div class="theme-toggle" onclick="toggleTheme()">
-              <div class="theme-toggle-slider">
-                <span id="theme-icon">🌙</span>
-              </div>
-            </div>
-            <button
-              style="
-                display: block;
-                background: none;
-                border: none;
-                color: var(--text-primary);
-                font-size: 24px;
-                cursor: pointer;
-              "
-              class="mobile-menu-btn"
-              onclick="toggleMobileMenu()"
-            >
-              ☰
-            </button>
-          </div>
-        </div>
-      </nav>
-      <div class="mobile-menu" id="mobileMenu">
-        <a
-          href="#home"
-          style="
-            display: block;
-            padding: 12px 0;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 600;
-          "
-          onclick="toggleMobileMenu()"
-          >Beranda</a
-        >
-        <a
-          href="#about"
-          style="
-            display: block;
-            padding: 12px 0;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 600;
-          "
-          onclick="toggleMobileMenu()"
-          >Tentang</a
-        >
-        <a
-          href="#products"
-          style="
-            display: block;
-            padding: 12px 0;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 600;
-          "
-          onclick="toggleMobileMenu()"
-          >Produk</a
-        >
-        <a
-          href="#services"
-          style="
-            display: block;
-            padding: 12px 0;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 600;
-          "
-          onclick="toggleMobileMenu()"
-          >Layanan</a
-        >
-        <a
-          href="#testimonials"
-          style="
-            display: block;
-            padding: 12px 0;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 600;
-          "
-          onclick="toggleMobileMenu()"
-          >Testimoni</a
-        >
-        <a
-          href="#contact"
-          style="
-            display: block;
-            padding: 12px 0;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 600;
-          "
-          onclick="toggleMobileMenu()"
-          >Kontak</a
-        >
+    <div id="app" style="width: 100%; min-height: 100%"></div>
+    <div id="lightbox" class="lightbox">
+      <div class="lightbox-content">
+        <button class="lightbox-close" id="lightbox-close">×</button>
+        <img
+          id="lightbox-img"
+          src=""
+          alt="Product"
+          style="width: 100%; height: auto; border-radius: 12px"
+        />
       </div>
-      <!-- Hero Section -->
-      <section id="home" class="hero-section">
-        <div class="hero-bg-gradient"></div>
-        <div class="floating-shapes">
-          <div class="shape shape-1"></div>
-          <div class="shape shape-2"></div>
-          <div class="shape shape-3"></div>
-        </div>
-        <div
-          style="
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 60px 24px;
-            position: relative;
-            z-index: 10;
-            text-align: center;
-          "
-        >
-          <div class="fade-in" style="margin-bottom: 32px">
-            <h1
-              id="hero-title"
-              style="
-                font-size: clamp(32px, 5vw, 56px);
-                font-weight: 800;
-                margin-bottom: 24px;
-                line-height: 1.2;
-              "
-            >
-              Belanja Produk UMKM Lokal Terbaik
-            </h1>
-            <p
-              id="hero-subtitle"
-              style="
-                font-size: clamp(16px, 2vw, 20px);
-                color: var(--text-secondary);
-                max-width: 700px;
-                margin: 0 auto 40px;
-              "
-            >
-              Platform marketplace premium yang menghubungkan Anda dengan produk
-              berkualitas dari UMKM lokal terpercaya
-            </p>
-            <button
-              id="hero-cta"
-              class="btn-primary"
-              style="
-                background: linear-gradient(
-                  135deg,
-                  var(--accent-primary),
-                  var(--accent-secondary)
-                );
-                color: white;
-                border: none;
-                padding: 16px 48px;
-                border-radius: 12px;
-                font-size: 18px;
-                font-weight: 700;
-                cursor: pointer;
-              "
-            >
-              Mulai Belanja
-            </button>
-          </div>
-          <div
-            class="fade-in"
-            style="
-              margin-top: 60px;
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-              gap: 24px;
-              max-width: 900px;
-              margin-left: auto;
-              margin-right: auto;
-            "
-          >
-            <div style="text-align: center">
-              <div
-                style="
-                  font-size: 40px;
-                  font-weight: 800;
-                  color: var(--accent-primary);
-                  margin-bottom: 8px;
-                "
-              >
-                500+
-              </div>
-              <div style="color: var(--text-secondary)">Produk Lokal</div>
-            </div>
-            <div style="text-align: center">
-              <div
-                style="
-                  font-size: 40px;
-                  font-weight: 800;
-                  color: var(--accent-primary);
-                  margin-bottom: 8px;
-                "
-              >
-                1000+
-              </div>
-              <div style="color: var(--text-secondary)">Pelanggan Puas</div>
-            </div>
-            <div style="text-align: center">
-              <div
-                style="
-                  font-size: 40px;
-                  font-weight: 800;
-                  color: var(--accent-primary);
-                  margin-bottom: 8px;
-                "
-              >
-                150+
-              </div>
-              <div style="color: var(--text-secondary)">UMKM Partner</div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- About Section -->
-      <section
-        id="about"
-        style="padding: 80px 24px; background: var(--bg-secondary)"
-      >
-        <div style="max-width: 1280px; margin: 0 auto">
-          <div class="fade-in" style="text-align: center; margin-bottom: 60px">
-            <h2
-              id="about-title"
-              style="
-                font-size: clamp(32px, 4vw, 48px);
-                font-weight: 800;
-                margin-bottom: 16px;
-              "
-            >
-              Tentang Kami
-            </h2>
-            <p
-              id="about-description"
-              style="
-                font-size: 18px;
-                color: var(--text-secondary);
-                max-width: 700px;
-                margin: 0 auto;
-              "
-            >
-              Kami adalah platform marketplace yang berdedikasi untuk
-              memberdayakan UMKM lokal dan menghubungkan mereka dengan pasar
-              yang lebih luas
-            </p>
-          </div>
-          <div
-            style="
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-              gap: 32px;
-              margin-top: 60px;
-            "
-          >
-            <div class="slide-in-left service-card">
-              <span style="font-size: 48px">👨‍💼</span>
-              <h3 style="font-size: 20px; font-weight: 700; margin: 16px 0 8px">
-                Andi Pratama
-              </h3>
-              <p style="color: var(--accent-primary); margin-bottom: 8px">
-                CEO &amp; Founder
-              </p>
-              <p style="color: var(--text-secondary); font-size: 14px">
-                Visioner di balik platform UMKM marketplace
-              </p>
-            </div>
-            <div
-              class="slide-in-left service-card"
-              style="transition-delay: 0.1s"
-            >
-              <span style="font-size: 48px">👩‍💻</span>
-              <h3 style="font-size: 20px; font-weight: 700; margin: 16px 0 8px">
-                Siti Nurhaliza
-              </h3>
-              <p style="color: var(--accent-primary); margin-bottom: 8px">
-                Head of Operations
-              </p>
-              <p style="color: var(--text-secondary); font-size: 14px">
-                Mengatur operasional dan partnership
-              </p>
-            </div>
-            <div
-              class="slide-in-left service-card"
-              style="transition-delay: 0.2s"
-            >
-              <span style="font-size: 48px">👨‍🎨</span>
-              <h3 style="font-size: 20px; font-weight: 700; margin: 16px 0 8px">
-                Budi Santoso
-              </h3>
-              <p style="color: var(--accent-primary); margin-bottom: 8px">
-                Creative Director
-              </p>
-              <p style="color: var(--text-secondary); font-size: 14px">
-                Memimpin tim kreatif dan branding
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Products Section -->
-      <section id="products" style="padding: 80px 24px">
-        <div style="max-width: 1280px; margin: 0 auto">
-          <div class="fade-in" style="text-align: center; margin-bottom: 40px">
-            <h2
-              style="
-                font-size: clamp(32px, 4vw, 48px);
-                font-weight: 800;
-                margin-bottom: 16px;
-              "
-            >
-              Produk Pilihan
-            </h2>
-            <p style="font-size: 18px; color: var(--text-secondary)">
-              Temukan berbagai produk berkualitas dari UMKM lokal
-            </p>
-          </div>
-          <div
-            class="fade-in"
-            style="
-              display: flex;
-              flex-wrap: wrap;
-              justify-content: center;
-              gap: 12px;
-              margin-bottom: 40px;
-            "
-          >
-            <button class="filter-btn active" onclick="filterProducts('all')">
-              Semua
-            </button>
-            <button class="filter-btn" onclick="filterProducts('fashion')">
-              Fashion
-            </button>
-            <button class="filter-btn" onclick="filterProducts('kuliner')">
-              Kuliner
-            </button>
-            <button class="filter-btn" onclick="filterProducts('kerajinan')">
-              Kerajinan
-            </button>
-            <button class="filter-btn" onclick="filterProducts('elektronik')">
-              Elektronik
-            </button>
-          </div>
-          <div
-            id="products-grid"
-            style="
-              display: grid;
-              grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-              gap: 24px;
-            "
-          ></div>
-        </div>
-      </section>
-      <!-- Services Section -->
-      <section
-        id="services"
-        style="padding: 80px 24px; background: var(--bg-secondary)"
-      >
-        <div style="max-width: 1280px; margin: 0 auto">
-          <div class="fade-in" style="text-align: center; margin-bottom: 60px">
-            <h2
-              id="services-title"
-              style="
-                font-size: clamp(32px, 4vw, 48px);
-                font-weight: 800;
-                margin-bottom: 16px;
-              "
-            >
-              Layanan Kami
-            </h2>
-            <p style="font-size: 18px; color: var(--text-secondary)">
-              Kemudahan dan keamanan dalam setiap transaksi
-            </p>
-          </div>
-          <div
-            style="
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-              gap: 32px;
-            "
-          >
-            <div class="slide-in-left service-card">
-              <div class="service-icon">🚚</div>
-              <h3
-                style="font-size: 24px; font-weight: 700; margin-bottom: 12px"
-              >
-                Pengiriman Cepat
-              </h3>
-              <p style="color: var(--text-secondary)">
-                Pengiriman ke seluruh Indonesia dengan tracking real-time
-              </p>
-            </div>
-            <div
-              class="slide-in-left service-card"
-              style="transition-delay: 0.1s"
-            >
-              <div class="service-icon">🔒</div>
-              <h3
-                style="font-size: 24px; font-weight: 700; margin-bottom: 12px"
-              >
-                Pembayaran Aman
-              </h3>
-              <p style="color: var(--text-secondary)">
-                Berbagai metode pembayaran digital yang aman dan terpercaya
-              </p>
-            </div>
-            <div
-              class="slide-in-left service-card"
-              style="transition-delay: 0.2s"
-            >
-              <div class="service-icon">💬</div>
-              <h3
-                style="font-size: 24px; font-weight: 700; margin-bottom: 12px"
-              >
-                Customer Support 24/7
-              </h3>
-              <p style="color: var(--text-secondary)">
-                Tim support siap membantu Anda kapan saja
-              </p>
-            </div>
-            <div
-              class="slide-in-left service-card"
-              style="transition-delay: 0.3s"
-            >
-              <div class="service-icon">✅</div>
-              <h3
-                style="font-size: 24px; font-weight: 700; margin-bottom: 12px"
-              >
-                Garansi Kualitas
-              </h3>
-              <p style="color: var(--text-secondary)">
-                Produk berkualitas dengan jaminan kepuasan pelanggan
-              </p>
-            </div>
-          </div>
-          <!-- Payment Methods -->
-          <div class="fade-in" style="margin-top: 60px">
-            <h3
-              style="
-                text-align: center;
-                font-size: 28px;
-                font-weight: 700;
-                margin-bottom: 32px;
-              "
-            >
-              Metode Pembayaran (DEMO)
-            </h3>
-            <div
-              style="
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-wrap: wrap;
-                gap: 24px;
-                max-width: 800px;
-                margin: 0 auto;
-              "
-            >
-              <div class="payment-method" style="width: 120px; height: 80px">
-                <span style="font-size: 40px">💳</span>
-              </div>
-              <div
-                class="payment-method"
-                style="
-                  width: 120px;
-                  height: 80px;
-                  flex-direction: column;
-                  gap: 8px;
-                "
-              >
-                <span style="font-size: 24px">OVO</span>
-                <span style="font-size: 12px; color: var(--text-secondary)"
-                  >DEMO</span
-                >
-              </div>
-              <div
-                class="payment-method"
-                style="
-                  width: 120px;
-                  height: 80px;
-                  flex-direction: column;
-                  gap: 8px;
-                "
-              >
-                <span style="font-size: 24px">GoPay</span>
-                <span style="font-size: 12px; color: var(--text-secondary)"
-                  >DEMO</span
-                >
-              </div>
-              <div
-                class="payment-method"
-                style="
-                  width: 120px;
-                  height: 80px;
-                  flex-direction: column;
-                  gap: 8px;
-                "
-              >
-                <span style="font-size: 24px">DANA</span>
-                <span style="font-size: 12px; color: var(--text-secondary)"
-                  >DEMO</span
-                >
-              </div>
-            </div>
-            <p
-              style="
-                text-align: center;
-                margin-top: 24px;
-                color: var(--text-secondary);
-                font-size: 14px;
-              "
-            >
-              ⚠️ Catatan: Ini adalah tampilan demo. Tidak ada integrasi
-              pembayaran aktual.
-            </p>
-          </div>
-        </div>
-      </section>
-      <!-- Testimonials Section -->
-      <section id="testimonials" style="padding: 80px 24px">
-        <div style="max-width: 1280px; margin: 0 auto">
-          <div class="fade-in" style="text-align: center; margin-bottom: 60px">
-            <h2
-              style="
-                font-size: clamp(32px, 4vw, 48px);
-                font-weight: 800;
-                margin-bottom: 16px;
-              "
-            >
-              Testimoni Pelanggan
-            </h2>
-            <p style="font-size: 18px; color: var(--text-secondary)">
-              Apa kata mereka tentang layanan kami
-            </p>
-          </div>
-          <div class="testimonial-carousel">
-            <div class="testimonial-track" id="testimonialTrack">
-              <div class="testimonial-card">
-                <div class="testimonial-content">
-                  <div class="stars">★★★★★</div>
-                  <p
-                    style="
-                      font-size: 18px;
-                      margin: 20px 0;
-                      line-height: 1.6;
-                      font-style: italic;
-                    "
-                  >
-                    "Produknya berkualitas tinggi dan pengirimannya sangat
-                    cepat. Sangat puas berbelanja di sini!"
-                  </p>
-                  <div style="display: flex; align-items: center; gap: 16px">
-                    <div
-                      style="
-                        width: 50px;
-                        height: 50px;
-                        border-radius: 50%;
-                        background: linear-gradient(
-                          135deg,
-                          var(--accent-primary),
-                          var(--accent-secondary)
-                        );
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        font-size: 24px;
-                      "
-                    >
-                      👩
-                    </div>
-                    <div>
-                      <div style="font-weight: 700">Dewi Lestari</div>
-                      <div
-                        style="color: var(--text-secondary); font-size: 14px"
-                      >
-                        Jakarta
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="testimonial-card">
-                <div class="testimonial-content">
-                  <div class="stars">★★★★★</div>
-                  <p
-                    style="
-                      font-size: 18px;
-                      margin: 20px 0;
-                      line-height: 1.6;
-                      font-style: italic;
-                    "
-                  >
-                    "Platform yang sangat membantu UMKM seperti kami. Pelayanan
-                    dan sistemnya profesional!"
-                  </p>
-                  <div style="display: flex; align-items: center; gap: 16px">
-                    <div
-                      style="
-                        width: 50px;
-                        height: 50px;
-                        border-radius: 50%;
-                        background: linear-gradient(
-                          135deg,
-                          var(--accent-primary),
-                          var(--accent-secondary)
-                        );
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        font-size: 24px;
-                      "
-                    >
-                      👨
-                    </div>
-                    <div>
-                      <div style="font-weight: 700">Rahmat Hidayat</div>
-                      <div
-                        style="color: var(--text-secondary); font-size: 14px"
-                      >
-                        Bandung
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="testimonial-card">
-                <div class="testimonial-content">
-                  <div class="stars">★★★★★</div>
-                  <p
-                    style="
-                      font-size: 18px;
-                      margin: 20px 0;
-                      line-height: 1.6;
-                      font-style: italic;
-                    "
-                  >
-                    "Senang bisa mendukung produk lokal dengan kualitas
-                    internasional. Recommended!"
-                  </p>
-                  <div style="display: flex; align-items: center; gap: 16px">
-                    <div
-                      style="
-                        width: 50px;
-                        height: 50px;
-                        border-radius: 50%;
-                        background: linear-gradient(
-                          135deg,
-                          var(--accent-primary),
-                          var(--accent-secondary)
-                        );
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        font-size: 24px;
-                      "
-                    >
-                      👩
-                    </div>
-                    <div>
-                      <div style="font-weight: 700">Maya Sari</div>
-                      <div
-                        style="color: var(--text-secondary); font-size: 14px"
-                      >
-                        Surabaya
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              style="
-                display: flex;
-                justify-content: center;
-                gap: 12px;
-                margin-top: 32px;
-              "
-            >
-              <button
-                onclick="prevTestimonial()"
-                style="
-                  width: 40px;
-                  height: 40px;
-                  border-radius: 50%;
-                  background: var(--accent-primary);
-                  color: white;
-                  border: none;
-                  cursor: pointer;
-                  font-size: 20px;
-                  transition: transform 0.3s;
-                "
-                onmouseover="this.style.transform='scale(1.1)'"
-                onmouseout="this.style.transform='scale(1)'"
-              >
-                ‹
-              </button>
-              <button
-                onclick="nextTestimonial()"
-                style="
-                  width: 40px;
-                  height: 40px;
-                  border-radius: 50%;
-                  background: var(--accent-primary);
-                  color: white;
-                  border: none;
-                  cursor: pointer;
-                  font-size: 20px;
-                  transition: transform 0.3s;
-                "
-                onmouseover="this.style.transform='scale(1.1)'"
-                onmouseout="this.style.transform='scale(1)'"
-              >
-                ›
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Contact Section -->
-      <section
-        id="contact"
-        style="padding: 80px 24px; background: var(--bg-secondary)"
-      >
-        <div style="max-width: 1280px; margin: 0 auto">
-          <div class="fade-in" style="text-align: center; margin-bottom: 60px">
-            <h2
-              id="contact-title"
-              style="
-                font-size: clamp(32px, 4vw, 48px);
-                font-weight: 800;
-                margin-bottom: 16px;
-              "
-            >
-              Hubungi Kami
-            </h2>
-            <p style="font-size: 18px; color: var(--text-secondary)">
-              Kami siap membantu Anda
-            </p>
-          </div>
-          <div
-            style="
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-              gap: 40px;
-            "
-          >
-            <!-- Contact Form -->
-            <div class="slide-in-left">
-              <form
-                id="contactForm"
-                onsubmit="handleContactSubmit(event)"
-                style="
-                  background: var(--bg-primary);
-                  padding: 32px;
-                  border-radius: 16px;
-                "
-              >
-                <div style="margin-bottom: 20px">
-                  <label
-                    for="name"
-                    style="display: block; margin-bottom: 8px; font-weight: 600"
-                    >Nama Lengkap</label
-                  >
-                  <input
-                    type="text"
-                    id="name"
-                    class="form-input"
-                    placeholder="Masukkan nama Anda"
-                    required
-                  />
-                </div>
-                <div style="margin-bottom: 20px">
-                  <label
-                    for="email"
-                    style="display: block; margin-bottom: 8px; font-weight: 600"
-                    >Email</label
-                  >
-                  <input
-                    type="email"
-                    id="email"
-                    class="form-input"
-                    placeholder="nama@email.com"
-                    required
-                  />
-                </div>
-                <div style="margin-bottom: 20px">
-                  <label
-                    for="message"
-                    style="display: block; margin-bottom: 8px; font-weight: 600"
-                    >Pesan</label
-                  >
-                  <textarea
-                    id="message"
-                    class="form-input"
-                    placeholder="Tulis pesan Anda..."
-                    rows="5"
-                    required
-                  ></textarea>
-                </div>
-                <button
-                  type="submit"
-                  class="btn-primary"
-                  style="
-                    width: 100%;
-                    background: linear-gradient(
-                      135deg,
-                      var(--accent-primary),
-                      var(--accent-secondary)
-                    );
-                    color: white;
-                    border: none;
-                    padding: 14px;
-                    border-radius: 8px;
-                    font-size: 16px;
-                    font-weight: 700;
-                    cursor: pointer;
-                  "
-                >
-                  Kirim Pesan
-                </button>
-                <div
-                  id="form-message"
-                  style="
-                    margin-top: 16px;
-                    padding: 12px;
-                    border-radius: 8px;
-                    display: none;
-                  "
-                ></div>
-              </form>
-            </div>
-            <!-- Contact Info -->
-            <div class="slide-in-right">
-              <div
-                style="
-                  background: var(--bg-primary);
-                  padding: 32px;
-                  border-radius: 16px;
-                  margin-bottom: 24px;
-                "
-              >
-                <h3
-                  style="font-size: 24px; font-weight: 700; margin-bottom: 24px"
-                >
-                  Informasi Kontak
-                </h3>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    gap: 16px;
-                    margin-bottom: 20px;
-                  "
-                >
-                  <div
-                    style="
-                      width: 48px;
-                      height: 48px;
-                      background: var(--accent-primary);
-                      border-radius: 12px;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      font-size: 24px;
-                    "
-                  >
-                    📧
-                  </div>
-                  <div>
-                    <div style="font-weight: 600; margin-bottom: 4px">
-                      Email
-                    </div>
-                    <div style="color: var(--text-secondary)">
-                      info@umkmmarket.co.id
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    gap: 16px;
-                    margin-bottom: 20px;
-                  "
-                >
-                  <div
-                    style="
-                      width: 48px;
-                      height: 48px;
-                      background: var(--accent-secondary);
-                      border-radius: 12px;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      font-size: 24px;
-                    "
-                  >
-                    📱
-                  </div>
-                  <div>
-                    <div style="font-weight: 600; margin-bottom: 4px">
-                      WhatsApp
-                    </div>
-                    <a
-                      href="https://wa.me/6281234567890"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style="
-                        color: var(--text-secondary);
-                        text-decoration: none;
-                      "
-                      >+62 812-3456-7890</a
-                    >
-                  </div>
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    gap: 16px;
-                    margin-bottom: 20px;
-                  "
-                >
-                  <div
-                    style="
-                      width: 48px;
-                      height: 48px;
-                      background: var(--accent-primary);
-                      border-radius: 12px;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      font-size: 24px;
-                    "
-                  >
-                    📷
-                  </div>
-                  <div>
-                    <div style="font-weight: 600; margin-bottom: 4px">
-                      Instagram
-                    </div>
-                    <a
-                      href="https://instagram.com/umkmmarket"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style="
-                        color: var(--text-secondary);
-                        text-decoration: none;
-                      "
-                      >@umkmmarket</a
-                    >
-                  </div>
-                </div>
-                <div style="display: flex; align-items: center; gap: 16px">
-                  <div
-                    style="
-                      width: 48px;
-                      height: 48px;
-                      background: var(--accent-secondary);
-                      border-radius: 12px;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      font-size: 24px;
-                    "
-                  >
-                    📍
-                  </div>
-                  <div>
-                    <div style="font-weight: 600; margin-bottom: 4px">
-                      Lokasi
-                    </div>
-                    <div style="color: var(--text-secondary)">
-                      Jakarta Selatan, Indonesia
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Newsletter -->
-              <div
-                style="
-                  background: var(--bg-primary);
-                  padding: 32px;
-                  border-radius: 16px;
-                "
-              >
-                <h3
-                  id="newsletter-title"
-                  style="font-size: 24px; font-weight: 700; margin-bottom: 12px"
-                >
-                  Newsletter
-                </h3>
-                <p style="color: var(--text-secondary); margin-bottom: 20px">
-                  Dapatkan update produk terbaru dan promo spesial
-                </p>
-                <form onsubmit="handleNewsletterSubmit(event)">
-                  <input
-                    type="email"
-                    class="form-input"
-                    placeholder="Email Anda"
-                    style="margin-bottom: 12px"
-                    required
-                  />
-                  <button
-                    type="submit"
-                    class="btn-primary"
-                    style="
-                      width: 100%;
-                      background: linear-gradient(
-                        135deg,
-                        var(--accent-primary),
-                        var(--accent-secondary)
-                      );
-                      color: white;
-                      border: none;
-                      padding: 12px;
-                      border-radius: 8px;
-                      font-size: 16px;
-                      font-weight: 700;
-                      cursor: pointer;
-                    "
-                  >
-                    Berlangganan
-                  </button>
-                </form>
-                <div
-                  id="newsletter-message"
-                  style="
-                    margin-top: 12px;
-                    padding: 12px;
-                    border-radius: 8px;
-                    display: none;
-                  "
-                ></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Footer -->
-      <footer
-        style="
-          background: var(--bg-primary);
-          padding: 40px 24px;
-          text-align: center;
-          border-top: 1px solid var(--bg-secondary);
-        "
-      >
-        <div style="max-width: 1280px; margin: 0 auto">
-          <div
-            style="
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              gap: 8px;
-              margin-bottom: 16px;
-            "
-          >
-            <span style="font-size: 32px">🏪</span>
-            <span
-              style="
-                font-weight: 700;
-                font-size: 24px;
-                color: var(--accent-primary);
-              "
-              >UMKM Market</span
-            >
-          </div>
-          <p style="color: var(--text-secondary); margin-bottom: 24px">
-            Platform marketplace premium untuk UMKM lokal Indonesia
-          </p>
-          <div
-            style="
-              display: flex;
-              justify-content: center;
-              gap: 16px;
-              margin-bottom: 24px;
-            "
-          >
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              style="
-                width: 40px;
-                height: 40px;
-                background: var(--bg-secondary);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-decoration: none;
-                font-size: 20px;
-                transition: all 0.3s;
-              "
-              onmouseover="this.style.background='var(--accent-primary)'"
-              onmouseout="this.style.background='var(--bg-secondary)'"
-              >📘</a
-            >
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              style="
-                width: 40px;
-                height: 40px;
-                background: var(--bg-secondary);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-decoration: none;
-                font-size: 20px;
-                transition: all 0.3s;
-              "
-              onmouseover="this.style.background='var(--accent-primary)'"
-              onmouseout="this.style.background='var(--bg-secondary)'"
-              >📷</a
-            >
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              style="
-                width: 40px;
-                height: 40px;
-                background: var(--bg-secondary);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-decoration: none;
-                font-size: 20px;
-                transition: all 0.3s;
-              "
-              onmouseover="this.style.background='var(--accent-primary)'"
-              onmouseout="this.style.background='var(--bg-secondary)'"
-              >🐦</a
-            >
-            <a
-              href="https://wa.me/6281234567890"
-              target="_blank"
-              rel="noopener noreferrer"
-              style="
-                width: 40px;
-                height: 40px;
-                background: var(--bg-secondary);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-decoration: none;
-                font-size: 20px;
-                transition: all 0.3s;
-              "
-              onmouseover="this.style.background='var(--accent-primary)'"
-              onmouseout="this.style.background='var(--bg-secondary)'"
-              >💬</a
-            >
-          </div>
-          <p style="color: var(--text-secondary); font-size: 14px">
-            © 2024 UMKM Market. All rights reserved.
-          </p>
-        </div>
-      </footer>
     </div>
     <script>
       const defaultConfig = {
-        hero_title: "Belanja Produk UMKM Lokal Terbaik",
-        hero_subtitle:
-          "Platform marketplace premium yang menghubungkan Anda dengan produk berkualitas dari UMKM lokal terpercaya",
-        hero_cta: "Mulai Belanja",
-        about_title: "Tentang Kami",
-        about_description:
-          "Kami adalah platform marketplace yang berdedikasi untuk memberdayakan UMKM lokal dan menghubungkan mereka dengan pasar yang lebih luas",
-        services_title: "Layanan Kami",
-        contact_title: "Hubungi Kami",
-        newsletter_title: "Newsletter",
-        background_color: "#0f172a",
-        surface_color: "#1e293b",
-        text_color: "#f1f5f9",
-        primary_action_color: "#8b5cf6",
-        secondary_action_color: "#06b6d4",
+        background_color: "#faf9f7",
+        surface_color: "#ffffff",
+        text_color: "#2c2c2c",
+        primary_color: "#d4a574",
+        secondary_color: "#8b7355",
+        brand_name: "Iluzè Skincare",
+        hero_tagline: "Kecantikan Alami yang Bersinar",
+        hero_description:
+          "Formula premium dengan bahan natural pilihan untuk kulit sehat bercahaya",
+        cta_button: "Belanja Sekarang",
+        contact_email: "hello@lumiere.com",
+        contact_phone: "+62 821 1234 5678",
+        contact_address: "Jakarta, Indonesia",
         font_family: "Inter",
         font_size: 16,
       };
 
-      let config = { ...defaultConfig };
+      let currentPage = "home";
+      let newsletterSubscribers = [];
 
-      // Products data
-      const products = [
-        {
-          name: "Batik Premium",
-          category: "fashion",
-          price: "Rp 350.000",
-          icon: "👔",
-          rating: 5,
-        },
-        {
-          name: "Kopi Arabica",
-          category: "kuliner",
-          price: "Rp 85.000",
-          icon: "☕",
-          rating: 5,
-        },
-        {
-          name: "Tas Anyaman",
-          category: "kerajinan",
-          price: "Rp 125.000",
-          icon: "👜",
-          rating: 5,
-        },
-        {
-          name: "Kemeja Tenun",
-          category: "fashion",
-          price: "Rp 280.000",
-          icon: "👕",
-          rating: 4,
-        },
-        {
-          name: "Keripik Singkong",
-          category: "kuliner",
-          price: "Rp 35.000",
-          icon: "🥔",
-          rating: 5,
-        },
-        {
-          name: "Hiasan Dinding",
-          category: "kerajinan",
-          price: "Rp 150.000",
-          icon: "🖼️",
-          rating: 4,
-        },
-        {
-          name: "Sepatu Kulit",
-          category: "fashion",
-          price: "Rp 450.000",
-          icon: "👞",
-          rating: 5,
-        },
-        {
-          name: "Sambal Homemade",
-          category: "kuliner",
-          price: "Rp 45.000",
-          icon: "🌶️",
-          rating: 5,
-        },
-        {
-          name: "Lampu Bambu",
-          category: "kerajinan",
-          price: "Rp 200.000",
-          icon: "💡",
-          rating: 4,
-        },
-      ];
+      const pageRoutes = {
+        home: "Home",
+        about: "About",
+        products: "Products",
+        portfolio: "Portfolio",
+        testimonials: "Testimonials",
+        blog: "Blog",
+        pricing: "Pricing",
+        contact: "Contact",
+      };
 
-      let currentTestimonial = 0;
-      let currentFilter = "all";
+      function renderNavigation(config) {
+        const baseSize = config.font_size || defaultConfig.font_size;
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack =
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        const fontFamily = `${customFont}, ${baseFontStack}`;
 
-      function renderProducts() {
-        const grid = document.getElementById("products-grid");
-        grid.innerHTML = "";
-
-        const filtered =
-          currentFilter === "all"
-            ? products
-            : products.filter((p) => p.category === currentFilter);
-
-        filtered.forEach((product, index) => {
-          const card = document.createElement("div");
-          card.className = "product-card fade-in";
-          card.style.transitionDelay = `${index * 0.1}s`;
-          card.innerHTML = `
-          <div class="product-image">${product.icon}</div>
-          <div style="padding: 20px;">
-            <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 8px;">${
-              product.name
-            }</h3>
-            <div style="color: #fbbf24; margin-bottom: 8px;">${"★".repeat(
-              product.rating
-            )}${"☆".repeat(5 - product.rating)}</div>
-            <div style="font-size: 24px; font-weight: 800; color: var(--accent-primary); margin-bottom: 16px;">${
-              product.price
-            }</div>
-            <button class="btn-primary" style="width: 100%; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer;">
-              Beli Sekarang
+        return `
+        <nav class="nav-sticky" style="box-shadow: 0 2px 20px rgba(0,0,0,0.05);">
+          <div style="max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-size: ${
+              baseSize * 1.5
+            }px; font-weight: 700; color: ${
+          config.primary_color
+        }; letter-spacing: 1px; font-family: ${fontFamily};">
+              ${config.brand_name || defaultConfig.brand_name}
+            </div>
+            
+            <button id="mobile-menu-btn" class="mobile-only" style="background: none; border: none; cursor: pointer; padding: 8px;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${
+                config.text_color
+              }" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
             </button>
+
+            <div class="desktop-only" style="display: flex; gap: 40px; align-items: center;">
+              ${Object.keys(pageRoutes)
+                .map(
+                  (page) => `
+                <a href="#${page}" data-page="${page}" style="color: ${
+                    currentPage === page
+                      ? config.primary_color
+                      : config.text_color
+                  }; text-decoration: none; font-weight: ${
+                    currentPage === page ? "600" : "400"
+                  }; font-size: ${baseSize}px; transition: all 0.3s ease; font-family: ${fontFamily}; opacity: ${
+                    currentPage === page ? "1" : "0.8"
+                  };">
+                  ${pageRoutes[page]}
+                </a>
+              `
+                )
+                .join("")}
+            </div>
           </div>
-        `;
-          grid.appendChild(card);
-        });
 
-        setTimeout(() => {
-          document
-            .querySelectorAll(".fade-in")
-            .forEach((el) => el.classList.add("visible"));
-        }, 100);
+          <div id="mobile-menu" class="mobile-menu mobile-only" style="position: fixed; top: 0; right: 0; bottom: 0; width: 280px; background: ${
+            config.surface_color
+          }; box-shadow: -4px 0 20px rgba(0,0,0,0.1); padding: 24px; display: flex; flex-direction: column; gap: 24px;">
+            <button id="close-menu-btn" style="align-self: flex-end; background: none; border: none; cursor: pointer; font-size: 28px; color: ${
+              config.text_color
+            };">×</button>
+            ${Object.keys(pageRoutes)
+              .map(
+                (page) => `
+              <a href="#${page}" data-page="${page}" class="mobile-nav-link" style="color: ${
+                  config.text_color
+                }; text-decoration: none; font-weight: 500; font-size: ${
+                  baseSize * 1.1
+                }px; padding: 12px 0; border-bottom: 1px solid ${
+                  config.text_color
+                }10; font-family: ${fontFamily};">
+                ${pageRoutes[page]}
+              </a>
+            `
+              )
+              .join("")}
+          </div>
+        </nav>
+      `;
       }
 
-      function filterProducts(category) {
-        currentFilter = category;
-        document.querySelectorAll(".filter-btn").forEach((btn) => {
-          btn.classList.remove("active");
-        });
-        event.target.classList.add("active");
-        renderProducts();
+      function renderHomePage(config) {
+        const baseSize = config.font_size || defaultConfig.font_size;
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack =
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        const fontFamily = `${customFont}, ${baseFontStack}`;
+
+        return `
+        <main style="padding-top: 80px;">
+          <!-- Hero Section -->
+          <section style="min-height: 85%; background: linear-gradient(135deg, ${
+            config.background_color
+          } 0%, ${
+          config.surface_color
+        } 100%); padding: 80px 24px; display: flex; align-items: center; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;" class="mobile-grid">
+              <div>
+                <h1 class="fade-in" style="font-size: ${
+                  baseSize * 3.5
+                }px; font-weight: 700; color: ${
+          config.text_color
+        }; line-height: 1.2; margin-bottom: 24px; font-family: ${fontFamily};">
+                  ${config.hero_tagline || defaultConfig.hero_tagline}
+                </h1>
+                <p class="fade-in delay-1" style="font-size: ${
+                  baseSize * 1.2
+                }px; color: ${
+          config.text_color
+        }; opacity: 0.8; line-height: 1.8; margin-bottom: 40px; font-family: ${fontFamily};">
+                  ${config.hero_description || defaultConfig.hero_description}
+                </p>
+                <button class="fade-in delay-2 hover-lift glow-animation" style="background: ${
+                  config.primary_color
+                }; color: white; padding: 18px 48px; border: none; border-radius: 50px; font-size: ${
+          baseSize * 1.1
+        }px; font-weight: 600; cursor: pointer; font-family: ${fontFamily};">
+                  ${config.cta_button || defaultConfig.cta_button}
+                </button>
+              </div>
+              <div class="fade-in delay-3 float-animation" style="background: ${
+                config.surface_color
+              }; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.08); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80" alt="Premium Skincare Product" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg viewBox=\'0 0 200 200\' style=\'width: 100%; height: 100%;\'><circle cx=\'100\' cy=\'100\' r=\'80\' fill=\'${
+                  config.primary_color
+                }\' opacity=\'0.2\'/><circle cx=\'100\' cy=\'100\' r=\'60\' fill=\'${
+          config.primary_color
+        }\' opacity=\'0.4\'/><circle cx=\'100\' cy=\'100\' r=\'40\' fill=\'${
+          config.primary_color
+        }\'/><text x=\'100\' y=\'110\' text-anchor=\'middle\' font-size=\'24\' font-weight=\'bold\' fill=\'white\'>PREMIUM</text></svg>';">
+              </div>
+            </div>
+          </section>
+
+          <!-- Features Section -->
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.surface_color
+          }; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+              <h2 style="font-size: ${
+                baseSize * 2.5
+              }px; font-weight: 700; text-align: center; color: ${
+          config.text_color
+        }; margin-bottom: 60px; font-family: ${fontFamily};">
+                Keunggulan Premium Kami
+              </h2>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;">
+                ${[
+                  {
+                    icon: "🌿",
+                    title: "100% Natural",
+                    desc: "Bahan alami pilihan berkualitas tinggi",
+                  },
+                  {
+                    icon: "🧪",
+                    title: "Teruji Klinis",
+                    desc: "Formulasi dermatologis tersertifikasi",
+                  },
+                  {
+                    icon: "✨",
+                    title: "Hasil Maksimal",
+                    desc: "Terbukti efektif dalam 2 minggu",
+                  },
+                  {
+                    icon: "🛡️",
+                    title: "Aman & Halal",
+                    desc: "Standar keamanan internasional",
+                  },
+                ]
+                  .map(
+                    (item, idx) => `
+                  <div class="hover-lift" style="background: ${
+                    config.background_color
+                  }; padding: 40px; border-radius: 16px; text-align: center;">
+                    <div class="icon-float" style="font-size: ${
+                      baseSize * 3
+                    }px; margin-bottom: 20px;">${item.icon}</div>
+                    <h3 style="font-size: ${
+                      baseSize * 1.3
+                    }px; font-weight: 600; color: ${
+                      config.text_color
+                    }; margin-bottom: 12px; font-family: ${fontFamily};">
+                      ${item.title}
+                    </h3>
+                    <p style="font-size: ${baseSize}px; color: ${
+                      config.text_color
+                    }; opacity: 0.7; line-height: 1.6; font-family: ${fontFamily};">
+                      ${item.desc}
+                    </p>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </section>
+
+          <!-- Products Highlight -->
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.background_color
+          }; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+              <h2 style="font-size: ${
+                baseSize * 2.5
+              }px; font-weight: 700; text-align: center; color: ${
+          config.text_color
+        }; margin-bottom: 60px; font-family: ${fontFamily};">
+                Produk Unggulan Premium
+              </h2>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px;">
+                ${[
+                  "Serum Brightening",
+                  "Moisturizer Hydra",
+                  "Night Cream Luxury",
+                ]
+                  .map(
+                    (product, idx) => `
+                  <div class="hover-lift product-card" data-product="${idx}" style="background: ${
+                      config.surface_color
+                    }; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.06); cursor: pointer;">
+                    <div style="height: 320px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: ${
+                      config.background_color
+                    };">
+                      <img src="https://images.unsplash.com/photo-${
+                        [
+                          "1556228720-195a672e8a03",
+                          "1612817288537-e4e1c0c4bf85",
+                          "1620916566398-39f1143ab7be",
+                        ][idx]
+                      }?w=600&q=80" alt="${product}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                      <div style="display: none; position: absolute; inset: 0; background: linear-gradient(135deg, ${
+                        config.primary_color
+                      }20 0%, ${
+                      config.secondary_color
+                    }20 100%); align-items: center; justify-content: center;">
+                        <svg width="140" height="140" viewBox="0 0 140 140">
+                          <rect x="40" y="20" width="60" height="100" rx="10" fill="${
+                            config.primary_color
+                          }" opacity="0.8"/>
+                          <rect x="45" y="25" width="50" height="80" rx="8" fill="${
+                            config.surface_color
+                          }"/>
+                          <circle cx="70" cy="65" r="20" fill="${
+                            config.secondary_color
+                          }" opacity="0.5"/>
+                        </svg>
+                      </div>
+                      <div class="pulse-animation" style="position: absolute; top: 20px; right: 20px; background: ${
+                        config.primary_color
+                      }; color: white; padding: 6px 16px; border-radius: 20px; font-size: ${
+                      baseSize * 0.85
+                    }px; font-weight: 600; font-family: ${fontFamily};">
+                        Best Seller
+                      </div>
+                    </div>
+                    <div style="padding: 32px;">
+                      <h3 style="font-size: ${
+                        baseSize * 1.4
+                      }px; font-weight: 600; color: ${
+                      config.text_color
+                    }; margin-bottom: 12px; font-family: ${fontFamily};">
+                        ${product}
+                      </h3>
+                      <p style="font-size: ${baseSize}px; color: ${
+                      config.text_color
+                    }; opacity: 0.7; margin-bottom: 20px; line-height: 1.6; font-family: ${fontFamily};">
+                        Formula premium untuk hasil maksimal
+                      </p>
+                      <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: ${
+                          baseSize * 1.5
+                        }px; font-weight: 700; color: ${
+                      config.primary_color
+                    }; font-family: ${fontFamily};">
+                          Rp ${350 + idx * 50}.000
+                        </span>
+                        <button style="background: ${
+                          config.primary_color
+                        }; color: white; padding: 12px 28px; border: none; border-radius: 50px; font-size: ${
+                      baseSize * 0.95
+                    }px; font-weight: 600; cursor: pointer; font-family: ${fontFamily};">
+                          Beli
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </section>
+
+          <!-- Results Section -->
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.surface_color
+          }; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+              <h2 style="font-size: ${
+                baseSize * 2.5
+              }px; font-weight: 700; text-align: center; color: ${
+          config.text_color
+        }; margin-bottom: 60px; font-family: ${fontFamily};">
+                Hasil Nyata & Terbukti
+              </h2>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+                ${[1, 2, 3]
+                  .map(
+                    (i) => `
+                  <div style="background: ${
+                    config.background_color
+                  }; padding: 32px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.05);">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+                      <div>
+                        <div style="aspect-ratio: 1; border-radius: 12px; overflow: hidden; margin-bottom: 8px; position: relative;">
+                          <img src="https://images.unsplash.com/photo-${
+                            [
+                              "1515377905703-95418b1e0562",
+                              "1522337360788-8b13dee7a37e",
+                              "1524502397800-2eeaad7c3fe5",
+                            ][i - 1]
+                          }?w=400&q=80&sat=-100" alt="Before" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85);" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                          <div style="display: none; position: absolute; inset: 0; background: ${
+                            config.text_color
+                          }10; align-items: center; justify-content: center;">
+                            <span style="font-size: ${
+                              baseSize * 2
+                            }px; opacity: 0.4;">📸</span>
+                          </div>
+                        </div>
+                        <div style="text-align: center; font-size: ${
+                          baseSize * 0.85
+                        }px; color: ${
+                      config.text_color
+                    }; opacity: 0.6; font-weight: 600; font-family: ${fontFamily};">BEFORE</div>
+                      </div>
+                      <div>
+                        <div style="aspect-ratio: 1; border-radius: 12px; overflow: hidden; margin-bottom: 8px; position: relative;">
+                          <img src="https://images.unsplash.com/photo-${
+                            [
+                              "1515377905703-95418b1e0562",
+                              "1522337360788-8b13dee7a37e",
+                              "1524502397800-2eeaad7c3fe5",
+                            ][i - 1]
+                          }?w=400&q=80&sat=50&bright=20" alt="After" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(1.1) saturate(1.2);" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                          <div style="display: none; position: absolute; inset: 0; background: linear-gradient(135deg, ${
+                            config.primary_color
+                          }30 0%, ${
+                      config.secondary_color
+                    }30 100%); align-items: center; justify-content: center;">
+                            <span style="font-size: ${
+                              baseSize * 2
+                            }px;">✨</span>
+                          </div>
+                        </div>
+                        <div style="text-align: center; font-size: ${
+                          baseSize * 0.85
+                        }px; color: ${
+                      config.primary_color
+                    }; font-weight: 600; font-family: ${fontFamily};">AFTER</div>
+                      </div>
+                    </div>
+                    <p style="font-size: ${baseSize}px; color: ${
+                      config.text_color
+                    }; text-align: center; opacity: 0.8; font-family: ${fontFamily};">
+                      Hasil setelah ${i * 2} minggu pemakaian
+                    </p>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </section>
+
+          <!-- Stats Section -->
+          <section class="section-visible" style="padding: 100px 24px; background: linear-gradient(135deg, ${
+            config.primary_color
+          } 0%, ${config.secondary_color} 100%); color: white; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 60px;">
+                ${[
+                  { num: "50K+", label: "Pelanggan Puas" },
+                  { num: "98%", label: "Tingkat Kepuasan" },
+                  { num: "15+", label: "Tahun Pengalaman" },
+                  { num: "100%", label: "Natural Ingredients" },
+                ]
+                  .map(
+                    (stat, idx) => `
+                  <div class="bounce-in delay-${idx + 1}">
+                    <div class="wave-animation" style="font-size: ${
+                      baseSize * 3.5
+                    }px; font-weight: 800; margin-bottom: 12px; font-family: ${fontFamily}; display: inline-block;">
+                      ${stat.num}
+                    </div>
+                    <div style="font-size: ${
+                      baseSize * 1.1
+                    }px; opacity: 0.95; font-family: ${fontFamily};">
+                      ${stat.label}
+                    </div>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </section>
+
+          <!-- Testimonials Preview -->
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.background_color
+          }; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+              <h2 style="font-size: ${
+                baseSize * 2.5
+              }px; font-weight: 700; text-align: center; color: ${
+          config.text_color
+        }; margin-bottom: 60px; font-family: ${fontFamily};">
+                Testimoni Pelanggan Kami
+              </h2>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
+                ${["Sarah K.", "Dina M.", "Rina L."]
+                  .map(
+                    (name, idx) => `
+                  <div class="hover-lift" style="background: ${
+                    config.surface_color
+                  }; padding: 32px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.06);">
+                    <div style="display: flex; gap: 4px; margin-bottom: 16px; color: ${
+                      config.primary_color
+                    };">
+                      ${[...Array(5)]
+                        .map(
+                          (_, i) =>
+                            `<span class="icon-pulse" style="animation-delay: ${
+                              i * 0.1
+                            }s;">⭐</span>`
+                        )
+                        .join("")}
+                    </div>
+                    <p style="font-size: ${baseSize}px; color: ${
+                      config.text_color
+                    }; opacity: 0.8; line-height: 1.8; margin-bottom: 24px; font-style: italic; font-family: ${fontFamily};">
+                      "Produk terbaik yang pernah saya coba. Kulit saya terasa lebih halus dan bercahaya dalam waktu singkat."
+                    </p>
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                      <div style="width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, ${
+                        config.primary_color
+                      } 0%, ${
+                      config.secondary_color
+                    } 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: ${
+                      baseSize * 1.2
+                    }px; font-family: ${fontFamily};">
+                        ${name[0]}
+                      </div>
+                      <div>
+                        <div style="font-size: ${baseSize}px; font-weight: 600; color: ${
+                      config.text_color
+                    }; font-family: ${fontFamily};">
+                          ${name}
+                        </div>
+                        <div style="font-size: ${baseSize * 0.85}px; color: ${
+                      config.text_color
+                    }; opacity: 0.6; font-family: ${fontFamily};">
+                          Verified Customer
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </section>
+
+          <!-- Newsletter Section -->
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.surface_color
+          }; width: 100%;">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+              <h2 style="font-size: ${
+                baseSize * 2.5
+              }px; font-weight: 700; color: ${
+          config.text_color
+        }; margin-bottom: 20px; font-family: ${fontFamily};">
+                Dapatkan Info & Promo Terbaru
+              </h2>
+              <p style="font-size: ${baseSize * 1.1}px; color: ${
+          config.text_color
+        }; opacity: 0.7; margin-bottom: 40px; line-height: 1.8; font-family: ${fontFamily};">
+                Subscribe newsletter kami untuk penawaran eksklusif dan tips perawatan kulit
+              </p>
+              <form id="newsletter-form" style="display: flex; gap: 16px; max-width: 600px; margin: 0 auto; flex-wrap: wrap;">
+                <input 
+                  type="email" 
+                  id="newsletter-email"
+                  placeholder="Masukkan email Anda"
+                  required
+                  style="flex: 1; min-width: 280px; padding: 18px 24px; border: 2px solid ${
+                    config.text_color
+                  }20; border-radius: 50px; font-size: ${baseSize}px; color: ${
+          config.text_color
+        }; background: ${config.background_color}; font-family: ${fontFamily};"
+                >
+                <button type="submit" class="hover-lift" style="background: ${
+                  config.primary_color
+                }; color: white; padding: 18px 40px; border: none; border-radius: 50px; font-size: ${baseSize}px; font-weight: 600; cursor: pointer; font-family: ${fontFamily}; white-space: nowrap;">
+                  Subscribe
+                </button>
+              </form>
+              <div id="newsletter-message" style="display: none; margin-top: 20px; padding: 16px; border-radius: 12px; font-size: ${baseSize}px; font-family: ${fontFamily};"></div>
+            </div>
+          </section>
+
+          <!-- CTA Section -->
+          <section class="section-visible" style="padding: 100px 24px; background: linear-gradient(135deg, ${
+            config.primary_color
+          } 0%, ${
+          config.secondary_color
+        } 100%); text-align: center; color: white; width: 100%;">
+            <div style="max-width: 800px; margin: 0 auto;">
+              <h2 style="font-size: ${
+                baseSize * 2.8
+              }px; font-weight: 800; margin-bottom: 24px; font-family: ${fontFamily};">
+                Mulai Transformasi Kecantikan Anda
+              </h2>
+              <p style="font-size: ${
+                baseSize * 1.2
+              }px; opacity: 0.95; margin-bottom: 40px; line-height: 1.8; font-family: ${fontFamily};">
+                Konsultasi gratis dengan beauty expert kami
+              </p>
+              <button class="hover-lift" style="background: white; color: ${
+                config.primary_color
+              }; padding: 20px 50px; border: none; border-radius: 50px; font-size: ${
+          baseSize * 1.1
+        }px; font-weight: 700; cursor: pointer; font-family: ${fontFamily}; box-shadow: 0 12px 40px rgba(0,0,0,0.2);">
+                Konsultasi Gratis
+              </button>
+            </div>
+          </section>
+
+          <!-- Ingredients Section -->
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.background_color
+          }; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+              <h2 style="font-size: ${
+                baseSize * 2.5
+              }px; font-weight: 700; text-align: center; color: ${
+          config.text_color
+        }; margin-bottom: 60px; font-family: ${fontFamily};">
+                Bahan Alami Premium
+              </h2>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;">
+                ${[
+                  "Vitamin C",
+                  "Hyaluronic Acid",
+                  "Niacinamide",
+                  "Collagen",
+                  "Green Tea",
+                  "Aloe Vera",
+                ]
+                  .map(
+                    (ingredient, idx) => `
+                  <div class="slide-in delay-${
+                    (idx % 3) + 1
+                  }" style="text-align: center;">
+                    <div class="hover-lift" style="width: 100px; height: 100px; margin: 0 auto 20px; background: linear-gradient(135deg, ${
+                      config.primary_color
+                    }20 0%, ${
+                      config.secondary_color
+                    }20 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                      <span class="icon-float" style="font-size: ${
+                        baseSize * 2.5
+                      }px; animation-delay: ${idx * 0.2}s;">🌿</span>
+                    </div>
+                    <h3 style="font-size: ${
+                      baseSize * 1.1
+                    }px; font-weight: 600; color: ${
+                      config.text_color
+                    }; font-family: ${fontFamily};">
+                      ${ingredient}
+                    </h3>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </section>
+        </main>
+      `;
       }
 
-      function nextTestimonial() {
-        const track = document.getElementById("testimonialTrack");
-        const cards = document.querySelectorAll(".testimonial-card");
-        currentTestimonial = (currentTestimonial + 1) % cards.length;
-        updateTestimonialPosition();
+      function renderAboutPage(config) {
+        const baseSize = config.font_size || defaultConfig.font_size;
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack =
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        const fontFamily = `${customFont}, ${baseFontStack}`;
+
+        return `
+        <main style="padding-top: 80px;">
+          <section style="min-height: 60%; padding: 100px 24px; background: linear-gradient(135deg, ${
+            config.background_color
+          } 0%, ${
+          config.surface_color
+        } 100%); display: flex; align-items: center; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+              <h1 class="fade-in" style="font-size: ${
+                baseSize * 3.5
+              }px; font-weight: 700; color: ${
+          config.text_color
+        }; margin-bottom: 24px; font-family: ${fontFamily};">
+                Tentang ${config.brand_name || defaultConfig.brand_name}
+              </h1>
+              <p class="fade-in delay-1" style="font-size: ${
+                baseSize * 1.3
+              }px; color: ${
+          config.text_color
+        }; opacity: 0.8; max-width: 800px; margin: 0 auto; line-height: 1.8; font-family: ${fontFamily};">
+                Perjalanan kami dalam menciptakan produk skincare premium berkualitas tinggi
+              </p>
+            </div>
+          </section>
+
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.surface_color
+          }; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;" class="mobile-grid">
+              <div>
+                <h2 style="font-size: ${
+                  baseSize * 2.5
+                }px; font-weight: 700; color: ${
+          config.text_color
+        }; margin-bottom: 32px; font-family: ${fontFamily};">
+                  Cerita Brand Kami
+                </h2>
+                <p style="font-size: ${baseSize * 1.1}px; color: ${
+          config.text_color
+        }; opacity: 0.8; line-height: 1.8; margin-bottom: 24px; font-family: ${fontFamily};">
+                  Didirikan pada tahun 2008, ${
+                    config.brand_name || defaultConfig.brand_name
+                  } lahir dari passion menciptakan produk skincare yang tidak hanya efektif, tetapi juga aman dan ramah lingkungan.
+                </p>
+                <p style="font-size: ${baseSize * 1.1}px; color: ${
+          config.text_color
+        }; opacity: 0.8; line-height: 1.8; font-family: ${fontFamily};">
+                  Dari laboratorium kecil hingga menjadi brand terpercaya, kami terus berkomitmen pada kualitas dan inovasi.
+                </p>
+              </div>
+              <div style="border-radius: 24px; aspect-ratio: 1; overflow: hidden; position: relative;">
+                <img src="https://images.unsplash.com/photo-1576426863848-c21f53c60b19?w=800&q=80" alt="Brand Story" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div style="display: none; position: absolute; inset: 0; background: linear-gradient(135deg, ${
+                  config.primary_color
+                }30 0%, ${
+          config.secondary_color
+        }30 100%); align-items: center; justify-content: center;">
+                  <svg viewBox="0 0 300 300" style="width: 80%; height: 80%;">
+                    <circle cx="150" cy="150" r="100" fill="${
+                      config.primary_color
+                    }" opacity="0.3"/>
+                    <circle cx="150" cy="150" r="70" fill="${
+                      config.primary_color
+                    }" opacity="0.5"/>
+                    <text x="150" y="165" text-anchor="middle" font-size="48" font-weight="bold" fill="${
+                      config.text_color
+                    }" font-family="${fontFamily}">2008</text>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.background_color
+          }; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+              <h2 style="font-size: ${
+                baseSize * 2.5
+              }px; font-weight: 700; text-align: center; color: ${
+          config.text_color
+        }; margin-bottom: 60px; font-family: ${fontFamily};">
+                Proses Produksi Premium
+              </h2>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 32px;">
+                ${[
+                  { step: "01", title: "Riset & Formulasi", icon: "🔬" },
+                  { step: "02", title: "Seleksi Bahan", icon: "🌿" },
+                  { step: "03", title: "Produksi Steril", icon: "⚗️" },
+                  { step: "04", title: "Quality Control", icon: "✓" },
+                ]
+                  .map(
+                    (item, idx) => `
+                  <div style="background: ${
+                    config.surface_color
+                  }; padding: 40px; border-radius: 16px; text-align: center;">
+                    <div style="font-size: ${
+                      baseSize * 3
+                    }px; margin-bottom: 16px;">${item.icon}</div>
+                    <div style="font-size: ${
+                      baseSize * 1.5
+                    }px; font-weight: 800; color: ${
+                      config.primary_color
+                    }; margin-bottom: 8px; font-family: ${fontFamily};">
+                      ${item.step}
+                    </div>
+                    <h3 style="font-size: ${
+                      baseSize * 1.1
+                    }px; font-weight: 600; color: ${
+                      config.text_color
+                    }; font-family: ${fontFamily};">
+                      ${item.title}
+                    </h3>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </section>
+
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.surface_color
+          }; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+              <h2 style="font-size: ${
+                baseSize * 2.5
+              }px; font-weight: 700; text-align: center; color: ${
+          config.text_color
+        }; margin-bottom: 60px; font-family: ${fontFamily};">
+                Standar Keamanan & Sertifikasi
+              </h2>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;">
+                ${[
+                  { badge: "BPOM", desc: "Terdaftar dan tersertifikasi" },
+                  { badge: "ISO", desc: "Standar produksi ISO 9001" },
+                  { badge: "HALAL", desc: "Sertifikat halal MUI" },
+                  { badge: "GMP", desc: "Good Manufacturing Practice" },
+                ]
+                  .map(
+                    (cert) => `
+                  <div class="hover-lift" style="background: ${
+                    config.background_color
+                  }; padding: 40px; border-radius: 16px; text-align: center;">
+                    <div style="width: 80px; height: 80px; margin: 0 auto 24px; background: linear-gradient(135deg, ${
+                      config.primary_color
+                    } 0%, ${
+                      config.secondary_color
+                    } 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: ${
+                      baseSize * 1.2
+                    }px; font-weight: 700; font-family: ${fontFamily};">
+                      ${cert.badge}
+                    </div>
+                    <p style="font-size: ${baseSize}px; color: ${
+                      config.text_color
+                    }; opacity: 0.7; font-family: ${fontFamily};">
+                      ${cert.desc}
+                    </p>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </section>
+
+          <section class="section-visible" style="padding: 100px 24px; background: linear-gradient(135deg, ${
+            config.primary_color
+          } 0%, ${config.secondary_color} 100%); color: white; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px;" class="mobile-grid">
+                <div>
+                  <h2 style="font-size: ${
+                    baseSize * 2.2
+                  }px; font-weight: 700; margin-bottom: 32px; font-family: ${fontFamily};">
+                    Visi Kami
+                  </h2>
+                  <p style="font-size: ${
+                    baseSize * 1.1
+                  }px; opacity: 0.95; line-height: 1.8; font-family: ${fontFamily};">
+                    Menjadi brand skincare premium terkemuka yang menginspirasi jutaan orang merawat kecantikan alami dengan produk berkualitas tinggi.
+                  </p>
+                </div>
+                <div>
+                  <h2 style="font-size: ${
+                    baseSize * 2.2
+                  }px; font-weight: 700; margin-bottom: 32px; font-family: ${fontFamily};">
+                    Misi Kami
+                  </h2>
+                  <ul style="font-size: ${
+                    baseSize * 1.1
+                  }px; opacity: 0.95; line-height: 2; list-style: none; padding: 0; font-family: ${fontFamily};">
+                    <li>✓ Menghadirkan produk premium berkualitas</li>
+                    <li>✓ Inovasi berkelanjutan dalam R&D</li>
+                    <li>✓ Edukasi tentang skincare sehat</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      `;
       }
 
-      function prevTestimonial() {
-        const track = document.getElementById("testimonialTrack");
-        const cards = document.querySelectorAll(".testimonial-card");
-        currentTestimonial =
-          (currentTestimonial - 1 + cards.length) % cards.length;
-        updateTestimonialPosition();
+      function renderProductsPage(config) {
+        const baseSize = config.font_size || defaultConfig.font_size;
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack =
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        const fontFamily = `${customFont}, ${baseFontStack}`;
+
+        const products = [
+          {
+            name: "Luminous Glow Serum",
+            category: "Serum",
+            price: "Rp 350.000",
+            rating: 4.9,
+          },
+          {
+            name: "Hydra Boost Moisturizer",
+            category: "Moisturizer",
+            price: "Rp 280.000",
+            rating: 4.8,
+          },
+          {
+            name: "Pure Radiance Cleanser",
+            category: "Cleanser",
+            price: "Rp 180.000",
+            rating: 4.7,
+          },
+          {
+            name: "Night Revival Cream",
+            category: "Night Cream",
+            price: "Rp 420.000",
+            rating: 4.9,
+          },
+          {
+            name: "Vitamin C Essence",
+            category: "Essence",
+            price: "Rp 320.000",
+            rating: 4.8,
+          },
+          {
+            name: "Collagen Eye Cream",
+            category: "Eye Care",
+            price: "Rp 240.000",
+            rating: 4.6,
+          },
+        ];
+
+        return `
+        <main style="padding-top: 80px;">
+          <section style="min-height: 50%; padding: 100px 24px; background: linear-gradient(135deg, ${
+            config.background_color
+          } 0%, ${
+          config.surface_color
+        } 100%); display: flex; align-items: center; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+              <h1 class="fade-in" style="font-size: ${
+                baseSize * 3.5
+              }px; font-weight: 700; color: ${
+          config.text_color
+        }; margin-bottom: 24px; font-family: ${fontFamily};">
+                Koleksi Produk Premium
+              </h1>
+              <p class="fade-in delay-1" style="font-size: ${
+                baseSize * 1.3
+              }px; color: ${
+          config.text_color
+        }; opacity: 0.8; max-width: 800px; margin: 0 auto; line-height: 1.8; font-family: ${fontFamily};">
+                Rangkaian lengkap skincare untuk setiap kebutuhan perawatan kulit
+              </p>
+            </div>
+          </section>
+
+          <section class="section-visible" style="padding: 60px 24px; background: ${
+            config.surface_color
+          }; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+              <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 60px;">
+                ${["Semua", "Serum", "Moisturizer", "Cleanser", "Treatment"]
+                  .map(
+                    (cat, idx) => `
+                  <button style="background: ${
+                    idx === 0 ? config.primary_color : config.background_color
+                  }; color: ${
+                      idx === 0 ? "white" : config.text_color
+                    }; padding: 12px 32px; border: none; border-radius: 50px; font-size: ${baseSize}px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-family: ${fontFamily};">
+                    ${cat}
+                  </button>
+                `
+                  )
+                  .join("")}
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 32px;">
+                ${products
+                  .map(
+                    (product, idx) => `
+                  <div class="hover-lift product-card" data-product="${idx}" style="background: ${
+                      config.background_color
+                    }; border-radius: 16px; overflow: hidden; cursor: pointer;">
+                    <div style="height: 280px; position: relative; overflow: hidden; background: ${
+                      config.background_color
+                    };">
+                      <img src="https://images.unsplash.com/photo-${
+                        [
+                          "1556228720-195a672e8a03",
+                          "1612817288537-e4e1c0c4bf85",
+                          "1620916566398-39f1143ab7be",
+                          "1556229010-6c3f9f905467",
+                          "1571875257727-f9e2bfb64e60",
+                          "1598440947619-2c35fc9aa908",
+                        ][idx]
+                      }?w=600&q=80" alt="${
+                      product.name
+                    }" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                      <div style="display: none; position: absolute; inset: 0; background: linear-gradient(135deg, ${
+                        config.primary_color
+                      }25 0%, ${
+                      config.secondary_color
+                    }25 100%); align-items: center; justify-content: center;">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                          <rect x="30" y="20" width="60" height="80" rx="8" fill="${
+                            config.primary_color
+                          }" opacity="0.7"/>
+                          <rect x="35" y="25" width="50" height="60" rx="6" fill="${
+                            config.surface_color
+                          }"/>
+                          <circle cx="60" cy="55" r="15" fill="${
+                            config.secondary_color
+                          }" opacity="0.5"/>
+                        </svg>
+                      </div>
+                      <div style="position: absolute; top: 16px; right: 16px; background: white; padding: 6px 12px; border-radius: 20px; font-size: ${
+                        baseSize * 0.85
+                      }px; font-weight: 600; color: ${
+                      config.primary_color
+                    }; font-family: ${fontFamily};">
+                        ${product.category}
+                      </div>
+                    </div>
+                    <div style="padding: 24px;">
+                      <h3 style="font-size: ${
+                        baseSize * 1.2
+                      }px; font-weight: 600; color: ${
+                      config.text_color
+                    }; margin-bottom: 8px; font-family: ${fontFamily};">
+                        ${product.name}
+                      </h3>
+                      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+                        <span style="color: ${
+                          config.secondary_color
+                        };">⭐</span>
+                        <span style="font-size: ${baseSize * 0.9}px; color: ${
+                      config.text_color
+                    }; font-weight: 600; font-family: ${fontFamily};">${
+                      product.rating
+                    }</span>
+                      </div>
+                      <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: ${
+                          baseSize * 1.3
+                        }px; font-weight: 700; color: ${
+                      config.primary_color
+                    }; font-family: ${fontFamily};">
+                          ${product.price}
+                        </span>
+                        <button style="background: ${
+                          config.primary_color
+                        }; color: white; padding: 10px 24px; border: none; border-radius: 50px; font-size: ${
+                      baseSize * 0.9
+                    }px; font-weight: 600; cursor: pointer; font-family: ${fontFamily};">
+                          Beli
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </section>
+
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.background_color
+          }; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+              <h2 style="font-size: ${
+                baseSize * 2.5
+              }px; font-weight: 700; text-align: center; color: ${
+          config.text_color
+        }; margin-bottom: 60px; font-family: ${fontFamily};">
+                Manfaat Utama Produk Kami
+              </h2>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px;">
+                ${[
+                  {
+                    icon: "💧",
+                    title: "Hidrasi Optimal",
+                    desc: "Menjaga kelembaban kulit sepanjang hari",
+                  },
+                  {
+                    icon: "✨",
+                    title: "Kulit Bercahaya",
+                    desc: "Meningkatkan kecerahan alami",
+                  },
+                  {
+                    icon: "🛡️",
+                    title: "Perlindungan",
+                    desc: "Melindungi dari radikal bebas",
+                  },
+                  {
+                    icon: "🌸",
+                    title: "Anti-Aging",
+                    desc: "Mengurangi tanda penuaan",
+                  },
+                ]
+                  .map(
+                    (benefit) => `
+                  <div class="hover-lift" style="background: ${
+                    config.surface_color
+                  }; padding: 32px; border-radius: 16px; text-align: center;">
+                    <div class="bounce-in delay-2" style="font-size: ${
+                      baseSize * 2.5
+                    }px; margin-bottom: 16px;">${benefit.icon}</div>
+                    <h3 style="font-size: ${
+                      baseSize * 1.2
+                    }px; font-weight: 600; color: ${
+                      config.text_color
+                    }; margin-bottom: 12px; font-family: ${fontFamily};">
+                      ${benefit.title}
+                    </h3>
+                    <p style="font-size: ${baseSize * 0.95}px; color: ${
+                      config.text_color
+                    }; opacity: 0.7; line-height: 1.6; font-family: ${fontFamily};">
+                      ${benefit.desc}
+                    </p>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </section>
+
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.surface_color
+          }; width: 100%;">
+            <div style="max-width: 900px; margin: 0 auto;">
+              <h2 style="font-size: ${
+                baseSize * 2.5
+              }px; font-weight: 700; text-align: center; color: ${
+          config.text_color
+        }; margin-bottom: 60px; font-family: ${fontFamily};">
+                FAQ - Pertanyaan Umum
+              </h2>
+              <div style="display: flex; flex-direction: column; gap: 20px;">
+                ${[
+                  {
+                    q: "Apakah produk aman untuk kulit sensitif?",
+                    a: "Ya, semua produk kami telah diuji dermatologi dan cocok untuk semua jenis kulit.",
+                  },
+                  {
+                    q: "Berapa lama terlihat hasilnya?",
+                    a: "Hasil dapat terlihat dalam 2-4 minggu pemakaian rutin.",
+                  },
+                  {
+                    q: "Bagaimana cara penyimpanan yang tepat?",
+                    a: "Simpan di tempat sejuk dan kering, hindari paparan sinar matahari langsung.",
+                  },
+                ]
+                  .map(
+                    (faq) => `
+                  <details style="background: ${
+                    config.background_color
+                  }; padding: 24px; border-radius: 12px; cursor: pointer;">
+                    <summary style="font-size: ${
+                      baseSize * 1.1
+                    }px; font-weight: 600; color: ${
+                      config.text_color
+                    }; list-style: none; display: flex; justify-content: space-between; align-items: center; font-family: ${fontFamily};">
+                      ${faq.q}
+                      <span style="color: ${config.primary_color};">+</span>
+                    </summary>
+                    <p style="font-size: ${baseSize}px; color: ${
+                      config.text_color
+                    }; opacity: 0.7; margin-top: 16px; line-height: 1.8; font-family: ${fontFamily};">
+                      ${faq.a}
+                    </p>
+                  </details>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </section>
+        </main>
+      `;
       }
 
-      function updateTestimonialPosition() {
-        const track = document.getElementById("testimonialTrack");
-        const cardWidth =
-          window.innerWidth < 768
-            ? 100
-            : window.innerWidth < 1024
-            ? 50
-            : 33.333;
-        track.style.transform = `translateX(-${
-          currentTestimonial * cardWidth
-        }%)`;
+      function renderPortfolioPage(config) {
+        const baseSize = config.font_size || defaultConfig.font_size;
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack =
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        const fontFamily = `${customFont}, ${baseFontStack}`;
+
+        return `
+        <main style="padding-top: 80px;">
+          <section style="min-height: 50%; padding: 100px 24px; background: linear-gradient(135deg, ${
+            config.background_color
+          } 0%, ${
+          config.surface_color
+        } 100%); display: flex; align-items: center; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+              <h1 class="fade-in" style="font-size: ${
+                baseSize * 3.5
+              }px; font-weight: 700; color: ${
+          config.text_color
+        }; margin-bottom: 24px; font-family: ${fontFamily};">
+                Portfolio Hasil Nyata
+              </h1>
+              <p class="fade-in delay-1" style="font-size: ${
+                baseSize * 1.3
+              }px; color: ${
+          config.text_color
+        }; opacity: 0.8; max-width: 800px; margin: 0 auto; line-height: 1.8; font-family: ${fontFamily};">
+                Bukti transformasi kulit dari pelanggan yang mempercayai kami
+              </p>
+            </div>
+          </section>
+
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.surface_color
+          }; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+              <h2 style="font-size: ${
+                baseSize * 2.5
+              }px; font-weight: 700; text-align: center; color: ${
+          config.text_color
+        }; margin-bottom: 60px; font-family: ${fontFamily};">
+                Galeri Before & After
+              </h2>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
+                ${[1, 2, 3, 4, 5, 6]
+                  .map(
+                    (i) => `
+                  <div class="hover-lift portfolio-item" data-portfolio="${i}" style="background: ${
+                      config.background_color
+                    }; border-radius: 16px; padding: 24px; cursor: pointer;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+                      <div>
+                        <div style="aspect-ratio: 1; border-radius: 12px; overflow: hidden; margin-bottom: 8px; position: relative;">
+                          <img src="https://images.unsplash.com/photo-${
+                            [
+                              "1515377905703-95418b1e0562",
+                              "1522337360788-8b13dee7a37e",
+                              "1524502397800-2eeaad7c3fe5",
+                              "1494790108377-be9c29b29330",
+                              "1509967419530-da38b4704bc6",
+                              "1529626455594-4ff0802cfb7e",
+                            ][i - 1]
+                          }?w=400&q=80&sat=-80" alt="Before ${i}" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9);" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                          <div style="display: none; position: absolute; inset: 0; background: ${
+                            config.text_color
+                          }10; align-items: center; justify-content: center;">
+                            <span style="font-size: ${
+                              baseSize * 2
+                            }px; opacity: 0.3;">📷</span>
+                          </div>
+                        </div>
+                        <div style="text-align: center; font-size: ${
+                          baseSize * 0.85
+                        }px; color: ${
+                      config.text_color
+                    }; opacity: 0.6; font-weight: 600; font-family: ${fontFamily};">BEFORE</div>
+                      </div>
+                      <div>
+                        <div style="aspect-ratio: 1; border-radius: 12px; overflow: hidden; margin-bottom: 8px; position: relative;">
+                          <img src="https://images.unsplash.com/photo-${
+                            [
+                              "1515377905703-95418b1e0562",
+                              "1522337360788-8b13dee7a37e",
+                              "1524502397800-2eeaad7c3fe5",
+                              "1494790108377-be9c29b29330",
+                              "1509967419530-da38b4704bc6",
+                              "1529626455594-4ff0802cfb7e",
+                            ][i - 1]
+                          }?w=400&q=80&sat=40" alt="After ${i}" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(1.1) saturate(1.15);" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                          <div style="display: none; position: absolute; inset: 0; background: linear-gradient(135deg, ${
+                            config.primary_color
+                          }30 0%, ${
+                      config.secondary_color
+                    }30 100%); align-items: center; justify-content: center;">
+                            <span style="font-size: ${
+                              baseSize * 2
+                            }px;">✨</span>
+                          </div>
+                        </div>
+                        <div style="text-align: center; font-size: ${
+                          baseSize * 0.85
+                        }px; color: ${
+                      config.primary_color
+                    }; font-weight: 600; font-family: ${fontFamily};">AFTER</div>
+                      </div>
+                    </div>
+                    <div style="padding: 16px; background: ${
+                      config.surface_color
+                    }; border-radius: 12px;">
+                      <p style="font-size: ${baseSize}px; color: ${
+                      config.text_color
+                    }; opacity: 0.8; text-align: center; font-family: ${fontFamily};">
+                        Setelah ${i * 2} minggu penggunaan rutin
+                      </p>
+                    </div>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </section>
+
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.background_color
+          }; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+              <h2 style="font-size: ${
+                baseSize * 2.5
+              }px; font-weight: 700; text-align: center; color: ${
+          config.text_color
+        }; margin-bottom: 60px; font-family: ${fontFamily};">
+                Bukti Kualitas Premium
+              </h2>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px;">
+                ${[
+                  {
+                    year: "2023",
+                    award: "Best Skincare Brand",
+                    org: "Beauty Awards",
+                  },
+                  {
+                    year: "2022",
+                    award: "Innovation Award",
+                    org: "Asia Beauty Expo",
+                  },
+                  {
+                    year: "2021",
+                    award: "Trusted Brand",
+                    org: "Consumer Choice",
+                  },
+                  {
+                    year: "2020",
+                    award: "Eco-Friendly Product",
+                    org: "Green Beauty",
+                  },
+                ]
+                  .map(
+                    (cert) => `
+                  <div class="hover-lift" style="background: ${
+                    config.surface_color
+                  }; padding: 32px; border-radius: 16px; text-align: center;">
+                    <div class="float-animation" style="width: 80px; height: 80px; margin: 0 auto 20px; background: linear-gradient(135deg, ${
+                      config.primary_color
+                    } 0%, ${
+                      config.secondary_color
+                    } 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                      <span class="wave-animation" style="font-size: ${
+                        baseSize * 2
+                      }px; display: inline-block;">🏆</span>
+                    </div>
+                    <div style="font-size: ${
+                      baseSize * 1.5
+                    }px; font-weight: 800; color: ${
+                      config.primary_color
+                    }; margin-bottom: 12px; font-family: ${fontFamily};">
+                      ${cert.year}
+                    </div>
+                    <h3 style="font-size: ${
+                      baseSize * 1.1
+                    }px; font-weight: 600; color: ${
+                      config.text_color
+                    }; margin-bottom: 8px; font-family: ${fontFamily};">
+                      ${cert.award}
+                    </h3>
+                    <p style="font-size: ${baseSize * 0.9}px; color: ${
+                      config.text_color
+                    }; opacity: 0.6; font-family: ${fontFamily};">
+                      ${cert.org}
+                    </p>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </section>
+        </main>
+      `;
       }
 
-      function toggleTheme() {
-        document.body.classList.toggle("light-mode");
-        const icon = document.getElementById("theme-icon");
-        icon.textContent = document.body.classList.contains("light-mode")
-          ? "☀️"
-          : "🌙";
+      function renderTestimonialsPage(config) {
+        const baseSize = config.font_size || defaultConfig.font_size;
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack =
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        const fontFamily = `${customFont}, ${baseFontStack}`;
+
+        const testimonials = [
+          {
+            name: "Sarah Wijaya",
+            city: "Jakarta",
+            rating: 5,
+            text: "Produk terbaik yang pernah saya coba! Kulit saya jadi glowing dan jerawat berkurang drastis.",
+          },
+          {
+            name: "Dina Maharani",
+            city: "Bandung",
+            rating: 5,
+            text: "Formula ringan dan cepat meresap. Worth every penny!",
+          },
+          {
+            name: "Rina Tamara",
+            city: "Surabaya",
+            rating: 5,
+            text: "Packaging mewah, produk berkualitas. Sudah repurchase 3x!",
+          },
+          {
+            name: "Lina Kusuma",
+            city: "Yogyakarta",
+            rating: 5,
+            text: "Sebanding dengan hasilnya. Kulit jadi lebih halus dan kenyal.",
+          },
+          {
+            name: "Maya Anggraini",
+            city: "Bali",
+            rating: 4,
+            text: "Produk bagus, harus sabar dan rutin untuk hasil maksimal.",
+          },
+          {
+            name: "Putri Santoso",
+            city: "Medan",
+            rating: 5,
+            text: "Kulit sensitif saya cocok banget. Tidak ada reaksi alergi.",
+          },
+        ];
+
+        return `
+        <main style="padding-top: 80px;">
+          <section style="min-height: 50%; padding: 100px 24px; background: linear-gradient(135deg, ${
+            config.background_color
+          } 0%, ${
+          config.surface_color
+        } 100%); display: flex; align-items: center; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+              <h1 class="fade-in" style="font-size: ${
+                baseSize * 3.5
+              }px; font-weight: 700; color: ${
+          config.text_color
+        }; margin-bottom: 24px; font-family: ${fontFamily};">
+                Testimoni Pelanggan
+              </h1>
+              <p class="fade-in delay-1" style="font-size: ${
+                baseSize * 1.3
+              }px; color: ${
+          config.text_color
+        }; opacity: 0.8; max-width: 800px; margin: 0 auto; line-height: 1.8; font-family: ${fontFamily};">
+                Ribuan pelanggan telah merasakan manfaat produk kami
+              </p>
+              <div class="fade-in delay-2" style="display: flex; justify-content: center; align-items: center; gap: 24px; margin-top: 40px; flex-wrap: wrap;">
+                <div>
+                  <div style="font-size: ${
+                    baseSize * 3
+                  }px; font-weight: 800; color: ${
+          config.primary_color
+        }; font-family: ${fontFamily};">4.9/5</div>
+                  <div style="font-size: ${baseSize}px; color: ${
+          config.text_color
+        }; opacity: 0.7; font-family: ${fontFamily};">Rating Rata-rata</div>
+                </div>
+                <div style="width: 2px; height: 60px; background: ${
+                  config.text_color
+                }; opacity: 0.2;"></div>
+                <div>
+                  <div style="font-size: ${
+                    baseSize * 3
+                  }px; font-weight: 800; color: ${
+          config.primary_color
+        }; font-family: ${fontFamily};">50K+</div>
+                  <div style="font-size: ${baseSize}px; color: ${
+          config.text_color
+        }; opacity: 0.7; font-family: ${fontFamily};">Review Verified</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.surface_color
+          }; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 32px;">
+                ${testimonials
+                  .map(
+                    (test) => `
+                  <div class="hover-lift" style="background: ${
+                    config.background_color
+                  }; padding: 32px; border-radius: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
+                      <div style="display: flex; align-items: center; gap: 16px;">
+                        <div style="width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, ${
+                          config.primary_color
+                        } 0%, ${
+                      config.secondary_color
+                    } 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: ${
+                      baseSize * 1.3
+                    }px; font-family: ${fontFamily};">
+                          ${test.name[0]}
+                        </div>
+                        <div>
+                          <div style="font-size: ${
+                            baseSize * 1.1
+                          }px; font-weight: 600; color: ${
+                      config.text_color
+                    }; font-family: ${fontFamily};">
+                            ${test.name}
+                          </div>
+                          <div style="font-size: ${baseSize * 0.9}px; color: ${
+                      config.text_color
+                    }; opacity: 0.6; font-family: ${fontFamily};">
+                            ${test.city}
+                          </div>
+                        </div>
+                      </div>
+                      <div style="background: ${
+                        config.primary_color
+                      }15; color: ${
+                      config.primary_color
+                    }; padding: 6px 12px; border-radius: 12px; font-size: ${
+                      baseSize * 0.85
+                    }px; font-weight: 600; font-family: ${fontFamily};">
+                        ⭐ ${test.rating}.0
+                      </div>
+                    </div>
+                    <p style="font-size: ${baseSize}px; color: ${
+                      config.text_color
+                    }; opacity: 0.8; line-height: 1.8; font-style: italic; margin-bottom: 20px; font-family: ${fontFamily};">
+                      "${test.text}"
+                    </p>
+                    <div style="padding-top: 16px; border-top: 1px solid ${
+                      config.text_color
+                    }15; font-size: ${baseSize * 0.85}px; color: ${
+                      config.primary_color
+                    }; font-weight: 600; font-family: ${fontFamily};">
+                      ✓ Verified Purchase
+                    </div>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </section>
+
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.background_color
+          }; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+              <h2 style="font-size: ${
+                baseSize * 2.5
+              }px; font-weight: 700; text-align: center; color: ${
+          config.text_color
+        }; margin-bottom: 60px; font-family: ${fontFamily};">
+                Rating & Foto Pelanggan
+              </h2>
+              <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
+                ${[1, 2, 3, 4, 5, 6]
+                  .map(
+                    (i) => `
+                  <div class="hover-lift customer-photo" data-photo="${i}" style="aspect-ratio: 1; border-radius: 12px; overflow: hidden; position: relative; cursor: pointer;">
+                    <img src="https://images.unsplash.com/photo-${
+                      [
+                        "1487412720507-e7ab37603c6f",
+                        "1532074205216-d0e1f4b87368",
+                        "1524502397800-2eeaad7c3fe5",
+                        "1487412912498-0447bf7673c8",
+                        "1499557354967-2b2d8910bcca",
+                        "1509967419530-da38b4704bc6",
+                      ][i - 1]
+                    }?w=400&q=80" alt="Customer Photo ${i}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="display: none; position: absolute; inset: 0; background: linear-gradient(135deg, ${
+                      config.primary_color
+                    }20 0%, ${
+                      config.secondary_color
+                    }20 100%); align-items: center; justify-content: center;">
+                      <span style="font-size: ${
+                        baseSize * 2.5
+                      }px; opacity: 0.4;">📸</span>
+                    </div>
+                    <div style="position: absolute; bottom: 12px; left: 12px; background: white; padding: 4px 12px; border-radius: 12px; font-size: ${
+                      baseSize * 0.8
+                    }px; font-weight: 600; color: ${
+                      config.primary_color
+                    }; font-family: ${fontFamily};">
+                      ⭐ 5.0
+                    </div>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </section>
+        </main>
+      `;
       }
 
-      function toggleMobileMenu() {
-        const menu = document.getElementById("mobileMenu");
-        menu.classList.toggle("active");
+      function renderBlogPage(config) {
+        const baseSize = config.font_size || defaultConfig.font_size;
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack =
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        const fontFamily = `${customFont}, ${baseFontStack}`;
+
+        const articles = [
+          {
+            title: "10 Langkah Skincare Routine Sehat",
+            excerpt: "Panduan lengkap perawatan kulit dari pagi hingga malam",
+            date: "15 Jan 2024",
+            category: "Skincare Tips",
+            readTime: "5 min",
+          },
+          {
+            title: "Manfaat Vitamin C untuk Wajah",
+            excerpt: "Kenapa Vitamin C wajib ada dalam skincare routine",
+            date: "12 Jan 2024",
+            category: "Ingredients",
+            readTime: "4 min",
+          },
+          {
+            title: "Memilih Moisturizer Sesuai Jenis Kulit",
+            excerpt: "Tips memilih pelembab yang tepat untuk kulit Anda",
+            date: "8 Jan 2024",
+            category: "Product Guide",
+            readTime: "6 min",
+          },
+          {
+            title: "Tren Skincare 2024",
+            excerpt: "Dari clean beauty hingga personalized skincare",
+            date: "5 Jan 2024",
+            category: "Trends",
+            readTime: "7 min",
+          },
+          {
+            title: "Myth vs Fact: Perawatan Kulit",
+            excerpt: "Membongkar mitos seputar skincare",
+            date: "2 Jan 2024",
+            category: "Education",
+            readTime: "5 min",
+          },
+          {
+            title: "Rahasia Kulit Glowing dari Korea",
+            excerpt: "K-Beauty secrets untuk glass skin natural",
+            date: "28 Des 2023",
+            category: "K-Beauty",
+            readTime: "8 min",
+          },
+        ];
+
+        return `
+        <main style="padding-top: 80px;">
+          <section style="min-height: 50%; padding: 100px 24px; background: linear-gradient(135deg, ${
+            config.background_color
+          } 0%, ${
+          config.surface_color
+        } 100%); display: flex; align-items: center; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+              <h1 class="fade-in" style="font-size: ${
+                baseSize * 3.5
+              }px; font-weight: 700; color: ${
+          config.text_color
+        }; margin-bottom: 24px; font-family: ${fontFamily};">
+                Blog & Artikel
+              </h1>
+              <p class="fade-in delay-1" style="font-size: ${
+                baseSize * 1.3
+              }px; color: ${
+          config.text_color
+        }; opacity: 0.8; max-width: 800px; margin: 0 auto; line-height: 1.8; font-family: ${fontFamily};">
+                Tips, trik, dan insight seputar dunia skincare
+              </p>
+            </div>
+          </section>
+
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.surface_color
+          }; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
+                ${articles
+                  .map(
+                    (article) => `
+                  <article class="hover-lift" style="background: ${
+                    config.background_color
+                  }; border-radius: 16px; overflow: hidden; cursor: pointer;">
+                    <div style="background: linear-gradient(135deg, ${
+                      config.primary_color
+                    }30 0%, ${
+                      config.secondary_color
+                    }30 100%); height: 240px; display: flex; align-items: center; justify-content: center; position: relative;">
+                      <svg width="120" height="120" viewBox="0 0 120 120">
+                        <rect x="20" y="30" width="80" height="60" rx="4" fill="${
+                          config.surface_color
+                        }" opacity="0.9"/>
+                        <line x1="30" y1="45" x2="90" y2="45" stroke="${
+                          config.primary_color
+                        }" stroke-width="3"/>
+                        <line x1="30" y1="55" x2="90" y2="55" stroke="${
+                          config.primary_color
+                        }" stroke-width="2" opacity="0.5"/>
+                        <line x1="30" y1="65" x2="75" y2="65" stroke="${
+                          config.primary_color
+                        }" stroke-width="2" opacity="0.5"/>
+                      </svg>
+                      <div style="position: absolute; top: 20px; left: 20px; background: ${
+                        config.primary_color
+                      }; color: white; padding: 6px 16px; border-radius: 20px; font-size: ${
+                      baseSize * 0.85
+                    }px; font-weight: 600; font-family: ${fontFamily};">
+                        ${article.category}
+                      </div>
+                    </div>
+                    <div style="padding: 32px;">
+                      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                        <span style="font-size: ${baseSize * 0.9}px; color: ${
+                      config.text_color
+                    }; opacity: 0.6; font-family: ${fontFamily};">
+                          ${article.date}
+                        </span>
+                        <span style="font-size: ${baseSize * 0.9}px; color: ${
+                      config.primary_color
+                    }; font-weight: 600; font-family: ${fontFamily};">
+                          📖 ${article.readTime}
+                        </span>
+                      </div>
+                      <h3 style="font-size: ${
+                        baseSize * 1.4
+                      }px; font-weight: 600; color: ${
+                      config.text_color
+                    }; margin-bottom: 12px; line-height: 1.4; font-family: ${fontFamily};">
+                        ${article.title}
+                      </h3>
+                      <p style="font-size: ${baseSize}px; color: ${
+                      config.text_color
+                    }; opacity: 0.7; margin-bottom: 24px; line-height: 1.6; font-family: ${fontFamily};">
+                        ${article.excerpt}
+                      </p>
+                      <button style="background: transparent; color: ${
+                        config.primary_color
+                      }; padding: 0; border: none; font-size: ${baseSize}px; font-weight: 600; cursor: pointer; font-family: ${fontFamily};">
+                        Baca Selengkapnya →
+                      </button>
+                    </div>
+                  </article>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </section>
+        </main>
+      `;
       }
 
-      function handleContactSubmit(event) {
-        event.preventDefault();
-        const message = document.getElementById("form-message");
-        message.style.display = "block";
-        message.style.background = "var(--accent-primary)";
-        message.style.color = "white";
-        message.textContent = "✓ Terima kasih! Pesan Anda telah terkirim.";
-        event.target.reset();
+      function renderPricingPage(config) {
+        const baseSize = config.font_size || defaultConfig.font_size;
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack =
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        const fontFamily = `${customFont}, ${baseFontStack}`;
 
-        setTimeout(() => {
-          message.style.display = "none";
-        }, 5000);
+        return `
+        <main style="padding-top: 80px;">
+          <section style="min-height: 50%; padding: 100px 24px; background: linear-gradient(135deg, ${
+            config.background_color
+          } 0%, ${
+          config.surface_color
+        } 100%); display: flex; align-items: center; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+              <h1 class="fade-in" style="font-size: ${
+                baseSize * 3.5
+              }px; font-weight: 700; color: ${
+          config.text_color
+        }; margin-bottom: 24px; font-family: ${fontFamily};">
+                Paket & Harga
+              </h1>
+              <p class="fade-in delay-1" style="font-size: ${
+                baseSize * 1.3
+              }px; color: ${
+          config.text_color
+        }; opacity: 0.8; max-width: 800px; margin: 0 auto; line-height: 1.8; font-family: ${fontFamily};">
+                Pilih paket yang sesuai dengan kebutuhan perawatan kulit Anda
+              </p>
+            </div>
+          </section>
+
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.surface_color
+          }; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
+                ${[
+                  {
+                    name: "Starter Kit",
+                    price: "Rp 550.000",
+                    original: "Rp 720.000",
+                    items: [
+                      "Cleanser 100ml",
+                      "Toner 150ml",
+                      "Moisturizer 50ml",
+                    ],
+                    badge: "Hemat 24%",
+                  },
+                  {
+                    name: "Complete Set",
+                    price: "Rp 1.200.000",
+                    original: "Rp 1.650.000",
+                    items: [
+                      "Cleanser 100ml",
+                      "Toner 150ml",
+                      "Serum 30ml",
+                      "Moisturizer 50ml",
+                      "Night Cream 50ml",
+                    ],
+                    badge: "Best Value",
+                    popular: true,
+                  },
+                  {
+                    name: "Premium Bundle",
+                    price: "Rp 2.500.000",
+                    original: "Rp 3.500.000",
+                    items: [
+                      "Full Product Line",
+                      "Exclusive Packaging",
+                      "Free Consultation",
+                    ],
+                    badge: "Hemat 29%",
+                  },
+                ]
+                  .map(
+                    (pkg) => `
+                  <div class="hover-lift" style="background: ${
+                    pkg.popular
+                      ? `linear-gradient(135deg, ${config.primary_color}10 0%, ${config.secondary_color}10 100%)`
+                      : config.background_color
+                  }; padding: 40px; border-radius: 20px; position: relative; border: ${
+                      pkg.popular ? `3px solid ${config.primary_color}` : "none"
+                    };">
+                    ${
+                      pkg.popular
+                        ? `
+                      <div style="position: absolute; top: -16px; left: 50%; transform: translateX(-50%); background: ${
+                        config.primary_color
+                      }; color: white; padding: 8px 24px; border-radius: 20px; font-size: ${
+                            baseSize * 0.85
+                          }px; font-weight: 700; font-family: ${fontFamily};">
+                        MOST POPULAR
+                      </div>
+                    `
+                        : ""
+                    }
+                    <div style="background: ${
+                      config.secondary_color
+                    }15; color: ${
+                      config.secondary_color
+                    }; padding: 6px 16px; border-radius: 20px; font-size: ${
+                      baseSize * 0.85
+                    }px; font-weight: 700; display: inline-block; margin-bottom: 20px; font-family: ${fontFamily};">
+                      ${pkg.badge}
+                    </div>
+                    <h3 style="font-size: ${
+                      baseSize * 1.8
+                    }px; font-weight: 700; color: ${
+                      config.text_color
+                    }; margin-bottom: 16px; font-family: ${fontFamily};">
+                      ${pkg.name}
+                    </h3>
+                    <div style="margin-bottom: 24px;">
+                      <div style="font-size: ${
+                        baseSize * 2.5
+                      }px; font-weight: 800; color: ${
+                      config.primary_color
+                    }; margin-bottom: 8px; font-family: ${fontFamily};">
+                        ${pkg.price}
+                      </div>
+                      <div style="font-size: ${baseSize}px; color: ${
+                      config.text_color
+                    }; opacity: 0.5; text-decoration: line-through; font-family: ${fontFamily};">
+                        ${pkg.original}
+                      </div>
+                    </div>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 32px;">
+                      ${pkg.items
+                        .map(
+                          (item) => `
+                        <li style="padding: 12px 0; border-bottom: 1px solid ${config.text_color}10; color: ${config.text_color}; font-size: ${baseSize}px; display: flex; align-items: center; gap: 12px; font-family: ${fontFamily};">
+                          <span style="color: ${config.primary_color};">✓</span>
+                          ${item}
+                        </li>
+                      `
+                        )
+                        .join("")}
+                    </ul>
+                    <button style="width: 100%; background: ${
+                      pkg.popular ? config.primary_color : "transparent"
+                    }; color: ${
+                      pkg.popular ? "white" : config.primary_color
+                    }; padding: 16px; border: 2px solid ${
+                      config.primary_color
+                    }; border-radius: 50px; font-size: ${
+                      baseSize * 1.1
+                    }px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; font-family: ${fontFamily};">
+                      Beli Sekarang
+                    </button>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </section>
+
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.background_color
+          }; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+              <h2 style="font-size: ${
+                baseSize * 2.5
+              }px; font-weight: 700; text-align: center; color: ${
+          config.text_color
+        }; margin-bottom: 60px; font-family: ${fontFamily};">
+                Promo Spesial
+              </h2>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px;">
+                ${[
+                  {
+                    title: "Buy 2 Get 1 Free",
+                    desc: "Khusus produk serum",
+                    code: "SERUM3FOR2",
+                  },
+                  {
+                    title: "Cashback 20%",
+                    desc: "Min. pembelian 1 juta",
+                    code: "CASHBACK20",
+                  },
+                  {
+                    title: "Free Shipping",
+                    desc: "Seluruh Indonesia",
+                    code: "FREESHIP",
+                  },
+                ]
+                  .map(
+                    (promo) => `
+                  <div class="hover-lift" style="background: linear-gradient(135deg, ${
+                    config.primary_color
+                  } 0%, ${
+                      config.secondary_color
+                    } 100%); padding: 32px; border-radius: 16px; color: white; text-align: center;">
+                    <div class="bounce-in delay-1" style="font-size: ${
+                      baseSize * 2.5
+                    }px; margin-bottom: 16px;">🎉</div>
+                    <h3 style="font-size: ${
+                      baseSize * 1.3
+                    }px; font-weight: 700; margin-bottom: 12px; font-family: ${fontFamily};">
+                      ${promo.title}
+                    </h3>
+                    <p style="font-size: ${baseSize}px; opacity: 0.9; margin-bottom: 20px; font-family: ${fontFamily};">
+                      ${promo.desc}
+                    </p>
+                    <div style="background: rgba(255,255,255,0.2); padding: 12px; border-radius: 12px; border: 2px dashed white;">
+                      <div style="font-size: ${
+                        baseSize * 0.8
+                      }px; opacity: 0.8; margin-bottom: 4px; font-family: ${fontFamily};">Kode:</div>
+                      <div style="font-size: ${
+                        baseSize * 1.2
+                      }px; font-weight: 800; letter-spacing: 2px; font-family: ${fontFamily};">
+                        ${promo.code}
+                      </div>
+                    </div>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </section>
+
+          <section class="section-visible" style="padding: 100px 24px; background: linear-gradient(135deg, ${
+            config.primary_color
+          } 0%, ${
+          config.secondary_color
+        } 100%); text-align: center; color: white; width: 100%;">
+            <div style="max-width: 800px; margin: 0 auto;">
+              <h2 style="font-size: ${
+                baseSize * 2.8
+              }px; font-weight: 800; margin-bottom: 24px; font-family: ${fontFamily};">
+                Siap Memulai Transformasi?
+              </h2>
+              <p style="font-size: ${
+                baseSize * 1.2
+              }px; opacity: 0.95; margin-bottom: 40px; line-height: 1.8; font-family: ${fontFamily};">
+                Dapatkan konsultasi gratis dan rekomendasi paket terbaik
+              </p>
+              <button class="hover-lift" style="background: white; color: ${
+                config.primary_color
+              }; padding: 20px 50px; border: none; border-radius: 50px; font-size: ${
+          baseSize * 1.1
+        }px; font-weight: 700; cursor: pointer; font-family: ${fontFamily}; box-shadow: 0 12px 40px rgba(0,0,0,0.2);">
+                Konsultasi Gratis
+              </button>
+            </div>
+          </section>
+        </main>
+      `;
       }
 
-      function handleNewsletterSubmit(event) {
-        event.preventDefault();
-        const message = document.getElementById("newsletter-message");
-        message.style.display = "block";
-        message.style.background = "var(--accent-primary)";
-        message.style.color = "white";
-        message.textContent = "✓ Anda telah berlangganan newsletter kami!";
-        event.target.reset();
+      function renderContactPage(config) {
+        const baseSize = config.font_size || defaultConfig.font_size;
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack =
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        const fontFamily = `${customFont}, ${baseFontStack}`;
 
-        setTimeout(() => {
-          message.style.display = "none";
-        }, 5000);
+        return `
+        <main style="padding-top: 80px;">
+          <section style="min-height: 50%; padding: 100px 24px; background: linear-gradient(135deg, ${
+            config.background_color
+          } 0%, ${
+          config.surface_color
+        } 100%); display: flex; align-items: center; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+              <h1 class="fade-in" style="font-size: ${
+                baseSize * 3.5
+              }px; font-weight: 700; color: ${
+          config.text_color
+        }; margin-bottom: 24px; font-family: ${fontFamily};">
+                Hubungi Kami
+              </h1>
+              <p class="fade-in delay-1" style="font-size: ${
+                baseSize * 1.3
+              }px; color: ${
+          config.text_color
+        }; opacity: 0.8; max-width: 800px; margin: 0 auto; line-height: 1.8; font-family: ${fontFamily};">
+                Kami siap membantu Anda menemukan solusi perawatan kulit yang tepat
+              </p>
+            </div>
+          </section>
+
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.surface_color
+          }; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px;" class="mobile-grid">
+                <div>
+                  <h2 style="font-size: ${
+                    baseSize * 2
+                  }px; font-weight: 700; color: ${
+          config.text_color
+        }; margin-bottom: 32px; font-family: ${fontFamily};">
+                    Kirim Pesan
+                  </h2>
+                  <form id="contact-form" style="display: flex; flex-direction: column; gap: 24px;">
+                    <div>
+                      <label for="contact-name" style="display: block; font-size: ${baseSize}px; font-weight: 600; color: ${
+          config.text_color
+        }; margin-bottom: 8px; font-family: ${fontFamily};">
+                        Nama Lengkap
+                      </label>
+                      <input 
+                        type="text" 
+                        id="contact-name"
+                        required
+                        style="width: 100%; padding: 16px; border: 2px solid ${
+                          config.text_color
+                        }20; border-radius: 12px; font-size: ${baseSize}px; color: ${
+          config.text_color
+        }; background: ${config.background_color}; font-family: ${fontFamily};"
+                        placeholder="Masukkan nama Anda"
+                      >
+                    </div>
+                    <div>
+                      <label for="contact-email-form" style="display: block; font-size: ${baseSize}px; font-weight: 600; color: ${
+          config.text_color
+        }; margin-bottom: 8px; font-family: ${fontFamily};">
+                        Email
+                      </label>
+                      <input 
+                        type="email" 
+                        id="contact-email-form"
+                        required
+                        style="width: 100%; padding: 16px; border: 2px solid ${
+                          config.text_color
+                        }20; border-radius: 12px; font-size: ${baseSize}px; color: ${
+          config.text_color
+        }; background: ${config.background_color}; font-family: ${fontFamily};"
+                        placeholder="email@example.com"
+                      >
+                    </div>
+                    <div>
+                      <label for="contact-message" style="display: block; font-size: ${baseSize}px; font-weight: 600; color: ${
+          config.text_color
+        }; margin-bottom: 8px; font-family: ${fontFamily};">
+                        Pesan
+                      </label>
+                      <textarea 
+                        id="contact-message"
+                        required
+                        rows="5"
+                        style="width: 100%; padding: 16px; border: 2px solid ${
+                          config.text_color
+                        }20; border-radius: 12px; font-size: ${baseSize}px; color: ${
+          config.text_color
+        }; background: ${
+          config.background_color
+        }; resize: vertical; font-family: ${fontFamily};"
+                        placeholder="Tulis pesan Anda..."
+                      ></textarea>
+                    </div>
+                    <button 
+                      type="submit"
+                      class="hover-lift"
+                      style="background: ${
+                        config.primary_color
+                      }; color: white; padding: 18px; border: none; border-radius: 50px; font-size: ${
+          baseSize * 1.1
+        }px; font-weight: 700; cursor: pointer; font-family: ${fontFamily};"
+                    >
+                      Kirim Pesan
+                    </button>
+                  </form>
+                  <div id="contact-message-result" style="display: none; margin-top: 20px; padding: 16px; border-radius: 12px; font-size: ${baseSize}px; font-family: ${fontFamily};"></div>
+                </div>
+
+                <div>
+                  <h2 style="font-size: ${
+                    baseSize * 2
+                  }px; font-weight: 700; color: ${
+          config.text_color
+        }; margin-bottom: 32px; font-family: ${fontFamily};">
+                    Informasi Kontak
+                  </h2>
+                  <div style="display: flex; flex-direction: column; gap: 32px;">
+                    ${[
+                      {
+                        icon: "📧",
+                        title: "Email",
+                        value:
+                          config.contact_email || defaultConfig.contact_email,
+                      },
+                      {
+                        icon: "📱",
+                        title: "Telepon",
+                        value:
+                          config.contact_phone || defaultConfig.contact_phone,
+                      },
+                      {
+                        icon: "📍",
+                        title: "Alamat",
+                        value:
+                          config.contact_address ||
+                          defaultConfig.contact_address,
+                      },
+                    ]
+                      .map(
+                        (contact) => `
+                      <div style="display: flex; gap: 20px; align-items: start;">
+                        <div class="float-animation" style="width: 56px; height: 56px; background: linear-gradient(135deg, ${
+                          config.primary_color
+                        }20 0%, ${
+                          config.secondary_color
+                        }20 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: ${
+                          baseSize * 1.5
+                        }px; flex-shrink: 0;">
+                          ${contact.icon}
+                        </div>
+                        <div>
+                          <h3 style="font-size: ${
+                            baseSize * 1.1
+                          }px; font-weight: 600; color: ${
+                          config.text_color
+                        }; margin-bottom: 8px; font-family: ${fontFamily};">
+                            ${contact.title}
+                          </h3>
+                          <p style="font-size: ${baseSize}px; color: ${
+                          config.text_color
+                        }; opacity: 0.7; font-family: ${fontFamily};">
+                            ${contact.value}
+                          </p>
+                        </div>
+                      </div>
+                    `
+                      )
+                      .join("")}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section-visible" style="padding: 100px 24px; background: ${
+            config.background_color
+          }; width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+              <h2 style="font-size: ${
+                baseSize * 2.5
+              }px; font-weight: 700; text-align: center; color: ${
+          config.text_color
+        }; margin-bottom: 60px; font-family: ${fontFamily};">
+                Hubungi Kami Via
+              </h2>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 32px;">
+                ${[
+                  { name: "WhatsApp", icon: "💬", color: "#25D366" },
+                  { name: "Instagram", icon: "📷", color: "#E4405F" },
+                  { name: "Facebook", icon: "👍", color: "#1877F2" },
+                  { name: "Line", icon: "💚", color: "#00B900" },
+                ]
+                  .map(
+                    (social) => `
+                  <div class="hover-lift" style="background: ${
+                    config.surface_color
+                  }; padding: 32px; border-radius: 16px; text-align: center;">
+                    <div class="bounce-in delay-2" style="width: 80px; height: 80px; margin: 0 auto 20px; background: ${
+                      social.color
+                    }15; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: ${
+                      baseSize * 2.5
+                    }px;">
+                      <span class="icon-pulse">${social.icon}</span>
+                    </div>
+                    <h3 style="font-size: ${
+                      baseSize * 1.3
+                    }px; font-weight: 600; color: ${
+                      config.text_color
+                    }; margin-bottom: 16px; font-family: ${fontFamily};">
+                      ${social.name}
+                    </h3>
+                    <button style="background: ${
+                      social.color
+                    }; color: white; padding: 12px 32px; border: none; border-radius: 50px; font-size: ${baseSize}px; font-weight: 600; cursor: pointer; font-family: ${fontFamily};">
+                      Chat
+                    </button>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </section>
+        </main>
+      `;
       }
 
-      // Scroll animations
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
+      function renderFooter(config) {
+        const baseSize = config.font_size || defaultConfig.font_size;
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack =
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        const fontFamily = `${customFont}, ${baseFontStack}`;
+
+        return `
+        <footer style="background: ${
+          config.text_color
+        }; color: white; padding: 60px 24px 24px; width: 100%;">
+          <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 48px; margin-bottom: 48px;">
+              <div>
+                <div style="font-size: ${
+                  baseSize * 1.5
+                }px; font-weight: 700; margin-bottom: 16px; font-family: ${fontFamily};">
+                  ${config.brand_name || defaultConfig.brand_name}
+                </div>
+                <p style="font-size: ${baseSize}px; opacity: 0.8; line-height: 1.8; font-family: ${fontFamily};">
+                  ${config.hero_tagline || defaultConfig.hero_tagline}
+                </p>
+              </div>
+              ${[
+                {
+                  title: "Produk",
+                  links: ["Serum", "Moisturizer", "Cleanser"],
+                },
+                {
+                  title: "Perusahaan",
+                  links: ["Tentang Kami", "Blog", "Karir"],
+                },
+                { title: "Bantuan", links: ["FAQ", "Pengiriman", "Return"] },
+              ]
+                .map(
+                  (col) => `
+                <div>
+                  <h3 style="font-size: ${
+                    baseSize * 1.1
+                  }px; font-weight: 700; margin-bottom: 20px; font-family: ${fontFamily};">
+                    ${col.title}
+                  </h3>
+                  <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px;">
+                    ${col.links
+                      .map(
+                        (link) => `
+                      <li>
+                        <a href="#" style="color: white; opacity: 0.8; text-decoration: none; font-size: ${baseSize}px; transition: opacity 0.3s ease; font-family: ${fontFamily};">
+                          ${link}
+                        </a>
+                      </li>
+                    `
+                      )
+                      .join("")}
+                  </ul>
+                </div>
+              `
+                )
+                .join("")}
+            </div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; text-align: center; font-size: ${
+              baseSize * 0.9
+            }px; opacity: 0.7; font-family: ${fontFamily};">
+              © 2024 ${
+                config.brand_name || defaultConfig.brand_name
+              }. All rights reserved.
+            </div>
+          </div>
+        </footer>
+      `;
+      }
+
+      async function onConfigChange(config) {
+        const app = document.getElementById("app");
+        if (!app) return;
+
+        let pageContent = "";
+        switch (currentPage) {
+          case "home":
+            pageContent = renderHomePage(config);
+            break;
+          case "about":
+            pageContent = renderAboutPage(config);
+            break;
+          case "products":
+            pageContent = renderProductsPage(config);
+            break;
+          case "portfolio":
+            pageContent = renderPortfolioPage(config);
+            break;
+          case "testimonials":
+            pageContent = renderTestimonialsPage(config);
+            break;
+          case "blog":
+            pageContent = renderBlogPage(config);
+            break;
+          case "pricing":
+            pageContent = renderPricingPage(config);
+            break;
+          case "contact":
+            pageContent = renderContactPage(config);
+            break;
+        }
+
+        app.innerHTML =
+          renderNavigation(config) + pageContent + renderFooter(config);
+
+        setupEventListeners(config);
+        setupIntersectionObserver();
+        setupForms(config);
+        setupLightbox();
+      }
+
+      function setupEventListeners(config) {
+        const navLinks = document.querySelectorAll("a[data-page]");
+        navLinks.forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const page = link.dataset.page;
+            if (page !== currentPage) {
+              currentPage = page;
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              onConfigChange(
+                window.elementSdk ? window.elementSdk.config : config
+              );
             }
           });
-        },
-        { threshold: 0.1 }
-      );
-
-      document
-        .querySelectorAll(".fade-in, .slide-in-left, .slide-in-right")
-        .forEach((el) => {
-          observer.observe(el);
         });
 
-      // Navbar scroll effect
-      window.addEventListener("scroll", () => {
-        const navbar = document.querySelector(".navbar");
-        if (window.scrollY > 50) {
-          navbar.classList.add("scrolled");
-        } else {
-          navbar.classList.remove("scrolled");
+        const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+        mobileNavLinks.forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const page = link.dataset.page;
+            if (page !== currentPage) {
+              currentPage = page;
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              const mobileMenu = document.getElementById("mobile-menu");
+              if (mobileMenu) mobileMenu.classList.remove("open");
+              onConfigChange(
+                window.elementSdk ? window.elementSdk.config : config
+              );
+            }
+          });
+        });
+
+        const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const closeMenuBtn = document.getElementById("close-menu-btn");
+
+        if (mobileMenuBtn && mobileMenu) {
+          mobileMenuBtn.addEventListener("click", () => {
+            mobileMenu.classList.add("open");
+          });
         }
-      });
 
-      // Smooth scrolling
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute("href"));
-          if (target) {
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
+        if (closeMenuBtn && mobileMenu) {
+          closeMenuBtn.addEventListener("click", () => {
+            mobileMenu.classList.remove("open");
+          });
+        }
+
+        const productCards = document.querySelectorAll(".product-card");
+        productCards.forEach((card) => {
+          card.addEventListener("click", () => {
+            const productId = card.dataset.product;
+            openLightbox(`product-${productId}`);
+          });
         });
-      });
 
-      // Auto-rotate testimonials
-      setInterval(() => {
-        nextTestimonial();
-      }, 5000);
+        const portfolioItems = document.querySelectorAll(".portfolio-item");
+        portfolioItems.forEach((item) => {
+          item.addEventListener("click", () => {
+            const portfolioId = item.dataset.portfolio;
+            openLightbox(`portfolio-${portfolioId}`);
+          });
+        });
 
-      // Responsive menu
-      if (window.innerWidth >= 768) {
-        document.querySelector(".desktop-menu").style.display = "flex";
-        document.querySelector(".mobile-menu-btn").style.display = "none";
+        const customerPhotos = document.querySelectorAll(".customer-photo");
+        customerPhotos.forEach((photo) => {
+          photo.addEventListener("click", () => {
+            const photoId = photo.dataset.photo;
+            openLightbox(`customer-${photoId}`);
+          });
+        });
       }
 
-      window.addEventListener("resize", () => {
-        if (window.innerWidth >= 768) {
-          document.querySelector(".desktop-menu").style.display = "flex";
-          document.querySelector(".mobile-menu-btn").style.display = "none";
-          document.getElementById("mobileMenu").classList.remove("active");
-        } else {
-          document.querySelector(".desktop-menu").style.display = "none";
-          document.querySelector(".mobile-menu-btn").style.display = "block";
+      function setupIntersectionObserver() {
+        const observerOptions = {
+          threshold: 0.1,
+          rootMargin: "0px 0px -50px 0px",
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+            }
+          });
+        }, observerOptions);
+
+        document.querySelectorAll(".section-visible").forEach((section) => {
+          observer.observe(section);
+        });
+      }
+
+      function setupForms(config) {
+        const newsletterForm = document.getElementById("newsletter-form");
+        if (newsletterForm) {
+          newsletterForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const emailInput = document.getElementById("newsletter-email");
+            const message = document.getElementById("newsletter-message");
+            const baseSize = config.font_size || defaultConfig.font_size;
+
+            if (emailInput && message) {
+              const email = emailInput.value;
+              newsletterSubscribers.push(email);
+
+              message.style.display = "block";
+              message.style.background = `${config.primary_color}15`;
+              message.style.color = config.primary_color;
+              message.style.border = `2px solid ${config.primary_color}`;
+              message.textContent =
+                "✓ Terima kasih! Anda telah berlangganan newsletter kami.";
+
+              emailInput.value = "";
+
+              setTimeout(() => {
+                message.style.display = "none";
+              }, 5000);
+            }
+          });
         }
-        updateTestimonialPosition();
-      });
 
-      async function onConfigChange(newConfig) {
-        const heroTitle = document.getElementById("hero-title");
-        if (heroTitle)
-          heroTitle.textContent =
-            newConfig.hero_title || defaultConfig.hero_title;
+        const contactForm = document.getElementById("contact-form");
+        if (contactForm) {
+          contactForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const message = document.getElementById("contact-message-result");
+            const baseSize = config.font_size || defaultConfig.font_size;
 
-        const heroSubtitle = document.getElementById("hero-subtitle");
-        if (heroSubtitle)
-          heroSubtitle.textContent =
-            newConfig.hero_subtitle || defaultConfig.hero_subtitle;
+            if (message) {
+              message.style.display = "block";
+              message.style.background = `${config.primary_color}15`;
+              message.style.color = config.primary_color;
+              message.style.border = `2px solid ${config.primary_color}`;
+              message.textContent =
+                "✓ Pesan Anda telah terkirim! Kami akan segera menghubungi Anda.";
 
-        const heroCta = document.getElementById("hero-cta");
-        if (heroCta)
-          heroCta.textContent = newConfig.hero_cta || defaultConfig.hero_cta;
+              contactForm.reset();
 
-        const aboutTitle = document.getElementById("about-title");
-        if (aboutTitle)
-          aboutTitle.textContent =
-            newConfig.about_title || defaultConfig.about_title;
+              setTimeout(() => {
+                message.style.display = "none";
+              }, 5000);
+            }
+          });
+        }
+      }
 
-        const aboutDescription = document.getElementById("about-description");
-        if (aboutDescription)
-          aboutDescription.textContent =
-            newConfig.about_description || defaultConfig.about_description;
+      function setupLightbox() {
+        const lightbox = document.getElementById("lightbox");
+        const lightboxClose = document.getElementById("lightbox-close");
 
-        const servicesTitle = document.getElementById("services-title");
-        if (servicesTitle)
-          servicesTitle.textContent =
-            newConfig.services_title || defaultConfig.services_title;
+        if (lightboxClose) {
+          lightboxClose.addEventListener("click", closeLightbox);
+        }
 
-        const contactTitle = document.getElementById("contact-title");
-        if (contactTitle)
-          contactTitle.textContent =
-            newConfig.contact_title || defaultConfig.contact_title;
+        if (lightbox) {
+          lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) {
+              closeLightbox();
+            }
+          });
+        }
+      }
 
-        const newsletterTitle = document.getElementById("newsletter-title");
-        if (newsletterTitle)
-          newsletterTitle.textContent =
-            newConfig.newsletter_title || defaultConfig.newsletter_title;
+      function openLightbox(imageId) {
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
 
-        const customFont = newConfig.font_family || defaultConfig.font_family;
-        const baseFontStack =
-          '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-        document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        if (lightbox && lightboxImg) {
+          lightboxImg.src = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect fill='%23f5f5f5' width='800' height='600'/><text x='50%' y='50%' text-anchor='middle' dy='.3em' fill='%23999' font-size='24' font-family='Arial'>Image: ${imageId}</text></svg>`;
+          lightbox.classList.add("active");
+        }
+      }
 
-        const baseSize = newConfig.font_size || defaultConfig.font_size;
-        document.documentElement.style.fontSize = `${baseSize}px`;
+      function closeLightbox() {
+        const lightbox = document.getElementById("lightbox");
+        if (lightbox) {
+          lightbox.classList.remove("active");
+        }
       }
 
       if (window.elementSdk) {
@@ -2082,23 +2918,18 @@
                 },
               },
               {
-                get: () =>
-                  config.primary_action_color ||
-                  defaultConfig.primary_action_color,
+                get: () => config.primary_color || defaultConfig.primary_color,
                 set: (value) => {
-                  config.primary_action_color = value;
-                  window.elementSdk.setConfig({ primary_action_color: value });
+                  config.primary_color = value;
+                  window.elementSdk.setConfig({ primary_color: value });
                 },
               },
               {
                 get: () =>
-                  config.secondary_action_color ||
-                  defaultConfig.secondary_action_color,
+                  config.secondary_color || defaultConfig.secondary_color,
                 set: (value) => {
-                  config.secondary_action_color = value;
-                  window.elementSdk.setConfig({
-                    secondary_action_color: value,
-                  });
+                  config.secondary_color = value;
+                  window.elementSdk.setConfig({ secondary_color: value });
                 },
               },
             ],
@@ -2120,35 +2951,35 @@
           }),
           mapToEditPanelValues: (config) =>
             new Map([
-              ["hero_title", config.hero_title || defaultConfig.hero_title],
+              ["brand_name", config.brand_name || defaultConfig.brand_name],
               [
-                "hero_subtitle",
-                config.hero_subtitle || defaultConfig.hero_subtitle,
-              ],
-              ["hero_cta", config.hero_cta || defaultConfig.hero_cta],
-              ["about_title", config.about_title || defaultConfig.about_title],
-              [
-                "about_description",
-                config.about_description || defaultConfig.about_description,
+                "hero_tagline",
+                config.hero_tagline || defaultConfig.hero_tagline,
               ],
               [
-                "services_title",
-                config.services_title || defaultConfig.services_title,
+                "hero_description",
+                config.hero_description || defaultConfig.hero_description,
+              ],
+              ["cta_button", config.cta_button || defaultConfig.cta_button],
+              [
+                "contact_email",
+                config.contact_email || defaultConfig.contact_email,
               ],
               [
-                "contact_title",
-                config.contact_title || defaultConfig.contact_title,
+                "contact_phone",
+                config.contact_phone || defaultConfig.contact_phone,
               ],
               [
-                "newsletter_title",
-                config.newsletter_title || defaultConfig.newsletter_title,
+                "contact_address",
+                config.contact_address || defaultConfig.contact_address,
               ],
             ]),
         });
-      }
 
-      // Initialize
-      renderProducts();
+        onConfigChange(window.elementSdk.config);
+      } else {
+        onConfigChange(defaultConfig);
+      }
     </script>
     <script>
       (function () {
@@ -2157,7 +2988,7 @@
           if (b) {
             var d = b.createElement("script");
             d.innerHTML =
-              "window.__CF$cv$params={r:'9a63db83a45d5f8d',t:'MTc2NDQzNzY4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+              "window.__CF$cv$params={r:'9a69f69b07a45cdf',t:'MTc2NDUwMTcwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
             b.getElementsByTagName("head")[0].appendChild(d);
           }
         }

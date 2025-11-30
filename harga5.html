@@ -5,13 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="UMKM Kuliner - Sajian Lezat dengan Cita Rasa Nusantara"
+      content="Temukan koleksi kaos, hoodie, dan aksesori buatan lokal berkualitas. Lihat produk, chat WA, dan pesan cepat."
     />
     <meta
-      name="keywords"
-      content="kuliner, makanan, umkm, restoran, catering"
+      property="og:title"
+      content="Fashion Store — Fashion Lokal | Jakarta"
     />
-    <title>UMKM Kuliner - Sajian Lezat Nusantara</title>
+    <meta
+      property="og:description"
+      content="Temukan koleksi kaos, hoodie, dan aksesori buatan lokal berkualitas. Lihat produk, chat WA, dan pesan cepat."
+    />
+    <meta property="og:type" content="website" />
+    <title>Fashion Store — Fashion Lokal | Jakarta</title>
+    <!-- JSON-LD Structured Data for Organization -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ClothingStore",
+        "name": "Fashion Store",
+        "description": "Toko fashion lokal dengan koleksi kaos, hoodie, dan aksesori berkualitas premium",
+        "url": "https://example.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Jl. Fashion Street No. 123",
+          "addressLocality": "Jakarta",
+          "addressCountry": "ID"
+        },
+        "openingHours": "Mo-Sa 09:00-21:00",
+        "telephone": "+62 812-3456-7890",
+        "priceRange": "Rp 75.000 - Rp 245.000"
+      }
+    </script>
     <script src="/_sdk/element_sdk.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -25,21 +49,10 @@
         box-sizing: border-box;
       }
 
-      html {
-        scroll-behavior: smooth;
-        height: 100%;
-      }
-
-      body {
-        height: 100%;
-        overflow-x: hidden;
-      }
-
-      /* Animations */
-      @keyframes fadeInUp {
+      @keyframes fadeIn {
         from {
           opacity: 0;
-          transform: translateY(30px);
+          transform: translateY(20px);
         }
         to {
           opacity: 1;
@@ -47,7 +60,7 @@
         }
       }
 
-      @keyframes fadeInLeft {
+      @keyframes slideIn {
         from {
           opacity: 0;
           transform: translateX(-30px);
@@ -58,385 +71,160 @@
         }
       }
 
-      @keyframes fadeInRight {
-        from {
-          opacity: 0;
-          transform: translateX(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
+      .fade-in {
+        animation: fadeIn 0.6s ease-out forwards;
       }
 
-      @keyframes scaleIn {
-        from {
-          opacity: 0;
-          transform: scale(0.9);
-        }
-        to {
-          opacity: 1;
-          transform: scale(1);
-        }
+      .slide-in {
+        animation: slideIn 0.8s ease-out forwards;
       }
 
-      @keyframes pulse {
-        0%,
-        100% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.05);
-        }
+      .product-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
 
-      .animate-fade-in-up {
-        opacity: 0;
-        animation: fadeInUp 0.8s ease forwards;
-      }
-
-      .animate-fade-in-left {
-        opacity: 0;
-        animation: fadeInLeft 0.8s ease forwards;
-      }
-
-      .animate-fade-in-right {
-        opacity: 0;
-        animation: fadeInRight 0.8s ease forwards;
-      }
-
-      .animate-scale-in {
-        opacity: 0;
-        animation: scaleIn 0.6s ease forwards;
-      }
-
-      .delay-100 {
-        animation-delay: 0.1s;
-      }
-      .delay-200 {
-        animation-delay: 0.2s;
-      }
-      .delay-300 {
-        animation-delay: 0.3s;
-      }
-      .delay-400 {
-        animation-delay: 0.4s;
-      }
-      .delay-500 {
-        animation-delay: 0.5s;
-      }
-      .delay-600 {
-        animation-delay: 0.6s;
-      }
-
-      .scroll-reveal {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.8s ease, transform 0.8s ease;
-      }
-
-      .scroll-reveal.revealed {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      /* Microinteractions */
-      .btn-primary {
-        position: relative;
-        overflow: hidden;
-        transition: all 0.3s ease;
-      }
-
-      .btn-primary::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.3);
-        transform: translate(-50%, -50%);
-        transition: width 0.6s, height 0.6s;
-      }
-
-      .btn-primary:hover::before {
-        width: 300px;
-        height: 300px;
-      }
-
-      .btn-primary:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      }
-
-      .btn-primary:active {
-        transform: translateY(-1px);
-      }
-
-      .card-hover {
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      }
-
-      .card-hover:hover {
-        transform: translateY(-10px) scale(1.02);
+      .product-card:hover {
+        transform: translateY(-8px);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
       }
 
-      .menu-item {
+      .nav-link {
         position: relative;
-        overflow: hidden;
-        transition: all 0.3s ease;
+        transition: color 0.3s ease;
       }
 
-      .menu-item::after {
+      .nav-link::after {
         content: "";
         position: absolute;
-        top: 0;
+        bottom: -4px;
         left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          180deg,
-          transparent 0%,
-          rgba(0, 0, 0, 0.7) 100%
-        );
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-
-      .menu-item:hover::after {
-        opacity: 1;
-      }
-
-      .menu-item .menu-overlay {
-        position: absolute;
-        bottom: -100%;
-        left: 0;
-        right: 0;
-        padding: 1.5rem;
-        transition: bottom 0.3s ease;
-        z-index: 10;
-      }
-
-      .menu-item:hover .menu-overlay {
-        bottom: 0;
-      }
-
-      .filter-btn {
-        position: relative;
-        transition: all 0.3s ease;
-      }
-
-      .filter-btn::after {
-        content: "";
-        position: absolute;
-        bottom: -2px;
-        left: 50%;
         width: 0;
-        height: 3px;
-        transform: translateX(-50%);
+        height: 2px;
+        background: currentColor;
         transition: width 0.3s ease;
       }
 
-      .filter-btn.active::after {
+      .nav-link:hover::after {
         width: 100%;
       }
 
-      .filter-btn:hover {
-        transform: translateY(-2px);
-      }
-
-      /* Carousel */
-      .carousel-container {
-        position: relative;
-        overflow: hidden;
-      }
-
-      .carousel-track {
-        display: flex;
-        transition: transform 0.5s ease-in-out;
-      }
-
-      .carousel-slide {
-        min-width: 100%;
-        padding: 0 1rem;
-      }
-
-      .carousel-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        z-index: 10;
-      }
-
-      .carousel-btn:hover {
-        transform: translateY(-50%) scale(1.1);
-      }
-
-      .carousel-btn.prev {
-        left: 20px;
-      }
-      .carousel-btn.next {
-        right: 20px;
-      }
-
-      .star-rating {
-        display: inline-flex;
-        gap: 2px;
-      }
-
-      .modal {
+      .lightbox {
         display: none;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.85);
-        z-index: 1000;
-        align-items: center;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 9999;
         justify-content: center;
-        animation: fadeIn 0.3s ease;
+        align-items: center;
+        padding: 20px;
       }
 
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-
-      .modal.active {
+      .lightbox.active {
         display: flex;
       }
 
-      .modal-content {
-        background: white;
-        border-radius: 20px;
-        max-width: 600px;
-        width: 90%;
+      .lightbox img {
+        max-width: 90%;
         max-height: 90%;
-        overflow-y: auto;
-        animation: slideUp 0.4s ease;
+        object-fit: contain;
       }
 
-      @keyframes slideUp {
-        from {
-          transform: translateY(50px);
-          opacity: 0;
-        }
-        to {
-          transform: translateY(0);
-          opacity: 1;
-        }
+      .slider-dots {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        z-index: 10;
       }
 
-      .social-icon {
-        transition: all 0.3s ease;
-      }
-
-      .social-icon:hover {
-        transform: translateY(-5px) rotate(5deg);
-      }
-
-      .loading-spinner {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        border: 3px solid rgba(255, 255, 255, 0.3);
+      .slider-dot {
+        width: 12px;
+        height: 12px;
         border-radius: 50%;
-        border-top-color: white;
-        animation: spin 0.8s linear infinite;
-      }
-
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      .toast {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 1rem 1.5rem;
-        border-radius: 12px;
-        color: white;
-        font-weight: 600;
-        z-index: 1001;
-        animation: slideInRight 0.4s ease;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      }
-
-      @keyframes slideInRight {
-        from {
-          transform: translateX(400px);
-          opacity: 0;
-        }
-        to {
-          transform: translateX(0);
-          opacity: 1;
-        }
-      }
-
-      .team-member {
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
         transition: all 0.3s ease;
       }
 
-      .team-member:hover {
-        transform: translateY(-5px);
+      .slider-dot.active {
+        background: white;
+        width: 30px;
+        border-radius: 6px;
       }
 
-      .team-member img {
+      .hero-slider {
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+      }
+
+      .hero-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.8s ease-in-out;
+      }
+
+      .hero-slide.active {
+        opacity: 1;
+      }
+
+      .hero-slide::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+        transition: background 0.4s ease;
+      }
+
+      .hero-slide:hover::before {
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      .hero-slide img {
+        transition: filter 0.4s ease;
+      }
+
+      .badge {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        z-index: 5;
+      }
+
+      .mobile-menu {
+        transform: translateX(-100%);
         transition: transform 0.3s ease;
       }
 
-      .team-member:hover img {
-        transform: scale(1.1);
+      .mobile-menu.active {
+        transform: translateX(0);
       }
 
-      /* Responsive */
+      .filter-section {
+        transition: max-height 0.3s ease;
+      }
+
       @media (max-width: 768px) {
-        .carousel-btn {
-          width: 40px;
-          height: 40px;
+        .hero-content h1 {
+          font-size: 2rem;
         }
-
-        .carousel-btn.prev {
-          left: 10px;
-        }
-        .carousel-btn.next {
-          right: 10px;
-        }
-      }
-
-      /* Smooth scrollbar */
-      ::-webkit-scrollbar {
-        width: 10px;
-      }
-
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: #888;
-        border-radius: 5px;
-      }
-
-      ::-webkit-scrollbar-thumb:hover {
-        background: #555;
       }
     </style>
     <style>
@@ -447,1075 +235,1720 @@
     <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   </head>
   <body>
-    <div id="app" class="w-full"></div>
+    <div id="app" class="w-full min-h-full">
+      <!-- Navigation -->
+      <nav
+        id="navbar"
+        class="fixed top-0 left-0 w-full z-50 transition-all duration-300"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between items-center h-20">
+            <div class="flex items-center">
+              <span id="brand-logo" class="text-2xl font-bold tracking-tight"
+                >FASHION</span
+              >
+            </div>
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8">
+              <a href="#home" class="nav-link font-medium">Beranda</a>
+              <a href="#collection" class="nav-link font-medium">Koleksi</a>
+              <a href="#catalog" class="nav-link font-medium">Katalog</a>
+              <a href="#about" class="nav-link font-medium">Tentang</a>
+              <a href="#contact" class="nav-link font-medium">Kontak</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg">
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewbox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div
+          id="mobile-menu"
+          class="mobile-menu fixed top-0 left-0 w-64 h-full md:hidden z-50"
+        >
+          <div class="p-6">
+            <button id="close-menu-btn" class="mb-8">
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewbox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
+            </button>
+            <div class="flex flex-col space-y-4">
+              <a href="#home" class="mobile-nav-link text-lg font-medium py-2"
+                >Beranda</a
+              >
+              <a
+                href="#collection"
+                class="mobile-nav-link text-lg font-medium py-2"
+                >Koleksi</a
+              >
+              <a
+                href="#catalog"
+                class="mobile-nav-link text-lg font-medium py-2"
+                >Katalog</a
+              >
+              <a href="#about" class="mobile-nav-link text-lg font-medium py-2"
+                >Tentang</a
+              >
+              <a
+                href="#contact"
+                class="mobile-nav-link text-lg font-medium py-2"
+                >Kontak</a
+              >
+            </div>
+          </div>
+        </div>
+      </nav>
+      <!-- Hero Section with Slider -->
+      <section
+        id="home"
+        class="relative w-full"
+        style="height: 600px; margin-top: 80px"
+      >
+        <div class="hero-slider w-full h-full">
+          <div class="hero-slide active">
+            <img
+              src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1600&amp;h=900&amp;fit=crop&amp;q=80"
+              alt="Fashion Collection 1"
+              class="w-full h-full object-cover cursor-pointer"
+              onclick="openLightbox(this.src)"
+              onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+            />
+          </div>
+          <div class="hero-slide">
+            <img
+              src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&amp;h=900&amp;fit=crop&amp;q=80"
+              alt="Fashion Collection 2"
+              class="w-full h-full object-cover cursor-pointer"
+              onclick="openLightbox(this.src)"
+              onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+            />
+          </div>
+          <div class="hero-slide">
+            <img
+              src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=1600&amp;h=900&amp;fit=crop&amp;q=80"
+              alt="Fashion Collection 3"
+              class="w-full h-full object-cover cursor-pointer"
+              onclick="openLightbox(this.src)"
+              onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+            />
+          </div>
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center z-10">
+          <div class="hero-content text-center px-4 max-w-4xl">
+            <h1
+              id="hero-title"
+              class="text-5xl md:text-6xl font-bold mb-6 slide-in"
+              style="
+                color: white;
+                text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8),
+                  0 4px 16px rgba(0, 0, 0, 0.6);
+              "
+            >
+              Koleksi Lokal — Gaya yang Nyata, Bahan yang Berani
+            </h1>
+            <p
+              id="hero-subtitle"
+              class="text-xl md:text-2xl mb-8 fade-in"
+              style="
+                color: white;
+                text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8),
+                  0 3px 12px rgba(0, 0, 0, 0.6);
+                animation-delay: 0.2s;
+              "
+            >
+              Limited drop, kualitas premium, harga ramah kantong.
+            </p>
+            <button
+              id="hero-cta"
+              class="px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300 transform hover:scale-105 fade-in"
+              style="animation-delay: 0.4s"
+            >
+              Pesan via WhatsApp
+            </button>
+          </div>
+        </div>
+        <div class="slider-dots">
+          <span class="slider-dot active" onclick="goToSlide(0)"></span>
+          <span class="slider-dot" onclick="goToSlide(1)"></span>
+          <span class="slider-dot" onclick="goToSlide(2)"></span>
+        </div>
+      </section>
+      <!-- Value Proposition -->
+      <section class="w-full py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div
+              class="text-center p-8 rounded-2xl transition-all duration-300 hover:shadow-xl"
+            >
+              <div class="text-5xl mb-4">✨</div>
+              <h3 class="text-xl font-bold mb-3">Kualitas Premium</h3>
+              <p class="text-opacity-80">
+                Bahan pilihan dengan jahitan berkualitas tinggi
+              </p>
+            </div>
+            <div
+              class="text-center p-8 rounded-2xl transition-all duration-300 hover:shadow-xl"
+            >
+              <div class="text-5xl mb-4">👔</div>
+              <h3 class="text-xl font-bold mb-3">Custom Fit</h3>
+              <p class="text-opacity-80">
+                Ukuran yang pas untuk kenyamanan maksimal
+              </p>
+            </div>
+            <div
+              class="text-center p-8 rounded-2xl transition-all duration-300 hover:shadow-xl"
+            >
+              <div class="text-5xl mb-4">⚡</div>
+              <h3 class="text-xl font-bold mb-3">Fast Response</h3>
+              <p class="text-opacity-80">
+                Layanan cepat via WhatsApp untuk pesanan Anda
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Featured Collection -->
+      <section id="collection" class="w-full py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-4">Koleksi Unggulan</h2>
+            <p class="text-lg text-opacity-80">Produk terbaik pilihan kami</p>
+          </div>
+          <div
+            id="featured-products"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
+          >
+            <!-- Featured products will be generated here -->
+          </div>
+          <div class="text-center">
+            <button
+              onclick="scrollToSection('#catalog')"
+              class="px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105"
+            >
+              Lihat Semua Produk
+            </button>
+          </div>
+        </div>
+      </section>
+      <!-- How to Order -->
+      <section class="w-full py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-4">Cara Pesan</h2>
+            <p class="text-lg text-opacity-80">
+              3 langkah mudah untuk mendapatkan produk impian Anda
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center p-8">
+              <div
+                class="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6"
+              >
+                1
+              </div>
+              <h3 class="text-xl font-bold mb-3">Pilih Produk</h3>
+              <p class="text-opacity-80">
+                Browse katalog dan pilih produk yang Anda inginkan
+              </p>
+            </div>
+            <div class="text-center p-8">
+              <div
+                class="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6"
+              >
+                2
+              </div>
+              <h3 class="text-xl font-bold mb-3">Chat WhatsApp</h3>
+              <p class="text-opacity-80">
+                Hubungi kami via WhatsApp untuk detail pesanan
+              </p>
+            </div>
+            <div class="text-center p-8">
+              <div
+                class="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6"
+              >
+                3
+              </div>
+              <h3 class="text-xl font-bold mb-3">Konfirmasi</h3>
+              <p class="text-opacity-80">
+                Konfirmasi pembayaran dan terima paket Anda
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Catalog Section -->
+      <section id="catalog" class="w-full py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-4">Katalog Lengkap</h2>
+            <p class="text-lg text-opacity-80">Jelajahi semua koleksi kami</p>
+          </div>
+          <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Filters Sidebar -->
+            <div class="lg:w-64 flex-shrink-0">
+              <div class="rounded-2xl p-6 sticky top-24">
+                <h3 class="text-xl font-bold mb-4">Filter</h3>
+                <!-- Category Filter -->
+                <div class="mb-6">
+                  <h4 class="font-semibold mb-3">Kategori</h4>
+                  <div class="space-y-2">
+                    <label class="flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        value="kaos"
+                        class="category-filter mr-2"
+                      />
+                      <span>Kaos</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        value="hoodie"
+                        class="category-filter mr-2"
+                      />
+                      <span>Hoodie</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        value="crewneck"
+                        class="category-filter mr-2"
+                      />
+                      <span>Crewneck</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        value="kemeja"
+                        class="category-filter mr-2"
+                      />
+                      <span>Kemeja</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        value="celana"
+                        class="category-filter mr-2"
+                      />
+                      <span>Celana</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        value="outerwear"
+                        class="category-filter mr-2"
+                      />
+                      <span>Outerwear</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        value="sweater"
+                        class="category-filter mr-2"
+                      />
+                      <span>Sweater</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        value="aksesori"
+                        class="category-filter mr-2"
+                      />
+                      <span>Aksesori</span>
+                    </label>
+                  </div>
+                </div>
+                <!-- Size Filter -->
+                <div class="mb-6">
+                  <h4 class="font-semibold mb-3">Ukuran</h4>
+                  <div class="space-y-2">
+                    <label class="flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        value="S"
+                        class="size-filter mr-2"
+                      />
+                      <span>S</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        value="M"
+                        class="size-filter mr-2"
+                      />
+                      <span>M</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        value="L"
+                        class="size-filter mr-2"
+                      />
+                      <span>L</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        value="XL"
+                        class="size-filter mr-2"
+                      />
+                      <span>XL</span>
+                    </label>
+                  </div>
+                </div>
+                <!-- Price Range -->
+                <div class="mb-6">
+                  <h4 class="font-semibold mb-3">Harga</h4>
+                  <div class="space-y-2">
+                    <label class="flex items-center cursor-pointer">
+                      <input
+                        type="radio"
+                        name="price"
+                        value="0-100000"
+                        class="price-filter mr-2"
+                      />
+                      <span>&lt; Rp 100.000</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                      <input
+                        type="radio"
+                        name="price"
+                        value="100000-150000"
+                        class="price-filter mr-2"
+                      />
+                      <span>Rp 100.000 - 150.000</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                      <input
+                        type="radio"
+                        name="price"
+                        value="150000-200000"
+                        class="price-filter mr-2"
+                      />
+                      <span>Rp 150.000 - 200.000</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                      <input
+                        type="radio"
+                        name="price"
+                        value="200000-999999999"
+                        class="price-filter mr-2"
+                      />
+                      <span>&gt; Rp 200.000</span>
+                    </label>
+                  </div>
+                </div>
+                <button
+                  onclick="resetFilters()"
+                  class="w-full py-2 rounded-lg font-semibold transition-colors"
+                >
+                  Reset Filter
+                </button>
+              </div>
+            </div>
+            <!-- Products Grid -->
+            <div class="flex-1">
+              <!-- Sort Options -->
+              <div class="flex justify-between items-center mb-8">
+                <span class="font-semibold"
+                  ><span id="product-count">0</span> Produk</span
+                >
+                <select
+                  id="sort-select"
+                  class="px-4 py-2 rounded-lg border-2 cursor-pointer"
+                >
+                  <option value="popular">Terpopuler</option>
+                  <option value="newest">Terbaru</option>
+                  <option value="price-low">Harga Terendah</option>
+                  <option value="price-high">Harga Tertinggi</option>
+                </select>
+              </div>
+              <div
+                id="catalog-products"
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+              >
+                <!-- Catalog products will be generated here -->
+              </div>
+              <!-- Pagination -->
+              <div
+                id="pagination"
+                class="flex justify-center items-center gap-2 mt-12"
+              >
+                <!-- Pagination will be generated here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Testimonials -->
+      <section class="w-full py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-4">Testimoni Pelanggan</h2>
+            <p class="text-lg text-opacity-80">Apa kata mereka tentang kami</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="p-8 rounded-2xl shadow-lg">
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 rounded-full flex items-center justify-center text-xl mr-4"
+                >
+                  👤
+                </div>
+                <div>
+                  <h4 class="font-bold">Sarah Amanda</h4>
+                  <div class="text-yellow-400">★★★★★</div>
+                </div>
+              </div>
+              <p class="text-opacity-80">
+                "Kualitas bahan sangat premium! Ukuran pas dan pelayanan ramah.
+                Sangat puas!"
+              </p>
+            </div>
+            <div class="p-8 rounded-2xl shadow-lg">
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 rounded-full flex items-center justify-center text-xl mr-4"
+                >
+                  👤
+                </div>
+                <div>
+                  <h4 class="font-bold">Dimas Prasetyo</h4>
+                  <div class="text-yellow-400">★★★★★</div>
+                </div>
+              </div>
+              <p class="text-opacity-80">
+                "Pesanan cepat sampai, packaging rapi. Bakal order lagi!"
+              </p>
+            </div>
+            <div class="p-8 rounded-2xl shadow-lg">
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 rounded-full flex items-center justify-center text-xl mr-4"
+                >
+                  👤
+                </div>
+                <div>
+                  <h4 class="font-bold">Lisa Maharani</h4>
+                  <div class="text-yellow-400">★★★★★</div>
+                </div>
+              </div>
+              <p class="text-opacity-80">
+                "Desain trendy dan harga worth it. Recommended banget!"
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Gallery -->
+      <section class="w-full py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-4">Galeri</h2>
+            <p class="text-lg text-opacity-80">
+              Lihat koleksi kami lebih dekat
+            </p>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div
+              class="aspect-square rounded-xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+              onclick="openLightbox('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=400&amp;h=400&amp;fit=crop&amp;q=80')"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=400&amp;h=400&amp;fit=crop&amp;q=80"
+                alt="Gallery 1"
+                class="w-full h-full object-cover"
+                onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+              />
+            </div>
+            <div
+              class="aspect-square rounded-xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+              onclick="openLightbox('https://images.unsplash.com/photo-1558769132-cb1aea26d28b?w=400&amp;h=400&amp;fit=crop&amp;q=80')"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1558769132-cb1aea26d28b?w=400&amp;h=400&amp;fit=crop&amp;q=80"
+                alt="Gallery 2"
+                class="w-full h-full object-cover"
+                onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+              />
+            </div>
+            <div
+              class="aspect-square rounded-xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+              onclick="openLightbox('https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&amp;h=400&amp;fit=crop&amp;q=80')"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&amp;h=400&amp;fit=crop&amp;q=80"
+                alt="Gallery 3"
+                class="w-full h-full object-cover"
+                onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+              />
+            </div>
+            <div
+              class="aspect-square rounded-xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+              onclick="openLightbox('https://images.unsplash.com/photo-1562157873-818bc0726f68?w=400&amp;h=400&amp;fit=crop&amp;q=80')"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1562157873-818bc0726f68?w=400&amp;h=400&amp;fit=crop&amp;q=80"
+                alt="Gallery 4"
+                class="w-full h-full object-cover"
+                onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- About Section -->
+      <section id="about" class="w-full py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 class="text-4xl font-bold mb-6">Tentang Kami</h2>
+              <p class="text-lg mb-4 text-opacity-80">
+                Fashion Store adalah toko fashion premium yang berkomitmen
+                menghadirkan koleksi berkualitas tinggi dengan desain trendy dan
+                timeless.
+              </p>
+              <p class="text-lg mb-4 text-opacity-80">
+                Kami percaya bahwa fashion bukan hanya tentang penampilan,
+                tetapi juga tentang kepercayaan diri dan kenyamanan. Setiap
+                produk dipilih dengan cermat untuk memastikan kualitas terbaik
+                bagi Anda.
+              </p>
+              <p class="text-lg text-opacity-80">
+                Dengan tim yang berpengalaman dan dedikasi tinggi, kami siap
+                membantu Anda menemukan gaya yang sempurna.
+              </p>
+            </div>
+            <div class="rounded-2xl overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&amp;h=400&amp;fit=crop&amp;q=80"
+                alt="Tim Kami"
+                class="w-full h-full object-cover"
+                onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Contact Section -->
+      <section id="contact" class="w-full py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-4">Hubungi Kami</h2>
+            <p class="text-lg text-opacity-80">Kami siap membantu Anda</p>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Contact Info -->
+            <div>
+              <div class="mb-8">
+                <h3 class="text-xl font-bold mb-4">Informasi Kontak</h3>
+                <div class="space-y-4">
+                  <div class="flex items-start">
+                    <span class="text-2xl mr-4">📱</span>
+                    <div>
+                      <p class="font-semibold">WhatsApp</p>
+                      <p id="contact-whatsapp" class="text-opacity-80">
+                        +62 812-3456-7890
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-start">
+                    <span class="text-2xl mr-4">📍</span>
+                    <div>
+                      <p class="font-semibold">Alamat</p>
+                      <p id="contact-address" class="text-opacity-80">
+                        Jl. Fashion Street No. 123, Jakarta
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-start">
+                    <span class="text-2xl mr-4">⏰</span>
+                    <div>
+                      <p class="font-semibold">Jam Operasional</p>
+                      <p id="contact-hours" class="text-opacity-80">
+                        Senin - Sabtu: 09:00 - 21:00
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold mb-4">Ikuti Kami</h3>
+                <div class="flex gap-4">
+                  <a
+                    href="#"
+                    class="w-12 h-12 rounded-full flex items-center justify-center text-xl transition-transform hover:scale-110"
+                    >📘</a
+                  >
+                  <a
+                    href="#"
+                    class="w-12 h-12 rounded-full flex items-center justify-center text-xl transition-transform hover:scale-110"
+                    >📷</a
+                  >
+                  <a
+                    href="#"
+                    class="w-12 h-12 rounded-full flex items-center justify-center text-xl transition-transform hover:scale-110"
+                    >🐦</a
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- Contact Form -->
+            <div class="rounded-2xl p-8">
+              <form id="contact-form" onsubmit="handleContactSubmit(event)">
+                <div class="mb-4">
+                  <label for="name" class="block font-semibold mb-2"
+                    >Nama</label
+                  >
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none focus:border-opacity-100 transition-colors"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label for="email" class="block font-semibold mb-2"
+                    >Email</label
+                  >
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none focus:border-opacity-100 transition-colors"
+                  />
+                </div>
+                <div class="mb-6">
+                  <label for="message" class="block font-semibold mb-2"
+                    >Pesan</label
+                  >
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="4"
+                    required
+                    class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none focus:border-opacity-100 transition-colors"
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  class="w-full py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
+                >
+                  Kirim Pesan
+                </button>
+              </form>
+              <div id="form-message" class="mt-4 p-4 rounded-lg hidden"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Footer -->
+      <footer class="w-full py-12 px-4 border-t-2">
+        <div class="max-w-7xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <h3 id="footer-brand" class="text-xl font-bold mb-4">FASHION</h3>
+              <p class="text-opacity-70">
+                Toko fashion premium dengan koleksi terbaik untuk gaya Anda.
+              </p>
+            </div>
+            <div>
+              <h4 class="font-bold mb-4">Menu</h4>
+              <ul class="space-y-2 text-opacity-70">
+                <li>
+                  <a href="#home" class="hover:opacity-100 transition-opacity"
+                    >Beranda</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#collection"
+                    class="hover:opacity-100 transition-opacity"
+                    >Koleksi</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#catalog"
+                    class="hover:opacity-100 transition-opacity"
+                    >Katalog</a
+                  >
+                </li>
+                <li>
+                  <a href="#about" class="hover:opacity-100 transition-opacity"
+                    >Tentang</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold mb-4">Kontak</h4>
+              <ul class="space-y-2 text-opacity-70">
+                <li id="footer-whatsapp">WhatsApp: +62 812-3456-7890</li>
+                <li id="footer-address">Jakarta, Indonesia</li>
+                <li id="footer-hours">09:00 - 21:00</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold mb-4">Newsletter</h4>
+              <p class="text-opacity-70 mb-4">
+                Dapatkan update koleksi terbaru
+              </p>
+              <form
+                onsubmit="handleNewsletterSubmit(event)"
+                class="flex flex-col sm:flex-row gap-2"
+              >
+                <input
+                  type="email"
+                  placeholder="Email Anda"
+                  class="flex-1 px-4 py-2 rounded-lg border-2 focus:outline-none"
+                  style="min-width: 0"
+                />
+                <button
+                  type="submit"
+                  class="px-6 py-2 rounded-lg font-semibold transition-colors whitespace-nowrap"
+                >
+                  Kirim
+                </button>
+              </form>
+            </div>
+          </div>
+          <div class="text-center pt-8 border-t-2 text-opacity-70">
+            <p>© 2024 Fashion Store. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+      <!-- Lightbox -->
+      <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span
+          class="absolute top-4 right-4 text-white text-4xl cursor-pointer z-10"
+          >×</span
+        >
+        <img id="lightbox-img" src="" alt="Lightbox Image" />
+      </div>
+    </div>
     <script>
       const defaultConfig = {
-        background_color: "#fef3c7",
+        background_color: "#f8f9fa",
         surface_color: "#ffffff",
-        text_color: "#1f2937",
-        primary_action: "#f59e0b",
-        secondary_action: "#10b981",
-        font_family: "Poppins",
+        text_color: "#1a1a1a",
+        primary_action_color: "#2c3e50",
+        secondary_action_color: "#34495e",
+        font_family: "Inter",
         font_size: 16,
-        hero_title: "Sajian Lezat dengan Cita Rasa Nusantara",
-        hero_subtitle:
-          "Nikmati kelezatan masakan tradisional dan modern yang dibuat dengan bahan pilihan dan penuh cinta",
-        hero_cta: "Lihat Menu Kami",
-        about_title: "Tentang Kami",
-        about_description:
-          "Kami adalah UMKM kuliner yang berkomitmen menghadirkan cita rasa autentik Nusantara dengan standar kebersihan dan kualitas terbaik. Setiap hidangan kami buat dengan penuh dedikasi untuk kepuasan Anda.",
-        about_vision:
-          "Menjadi pilihan utama kuliner Nusantara yang mengutamakan kualitas, kebersihan, dan kepuasan pelanggan",
-        portfolio_title: "Menu Spesial Kami",
-        portfolio_subtitle: "Berbagai pilihan menu lezat untuk setiap selera",
-        services_title: "Layanan Kami",
-        services_subtitle: "Pelayanan terbaik untuk kepuasan Anda",
-        testimonials_title: "Testimoni Pelanggan",
-        contact_title: "Hubungi Kami",
-        contact_subtitle: "Kami siap melayani pesanan dan pertanyaan Anda",
-        contact_address: "Jl. Kuliner No. 123, Jakarta Selatan",
-        contact_phone: "+62 812-3456-7890",
-        contact_email: "hello@umkmkuliner.com",
-        footer_text:
-          "© 2024 UMKM Kuliner. Dibuat dengan ❤️ untuk pecinta kuliner",
+        brand_name: "FASHION",
+        tagline: "Fashion Lokal",
+        hero_title: "Koleksi Lokal — Gaya yang Nyata, Bahan yang Berani",
+        hero_subtitle: "Limited drop, kualitas premium, harga ramah kantong.",
+        cta_button: "Pesan via WhatsApp",
+        whatsapp_number: "+62 812-3456-7890",
+        store_address: "Jl. Fashion Street No. 123, Jakarta",
+        store_hours: "Senin - Sabtu: 09:00 - 21:00",
       };
 
-      let currentFilter = "semua";
-      let currentTestimonialIndex = 0;
-
-      // Sample data for demonstration
-      const sampleMenus = [
+      // Sample products data with real Unsplash photos (free to use, no copyright)
+      const allProducts = [
         {
-          type: "menu",
-          title: "Nasi Goreng Spesial",
-          category: "Makanan Utama",
-          price: "Rp 25.000",
-          image: "🍛",
-          description: "Nasi goreng dengan bumbu rahasia dan topping lengkap",
+          id: 1,
+          name: "Hoodie Basic Canvas",
+          slug: "hoodie-basic-canvas",
+          sku: "HB-001",
+          category: "hoodie",
+          price: 180000,
+          image:
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=500&fit=crop&q=80",
+          badge: "new",
+          sizes: ["S", "M", "L", "XL"],
+          colors: ["Hitam", "Abu", "Merah"],
+          stock: 25,
+          desc_short: "Hoodie nyaman, bahan tebal, jahitan rapi.",
+          desc_long:
+            "Bahan cotton blend 320gsm, jahitan reinforced, cocok untuk daily wear dan custom print.",
         },
         {
-          type: "menu",
-          title: "Soto Ayam",
-          category: "Makanan Utama",
-          price: "Rp 20.000",
-          image: "🍜",
-          description: "Soto ayam kuah bening dengan rempah tradisional",
+          id: 2,
+          name: "Kaos Premium Cotton",
+          slug: "kaos-premium-cotton",
+          sku: "KP-002",
+          category: "kaos",
+          price: 120000,
+          image:
+            "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop&q=80",
+          badge: "best",
+          sizes: ["S", "M", "L", "XL"],
+          colors: ["Hitam", "Putih", "Navy"],
+          stock: 40,
+          desc_short: "Kaos premium, adem, tidak mudah luntur.",
+          desc_long:
+            "100% cotton combed 30s, sablon rubber premium, nyaman untuk aktivitas sehari-hari.",
         },
         {
-          type: "menu",
-          title: "Bakso Sapi",
-          category: "Makanan Utama",
-          price: "Rp 18.000",
-          image: "🍲",
-          description: "Bakso sapi kenyal dengan kuah kaldu segar",
+          id: 3,
+          name: "Crewneck Fleece",
+          slug: "crewneck-fleece",
+          sku: "CF-003",
+          category: "crewneck",
+          price: 165000,
+          image:
+            "https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=400&h=500&fit=crop&q=80",
+          badge: "new",
+          sizes: ["M", "L", "XL"],
+          colors: ["Abu", "Maroon", "Olive"],
+          stock: 30,
+          desc_short: "Crewneck fleece hangat dan stylish.",
+          desc_long:
+            "Material fleece premium, lembut di dalam, cocok untuk cuaca dingin atau ber-AC.",
         },
         {
-          type: "menu",
-          title: "Es Teh Manis",
-          category: "Minuman",
-          price: "Rp 5.000",
-          image: "🧋",
-          description: "Teh manis segar untuk menemani santapan",
+          id: 4,
+          name: "Totebag Canvas",
+          slug: "totebag-canvas",
+          sku: "TB-004",
+          category: "aksesori",
+          price: 85000,
+          image:
+            "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=500&fit=crop&q=80",
+          badge: "best",
+          sizes: ["One Size"],
+          colors: ["Natural", "Hitam", "Navy"],
+          stock: 50,
+          desc_short: "Totebag kanvas tebal, eco-friendly.",
+          desc_long:
+            "Canvas 12oz, jahitan double stitch, kapasitas besar, desain minimalis untuk daily use.",
         },
         {
-          type: "menu",
-          title: "Jus Alpukat",
-          category: "Minuman",
-          price: "Rp 15.000",
-          image: "🥤",
-          description: "Jus alpukat kental dan creamy",
+          id: 5,
+          name: "Kaos Oversize",
+          slug: "kaos-oversize",
+          sku: "KO-005",
+          category: "kaos",
+          price: 135000,
+          image:
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=400&h=500&fit=crop&q=80",
+          badge: "",
+          sizes: ["M", "L", "XL"],
+          colors: ["Hitam", "Putih", "Cream"],
+          stock: 35,
+          desc_short: "Kaos oversize untuk gaya street.",
+          desc_long:
+            "Cotton combed 24s, potongan oversize trendy, nyaman dan longgar.",
         },
         {
-          type: "menu",
-          title: "Pisang Goreng",
-          category: "Dessert",
-          price: "Rp 10.000",
-          image: "🍌",
-          description: "Pisang goreng renyah dengan taburan keju",
+          id: 6,
+          name: "Topi Dad Hat",
+          slug: "topi-dad-hat",
+          sku: "TH-006",
+          category: "aksesori",
+          price: 75000,
+          image:
+            "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=500&fit=crop&q=80",
+          badge: "new",
+          sizes: ["One Size"],
+          colors: ["Hitam", "Khaki", "Navy"],
+          stock: 45,
+          desc_short: "Topi dad hat klasik casual.",
+          desc_long:
+            "Bahan twill premium, adjustable strap, bordir logo clean, cocok untuk hangout.",
+        },
+        {
+          id: 7,
+          name: "Jaket Coach",
+          slug: "jaket-coach",
+          sku: "JC-007",
+          category: "outerwear",
+          price: 245000,
+          image:
+            "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=500&fit=crop&q=80",
+          badge: "best",
+          sizes: ["M", "L", "XL"],
+          colors: ["Hitam", "Navy", "Maroon"],
+          stock: 20,
+          desc_short: "Jaket coach ringan, stylish.",
+          desc_long:
+            "Bahan taslan waterproof, lining satin, saku dalam, cocok untuk riding atau outdoor.",
+        },
+        {
+          id: 8,
+          name: "Kemeja Flanel",
+          slug: "kemeja-flanel",
+          sku: "KF-008",
+          category: "kemeja",
+          price: 155000,
+          image:
+            "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&h=500&fit=crop&q=80",
+          badge: "",
+          sizes: ["S", "M", "L", "XL"],
+          colors: ["Merah Kotak", "Biru Kotak", "Abu Kotak"],
+          stock: 28,
+          desc_short: "Kemeja flanel motif kotak klasik.",
+          desc_long:
+            "Flanel brushed cotton, hangat dan nyaman, cocok untuk gaya kasual atau layering.",
+        },
+        {
+          id: 9,
+          name: "Celana Cargo",
+          slug: "celana-cargo",
+          sku: "CC-009",
+          category: "celana",
+          price: 195000,
+          image:
+            "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=400&h=500&fit=crop&q=80",
+          badge: "new",
+          sizes: ["28", "30", "32", "34"],
+          colors: ["Hitam", "Olive", "Khaki"],
+          stock: 32,
+          desc_short: "Celana cargo multi pocket.",
+          desc_long:
+            "Bahan drill premium, banyak kantong fungsional, fit regular, ideal untuk outdoor atau streetwear.",
+        },
+        {
+          id: 10,
+          name: "Sweater Rajut",
+          slug: "sweater-rajut",
+          sku: "SR-010",
+          category: "sweater",
+          price: 175000,
+          image:
+            "https://images.unsplash.com/photo-1576871337622-98d48d1cf531?w=400&h=500&fit=crop&q=80",
+          badge: "",
+          sizes: ["M", "L", "XL"],
+          colors: ["Cream", "Abu", "Navy"],
+          stock: 22,
+          desc_short: "Sweater rajut hangat vintage.",
+          desc_long:
+            "Knit cotton blend, tekstur rajut klasik, hangat dan stylish, cocok untuk cuaca dingin.",
+        },
+        {
+          id: 11,
+          name: "Kaos Pocket Tee",
+          slug: "kaos-pocket-tee",
+          sku: "KPT-011",
+          category: "kaos",
+          price: 125000,
+          image:
+            "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400&h=500&fit=crop&q=80",
+          badge: "best",
+          sizes: ["S", "M", "L", "XL"],
+          colors: ["Hitam", "Putih", "Abu", "Navy"],
+          stock: 38,
+          desc_short: "Kaos dengan pocket detail.",
+          desc_long:
+            "Cotton combed 30s, pocket di dada, detail jahit kontras, simple dan fungsional.",
+        },
+        {
+          id: 12,
+          name: "Bucket Hat",
+          slug: "bucket-hat",
+          sku: "BH-012",
+          category: "aksesori",
+          price: 80000,
+          image:
+            "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?w=400&h=500&fit=crop&q=80",
+          badge: "new",
+          sizes: ["One Size"],
+          colors: ["Hitam", "Khaki", "Denim"],
+          stock: 42,
+          desc_short: "Bucket hat trendy untuk festival.",
+          desc_long:
+            "Bahan twill soft, reversible, bisa bolak-balik, cocok untuk festival atau outdoor.",
         },
       ];
 
-      const sampleServices = [
-        {
-          type: "service",
-          title: "Delivery Cepat",
-          image: "🚚",
-          description:
-            "Pengiriman cepat ke seluruh area dengan kemasan aman dan rapi",
-        },
-        {
-          type: "service",
-          title: "Catering Event",
-          image: "🎉",
-          description:
-            "Layanan catering untuk acara keluarga, kantor, dan pernikahan",
-        },
-        {
-          type: "service",
-          title: "Dine In Nyaman",
-          image: "🪑",
-          description: "Ruang makan yang bersih dan nyaman untuk keluarga",
-        },
-      ];
+      let filteredProducts = [...allProducts];
+      let currentPage = 1;
+      const productsPerPage = 9;
 
-      const sampleTestimonials = [
-        {
-          type: "testimonial",
-          customerName: "Budi Santoso",
-          rating: 5,
-          description:
-            "Makanannya enak sekali! Porsi besar dan harga terjangkau. Pasti balik lagi!",
-        },
-        {
-          type: "testimonial",
-          customerName: "Siti Nurhaliza",
-          rating: 5,
-          description:
-            "Pelayanan ramah, makanan cepat datang. Soto ayamnya juara!",
-        },
-        {
-          type: "testimonial",
-          customerName: "Andi Wijaya",
-          rating: 5,
-          description:
-            "Sudah langganan 2 tahun, kualitas selalu terjaga. Recommended!",
-        },
-      ];
+      // Hero slider
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".hero-slide");
+      const dots = document.querySelectorAll(".slider-dot");
 
-      const sampleTeam = [
-        { type: "team", name: "Chef Agus", position: "Head Chef", image: "👨‍🍳" },
-        { type: "team", name: "Rina", position: "Sous Chef", image: "👩‍🍳" },
-      ];
-
-      const sampleSocials = [
-        {
-          type: "social",
-          category: "whatsapp",
-          socialLink: "https://wa.me/6281234567890",
-        },
-        {
-          type: "social",
-          category: "instagram",
-          socialLink: "https://instagram.com/umkmkuliner",
-        },
-      ];
-
-      function getConfig(key) {
-        return window.elementSdk?.config?.[key] || defaultConfig[key];
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === index);
+        });
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("active", i === index);
+        });
       }
 
-      function getBaseFontSize() {
-        return window.elementSdk?.config?.font_size || defaultConfig.font_size;
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
       }
 
-      function getFontFamily() {
-        const customFont =
-          window.elementSdk?.config?.font_family || defaultConfig.font_family;
-        return `${customFont}, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`;
+      function goToSlide(index) {
+        currentSlide = index;
+        showSlide(currentSlide);
       }
 
-      async function onConfigChange(config) {
-        renderWebsite();
+      setInterval(nextSlide, 5000);
+
+      // Lightbox
+      function openLightbox(src) {
+        document.getElementById("lightbox").classList.add("active");
+        document.getElementById("lightbox-img").src = src;
       }
 
-      function renderWebsite() {
-        const baseSize = getBaseFontSize();
-        const fontFamily = getFontFamily();
-        const backgroundColor = getConfig("background_color");
-        const surfaceColor = getConfig("surface_color");
-        const textColor = getConfig("text_color");
-        const primaryAction = getConfig("primary_action");
-        const secondaryAction = getConfig("secondary_action");
-
-        const menus = sampleMenus;
-        const services = sampleServices;
-        const testimonials = sampleTestimonials;
-        const team = sampleTeam;
-        const socials = sampleSocials;
-
-        const categories = [
-          "semua",
-          ...new Set(menus.map((m) => m.category).filter(Boolean)),
-        ];
-        const filteredMenus =
-          currentFilter === "semua"
-            ? menus
-            : menus.filter((m) => m.category === currentFilter);
-
-        const app = document.getElementById("app");
-        app.style.fontFamily = fontFamily;
-        app.style.fontSize = `${baseSize}px`;
-        app.style.color = textColor;
-
-        app.innerHTML = `
-        <div class="w-full" style="background-color: ${backgroundColor};">
-          <!-- Navigation -->
-          <nav class="w-full sticky top-0 z-50 shadow-lg" style="background-color: ${surfaceColor};">
-            <div class="max-w-7xl mx-auto px-6 py-4">
-              <div class="flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                  <div class="text-4xl">🍽️</div>
-                  <div>
-                    <h1 class="font-bold" style="font-size: ${
-                      baseSize * 1.5
-                    }px; color: ${primaryAction};">UMKM Kuliner</h1>
-                    <p class="text-xs" style="color: ${textColor}; opacity: 0.7;">Sajian Lezat Nusantara</p>
-                  </div>
-                </div>
-                <div class="hidden md:flex gap-6">
-                  <a href="#home" class="font-semibold hover:opacity-70 transition-opacity" style="color: ${textColor}; font-size: ${baseSize}px;">Beranda</a>
-                  <a href="#about" class="font-semibold hover:opacity-70 transition-opacity" style="color: ${textColor}; font-size: ${baseSize}px;">Tentang</a>
-                  <a href="#portfolio" class="font-semibold hover:opacity-70 transition-opacity" style="color: ${textColor}; font-size: ${baseSize}px;">Menu</a>
-                  <a href="#services" class="font-semibold hover:opacity-70 transition-opacity" style="color: ${textColor}; font-size: ${baseSize}px;">Layanan</a>
-                  <a href="#testimonials" class="font-semibold hover:opacity-70 transition-opacity" style="color: ${textColor}; font-size: ${baseSize}px;">Testimoni</a>
-                  <a href="#contact" class="font-semibold hover:opacity-70 transition-opacity" style="color: ${textColor}; font-size: ${baseSize}px;">Kontak</a>
-                </div>
-              </div>
-            </div>
-          </nav>
-
-          <!-- Hero Section -->
-          <section id="home" class="w-full py-24 md:py-32 relative overflow-hidden" style="background: linear-gradient(135deg, ${primaryAction} 0%, ${secondaryAction} 100%);">
-            <div class="absolute inset-0 opacity-10">
-              <div class="text-9xl absolute top-10 left-10 animate-fade-in-left">🍜</div>
-              <div class="text-9xl absolute bottom-10 right-10 animate-fade-in-right">🍛</div>
-              <div class="text-7xl absolute top-1/2 left-1/4 animate-scale-in delay-300">🍲</div>
-            </div>
-            <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
-              <h2 class="font-bold text-white mb-6 animate-fade-in-up" 
-                style="font-size: ${baseSize * 3}px; line-height: 1.2;">
-                ${getConfig("hero_title")}
-              </h2>
-              <p class="text-white mb-8 max-w-2xl mx-auto animate-fade-in-up delay-200" 
-                style="font-size: ${baseSize * 1.25}px; opacity: 0.95;">
-                ${getConfig("hero_subtitle")}
-              </p>
-              <a href="#portfolio" class="btn-primary inline-block px-10 py-4 rounded-full font-bold text-white shadow-2xl animate-fade-in-up delay-400" 
-                style="background-color: ${surfaceColor}; color: ${primaryAction}; font-size: ${
-          baseSize * 1.125
-        }px;">
-                ${getConfig("hero_cta")} →
-              </a>
-            </div>
-          </section>
-
-          <!-- About Section -->
-          <section id="about" class="w-full py-20" style="background-color: ${surfaceColor};">
-            <div class="max-w-7xl mx-auto px-6">
-              <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="scroll-reveal">
-                  <div class="text-8xl mb-6">👨‍🍳</div>
-                  <h2 class="font-bold mb-4" style="font-size: ${
-                    baseSize * 2.5
-                  }px; color: ${primaryAction};">
-                    ${getConfig("about_title")}
-                  </h2>
-                  <p class="mb-6 leading-relaxed" style="font-size: ${
-                    baseSize * 1.125
-                  }px; color: ${textColor};">
-                    ${getConfig("about_description")}
-                  </p>
-                  <div class="p-6 rounded-2xl" style="background-color: ${backgroundColor};">
-                    <h3 class="font-bold mb-3 flex items-center gap-2" style="font-size: ${
-                      baseSize * 1.25
-                    }px; color: ${primaryAction};">
-                      <span>������</span> Visi Kami
-                    </h3>
-                    <p style="font-size: ${baseSize}px; color: ${textColor};">
-                      ${getConfig("about_vision")}
-                    </p>
-                  </div>
-                </div>
-                <div class="scroll-reveal">
-                  <div class="grid grid-cols-2 gap-6">
-                    <div class="card-hover p-6 rounded-2xl text-center" style="background-color: ${backgroundColor};">
-                      <div class="text-5xl mb-3">🏆</div>
-                      <h4 class="font-bold mb-2" style="font-size: ${
-                        baseSize * 1.5
-                      }px; color: ${primaryAction};">100+</h4>
-                      <p style="font-size: ${
-                        baseSize * 0.875
-                      }px; color: ${textColor};">Menu Tersedia</p>
-                    </div>
-                    <div class="card-hover p-6 rounded-2xl text-center" style="background-color: ${backgroundColor};">
-                      <div class="text-5xl mb-3">😊</div>
-                      <h4 class="font-bold mb-2" style="font-size: ${
-                        baseSize * 1.5
-                      }px; color: ${primaryAction};">1000+</h4>
-                      <p style="font-size: ${
-                        baseSize * 0.875
-                      }px; color: ${textColor};">Pelanggan Puas</p>
-                    </div>
-                    <div class="card-hover p-6 rounded-2xl text-center" style="background-color: ${backgroundColor};">
-                      <div class="text-5xl mb-3">⭐</div>
-                      <h4 class="font-bold mb-2" style="font-size: ${
-                        baseSize * 1.5
-                      }px; color: ${primaryAction};">4.9/5</h4>
-                      <p style="font-size: ${
-                        baseSize * 0.875
-                      }px; color: ${textColor};">Rating</p>
-                    </div>
-                    <div class="card-hover p-6 rounded-2xl text-center" style="background-color: ${backgroundColor};">
-                      <div class="text-5xl mb-3">🚚</div>
-                      <h4 class="font-bold mb-2" style="font-size: ${
-                        baseSize * 1.5
-                      }px; color: ${primaryAction};">Express</h4>
-                      <p style="font-size: ${
-                        baseSize * 0.875
-                      }px; color: ${textColor};">Pengiriman Cepat</p>
-                    </div>
-                  </div>
-                  ${
-                    team.length > 0
-                      ? `
-                    <div class="mt-8">
-                      <h3 class="font-bold mb-4 text-center" style="font-size: ${
-                        baseSize * 1.5
-                      }px; color: ${textColor};">Tim Kami</h3>
-                      <div class="grid grid-cols-2 gap-4">
-                        ${team
-                          .slice(0, 4)
-                          .map(
-                            (member) => `
-                          <div class="team-member p-4 rounded-xl text-center" style="background-color: ${backgroundColor};">
-                            <div class="w-16 h-16 mx-auto mb-3 rounded-full flex items-center justify-center text-3xl" style="background-color: ${primaryAction};">
-                              ${member.image || "👤"}
-                            </div>
-                            <h4 class="font-bold" style="font-size: ${baseSize}px; color: ${textColor};">${
-                              member.name
-                            }</h4>
-                            <p class="text-sm" style="font-size: ${
-                              baseSize * 0.75
-                            }px; color: ${textColor}; opacity: 0.7;">${
-                              member.position
-                            }</p>
-                          </div>
-                        `
-                          )
-                          .join("")}
-                      </div>
-                    </div>
-                  `
-                      : ""
-                  }
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Portfolio/Menu Section -->
-          <section id="portfolio" class="w-full py-20" style="background-color: ${backgroundColor};">
-            <div class="max-w-7xl mx-auto px-6">
-              <div class="text-center mb-12 scroll-reveal">
-                <h2 class="font-bold mb-4" style="font-size: ${
-                  baseSize * 2.5
-                }px; color: ${primaryAction};">
-                  ${getConfig("portfolio_title")}
-                </h2>
-                <p style="font-size: ${
-                  baseSize * 1.125
-                }px; color: ${textColor}; opacity: 0.8;">
-                  ${getConfig("portfolio_subtitle")}
-                </p>
-              </div>
-
-              <!-- Filter Categories -->
-              <div class="flex flex-wrap justify-center gap-3 mb-12 scroll-reveal">
-                ${categories
-                  .map(
-                    (cat) => `
-                  <button class="filter-btn px-6 py-3 rounded-full font-bold transition-all ${
-                    currentFilter === cat ? "active" : ""
-                  }" 
-                    data-category="${cat}"
-                    style="background-color: ${
-                      currentFilter === cat ? primaryAction : surfaceColor
-                    }; 
-                           color: ${
-                             currentFilter === cat ? "white" : textColor
-                           };
-                           font-size: ${baseSize * 0.875}px;
-                           box-shadow: ${
-                             currentFilter === cat
-                               ? "0 8px 20px rgba(0,0,0,0.15)"
-                               : "0 2px 8px rgba(0,0,0,0.1)"
-                           };">
-                    ${cat.charAt(0).toUpperCase() + cat.slice(1)}
-                  </button>
-                `
-                  )
-                  .join("")}
-              </div>
-
-              <!-- Menu Grid -->
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                ${
-                  filteredMenus.length > 0
-                    ? filteredMenus
-                        .map(
-                          (menu, idx) => `
-                  <div class="menu-item card-hover rounded-2xl overflow-hidden shadow-xl scroll-reveal" 
-                    style="background-color: ${surfaceColor}; animation-delay: ${
-                            idx * 0.1
-                          }s;">
-                    <div class="relative h-64 flex items-center justify-center text-8xl" 
-                      style="background: linear-gradient(135deg, ${primaryAction}30, ${secondaryAction}30);">
-                      ${menu.image || "🍽️"}
-                      <div class="menu-overlay text-white">
-                        <h3 class="font-bold mb-2" style="font-size: ${
-                          baseSize * 1.25
-                        }px;">${menu.title}</h3>
-                        <p class="text-sm mb-3" style="font-size: ${
-                          baseSize * 0.875
-                        }px;">${
-                            menu.description ||
-                            "Hidangan lezat yang wajib dicoba"
-                          }</p>
-                        ${
-                          menu.price
-                            ? `<div class="font-bold text-2xl" style="color: ${secondaryAction};">${menu.price}</div>`
-                            : ""
-                        }
-                      </div>
-                    </div>
-                    <div class="p-6">
-                      <div class="flex justify-between items-center mb-2">
-                        <h3 class="font-bold" style="font-size: ${
-                          baseSize * 1.25
-                        }px; color: ${textColor};">${menu.title}</h3>
-                      </div>
-                      ${
-                        menu.category
-                          ? `
-                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold mb-3" 
-                          style="background-color: ${primaryAction}; color: white; font-size: ${
-                              baseSize * 0.75
-                            }px;">
-                          ${menu.category}
-                        </span>
-                      `
-                          : ""
-                      }
-                      ${
-                        menu.price
-                          ? `<div class="font-bold mb-3" style="color: ${primaryAction}; font-size: ${
-                              baseSize * 1.5
-                            }px;">${menu.price}</div>`
-                          : ""
-                      }
-                      <button class="order-btn w-full py-3 rounded-xl font-bold text-white transition-all hover:shadow-lg" 
-                        data-menu="${menu.title}"
-                        style="background-color: ${secondaryAction}; font-size: ${baseSize}px;">
-                        Pesan Sekarang 🛒
-                      </button>
-                    </div>
-                  </div>
-                `
-                        )
-                        .join("")
-                    : `
-                  <div class="col-span-full text-center py-16">
-                    <div class="text-6xl mb-4">🍽️</div>
-                    <p style="color: ${textColor}; opacity: 0.5; font-size: ${
-                        baseSize * 1.125
-                      }px;">
-                      Menu akan segera hadir!
-                    </p>
-                  </div>
-                `
-                }
-              </div>
-            </div>
-          </section>
-
-          <!-- Services Section -->
-          <section id="services" class="w-full py-20" style="background-color: ${surfaceColor};">
-            <div class="max-w-7xl mx-auto px-6">
-              <div class="text-center mb-12 scroll-reveal">
-                <h2 class="font-bold mb-4" style="font-size: ${
-                  baseSize * 2.5
-                }px; color: ${primaryAction};">
-                  ${getConfig("services_title")}
-                </h2>
-                <p style="font-size: ${
-                  baseSize * 1.125
-                }px; color: ${textColor}; opacity: 0.8;">
-                  ${getConfig("services_subtitle")}
-                </p>
-              </div>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                ${
-                  services.length > 0
-                    ? services
-                        .map(
-                          (service, idx) => `
-                  <div class="card-hover p-8 rounded-2xl text-center scroll-reveal" 
-                    style="background-color: ${backgroundColor}; animation-delay: ${
-                            idx * 0.15
-                          }s;">
-                    <div class="text-6xl mb-4">${service.image || "⚡"}</div>
-                    <h3 class="font-bold mb-3" style="font-size: ${
-                      baseSize * 1.5
-                    }px; color: ${textColor};">
-                      ${service.title}
-                    </h3>
-                    <p style="font-size: ${baseSize}px; color: ${textColor}; opacity: 0.8;">
-                      ${service.description}
-                    </p>
-                  </div>
-                `
-                        )
-                        .join("")
-                    : `
-                  <div class="col-span-full text-center py-12">
-                    <div class="text-6xl mb-4">🎯</div>
-                    <p style="color: ${textColor}; opacity: 0.5; font-size: ${baseSize}px;">
-                      Layanan akan segera hadir!
-                    </p>
-                  </div>
-                `
-                }
-              </div>
-            </div>
-          </section>
-
-          <!-- Testimonials Section -->
-          <section id="testimonials" class="w-full py-20" style="background-color: ${backgroundColor};">
-            <div class="max-w-7xl mx-auto px-6">
-              <div class="text-center mb-12 scroll-reveal">
-                <h2 class="font-bold mb-4" style="font-size: ${
-                  baseSize * 2.5
-                }px; color: ${primaryAction};">
-                  ${getConfig("testimonials_title")}
-                </h2>
-              </div>
-              
-              ${
-                testimonials.length > 0
-                  ? `
-                <div class="carousel-container max-w-4xl mx-auto">
-                  <div class="carousel-track" id="testimonialTrack">
-                    ${testimonials
-                      .map(
-                        (testimonial) => `
-                      <div class="carousel-slide">
-                        <div class="p-10 rounded-3xl shadow-2xl" style="background-color: ${surfaceColor};">
-                          <div class="flex items-center justify-center mb-6">
-                            <div class="w-20 h-20 rounded-full flex items-center justify-center text-4xl text-white font-bold" 
-                              style="background-color: ${primaryAction};">
-                              ${testimonial.customerName
-                                .charAt(0)
-                                .toUpperCase()}
-                            </div>
-                          </div>
-                          <div class="text-center mb-4">
-                            <h4 class="font-bold mb-2" style="font-size: ${
-                              baseSize * 1.5
-                            }px; color: ${textColor};">
-                              ${testimonial.customerName}
-                            </h4>
-                            <div class="star-rating justify-center text-3xl mb-4">
-                              ${"⭐".repeat(testimonial.rating || 5)}
-                            </div>
-                          </div>
-                          <p class="text-center italic leading-relaxed" 
-                            style="font-size: ${
-                              baseSize * 1.125
-                            }px; color: ${textColor};">
-                            "${testimonial.description}"
-                          </p>
-                        </div>
-                      </div>
-                    `
-                      )
-                      .join("")}
-                  </div>
-                  ${
-                    testimonials.length > 1
-                      ? `
-                    <button class="carousel-btn prev" id="prevBtn" 
-                      style="background-color: ${primaryAction}; color: white;">
-                      ‹
-                    </button>
-                    <button class="carousel-btn next" id="nextBtn" 
-                      style="background-color: ${primaryAction}; color: white;">
-                      ›
-                    </button>
-                  `
-                      : ""
-                  }
-                </div>
-              `
-                  : `
-                <div class="text-center py-12">
-                  <div class="text-6xl mb-4">💬</div>
-                  <p style="color: ${textColor}; opacity: 0.5; font-size: ${baseSize}px;">
-                    Testimoni akan segera hadir!
-                  </p>
-                </div>
-              `
-              }
-            </div>
-          </section>
-
-          <!-- Contact Section -->
-          <section id="contact" class="w-full py-20" style="background-color: ${surfaceColor};">
-            <div class="max-w-6xl mx-auto px-6">
-              <div class="text-center mb-12 scroll-reveal">
-                <h2 class="font-bold mb-4" style="font-size: ${
-                  baseSize * 2.5
-                }px; color: ${primaryAction};">
-                  ${getConfig("contact_title")}
-                </h2>
-                <p style="font-size: ${
-                  baseSize * 1.125
-                }px; color: ${textColor}; opacity: 0.8;">
-                  ${getConfig("contact_subtitle")}
-                </p>
-              </div>
-
-              <div class="grid md:grid-cols-2 gap-12">
-                <!-- Contact Info -->
-                <div class="scroll-reveal">
-                  <div class="space-y-6 mb-8">
-                    <div class="flex items-start gap-4 p-6 rounded-2xl" style="background-color: ${backgroundColor};">
-                      <div class="text-4xl">📍</div>
-                      <div>
-                        <h4 class="font-bold mb-2" style="font-size: ${
-                          baseSize * 1.125
-                        }px; color: ${textColor};">Alamat</h4>
-                        <p style="font-size: ${baseSize}px; color: ${textColor}; opacity: 0.8;">${getConfig(
-          "contact_address"
-        )}</p>
-                      </div>
-                    </div>
-                    <div class="flex items-start gap-4 p-6 rounded-2xl" style="background-color: ${backgroundColor};">
-                      <div class="text-4xl">📞</div>
-                      <div>
-                        <h4 class="font-bold mb-2" style="font-size: ${
-                          baseSize * 1.125
-                        }px; color: ${textColor};">Telepon</h4>
-                        <p style="font-size: ${baseSize}px; color: ${textColor}; opacity: 0.8;">${getConfig(
-          "contact_phone"
-        )}</p>
-                      </div>
-                    </div>
-                    <div class="flex items-start gap-4 p-6 rounded-2xl" style="background-color: ${backgroundColor};">
-                      <div class="text-4xl">📧</div>
-                      <div>
-                        <h4 class="font-bold mb-2" style="font-size: ${
-                          baseSize * 1.125
-                        }px; color: ${textColor};">Email</h4>
-                        <p style="font-size: ${baseSize}px; color: ${textColor}; opacity: 0.8;">${getConfig(
-          "contact_email"
-        )}</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Social Media -->
-                  ${
-                    socials.length > 0
-                      ? `
-                    <div class="p-6 rounded-2xl" style="background-color: ${backgroundColor};">
-                      <h4 class="font-bold mb-4 text-center" style="font-size: ${
-                        baseSize * 1.25
-                      }px; color: ${textColor};">
-                        Follow Us
-                      </h4>
-                      <div class="flex justify-center gap-4">
-                        ${socials
-                          .map((social) => {
-                            const icons = {
-                              instagram: "📷",
-                              whatsapp: "💬",
-                              tiktok: "🎵",
-                              facebook: "📘",
-                              twitter: "🐦",
-                            };
-                            const icon =
-                              icons[social.category?.toLowerCase()] || "🔗";
-                            return `
-                            <a href="${social.socialLink}" target="_blank" rel="noopener noreferrer" 
-                               class="social-icon w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-lg"
-                               style="background-color: ${primaryAction}; color: white;">
-                              ${icon}
-                            </a>
-                          `;
-                          })
-                          .join("")}
-                      </div>
-                    </div>
-                  `
-                      : ""
-                  }
-                </div>
-
-                <!-- Contact Form -->
-                <div class="scroll-reveal">
-                  <form id="contactForm" class="space-y-4">
-                    <div>
-                      <label class="block mb-2 font-semibold" style="font-size: ${baseSize}px; color: ${textColor};">Nama</label>
-                      <input type="text" id="contactName" required
-                        class="w-full px-4 py-3 rounded-xl border-2 focus:outline-none transition-all"
-                        style="border-color: ${primaryAction}; font-size: ${baseSize}px;"
-                        placeholder="Nama Anda">
-                    </div>
-                    <div>
-                      <label class="block mb-2 font-semibold" style="font-size: ${baseSize}px; color: ${textColor};">Email</label>
-                      <input type="email" id="contactEmail" required
-                        class="w-full px-4 py-3 rounded-xl border-2 focus:outline-none transition-all"
-                        style="border-color: ${primaryAction}; font-size: ${baseSize}px;"
-                        placeholder="email@example.com">
-                    </div>
-                    <div>
-                      <label class="block mb-2 font-semibold" style="font-size: ${baseSize}px; color: ${textColor};">No. HP</label>
-                      <input type="tel" id="contactPhone" required
-                        class="w-full px-4 py-3 rounded-xl border-2 focus:outline-none transition-all"
-                        style="border-color: ${primaryAction}; font-size: ${baseSize}px;"
-                        placeholder="+62 812-3456-7890">
-                    </div>
-                    <div>
-                      <label class="block mb-2 font-semibold" style="font-size: ${baseSize}px; color: ${textColor};">Pesan</label>
-                      <textarea id="contactMessage" rows="5" required
-                        class="w-full px-4 py-3 rounded-xl border-2 focus:outline-none transition-all"
-                        style="border-color: ${primaryAction}; font-size: ${baseSize}px;"
-                        placeholder="Tulis pesan Anda..."></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary w-full py-4 rounded-xl text-white font-bold"
-                      style="background-color: ${primaryAction}; font-size: ${
-          baseSize * 1.125
-        }px;">
-                      Kirim Pesan 📤
-                    </button>
-                  </form>
-                </div>
-              </div>
-
-              <!-- Map Placeholder -->
-              <div class="mt-12 scroll-reveal">
-                <div class="h-64 rounded-3xl overflow-hidden flex items-center justify-center text-6xl" 
-                  style="background: linear-gradient(135deg, ${primaryAction}20, ${secondaryAction}20);">
-                  🗺️ Google Maps
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Newsletter Section -->
-          <section class="w-full py-16" style="background: linear-gradient(135deg, ${primaryAction} 0%, ${secondaryAction} 100%);">
-            <div class="max-w-4xl mx-auto px-6 text-center">
-              <div class="scroll-reveal">
-                <h3 class="font-bold text-white mb-4" style="font-size: ${
-                  baseSize * 2
-                }px;">
-                  Subscribe Newsletter
-                </h3>
-                <p class="text-white mb-8" style="font-size: ${
-                  baseSize * 1.125
-                }px; opacity: 0.95;">
-                  Dapatkan info promo dan menu terbaru langsung ke email Anda
-                </p>
-                <form id="newsletterForm" class="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
-                  <input type="email" id="newsletterEmail" required
-                    class="flex-1 px-6 py-4 rounded-full focus:outline-none"
-                    style="font-size: ${baseSize}px;"
-                    placeholder="Email Anda">
-                  <button type="submit" class="btn-primary px-8 py-4 rounded-full font-bold whitespace-nowrap"
-                    style="background-color: ${surfaceColor}; color: ${primaryAction}; font-size: ${baseSize}px;">
-                    Subscribe 📧
-                  </button>
-                </form>
-              </div>
-            </div>
-          </section>
-
-          <!-- Footer -->
-          <footer class="w-full py-8 text-center" style="background-color: ${surfaceColor}; color: ${textColor};">
-            <p style="font-size: ${baseSize}px;">${getConfig("footer_text")}</p>
-          </footer>
-
-
-        </div>
-      `;
-
-        setupEventListeners();
-        initScrollReveal();
-        if (testimonials.length > 1) {
-          initCarousel();
-        }
+      function closeLightbox() {
+        document.getElementById("lightbox").classList.remove("active");
       }
 
-      function setupEventListeners() {
-        const contactForm = document.getElementById("contactForm");
-        const newsletterForm = document.getElementById("newsletterForm");
-
-        const filterButtons = document.querySelectorAll(".filter-btn");
-        filterButtons.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            currentFilter = btn.dataset.category;
-            renderWebsite();
-          });
+      // Mobile menu
+      document
+        .getElementById("mobile-menu-btn")
+        .addEventListener("click", () => {
+          document.getElementById("mobile-menu").classList.add("active");
         });
 
-        const orderButtons = document.querySelectorAll(".order-btn");
-        orderButtons.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const menuName = btn.dataset.menu;
-            const whatsappSocial = sampleSocials.find(
-              (item) => item.category === "whatsapp"
-            );
-
-            if (whatsappSocial) {
-              const message = `Halo, saya ingin memesan ${menuName}`;
-              const url = `${
-                whatsappSocial.socialLink
-              }?text=${encodeURIComponent(message)}`;
-              window.open(url, "_blank", "noopener,noreferrer");
-            } else {
-              showToast("Silakan hubungi kami untuk memesan", "info");
-            }
-          });
+      document
+        .getElementById("close-menu-btn")
+        .addEventListener("click", () => {
+          document.getElementById("mobile-menu").classList.remove("active");
         });
 
-        contactForm.addEventListener("submit", (e) => {
+      document.querySelectorAll(".mobile-nav-link").forEach((link) => {
+        link.addEventListener("click", () => {
+          document.getElementById("mobile-menu").classList.remove("active");
+        });
+      });
+
+      // Smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
           e.preventDefault();
-
-          const name = document.getElementById("contactName").value;
-          const email = document.getElementById("contactEmail").value;
-          const phone = document.getElementById("contactPhone").value;
-          const message = document.getElementById("contactMessage").value;
-
-          // Redirect to WhatsApp with the message
-          const whatsappSocial = sampleSocials.find(
-            (item) => item.category === "whatsapp"
-          );
-          if (whatsappSocial) {
-            const whatsappMessage = `Halo, saya ${name}.\nEmail: ${email}\nNo HP: ${phone}\n\nPesan: ${message}`;
-            const url = `${whatsappSocial.socialLink}?text=${encodeURIComponent(
-              whatsappMessage
-            )}`;
-            window.open(url, "_blank", "noopener,noreferrer");
-            showToast("Mengarahkan ke WhatsApp... 💬", "success");
-            contactForm.reset();
-          } else {
-            showToast("Pesan berhasil dikirim! 🎉", "success");
-            contactForm.reset();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
           }
         });
+      });
 
-        newsletterForm.addEventListener("submit", (e) => {
-          e.preventDefault();
-
-          showToast("Terima kasih sudah subscribe! 📧", "success");
-          newsletterForm.reset();
-        });
+      function scrollToSection(selector) {
+        const target = document.querySelector(selector);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
       }
 
-      function initScrollReveal() {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("revealed");
-              }
-            });
-          },
-          { threshold: 0.1 }
-        );
+      // Navbar scroll effect
+      window.addEventListener("scroll", () => {
+        const navbar = document.getElementById("navbar");
+        if (window.scrollY > 50) {
+          navbar.style.backgroundColor = defaultConfig.surface_color;
+          navbar.style.boxShadow = "0 2px 10px rgba(0,0,0,0.1)";
+        } else {
+          navbar.style.backgroundColor = "transparent";
+          navbar.style.boxShadow = "none";
+        }
+      });
 
-        document.querySelectorAll(".scroll-reveal").forEach((el) => {
-          observer.observe(el);
-        });
+      // Product rendering
+      function renderFeaturedProducts() {
+        const container = document.getElementById("featured-products");
+        const featured = allProducts.slice(0, 6);
+
+        container.innerHTML = featured
+          .map(
+            (product) => `
+        <div class="product-card rounded-xl overflow-hidden shadow-lg cursor-pointer" onclick="openProductDetail(${
+          product.id
+        })">
+          <div class="relative aspect-[3/4] overflow-hidden">
+            <img src="${product.image}" alt="${
+              product.name
+            }" class="w-full h-full object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.parentElement.innerHTML='<div class=\'w-full h-full bg-gray-200 flex items-center justify-center\'><span class=\'text-gray-400\'>No Image</span></div>';">
+            ${
+              product.badge
+                ? `<span class="badge" style="background: ${
+                    defaultConfig.primary_action_color
+                  }; color: white;">${
+                    product.badge === "new" ? "BARU" : "BEST SELLER"
+                  }</span>`
+                : ""
+            }
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-lg mb-2">${product.name}</h3>
+            <p class="text-xl font-bold" style="color: ${
+              defaultConfig.primary_action_color
+            };">Rp ${product.price.toLocaleString("id-ID")}</p>
+          </div>
+        </div>
+      `
+          )
+          .join("");
       }
 
-      function initCarousel() {
-        const track = document.getElementById("testimonialTrack");
-        const prevBtn = document.getElementById("prevBtn");
-        const nextBtn = document.getElementById("nextBtn");
+      function renderCatalogProducts() {
+        const container = document.getElementById("catalog-products");
+        const start = (currentPage - 1) * productsPerPage;
+        const end = start + productsPerPage;
+        const pageProducts = filteredProducts.slice(start, end);
 
-        if (!track || !prevBtn || !nextBtn) return;
+        container.innerHTML = pageProducts
+          .map(
+            (product) => `
+        <div class="product-card rounded-xl overflow-hidden shadow-lg cursor-pointer" onclick="openProductDetail(${
+          product.id
+        })">
+          <div class="relative aspect-[3/4] overflow-hidden">
+            <img src="${product.image}" alt="${
+              product.name
+            }" class="w-full h-full object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.parentElement.innerHTML='<div class=\'w-full h-full bg-gray-200 flex items-center justify-center\'><span class=\'text-gray-400\'>No Image</span></div>';">
+            ${
+              product.badge
+                ? `<span class="badge" style="background: ${
+                    defaultConfig.primary_action_color
+                  }; color: white;">${
+                    product.badge === "new" ? "BARU" : "BEST SELLER"
+                  }</span>`
+                : ""
+            }
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-lg mb-2">${product.name}</h3>
+            <p class="text-sm text-opacity-70 mb-2 capitalize">${
+              product.category
+            }</p>
+            <p class="text-xl font-bold mb-3" style="color: ${
+              defaultConfig.primary_action_color
+            };">Rp ${product.price.toLocaleString("id-ID")}</p>
+            <button class="w-full py-2 rounded-lg font-semibold transition-colors" style="background: ${
+              defaultConfig.secondary_action_color
+            }; color: white;" onclick="event.stopPropagation(); contactWhatsApp('${
+              product.name
+            }')">Quick Order</button>
+          </div>
+        </div>
+      `
+          )
+          .join("");
 
-        function updateCarousel() {
-          track.style.transform = `translateX(-${
-            currentTestimonialIndex * 100
-          }%)`;
+        document.getElementById("product-count").textContent =
+          filteredProducts.length;
+        renderPagination();
+      }
+
+      function renderPagination() {
+        const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+        const pagination = document.getElementById("pagination");
+
+        if (totalPages <= 1) {
+          pagination.innerHTML = "";
+          return;
         }
 
-        prevBtn.addEventListener("click", () => {
-          currentTestimonialIndex =
-            (currentTestimonialIndex - 1 + sampleTestimonials.length) %
-            sampleTestimonials.length;
-          updateCarousel();
+        let html = "";
+
+        if (currentPage > 1) {
+          html += `<button onclick="changePage(${
+            currentPage - 1
+          })" class="px-4 py-2 rounded-lg font-semibold transition-colors" style="background: ${
+            defaultConfig.surface_color
+          }; border: 2px solid ${defaultConfig.primary_action_color}; color: ${
+            defaultConfig.primary_action_color
+          };">‹</button>`;
+        }
+
+        for (let i = 1; i <= totalPages; i++) {
+          if (i === currentPage) {
+            html += `<button class="px-4 py-2 rounded-lg font-semibold" style="background: ${defaultConfig.primary_action_color}; color: white;">${i}</button>`;
+          } else {
+            html += `<button onclick="changePage(${i})" class="px-4 py-2 rounded-lg font-semibold transition-colors" style="background: ${defaultConfig.surface_color}; border: 2px solid ${defaultConfig.primary_action_color}; color: ${defaultConfig.primary_action_color};">${i}</button>`;
+          }
+        }
+
+        if (currentPage < totalPages) {
+          html += `<button onclick="changePage(${
+            currentPage + 1
+          })" class="px-4 py-2 rounded-lg font-semibold transition-colors" style="background: ${
+            defaultConfig.surface_color
+          }; border: 2px solid ${defaultConfig.primary_action_color}; color: ${
+            defaultConfig.primary_action_color
+          };">›</button>`;
+        }
+
+        pagination.innerHTML = html;
+      }
+
+      function changePage(page) {
+        currentPage = page;
+        renderCatalogProducts();
+        scrollToSection("#catalog");
+      }
+
+      // Filters
+      function applyFilters() {
+        const categories = Array.from(
+          document.querySelectorAll(".category-filter:checked")
+        ).map((cb) => cb.value);
+        const sizes = Array.from(
+          document.querySelectorAll(".size-filter:checked")
+        ).map((cb) => cb.value);
+        const priceRange = document.querySelector(
+          ".price-filter:checked"
+        )?.value;
+
+        filteredProducts = allProducts.filter((product) => {
+          const categoryMatch =
+            categories.length === 0 || categories.includes(product.category);
+          const sizeMatch =
+            sizes.length === 0 ||
+            sizes.some((size) => product.sizes.includes(size));
+
+          let priceMatch = true;
+          if (priceRange) {
+            const [min, max] = priceRange.split("-").map(Number);
+            priceMatch = product.price >= min && product.price <= max;
+          }
+
+          return categoryMatch && sizeMatch && priceMatch;
         });
 
-        nextBtn.addEventListener("click", () => {
-          currentTestimonialIndex =
-            (currentTestimonialIndex + 1) % sampleTestimonials.length;
-          updateCarousel();
+        currentPage = 1;
+        renderCatalogProducts();
+      }
+
+      function resetFilters() {
+        document
+          .querySelectorAll(".category-filter, .size-filter, .price-filter")
+          .forEach((cb) => (cb.checked = false));
+        filteredProducts = [...allProducts];
+        currentPage = 1;
+        renderCatalogProducts();
+      }
+
+      document
+        .querySelectorAll(".category-filter, .size-filter, .price-filter")
+        .forEach((filter) => {
+          filter.addEventListener("change", applyFilters);
         });
 
-        setInterval(() => {
-          currentTestimonialIndex =
-            (currentTestimonialIndex + 1) % sampleTestimonials.length;
-          updateCarousel();
+      // Sort
+      document.getElementById("sort-select").addEventListener("change", (e) => {
+        const sortBy = e.target.value;
+
+        switch (sortBy) {
+          case "newest":
+            filteredProducts.sort((a, b) => b.id - a.id);
+            break;
+          case "price-low":
+            filteredProducts.sort((a, b) => a.price - b.price);
+            break;
+          case "price-high":
+            filteredProducts.sort((a, b) => b.price - a.price);
+            break;
+          case "popular":
+          default:
+            filteredProducts.sort((a, b) => {
+              const aScore = a.badge === "best" ? 2 : a.badge === "new" ? 1 : 0;
+              const bScore = b.badge === "best" ? 2 : b.badge === "new" ? 1 : 0;
+              return bScore - aScore;
+            });
+        }
+
+        currentPage = 1;
+        renderCatalogProducts();
+      });
+
+      // Contact form
+      function handleContactSubmit(e) {
+        e.preventDefault();
+        const formMessage = document.getElementById("form-message");
+        formMessage.textContent =
+          "Terima kasih! Pesan Anda telah terkirim. Kami akan segera menghubungi Anda.";
+        formMessage.style.background = defaultConfig.primary_action_color;
+        formMessage.style.color = "white";
+        formMessage.classList.remove("hidden");
+        e.target.reset();
+
+        setTimeout(() => {
+          formMessage.classList.add("hidden");
         }, 5000);
       }
 
-      function showToast(message, type = "success") {
-        const colors = {
-          success: getConfig("secondary_action"),
-          error: "#ef4444",
-          info: getConfig("primary_action"),
-        };
-
-        const toast = document.createElement("div");
-        toast.className = "toast";
-        toast.textContent = message;
-        toast.style.backgroundColor = colors[type];
-        document.body.appendChild(toast);
+      // Newsletter
+      function handleNewsletterSubmit(e) {
+        e.preventDefault();
+        const email = e.target.querySelector('input[type="email"]').value;
+        const message = document.createElement("div");
+        message.textContent = "Terima kasih telah berlangganan!";
+        message.style.cssText = `position: fixed; bottom: 20px; right: 20px; background: ${defaultConfig.primary_action_color}; color: white; padding: 16px 24px; border-radius: 8px; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.2);`;
+        document.body.appendChild(message);
+        e.target.reset();
 
         setTimeout(() => {
-          toast.remove();
+          message.remove();
         }, 3000);
       }
 
-      function init() {
-        // Initial render
-        renderWebsite();
-
-        if (window.elementSdk) {
-          window.elementSdk.init({
-            defaultConfig,
-            onConfigChange,
-            mapToCapabilities: (config) => ({
-              recolorables: [
-                {
-                  get: () =>
-                    config.background_color || defaultConfig.background_color,
-                  set: (value) => {
-                    config.background_color = value;
-                    window.elementSdk.setConfig({ background_color: value });
-                  },
-                },
-                {
-                  get: () =>
-                    config.surface_color || defaultConfig.surface_color,
-                  set: (value) => {
-                    config.surface_color = value;
-                    window.elementSdk.setConfig({ surface_color: value });
-                  },
-                },
-                {
-                  get: () => config.text_color || defaultConfig.text_color,
-                  set: (value) => {
-                    config.text_color = value;
-                    window.elementSdk.setConfig({ text_color: value });
-                  },
-                },
-                {
-                  get: () =>
-                    config.primary_action || defaultConfig.primary_action,
-                  set: (value) => {
-                    config.primary_action = value;
-                    window.elementSdk.setConfig({ primary_action: value });
-                  },
-                },
-                {
-                  get: () =>
-                    config.secondary_action || defaultConfig.secondary_action,
-                  set: (value) => {
-                    config.secondary_action = value;
-                    window.elementSdk.setConfig({ secondary_action: value });
-                  },
-                },
-              ],
-              borderables: [],
-              fontEditable: {
-                get: () => config.font_family || defaultConfig.font_family,
-                set: (value) => {
-                  config.font_family = value;
-                  window.elementSdk.setConfig({ font_family: value });
-                },
-              },
-              fontSizeable: {
-                get: () => config.font_size || defaultConfig.font_size,
-                set: (value) => {
-                  config.font_size = value;
-                  window.elementSdk.setConfig({ font_size: value });
-                },
-              },
-            }),
-            mapToEditPanelValues: (config) =>
-              new Map([
-                ["hero_title", config.hero_title || defaultConfig.hero_title],
-                [
-                  "hero_subtitle",
-                  config.hero_subtitle || defaultConfig.hero_subtitle,
-                ],
-                ["hero_cta", config.hero_cta || defaultConfig.hero_cta],
-                [
-                  "about_title",
-                  config.about_title || defaultConfig.about_title,
-                ],
-                [
-                  "about_description",
-                  config.about_description || defaultConfig.about_description,
-                ],
-                [
-                  "about_vision",
-                  config.about_vision || defaultConfig.about_vision,
-                ],
-                [
-                  "portfolio_title",
-                  config.portfolio_title || defaultConfig.portfolio_title,
-                ],
-                [
-                  "portfolio_subtitle",
-                  config.portfolio_subtitle || defaultConfig.portfolio_subtitle,
-                ],
-                [
-                  "services_title",
-                  config.services_title || defaultConfig.services_title,
-                ],
-                [
-                  "services_subtitle",
-                  config.services_subtitle || defaultConfig.services_subtitle,
-                ],
-                [
-                  "testimonials_title",
-                  config.testimonials_title || defaultConfig.testimonials_title,
-                ],
-                [
-                  "contact_title",
-                  config.contact_title || defaultConfig.contact_title,
-                ],
-                [
-                  "contact_subtitle",
-                  config.contact_subtitle || defaultConfig.contact_subtitle,
-                ],
-                [
-                  "contact_address",
-                  config.contact_address || defaultConfig.contact_address,
-                ],
-                [
-                  "contact_phone",
-                  config.contact_phone || defaultConfig.contact_phone,
-                ],
-                [
-                  "contact_email",
-                  config.contact_email || defaultConfig.contact_email,
-                ],
-                [
-                  "footer_text",
-                  config.footer_text || defaultConfig.footer_text,
-                ],
-              ]),
-          });
-        }
+      // WhatsApp contact
+      function contactWhatsApp(productName = "") {
+        const config = window.elementSdk
+          ? window.elementSdk.config
+          : defaultConfig;
+        const phone = config.whatsapp_number || defaultConfig.whatsapp_number;
+        const cleanPhone = phone.replace(/\D/g, "");
+        const message = productName
+          ? `Halo, saya tertarik dengan produk ${productName}`
+          : "Halo, saya ingin bertanya tentang produk Anda";
+        const url = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(
+          message
+        )}`;
+        window.open(url, "_blank", "noopener,noreferrer");
       }
 
-      init();
+      function openProductDetail(productId) {
+        const product = allProducts.find((p) => p.id === productId);
+        if (!product) return;
+
+        // Add JSON-LD structured data for product
+        const productSchema = {
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: product.name,
+          image: product.image,
+          description: product.desc_long || product.desc_short,
+          sku: product.sku,
+          brand: {
+            "@type": "Brand",
+            name: "Fashion Store",
+          },
+          offers: {
+            "@type": "Offer",
+            price: product.price,
+            priceCurrency: "IDR",
+            availability:
+              product.stock > 0
+                ? "https://schema.org/InStock"
+                : "https://schema.org/OutOfStock",
+            itemCondition: "https://schema.org/NewCondition",
+          },
+        };
+
+        // Create or update JSON-LD script tag
+        let existingScript = document.getElementById("product-schema");
+        if (!existingScript) {
+          existingScript = document.createElement("script");
+          existingScript.id = "product-schema";
+          existingScript.type = "application/ld+json";
+          document.head.appendChild(existingScript);
+        }
+        existingScript.textContent = JSON.stringify(productSchema);
+
+        const detailHtml = `
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onclick="closeProductDetail(event)">
+          <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90%] overflow-y-auto" onclick="event.stopPropagation()">
+            <div class="p-6">
+              <div class="flex justify-between items-start mb-6">
+                <h2 class="text-3xl font-bold">${product.name}</h2>
+                <button onclick="closeProductDetail()" class="text-3xl">&times;</button>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <img src="${product.image}" alt="${
+          product.name
+        }" class="w-full rounded-xl cursor-pointer" onclick="openLightbox('${
+          product.image
+        }')" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                </div>
+                <div>
+                  <p class="text-3xl font-bold mb-4" style="color: ${
+                    defaultConfig.primary_action_color
+                  };">Rp ${product.price.toLocaleString("id-ID")}</p>
+                  <div class="mb-4">
+                    <p class="font-semibold mb-2">Kategori:</p>
+                    <span class="px-4 py-2 rounded-full capitalize" style="background: ${
+                      defaultConfig.primary_action_color
+                    }20; color: ${defaultConfig.primary_action_color};">${
+          product.category
+        }</span>
+                  </div>
+                  <div class="mb-4">
+                    <p class="font-semibold mb-2">SKU: ${product.sku}</p>
+                    <p class="text-opacity-80">Stok: ${product.stock} pcs</p>
+                  </div>
+                  <div class="mb-4">
+                    <p class="font-semibold mb-2">Ukuran Tersedia:</p>
+                    <div class="flex gap-2 flex-wrap">
+                      ${product.sizes
+                        .map(
+                          (size) =>
+                            `<span class="px-4 py-2 rounded-lg border-2" style="border-color: ${defaultConfig.primary_action_color};">${size}</span>`
+                        )
+                        .join("")}
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <p class="font-semibold mb-2">Warna Tersedia:</p>
+                    <div class="flex gap-2 flex-wrap">
+                      ${
+                        product.colors
+                          ? product.colors
+                              .map(
+                                (color) =>
+                                  `<span class="px-3 py-1 rounded-full text-sm" style="background: ${defaultConfig.primary_action_color}20; color: ${defaultConfig.primary_action_color};">${color}</span>`
+                              )
+                              .join("")
+                          : ""
+                      }
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <p class="font-semibold mb-2">Deskripsi Singkat:</p>
+                    <p class="text-opacity-80">${
+                      product.desc_short ||
+                      "Produk fashion lokal berkualitas premium."
+                    }</p>
+                  </div>
+                  <div class="mb-6">
+                    <p class="font-semibold mb-2">Detail Produk:</p>
+                    <p class="text-opacity-80">${
+                      product.desc_long ||
+                      "Produk fashion berkualitas premium dengan desain trendy dan bahan pilihan. Nyaman dipakai untuk berbagai kesempatan."
+                    }</p>
+                  </div>
+                  <button onclick="contactWhatsApp('${
+                    product.name
+                  }')" class="w-full py-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105" style="background: ${
+          defaultConfig.primary_action_color
+        }; color: white;">Pesan via WhatsApp</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+        const detailDiv = document.createElement("div");
+        detailDiv.id = "product-detail";
+        detailDiv.innerHTML = detailHtml;
+        document.body.appendChild(detailDiv);
+      }
+
+      function closeProductDetail(event) {
+        if (event && event.target !== event.currentTarget) return;
+        const detailDiv = document.getElementById("product-detail");
+        if (detailDiv) detailDiv.remove();
+      }
+
+      // Config handling
+      async function onConfigChange(config) {
+        const baseFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack = "system-ui, -apple-system, sans-serif";
+        const fontSize = config.font_size || defaultConfig.font_size;
+
+        // Apply colors
+        document.body.style.background =
+          config.background_color || defaultConfig.background_color;
+        document.body.style.color =
+          config.text_color || defaultConfig.text_color;
+
+        // Apply fonts
+        document.body.style.fontFamily = `${baseFont}, ${baseFontStack}`;
+        document.body.style.fontSize = `${fontSize}px`;
+
+        // Update navbar
+        const navbar = document.getElementById("navbar");
+        navbar.style.color = config.text_color || defaultConfig.text_color;
+
+        // Update mobile menu
+        const mobileMenu = document.getElementById("mobile-menu");
+        mobileMenu.style.background =
+          config.surface_color || defaultConfig.surface_color;
+        mobileMenu.style.color = config.text_color || defaultConfig.text_color;
+
+        // Update all surfaces
+        document
+          .querySelectorAll(
+            ".rounded-2xl.p-6, .rounded-2xl.p-8, .rounded-xl.p-8, .product-card"
+          )
+          .forEach((el) => {
+            el.style.background =
+              config.surface_color || defaultConfig.surface_color;
+          });
+
+        // Update buttons
+        document.querySelectorAll("button").forEach((btn) => {
+          if (
+            !btn.classList.contains("slider-dot") &&
+            !btn.id.includes("menu")
+          ) {
+            btn.style.background =
+              config.primary_action_color || defaultConfig.primary_action_color;
+            btn.style.color =
+              config.surface_color || defaultConfig.surface_color;
+          }
+        });
+
+        // Update CTA button in hero
+        const heroCta = document.getElementById("hero-cta");
+        heroCta.style.background =
+          config.primary_action_color || defaultConfig.primary_action_color;
+        heroCta.style.color =
+          config.surface_color || defaultConfig.surface_color;
+
+        // Update step numbers
+        document.querySelectorAll(".w-16.h-16.rounded-full").forEach((el) => {
+          el.style.background =
+            config.primary_action_color || defaultConfig.primary_action_color;
+          el.style.color = config.surface_color || defaultConfig.surface_color;
+        });
+
+        // Update editable text
+        document.getElementById("brand-logo").textContent =
+          config.brand_name || defaultConfig.brand_name;
+        document.getElementById("hero-title").textContent =
+          config.hero_title || defaultConfig.hero_title;
+        document.getElementById("hero-subtitle").textContent =
+          config.hero_subtitle || defaultConfig.hero_subtitle;
+        document.getElementById("hero-cta").textContent =
+          config.cta_button || defaultConfig.cta_button;
+        document.getElementById("contact-whatsapp").textContent =
+          config.whatsapp_number || defaultConfig.whatsapp_number;
+        document.getElementById("contact-address").textContent =
+          config.store_address || defaultConfig.store_address;
+        document.getElementById("contact-hours").textContent =
+          config.store_hours || defaultConfig.store_hours;
+        document.getElementById("footer-brand").textContent =
+          config.brand_name || defaultConfig.brand_name;
+        document.getElementById("footer-whatsapp").textContent = `WhatsApp: ${
+          config.whatsapp_number || defaultConfig.whatsapp_number
+        }`;
+        document.getElementById("footer-address").textContent =
+          config.store_address || defaultConfig.store_address;
+        document.getElementById("footer-hours").textContent =
+          config.store_hours || defaultConfig.store_hours;
+
+        // Re-render products with new colors
+        renderFeaturedProducts();
+        renderCatalogProducts();
+      }
+
+      function mapToCapabilities(config) {
+        return {
+          recolorables: [
+            {
+              get: () =>
+                config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              },
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                config.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              },
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              },
+            },
+            {
+              get: () =>
+                config.primary_action_color ||
+                defaultConfig.primary_action_color,
+              set: (value) => {
+                config.primary_action_color = value;
+                window.elementSdk.setConfig({ primary_action_color: value });
+              },
+            },
+            {
+              get: () =>
+                config.secondary_action_color ||
+                defaultConfig.secondary_action_color,
+              set: (value) => {
+                config.secondary_action_color = value;
+                window.elementSdk.setConfig({ secondary_action_color: value });
+              },
+            },
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            },
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            },
+          },
+        };
+      }
+
+      function mapToEditPanelValues(config) {
+        return new Map([
+          ["brand_name", config.brand_name || defaultConfig.brand_name],
+          ["tagline", config.tagline || defaultConfig.tagline],
+          ["hero_title", config.hero_title || defaultConfig.hero_title],
+          [
+            "hero_subtitle",
+            config.hero_subtitle || defaultConfig.hero_subtitle,
+          ],
+          ["cta_button", config.cta_button || defaultConfig.cta_button],
+          [
+            "whatsapp_number",
+            config.whatsapp_number || defaultConfig.whatsapp_number,
+          ],
+          [
+            "store_address",
+            config.store_address || defaultConfig.store_address,
+          ],
+          ["store_hours", config.store_hours || defaultConfig.store_hours],
+        ]);
+      }
+
+      // Initialize
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities,
+          mapToEditPanelValues,
+        });
+      }
+
+      // Initial render
+      renderFeaturedProducts();
+      renderCatalogProducts();
+      onConfigChange(defaultConfig);
     </script>
     <script>
       (function () {
@@ -1524,7 +1957,7 @@
           if (b) {
             var d = b.createElement("script");
             d.innerHTML =
-              "window.__CF$cv$params={r:'9a63f83dc6da6bbb',t:'MTc2NDQzODg2MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+              "window.__CF$cv$params={r:'9a69ae5c03e1ef6e',t:'MTc2NDQ5ODc0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
             b.getElementsByTagName("head")[0].appendChild(d);
           }
         }
