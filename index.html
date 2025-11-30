@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UMKM Aditya Store</title>
+    <title>ILUZEearDev - Jasa Pembuatan Landing Page Profesional</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/_sdk/element_sdk.js"></script>
     <style>
@@ -11,137 +11,611 @@
         box-sizing: border-box;
       }
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      html,
-      body {
-        height: 100%;
-      }
-
-      .page {
-        display: none;
-        animation: fadeIn 0.3s ease-in;
-      }
-
-      .page.active {
-        display: block;
-      }
-
-      @keyframes fadeIn {
+      @keyframes fadeInUp {
         from {
           opacity: 0;
+          transform: translateY(30px);
         }
         to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(99, 102, 241, 0.8);
+        }
+      }
+
+      @keyframes slide-in-left {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slide-in-right {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes scale-in {
+        from {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes rotate-in {
+        from {
+          opacity: 0;
+          transform: rotate(-10deg) scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: rotate(0) scale(1);
+        }
+      }
+
+      .animate-fade-in-up {
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+
+      .animate-float {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .animate-pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+
+      .animate-slide-in-left {
+        animation: slide-in-left 0.8s ease-out forwards;
+      }
+
+      .animate-slide-in-right {
+        animation: slide-in-right 0.8s ease-out forwards;
+      }
+
+      .animate-scale-in {
+        animation: scale-in 0.6s ease-out forwards;
+      }
+
+      .animate-rotate-in {
+        animation: rotate-in 0.7s ease-out forwards;
+      }
+
+      .delay-100 {
+        animation-delay: 0.1s;
+      }
+      .delay-200 {
+        animation-delay: 0.2s;
+      }
+      .delay-300 {
+        animation-delay: 0.3s;
+      }
+      .delay-400 {
+        animation-delay: 0.4s;
+      }
+      .delay-500 {
+        animation-delay: 0.5s;
+      }
+      .delay-600 {
+        animation-delay: 0.6s;
+      }
+
+      .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .card-hover {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .card-hover:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-hover {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-hover::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+
+      .btn-hover:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      .btn-hover:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .image-hover {
+        transition: all 0.5s ease;
+      }
+
+      .image-hover:hover {
+        transform: scale(1.1) rotate(2deg);
+      }
+
+      .parallax-bg {
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .glow-on-hover {
+        transition: all 0.3s ease;
+      }
+
+      .glow-on-hover:hover {
+        box-shadow: 0 0 30px rgba(99, 102, 241, 0.6);
+      }
+
+      @keyframes shimmer {
+        0% {
+          background-position: -1000px 0;
+        }
+        100% {
+          background-position: 1000px 0;
+        }
+      }
+
+      .shimmer {
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        background-size: 1000px 100%;
+        animation: shimmer 3s infinite;
+      }
+
+      @keyframes slide-in-bottom {
+        from {
+          opacity: 0;
+          transform: translateY(100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes flip-in {
+        from {
+          opacity: 0;
+          transform: perspective(800px) rotateX(-90deg);
+        }
+        to {
+          opacity: 1;
+          transform: perspective(800px) rotateX(0);
+        }
+      }
+
+      @keyframes spiral-in {
+        from {
+          opacity: 0;
+          transform: rotate(-180deg) scale(0);
+        }
+        to {
+          opacity: 1;
+          transform: rotate(0) scale(1);
+        }
+      }
+
+      @keyframes bounce-drop {
+        0% {
+          opacity: 0;
+          transform: translateY(-500px);
+        }
+        60% {
+          opacity: 1;
+          transform: translateY(20px);
+        }
+        80% {
+          transform: translateY(-10px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes expand-in {
+        from {
+          opacity: 0;
+          transform: scale(0) rotate(180deg);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) rotate(0);
+        }
+      }
+
+      @keyframes swing-in {
+        0% {
+          opacity: 0;
+          transform: perspective(600px) rotateY(-90deg);
+        }
+        100% {
+          opacity: 1;
+          transform: perspective(600px) rotateY(0);
+        }
+      }
+
+      .animate-slide-in-bottom {
+        animation: slide-in-bottom 0.8s ease-out forwards;
+      }
+
+      .animate-flip-in {
+        animation: flip-in 0.8s ease-out forwards;
+      }
+
+      .animate-spiral-in {
+        animation: spiral-in 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+          forwards;
+      }
+
+      .animate-bounce-drop {
+        animation: bounce-drop 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+          forwards;
+      }
+
+      .animate-expand-in {
+        animation: expand-in 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+          forwards;
+      }
+
+      .animate-swing-in {
+        animation: swing-in 0.8s ease-out forwards;
+      }
+
+      @keyframes bounce-in {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
           opacity: 1;
         }
       }
 
-      .product-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        cursor: pointer;
+      @keyframes wiggle {
+        0%,
+        100% {
+          transform: rotate(0deg);
+        }
+        25% {
+          transform: rotate(1deg);
+        }
+        75% {
+          transform: rotate(-1deg);
+        }
       }
 
-      .product-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      @keyframes flip {
+        0% {
+          transform: perspective(400px) rotateY(0);
+        }
+        100% {
+          transform: perspective(400px) rotateY(360deg);
+        }
       }
 
-      .theme-toggle {
-        transition: all 0.3s ease;
+      @keyframes slide-up {
+        from {
+          transform: translateY(100px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
       }
 
-      /* Light theme */
-      body.light {
-        background-color: #ffffff;
-        color: #1f2937;
+      @keyframes zoom-in {
+        from {
+          transform: scale(0.5);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
       }
 
-      body.light .nav-bar {
-        background-color: #ffffff;
-        border-bottom: 1px solid #e5e7eb;
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        10%,
+        30%,
+        50%,
+        70%,
+        90% {
+          transform: translateX(-2px);
+        }
+        20%,
+        40%,
+        60%,
+        80% {
+          transform: translateX(2px);
+        }
       }
 
-      body.light .card-bg {
-        background-color: #f9fafb;
+      @keyframes glow-pulse {
+        0%,
+        100% {
+          box-shadow: 0 0 5px rgba(99, 102, 241, 0.5),
+            0 0 10px rgba(99, 102, 241, 0.3);
+        }
+        50% {
+          box-shadow: 0 0 20px rgba(99, 102, 241, 0.8),
+            0 0 30px rgba(99, 102, 241, 0.6), 0 0 40px rgba(99, 102, 241, 0.4);
+        }
       }
 
-      body.light .text-primary {
-        color: #1f2937;
+      @keyframes morph {
+        0%,
+        100% {
+          border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+        50% {
+          border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+        }
       }
 
-      body.light .text-secondary {
-        color: #6b7280;
+      @keyframes gradient-shift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
       }
 
-      body.light .border-color {
-        border-color: #e5e7eb;
+      @keyframes text-glow {
+        0%,
+        100% {
+          text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+        }
+        50% {
+          text-shadow: 0 0 20px rgba(99, 102, 241, 0.8),
+            0 0 30px rgba(99, 102, 241, 0.6);
+        }
       }
 
-      /* Dark theme */
-      body.dark {
-        background-color: #111827;
-        color: #f9fafb;
+      .animate-bounce-in {
+        animation: bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+          forwards;
       }
 
-      body.dark .nav-bar {
-        background-color: #1f2937;
-        border-bottom: 1px solid #374151;
+      .animate-wiggle {
+        animation: wiggle 1.5s ease-in-out;
       }
 
-      body.dark .card-bg {
-        background-color: #1f2937;
+      .animate-slide-up {
+        animation: slide-up 0.8s ease-out forwards;
       }
 
-      body.dark .text-primary {
-        color: #f9fafb;
+      .animate-zoom-in {
+        animation: zoom-in 0.6s ease-out forwards;
       }
 
-      body.dark .text-secondary {
-        color: #9ca3af;
+      .animate-glow-pulse {
+        animation: glow-pulse 2s ease-in-out infinite;
       }
 
-      body.dark .border-color {
-        border-color: #374151;
+      .animate-morph {
+        animation: morph 8s ease-in-out infinite;
       }
 
-      .btn-primary {
-        background-color: #10b981;
-        color: white;
-        transition: all 0.3s ease;
+      .animate-gradient-shift {
+        background-size: 200% 200%;
+        animation: gradient-shift 5s ease infinite;
       }
 
-      .btn-primary:hover {
-        background-color: #059669;
-        transform: translateY(-2px);
+      .animate-text-glow {
+        animation: text-glow 2s ease-in-out infinite;
       }
 
-      .admin-panel {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 100;
+      .hover-wiggle:hover {
+        animation: wiggle 1.5s ease-in-out;
       }
 
-      .admin-modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-        overflow-y: auto;
+      .hover-shake:hover {
+        animation: shake 1.5s ease-in-out;
       }
 
-      .admin-modal.active {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      .hover-flip:hover {
+        animation: flip 0.6s ease-in-out;
+      }
+
+      .hover-bounce:hover {
+        animation: bounce-in 0.5s ease;
+      }
+
+      @keyframes pulse-scale {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      @keyframes rainbow-glow {
+        0% {
+          box-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000;
+        }
+        16% {
+          box-shadow: 0 0 20px #ff7f00, 0 0 40px #ff7f00;
+        }
+        33% {
+          box-shadow: 0 0 20px #ffff00, 0 0 40px #ffff00;
+        }
+        50% {
+          box-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00;
+        }
+        66% {
+          box-shadow: 0 0 20px #0000ff, 0 0 40px #0000ff;
+        }
+        83% {
+          box-shadow: 0 0 20px #8b00ff, 0 0 40px #8b00ff;
+        }
+        100% {
+          box-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000;
+        }
+      }
+
+      @keyframes mega-pulse {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7);
+        }
+        50% {
+          transform: scale(1.08);
+          box-shadow: 0 0 30px 10px rgba(251, 191, 36, 0);
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(251, 191, 36, 0);
+        }
+      }
+
+      @keyframes sparkle {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1) rotate(0deg);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(1.2) rotate(180deg);
+        }
+      }
+
+      .btn-starter:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        animation: pulse-scale 1.5s ease infinite;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-basic:hover {
+        background: linear-gradient(45deg, #667eea, #764ba2, #667eea);
+        background-size: 200% 200%;
+        animation: gradient-shift 4s ease infinite;
+        transform: translateY(-3px) rotate(-2deg);
+        box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
+      }
+
+      .btn-standard:hover {
+        background: linear-gradient(
+          135deg,
+          #667eea 0%,
+          #764ba2 50%,
+          #667eea 100%
+        );
+        background-size: 200% 200%;
+        animation: gradient-shift 3.5s ease infinite, wiggle 0.8s ease;
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6),
+          0 0 20px rgba(118, 75, 162, 0.4);
+      }
+
+      .btn-professional:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        animation: shake 1s ease;
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5),
+          inset 0 0 20px rgba(255, 255, 255, 0.2);
+      }
+
+      .btn-business:hover {
+        background: radial-gradient(
+          circle,
+          #764ba2 0%,
+          #667eea 50%,
+          #764ba2 100%
+        );
+        background-size: 200% 200%;
+        animation: gradient-shift 4s ease infinite, pulse-scale 2s ease infinite;
+        transform: translateY(-4px) rotate(2deg);
+        box-shadow: 0 14px 40px rgba(118, 75, 162, 0.6);
+      }
+
+      .btn-enterprise:hover {
+        background: linear-gradient(135deg, #fbbf24, #f59e0b, #fbbf24, #f59e0b);
+        background-size: 300% 300%;
+        animation: gradient-shift 2.5s ease infinite,
+          mega-pulse 3s ease infinite, rainbow-glow 6s linear infinite;
+        transform: translateY(-8px) scale(1.1) rotate(0deg);
+        font-weight: 900;
+        letter-spacing: 1px;
       }
     </style>
     <style>
@@ -151,664 +625,978 @@
     </style>
     <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   </head>
-  <body class="light">
-    <!-- Navigation Bar -->
-    <nav class="nav-bar fixed top-0 w-full z-50 shadow-sm">
-      <div class="container mx-auto px-6 py-4">
-        <div class="flex justify-between items-center">
-          <h1
-            id="nav-store-name"
-            class="text-2xl font-bold text-primary cursor-pointer"
-            onclick="navigateTo('home')"
-          >
-            TokoAditya
-          </h1>
-          <div class="flex items-center gap-6">
+  <body class="w-full min-h-full">
+    <!-- Navbar -->
+    <nav class="w-full bg-white shadow-lg fixed top-0 left-0 right-0 z-50">
+      <div class="container-main mx-auto px-6">
+        <div class="flex items-center justify-between h-20">
+          <!-- Logo -->
+          <div class="flex items-center">
             <a
-              onclick="navigateTo('home')"
-              class="text-sm font-medium text-secondary hover:text-primary cursor-pointer"
+              href="#hero"
+              class="text-2xl font-bold gradient-text hover-wiggle"
+              >ILUZEear_Dev</a
+            >
+          </div>
+          <!-- Desktop Menu -->
+          <div class="hidden md:flex items-center space-x-8">
+            <a
+              href="#hero"
+              class="text-gray-700 hover:text-purple-600 transition-colors font-semibold"
               >Beranda</a
             >
             <a
-              onclick="navigateTo('products')"
-              class="text-sm font-medium text-secondary hover:text-primary cursor-pointer"
-              >Produk</a
+              href="#about"
+              class="text-gray-700 hover:text-purple-600 transition-colors font-semibold"
+              >Tentang</a
             >
             <a
-              onclick="navigateTo('contact')"
-              class="text-sm font-medium text-secondary hover:text-primary cursor-pointer"
-              >Kontak</a
+              href="#packages"
+              class="text-gray-700 hover:text-purple-600 transition-colors font-semibold"
+              >Paket</a
             >
             <a
-              onclick="navigateTo('testimonials')"
-              class="text-sm font-medium text-secondary hover:text-primary cursor-pointer"
+              href="#testimonials"
+              class="text-gray-700 hover:text-purple-600 transition-colors font-semibold"
               >Testimoni</a
             >
-            <button
-              onclick="toggleTheme()"
-              class="theme-toggle px-4 py-2 rounded-lg text-sm font-medium card-bg"
+            <a
+              href="#contact"
+              class="bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition-colors font-semibold"
+              >Hubungi</a
             >
-              <span id="theme-icon">🌙</span>
-            </button>
+          </div>
+          <!-- Mobile Hamburger Button -->
+          <button
+            id="mobile-menu-btn"
+            class="md:hidden text-gray-700 focus:outline-none hover-wiggle"
+          >
+            <svg
+              id="hamburger-icon"
+              class="w-8 h-8"
+              fill="none"
+              stroke="currentColor"
+              viewbox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+            <svg
+              id="close-icon"
+              class="w-8 h-8 hidden"
+              fill="none"
+              stroke="currentColor"
+              viewbox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden pb-6">
+          <div class="flex flex-col space-y-4">
+            <a
+              href="#hero"
+              class="text-gray-700 hover:text-purple-600 transition-colors font-semibold py-2 border-b border-gray-200"
+              >Beranda</a
+            >
+            <a
+              href="#about"
+              class="text-gray-700 hover:text-purple-600 transition-colors font-semibold py-2 border-b border-gray-200"
+              >Tentang</a
+            >
+            <a
+              href="#packages"
+              class="text-gray-700 hover:text-purple-600 transition-colors font-semibold py-2 border-b border-gray-200"
+              >Paket</a
+            >
+            <a
+              href="#testimonials"
+              class="text-gray-700 hover:text-purple-600 transition-colors font-semibold py-2 border-b border-gray-200"
+              >Testimoni</a
+            >
+            <a
+              href="#contact"
+              class="bg-purple-600 text-white px-6 py-3 rounded-full hover:bg-purple-700 transition-colors font-semibold text-center"
+              >Hubungi</a
+            >
           </div>
         </div>
       </div>
     </nav>
-    <!-- Home Page -->
-    <div id="home" class="page active" style="padding-top: 80px">
-      <!-- Banner Promo -->
-      <section class="card-bg py-20">
-        <div class="container mx-auto px-6 text-center">
-          <div
-            class="inline-block px-4 py-2 bg-red-500 text-white rounded-full text-sm font-bold mb-4"
+    <!-- Hero Section -->
+    <section
+      id="hero"
+      class="w-full min-h-full gradient-bg animate-gradient-shift flex items-center justify-center relative overflow-hidden pt-20"
+    >
+      <div class="absolute inset-0 opacity-10">
+        <div
+          class="absolute top-10 left-10 w-64 h-64 bg-white rounded-full blur-3xl animate-float animate-morph"
+        ></div>
+        <div
+          class="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl animate-float delay-300 animate-morph"
+        ></div>
+        <div
+          class="absolute top-1/2 left-1/4 w-48 h-48 bg-white rounded-full blur-2xl animate-float delay-500"
+        ></div>
+      </div>
+      <div class="container-main mx-auto px-6 py-20 relative z-10">
+        <div class="text-center">
+          <h1
+            id="hero-title"
+            class="text-5xl md:text-7xl font-bold text-white mb-6 animate-zoom-in animate-text-glow"
           >
-            PROMO SPESIAL
-          </div>
-          <h2
-            id="promo-banner-text"
-            class="text-5xl font-bold text-primary mb-4"
+            ILUZEear Dev
+          </h1>
+          <p
+            id="hero-tagline"
+            class="text-xl md:text-2xl text-white mb-8 opacity-90 animate-slide-up delay-200"
           >
-            Diskon 50% Untuk Semua Produk!
-          </h2>
-          <p class="text-xl text-secondary mb-8">
-            Buruan order sebelum kehabisan stok
+            Website Sederhana, Profesional, Bikin Bisnis Anda Melesat
           </p>
           <button
-            onclick="navigateTo('products')"
-            class="btn-primary px-8 py-4 rounded-lg font-bold text-lg"
+            id="cta-btn"
+            class="btn-hover bg-white text-purple-600 px-8 py-4 rounded-full text-lg font-semibold animate-bounce-in delay-400 hover-wiggle"
           >
-            Lihat Produk
+            Hubungi Sekarang
           </button>
         </div>
-      </section>
-      <!-- Featured Products -->
-      <section class="py-16">
-        <div class="container mx-auto px-6">
-          <h2 class="text-3xl font-bold text-primary mb-8 text-center">
-            Produk Unggulan
-          </h2>
-          <div
-            class="grid grid-cols-1 md:grid-cols-3 gap-8"
-            id="featured-products"
-          >
-            <!-- Products will be loaded here -->
-          </div>
-          <div class="text-center mt-10">
-            <button
-              onclick="navigateTo('products')"
-              class="btn-primary px-6 py-3 rounded-lg font-semibold"
-            >
-              Lihat Semua Produk
-            </button>
-          </div>
-        </div>
-      </section>
-    </div>
-    <!-- Products Page -->
-    <div id="products" class="page" style="padding-top: 80px">
-      <section class="py-16">
-        <div class="container mx-auto px-6">
-          <h2 class="text-4xl font-bold text-primary mb-10 text-center">
-            Semua Produk
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-4 gap-6" id="all-products">
-            <!-- Products will be loaded here -->
-          </div>
-        </div>
-      </section>
-    </div>
-    <!-- Product Detail Page -->
-    <div id="product-detail" class="page" style="padding-top: 80px">
-      <section class="py-16">
-        <div class="container mx-auto px-6">
-          <button
-            onclick="navigateBack()"
-            class="text-secondary hover:text-primary mb-6 flex items-center gap-2"
-          >
-            <span>←</span> Kembali
-          </button>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div>
+      </div>
+    </section>
+    <!-- About Section -->
+    <section id="about" class="w-full py-20 bg-white">
+      <div class="container-main mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <div class="flex flex-col md:flex-row items-center gap-12">
+            <div class="w-48 h-48 md:w-64 md:h-64 m animate-slide-in-left">
               <div
-                id="detail-image"
-                class="card-bg rounded-2xl flex items-center justify-center"
-                style="height: 500px"
+                class="w-full h-full rounded-full gradient-bg flex items-center justify-center image-hover"
               >
-                <span class="text-8xl">📦</span>
+                <img
+                  src="20240813_195008.jpg"
+                  alt=""
+                  class="w-full p-2 h-full rounded-full gradient-bg flex items-center justify-center image-hover"
+                  style="object-fit: cover"
+                />
               </div>
             </div>
-            <div>
-              <h1 id="detail-name" class="text-4xl font-bold text-primary mb-4">
-                Nama Produk
-              </h1>
-              <div
-                id="detail-price"
-                class="text-3xl font-bold text-green-600 mb-6"
+
+            <div class="flex-1 animate-slide-in-right">
+              <h2
+                id="about-title"
+                class="text-4xl font-bold gradient-text mb-6"
               >
-                Rp 100.000
-              </div>
-              <div class="mb-8">
-                <h3 class="text-lg font-semibold text-primary mb-3">
-                  Deskripsi Produk
-                </h3>
-                <p
-                  id="detail-description"
-                  class="text-secondary leading-relaxed"
+                Tentang Saya
+              </h2>
+              <p
+                id="about-description"
+                class="text-gray-700 text-lg leading-relaxed mb-6"
+              >
+                Saya adalah web developer profesional dengan pengalaman membuat
+                landing page yang menarik dan efektif. Setiap project dikerjakan
+                dengan detail tinggi, responsif di semua perangkat, dan
+                dioptimalkan untuk konversi maksimal. Kepuasan klien adalah
+                prioritas utama saya.
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div
+                  class="bg-purple-50 p-4 rounded-lg animate-glow-pulse animate-bounce-in delay-100 hover-bounce"
                 >
-                  Deskripsi lengkap produk akan muncul di sini.
-                </p>
+                  <div class="text-3xl font-bold text-purple-600 mb-2">50+</div>
+                  <div class="text-gray-600">Project Selesai</div>
+                </div>
+                <div
+                  class="bg-purple-50 p-4 rounded-lg animate-glow-pulse animate-bounce-in delay-200 hover-bounce"
+                >
+                  <div class="text-3xl font-bold text-purple-600 mb-2">
+                    100%
+                  </div>
+                  <div class="text-gray-600">Kepuasan Klien</div>
+                </div>
+                <div
+                  class="bg-purple-50 p-4 rounded-lg animate-glow-pulse animate-bounce-in delay-300 hover-bounce"
+                >
+                  <div class="text-3xl font-bold text-purple-600 mb-2">
+                    24/7
+                  </div>
+                  <div class="text-gray-600">Support</div>
+                </div>
               </div>
-              <button
-                onclick="orderViaWhatsApp()"
-                class="btn-primary w-full py-4 rounded-lg font-bold text-lg flex items-center justify-center gap-3"
-              >
-                <span>💬</span> Pesan via WhatsApp
-              </button>
             </div>
           </div>
         </div>
-      </section>
-    </div>
-    <!-- Contact Page -->
-    <div id="contact" class="page" style="padding-top: 80px">
-      <section class="py-16">
-        <div class="container mx-auto px-6 max-w-4xl">
-          <h2 class="text-4xl font-bold text-primary mb-10 text-center">
+      </div>
+    </section>
+    <!-- Packages Section -->
+    <section id="packages" class="w-full py-20 bg-gray-50">
+      <div class="container-main mx-auto px-6">
+        <h2
+          id="packages-title"
+          class="text-4xl md:text-5xl font-bold text-center gradient-text mb-4 animate-fade-in-up p-2"
+        >
+          Paket Landing Page
+        </h2>
+        <p class="text-center text-gray-600 mb-12 animate-fade-in-up delay-100">
+          Pilih paket yang sesuai dengan kebutuhan bisnis Anda
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Package 1 - Slide In Bottom Animation -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg card-hover animate-slide-in-bottom delay-100"
+          >
+            <div class="text-center mb-6">
+              <h3 class="text-2xl font-bold text-gray-800 mb-2 hover-wiggle">
+                Starter
+              </h3>
+              <div
+                class="text-4xl font-bold gradient-text mb-2 animate-text-glow"
+              >
+                25K
+              </div>
+              <p class="text-gray-500">Paket Hemat</p>
+            </div>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start animate-fade-in-up delay-200">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">1 Halaman Simple</span>
+              </li>
+              <li class="flex items-start animate-fade-in-up delay-300">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Design Basic</span>
+              </li>
+              <li class="flex items-start animate-fade-in-up delay-400">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Responsif Mobile</span>
+              </li>
+              <li class="flex items-start animate-fade-in-up delay-500">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Revisi 1x</span>
+              </li>
+            </ul>
+            <div class="space-y-3">
+              <a
+                href="#contact"
+                class="block w-full btn-starter bg-purple-600 text-white py-3 rounded-lg font-semibold transition-all text-center"
+              >
+                Pilih Paket
+              </a>
+              <a
+                href="harga1.html"
+                target="_blank"
+                class="block w-full bg-gray-100 text-purple-600 py-3 rounded-lg font-semibold transition-all hover:bg-gray-200 text-center"
+              >
+                Lihat Demo
+              </a>
+            </div>
+          </div>
+          <!-- Package 2 - Flip In Animation -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg card-hover animate-flip-in delay-200"
+          >
+            <div class="text-center mb-6">
+              <h3 class="text-2xl font-bold text-gray-800 mb-2 hover-wiggle">
+                Basic
+              </h3>
+              <div
+                class="text-4xl font-bold gradient-text mb-2 animate-text-glow"
+              >
+                50K
+              </div>
+              <p class="text-gray-500">Cocok Pemula</p>
+            </div>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start animate-slide-in-right delay-300">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">1 Halaman Lengkap</span>
+              </li>
+              <li class="flex items-start animate-slide-in-right delay-400">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Design Modern</span>
+              </li>
+              <li class="flex items-start animate-slide-in-right delay-500">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Full Responsif</span>
+              </li>
+              <li class="flex items-start animate-slide-in-right delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Form Kontak</span>
+              </li>
+              <li class="flex items-start animate-slide-in-right delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Revisi 2x</span>
+              </li>
+            </ul>
+            <div class="space-y-3">
+              <a
+                href="#contact"
+                class="block w-full btn-basic bg-purple-600 text-white py-3 rounded-lg font-semibold transition-all text-center"
+              >
+                Pilih Paket
+              </a>
+              <a
+                href="harga2.html"
+                class="block w-full bg-gray-100 text-purple-600 py-3 rounded-lg font-semibold transition-all hover:bg-gray-200 text-center"
+              >
+                Lihat Demo
+              </a>
+            </div>
+          </div>
+          <!-- Package 3 - Spiral In Animation (POPULAR) -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg card-hover animate-spiral-in delay-300 border-4 border-purple-500 relative"
+          >
+            <div
+              class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-purple-500 text-white px-4 py-1 rounded-full text-sm font-semibold animate-pulse-glow hover-wiggle"
+            >
+              POPULAR
+            </div>
+            <div class="text-center mb-6">
+              <h3 class="text-2xl font-bold text-gray-800 mb-2 hover-wiggle">
+                Standard
+              </h3>
+              <div
+                class="text-4xl font-bold gradient-text mb-2 animate-text-glow"
+              >
+                150K
+              </div>
+              <p class="text-gray-500">Paling Laris</p>
+            </div>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start animate-scale-in delay-400">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Multi Section</span>
+              </li>
+              <li class="flex items-start animate-scale-in delay-500">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Design Premium</span>
+              </li>
+              <li class="flex items-start animate-scale-in delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Animasi Smooth</span>
+              </li>
+              <li class="flex items-start animate-scale-in delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">SEO Friendly</span>
+              </li>
+              <li class="flex items-start animate-scale-in delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Revisi 3x</span>
+              </li>
+              <li class="flex items-start animate-scale-in delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Support 7 Hari</span>
+              </li>
+            </ul>
+            <div class="space-y-3">
+              <a
+                href="#contact"
+                class="block w-full btn-standard bg-gradient-to-r from-purple-600 to-purple-800 text-white py-3 rounded-lg font-semibold transition-all text-center"
+              >
+                Pilih Paket
+              </a>
+              <a
+                href="harga3.html"
+                class="block w-full bg-gray-100 text-purple-600 py-3 rounded-lg font-semibold transition-all hover:bg-gray-200 text-center"
+              >
+                Lihat Demo
+              </a>
+            </div>
+          </div>
+          <!-- Package 4 - Bounce Drop Animation -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg card-hover animate-bounce-drop delay-400"
+          >
+            <div class="text-center mb-6">
+              <h3 class="text-2xl font-bold text-gray-800 mb-2 hover-wiggle">
+                Professional
+              </h3>
+              <div
+                class="text-4xl font-bold gradient-text mb-2 animate-text-glow"
+              >
+                500K
+              </div>
+              <p class="text-gray-500">Untuk Bisnis</p>
+            </div>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start animate-slide-in-left delay-500">
+                <span class="text-green-500 mr-2">�����</span>
+                <span class="text-gray-700">Landing Page Kompleks</span>
+              </li>
+              <li class="flex items-start animate-slide-in-left delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Custom Design</span>
+              </li>
+              <li class="flex items-start animate-slide-in-left delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Advanced Animation</span>
+              </li>
+              <li class="flex items-start animate-slide-in-left delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Database Integration</span>
+              </li>
+              <li class="flex items-start animate-slide-in-left delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Revisi Unlimited</span>
+              </li>
+              <li class="flex items-start animate-slide-in-left delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Support 14 Hari</span>
+              </li>
+            </ul>
+            <div class="space-y-3">
+              <a
+                href="#contact"
+                class="block w-full btn-professional bg-purple-600 text-white py-3 rounded-lg font-semibold transition-all text-center"
+              >
+                Pilih Paket
+              </a>
+              <a
+                href="#"
+                class="block w-full bg-gray-100 text-purple-600 py-3 rounded-lg font-semibold transition-all hover:bg-gray-200 text-center"
+              >
+                Lihat Demo
+              </a>
+            </div>
+          </div>
+          <!-- Package 5 - Expand In Animation -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg card-hover animate-expand-in delay-500"
+          >
+            <div class="text-center mb-6">
+              <h3 class="text-2xl font-bold text-gray-800 mb-2 hover-wiggle">
+                Business
+              </h3>
+              <div
+                class="text-4xl font-bold gradient-text mb-2 animate-text-glow"
+              >
+                1JT
+              </div>
+              <p class="text-gray-500">Solusi Lengkap</p>
+            </div>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start animate-rotate-in delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Multi-Page Website</span>
+              </li>
+              <li class="flex items-start animate-rotate-in delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Premium Design</span>
+              </li>
+              <li class="flex items-start animate-rotate-in delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">CMS Integration</span>
+              </li>
+              <li class="flex items-start animate-rotate-in delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">E-Commerce Ready</span>
+              </li>
+              <li class="flex items-start animate-rotate-in delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Free Hosting 1 Tahun</span>
+              </li>
+              <li class="flex items-start animate-rotate-in delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Support 30 Hari</span>
+              </li>
+            </ul>
+            <div class="space-y-3">
+              <a
+                href="#contact"
+                class="block w-full btn-business bg-purple-600 text-white py-3 rounded-lg font-semibold transition-all text-center"
+              >
+                Pilih Paket
+              </a>
+              <a
+                href="#"
+                class="block w-full bg-gray-100 text-purple-600 py-3 rounded-lg font-semibold transition-all hover:bg-gray-200 text-center"
+              >
+                Lihat Demo
+              </a>
+            </div>
+          </div>
+          <!-- Package 6 - Swing In Animation (PREMIUM) -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-lg card-hover animate-swing-in delay-600 border-4 border-yellow-500 relative"
+          >
+            <div
+              class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white px-4 py-1 rounded-full text-sm font-semibold shimmer hover-wiggle"
+            >
+              PREMIUM
+            </div>
+            <div class="text-center mb-6">
+              <h3 class="text-2xl font-bold text-gray-800 mb-2 hover-wiggle">
+                Enterprise
+              </h3>
+              <div
+                class="text-4xl font-bold gradient-text mb-2 animate-text-glow"
+              >
+                1.7JT
+              </div>
+              <p class="text-gray-500">Paket Ultimate</p>
+            </div>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start animate-zoom-in delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Full Website System</span>
+              </li>
+              <li class="flex items-start animate-zoom-in delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Luxury Custom Design</span>
+              </li>
+              <li class="flex items-start animate-zoom-in delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Advanced Features</span>
+              </li>
+              <li class="flex items-start animate-zoom-in delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">API Integration</span>
+              </li>
+              <li class="flex items-start animate-zoom-in delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Mobile App Version</span>
+              </li>
+              <li class="flex items-start animate-zoom-in delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Free Maintenance 3 Bulan</span>
+              </li>
+              <li class="flex items-start animate-zoom-in delay-600">
+                <span class="text-green-500 mr-2">✓</span>
+                <span class="text-gray-700">Priority Support 24/7</span>
+              </li>
+            </ul>
+            <div class="space-y-3">
+              <a
+                href="#contact"
+                class="block w-full btn-enterprise bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-3 rounded-lg font-semibold transition-all text-center"
+              >
+                ⭐ PILIH PAKET PREMIUM ⭐
+              </a>
+              <a
+                href="#"
+                class="block w-full bg-gray-100 text-yellow-600 py-3 rounded-lg font-semibold transition-all hover:bg-gray-200 text-center"
+              >
+                Lihat Demo
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="w-full py-20 bg-white">
+      <div class="container-main mx-auto px-6">
+        <h2
+          id="testimonials-title"
+          class="text-4xl md:text-5xl font-bold text-center gradient-text mb-4 animate-fade-in-up"
+        >
+          Testimoni Klien
+        </h2>
+        <p class="text-center text-gray-600 mb-12 animate-fade-in-up delay-100">
+          Apa kata mereka yang sudah menggunakan jasa kami
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <!-- Testimonial 1 -->
+          <div
+            class="bg-gradient-to-br from-purple-50 to-white p-8 rounded-2xl shadow-lg card-hover animate-zoom-in delay-100"
+          >
+            <div class="flex items-center mb-4">
+              <div
+                class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center text-white text-2xl font-bold hover-flip animate-glow-pulse"
+              >
+                A
+              </div>
+              <div class="ml-4">
+                <h4 class="font-bold text-gray-800 hover-wiggle">
+                  Andi Pratama
+                </h4>
+                <div class="text-yellow-500 text-sm animate-pulse">★★★★★</div>
+              </div>
+            </div>
+            <p class="text-gray-700 italic">
+              "Landing page yang dibuat sangat profesional dan sesuai
+              ekspektasi. Proses pengerjaan cepat dan komunikasi sangat baik.
+              Highly recommended!"
+            </p>
+          </div>
+          <!-- Testimonial 2 -->
+          <div
+            class="bg-gradient-to-br from-purple-50 to-white p-8 rounded-2xl shadow-lg card-hover animate-zoom-in delay-200"
+          >
+            <div class="flex items-center mb-4">
+              <div
+                class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center text-white text-2xl font-bold hover-flip animate-glow-pulse"
+              >
+                S
+              </div>
+              <div class="ml-4">
+                <h4 class="font-bold text-gray-800 hover-wiggle">
+                  Siti Nurhaliza
+                </h4>
+                <div class="text-yellow-500 text-sm animate-pulse">★★★★★</div>
+              </div>
+            </div>
+            <p class="text-gray-700 italic">
+              "Desainnya keren banget dan responsif di semua device. Harga
+              terjangkau dengan kualitas premium. Pasti order lagi untuk project
+              selanjutnya!"
+            </p>
+          </div>
+          <!-- Testimonial 3 -->
+          <div
+            class="bg-gradient-to-br from-purple-50 to-white p-8 rounded-2xl shadow-lg card-hover animate-zoom-in delay-300"
+          >
+            <div class="flex items-center mb-4">
+              <div
+                class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center text-white text-2xl font-bold hover-flip animate-glow-pulse"
+              >
+                B
+              </div>
+              <div class="ml-4">
+                <h4 class="font-bold text-gray-800 hover-wiggle">
+                  Budi Santoso
+                </h4>
+                <div class="text-yellow-500 text-sm animate-pulse">★★★★★</div>
+              </div>
+            </div>
+            <p class="text-gray-700 italic">
+              "Pelayanan memuaskan, hasil kerja rapi dan detail. Website bisnis
+              saya jadi lebih profesional. Terima kasih ILUZEear Dev!"
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact" class="w-full py-20 gradient-bg">
+      <div class="container-main mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <h2
+            id="contact-title"
+            class="text-4xl md:text-5xl font-bold text-center text-white mb-4 animate-fade-in-up"
+          >
             Hubungi Kami
           </h2>
-          <div class="card-bg rounded-2xl p-8 mb-10">
-            <h3 class="text-2xl font-bold text-primary mb-6">Profil Toko</h3>
-            <div class="space-y-4">
-              <div>
-                <label class="text-sm font-semibold text-secondary"
-                  >Nama Toko</label
-                >
-                <p id="contact-store-name" class="text-lg text-primary">
-                  TokoAditya
-                </p>
-              </div>
-              <div>
-                <label class="text-sm font-semibold text-secondary"
-                  >Deskripsi</label
-                >
-                <p id="contact-description" class="text-lg text-primary">
-                  Toko online terpercaya menyediakan berbagai produk berkualitas
-                  dengan harga terjangkau.
-                </p>
-              </div>
-              <div>
-                <label class="text-sm font-semibold text-secondary"
-                  >Lokasi</label
-                >
-                <p id="contact-location" class="text-lg text-primary">
-                  Tasikmalaya, Indonesia
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <a
-              id="whatsapp-link"
-              href="https://wa.me/6283136286696"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="card-bg rounded-xl p-6 text-center hover:shadow-lg transition-shadow"
-            >
-              <div class="text-5xl mb-3">💬</div>
-              <div class="font-bold text-primary mb-2">WhatsApp</div>
-              <div id="display-whatsapp" class="text-sm text-secondary">
-                +62 8313-6286-696
-              </div></a
-            >
-            <a
-              id="instagram-link"
-              href="https://www.instagram.com/iluze_ear/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="card-bg rounded-xl p-6 text-center hover:shadow-lg transition-shadow"
-            >
-              <div class="text-5xl mb-3">📸</div>
-              <div class="font-bold text-primary mb-2">Instagram</div>
-              <div id="display-instagram" class="text-sm text-secondary">
-                @TokoAditya
-              </div></a
-            >
-            <a
-              id="facebook-link"
-              href="https://www.facebook.com/IluzeEar.25"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="card-bg rounded-xl p-6 text-center hover:shadow-lg transition-shadow"
-            >
-              <div class="text-5xl mb-3">👥</div>
-              <div class="font-bold text-primary mb-2">Facebook</div>
-              <div id="display-facebook" class="text-sm text-secondary">
-                TokoAditya Official
-              </div></a
-            >
-          </div>
-        </div>
-      </section>
-    </div>
-    <!-- Testimonials Page -->
-    <div id="testimonials" class="page" style="padding-top: 80px">
-      <section class="py-16">
-        <div class="container mx-auto px-6 max-w-5xl">
-          <h2 class="text-4xl font-bold text-primary mb-10 text-center">
-            Testimoni Pelanggan
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="card-bg rounded-xl p-8">
-              <div class="flex items-center mb-4">
-                <div
-                  class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center text-2xl mr-4"
-                >
-                  👤
-                </div>
-                <div>
-                  <div class="font-bold text-primary">Siti Aminah</div>
-                  <div class="text-sm text-secondary">Jakarta</div>
-                </div>
-              </div>
-              <p class="text-secondary leading-relaxed mb-4">
-                "Produknya bagus banget! Pengiriman cepat dan packingnya rapi.
-                Puas banget belanja di sini."
-              </p>
-              <div class="text-yellow-500">⭐⭐⭐⭐⭐</div>
-            </div>
-            <div class="card-bg rounded-xl p-8">
-              <div class="flex items-center mb-4">
-                <div
-                  class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center text-2xl mr-4"
-                >
-                  👤
-                </div>
-                <div>
-                  <div class="font-bold text-primary">Budi Santoso</div>
-                  <div class="text-sm text-secondary">Bandung</div>
-                </div>
-              </div>
-              <p class="text-secondary leading-relaxed mb-4">
-                "Harga terjangkau, kualitas oke. Udah langganan beberapa kali,
-                selalu puas. Recommended!"
-              </p>
-              <div class="text-yellow-500">⭐⭐⭐⭐⭐</div>
-            </div>
-            <div class="card-bg rounded-xl p-8">
-              <div class="flex items-center mb-4">
-                <div
-                  class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center text-2xl mr-4"
-                >
-                  👤
-                </div>
-                <div>
-                  <div class="font-bold text-primary">Dewi Lestari</div>
-                  <div class="text-sm text-secondary">Surabaya</div>
-                </div>
-              </div>
-              <p class="text-secondary leading-relaxed mb-4">
-                "Pelayanannya ramah, respon cepat. Produknya sesuai deskripsi.
-                Top markotop deh!"
-              </p>
-              <div class="text-yellow-500">⭐⭐⭐⭐⭐</div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-    <!-- Admin Panel Button -->
-    <div class="admin-panel">
-      <button
-        onclick="toggleAdminModals()"
-        class="bg-blue-600 text-white px-6 py-3 rounded-full font-bold shadow-lg hover:bg-blue-700 transition-all"
-      >
-        ⚙️ Admin
-      </button>
-    </div>
-    <!-- Admin Modal -->
-    <div id="admin-modal" class="admin-modal">
-      <div class="card-bg rounded-2xl p-8 m-6 max-w-2xl w-full">
-        <div class="flex justify-between items-center mb-6">
-          <h2 class="text-2xl font-bold text-primary">Panel Admin</h2>
-          <button
-            onclick="toggleAdminModal()"
-            class="text-2xl text-secondary hover:text-primary"
+          <p
+            id="contact-subtitle"
+            class="text-center text-white opacity-90 mb-12 animate-fade-in-up delay-100"
           >
-            ×
-          </button>
+            Siap wujudkan landing page impian Anda? Mari berdiskusi!
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Contact Form -->
+            <div
+              class="bg-white rounded-2xl p-8 shadow-2xl animate-zoom-in delay-100"
+            >
+              <h3
+                class="text-2xl font-bold gradient-text mb-6 animate-text-glow"
+              >
+                Kirim Pesan
+              </h3>
+              <form id="contact-form">
+                <div class="mb-4 animate-slide-in-left delay-100">
+                  <label
+                    for="name"
+                    class="block text-gray-700 font-semibold mb-2"
+                    >Nama</label
+                  >
+                  <input
+                    type="text"
+                    id="name"
+                    class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-purple-500 focus:outline-none transition-colors hover-shake"
+                    placeholder="Nama Anda"
+                    required
+                  />
+                </div>
+                <div class="mb-4 animate-slide-in-left delay-200">
+                  <label
+                    for="email"
+                    class="block text-gray-700 font-semibold mb-2"
+                    >Email</label
+                  >
+                  <input
+                    type="email"
+                    id="email"
+                    class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-purple-500 focus:outline-none transition-colors hover-shake"
+                    placeholder="email@example.com"
+                    required
+                  />
+                </div>
+                <div class="mb-4 animate-slide-in-left delay-300">
+                  <label
+                    for="message"
+                    class="block text-gray-700 font-semibold mb-2"
+                    >Pesan</label
+                  >
+                  <textarea
+                    id="message"
+                    rows="4"
+                    class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-purple-500 focus:outline-none transition-colors hover-shake"
+                    placeholder="Ceritakan kebutuhan Anda..."
+                    required
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  class="w-full btn-hover bg-purple-600 text-white py-3 rounded-lg font-semibold animate-bounce-in delay-400 hover-wiggle"
+                >
+                  Kirim Pesan
+                </button>
+              </form>
+              <div
+                id="form-message"
+                class="mt-4 text-center font-semibold"
+              ></div>
+            </div>
+            <!-- WhatsApp Contact -->
+            <div
+              class="bg-white rounded-2xl p-8 shadow-2xl animate-zoom-in delay-200 flex flex-col justify-center"
+            >
+              <div class="text-center mb-6">
+                <div
+                  class="inline-block p-6 bg-green-100 rounded-full mb-4 animate-pulse-glow hover-bounce"
+                >
+                  <svg
+                    class="w-16 h-16 text-green-600"
+                    fill="currentColor"
+                    viewbox="0 0 24 24"
+                  >
+                    <path
+                      d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+                    />
+                  </svg>
+                </div>
+                <h3
+                  class="text-2xl font-bold gradient-text mb-4 animate-text-glow"
+                >
+                  Chat via WhatsApp
+                </h3>
+                <p class="text-gray-600 mb-6 animate-fade-in-up delay-100">
+                  Dapatkan respon cepat dan konsultasi gratis langsung melalui
+                  WhatsApp
+                </p>
+                <a
+                  href="https://wa.me/6281234567890?text=Halo%20ILUZEear%20Dev,%20saya%20tertarik%20dengan%20jasa%20pembuatan%20landing%20page"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-block btn-hover bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover-wiggle animate-bounce-in delay-300"
+                >
+                  <span class="flex items-center justify-center">
+                    <svg
+                      class="w-6 h-6 mr-2"
+                      fill="currentColor"
+                      viewbox="0 0 24 24"
+                    >
+                      <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+                      />
+                    </svg>
+                    Chat Sekarang
+                  </span>
+                </a>
+              </div>
+              <div class="mt-8 space-y-4">
+                <div
+                  class="flex items-center text-gray-600 animate-slide-in-right delay-400"
+                >
+                  <svg
+                    class="w-6 h-6 mr-3 text-purple-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewbox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    /></svg
+                  ><span>Respon dalam 5 menit</span>
+                </div>
+                <div
+                  class="flex items-center text-gray-600 animate-slide-in-right delay-500"
+                >
+                  <svg
+                    class="w-6 h-6 mr-3 text-purple-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewbox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    /></svg
+                  ><span>Konsultasi Gratis</span>
+                </div>
+                <div
+                  class="flex items-center text-gray-600 animate-slide-in-right delay-600"
+                >
+                  <svg
+                    class="w-6 h-6 mr-3 text-purple-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewbox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"
+                    /></svg
+                  ><span>Layanan 24/7</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <form id="admin-form" class="space-y-4">
-          <div>
-            <label class="block text-sm font-semibold text-primary mb-2"
-              >Nama Toko</label
-            >
-            <input
-              type="text"
-              id="admin-store-name"
-              class="w-full px-4 py-3 rounded-lg border-2 border-color bg-transparent text-primary"
-              value="TokoAditya"
-            />
-          </div>
-          <div>
-            <label class="block text-sm font-semibold text-primary mb-2"
-              >Nomor WhatsApp (format: 628123456789)</label
-            >
-            <input
-              type="text"
-              id="admin-whatsapp"
-              class="w-full px-4 py-3 rounded-lg border-2 border-color bg-transparent text-primary"
-              value="628123456789"
-            />
-          </div>
-          <div>
-            <label class="block text-sm font-semibold text-primary mb-2"
-              >Teks Promo Banner</label
-            >
-            <input
-              type="text"
-              id="admin-promo"
-              class="w-full px-4 py-3 rounded-lg border-2 border-color bg-transparent text-primary"
-              value="Diskon 50% Untuk Semua Produk!"
-            />
-          </div>
-          <div>
-            <label class="block text-sm font-semibold text-primary mb-2"
-              >Deskripsi Toko</label
-            >
-            <textarea
-              id="admin-description"
-              rows="3"
-              class="w-full px-4 py-3 rounded-lg border-2 border-color bg-transparent text-primary"
-            >
-Toko online terpercaya menyediakan berbagai produk berkualitas dengan harga terjangkau.</textarea
-            >
-          </div>
-          <div>
-            <label class="block text-sm font-semibold text-primary mb-2"
-              >Lokasi Toko</label
-            >
-            <input
-              type="text"
-              id="admin-location"
-              class="w-full px-4 py-3 rounded-lg border-2 border-color bg-transparent text-primary"
-              value="Jakarta, Indonesia"
-            />
-          </div>
-          <div>
-            <label class="block text-sm font-semibold text-primary mb-2"
-              >Instagram Handle</label
-            >
-            <input
-              type="text"
-              id="admin-instagram"
-              class="w-full px-4 py-3 rounded-lg border-2 border-color bg-transparent text-primary"
-              value="@TokoAditya"
-            />
-          </div>
-          <div>
-            <label class="block text-sm font-semibold text-primary mb-2"
-              >Facebook Handle</label
-            >
-            <input
-              type="text"
-              id="admin-facebook"
-              class="w-full px-4 py-3 rounded-lg border-2 border-color bg-transparent text-primary"
-              value="TokoAditya Official"
-            />
-          </div>
-          <button
-            type="submit"
-            class="btn-primary w-full py-3 rounded-lg font-bold"
-          >
-            Simpan Perubahan
-          </button>
-        </form>
       </div>
-    </div>
+    </section>
     <!-- Footer -->
-    <footer class="nav-bar border-t border-color py-8 mt-20">
-      <div class="container mx-auto px-6 text-center">
-        <p class="text-secondary text-sm">
-          © 2024 <span id="footer-store-name">TokoAditya</span>. All rights
-          reserved.
+    <footer class="w-full bg-gray-900 text-white py-8">
+      <div class="container-main mx-auto px-6 text-center">
+        <p class="text-lg font-semibold mb-2">ILUZEear_Dev</p>
+        <p class="text-gray-400 text-sm">
+          © 2025 ILUZEearDev. Website Sederhana, Profesional, Bikin Bisnis Anda
+          Melesat.
         </p>
       </div>
     </footer>
     <script>
-      // Product Data (Lo bisa edit manual di sini)
-      const products = [
-        {
-          id: 1,
-          name: "Tas Kulit Premium",
-          price: 250000,
-          description:
-            "Tas kulit asli berkualitas tinggi dengan desain elegan. Cocok untuk acara formal maupun casual. Dilengkapi dengan beberapa kompartemen untuk menyimpan barang-barang penting Anda. Material kulit premium yang tahan lama dan mudah dirawat.",
-          emoji: "👜",
-          featured: true,
-        },
-        {
-          id: 2,
-          name: "Sepatu Sneakers",
-          price: 350000,
-          description:
-            "Sepatu sneakers stylish dan nyaman untuk aktivitas sehari-hari. Desain modern dengan bahan breathable yang membuat kaki tetap nyaman sepanjang hari. Sol empuk memberikan kenyamanan maksimal saat berjalan.",
-          emoji: "👟",
-          featured: true,
-        },
-        {
-          id: 3,
-          name: "Jam Tangan Elegant",
-          price: 450000,
-          description:
-            "Jam tangan dengan desain minimalis dan elegant. Tali stainless steel berkualitas tinggi, tahan air hingga 50 meter. Cocok untuk pria maupun wanita. Movement Jepang yang akurat dan tahan lama.",
-          emoji: "⌚",
-          featured: true,
-        },
-        {
-          id: 4,
-          name: "Dompet Pria Kulit",
-          price: 150000,
-          description:
-            "Dompet kulit asli dengan desain slim dan praktis. Terdapat banyak slot untuk kartu dan uang. Material kulit premium yang awet dan berkelas. Ukuran pas untuk disimpan di saku celana.",
-          emoji: "👛",
-          featured: false,
-        },
-        {
-          id: 5,
-          name: "Kacamata Hitam",
-          price: 200000,
-          description:
-            "Kacamata hitam dengan frame berkualitas dan lensa UV protection. Melindungi mata dari sinar matahari berbahaya. Desain modern dan stylish cocok untuk berbagai bentuk wajah.",
-          emoji: "🕶️",
-          featured: false,
-        },
-        {
-          id: 6,
-          name: "Topi Baseball",
-          price: 80000,
-          description:
-            "Topi baseball casual dengan bahan katun berkualitas. Nyaman dipakai seharian, cocok untuk melindungi dari panas matahari. Desain simple dan timeless.",
-          emoji: "🧢",
-          featured: false,
-        },
-        {
-          id: 7,
-          name: "Kalung Fashion",
-          price: 120000,
-          description:
-            "Kalung fashion dengan desain trendy dan elegan. Material anti karat dan tidak menyebabkan alergi. Cocok untuk melengkapi outfit harian Anda.",
-          emoji: "📿",
-          featured: false,
-        },
-        {
-          id: 8,
-          name: "Gelang Kulit",
-          price: 90000,
-          description:
-            "Gelang kulit dengan desain maskulin dan stylish. Bahan kulit asli yang lentur dan nyaman di pergelangan tangan. Cocok untuk penampilan casual maupun semi formal.",
-          emoji: "📿",
-          featured: false,
-        },
-      ];
-
-      // State Management
-      let currentTheme = "light";
-      let currentProduct = null;
-      let previousPage = "home";
-
       const defaultConfig = {
-        background_color: "#ffffff",
-        card_color: "#f9fafb",
+        hero_title: "ILUZEear_Dev",
+        hero_tagline:
+          "Website Sederhana, Profesional, Bikin Bisnis Anda Melesat",
+        cta_button_text: "Hubungi Sekarang",
+        about_title: "Tentang Saya",
+        about_description:
+          "Saya adalah web developer profesional dengan fokus pada kualitas dan detail. Setiap proyek dirancang agar responsif di semua perangkat, tampil rapi, dan berfungsi optimal untuk mencapai tujuan bisnis. Kepuasan klien menjadi prioritas utama saya, dengan pendekatan yang sistematis namun tetap punya ritme kerja yang dinamis dan terstruktur.",
+        packages_title: "Paket Landing Page",
+        testimonials_title: "Testimoni Klien",
+        contact_title: "Hubungi Kami",
+        contact_subtitle:
+          "Siap wujudkan landing page impian Anda? Mari berdiskusi!",
+        primary_color: "#667eea",
+        secondary_color: "#764ba2",
         text_color: "#1f2937",
+        background_color: "#ffffff",
         accent_color: "#10b981",
-        secondary_text_color: "#6b7280",
         font_family: "system-ui",
         font_size: 16,
-        store_name: "TokoAditya",
-        whatsapp_number: "6283136286696",
-        promo_text: "Diskon 50% Untuk Semua Produk!",
-        store_description:
-          "Toko online terpercaya menyediakan berbagai produk berkualitas dengan harga terjangkau.",
-        store_location: "Jakarta, Indonesia",
-        instagram_handle: "@TokoAditya",
-        facebook_handle: "TokoAditya Official",
       };
 
-      // Config from Elements SDK
       async function onConfigChange(config) {
-        const storeName = config.store_name || defaultConfig.store_name;
-        const whatsappNumber =
-          config.whatsapp_number || defaultConfig.whatsapp_number;
-        const promoText = config.promo_text || defaultConfig.promo_text;
-        const storeDescription =
-          config.store_description || defaultConfig.store_description;
-        const storeLocation =
-          config.store_location || defaultConfig.store_location;
-        const instagramHandle =
-          config.instagram_handle || defaultConfig.instagram_handle;
-        const facebookHandle =
-          config.facebook_handle || defaultConfig.facebook_handle;
+        const heroTitle = document.getElementById("hero-title");
+        const heroTagline = document.getElementById("hero-tagline");
+        const ctaBtn = document.getElementById("cta-btn");
+        const aboutTitle = document.getElementById("about-title");
+        const aboutDescription = document.getElementById("about-description");
+        const packagesTitle = document.getElementById("packages-title");
+        const testimonialsTitle = document.getElementById("testimonials-title");
+        const contactTitle = document.getElementById("contact-title");
+        const contactSubtitle = document.getElementById("contact-subtitle");
 
+        heroTitle.textContent = config.hero_title || defaultConfig.hero_title;
+        heroTagline.textContent =
+          config.hero_tagline || defaultConfig.hero_tagline;
+        ctaBtn.textContent =
+          config.cta_button_text || defaultConfig.cta_button_text;
+        aboutTitle.textContent =
+          config.about_title || defaultConfig.about_title;
+        aboutDescription.textContent =
+          config.about_description || defaultConfig.about_description;
+        packagesTitle.textContent =
+          config.packages_title || defaultConfig.packages_title;
+        testimonialsTitle.textContent =
+          config.testimonials_title || defaultConfig.testimonials_title;
+        contactTitle.textContent =
+          config.contact_title || defaultConfig.contact_title;
+        contactSubtitle.textContent =
+          config.contact_subtitle || defaultConfig.contact_subtitle;
+
+        const primaryColor =
+          config.primary_color || defaultConfig.primary_color;
+        const secondaryColor =
+          config.secondary_color || defaultConfig.secondary_color;
+        const textColor = config.text_color || defaultConfig.text_color;
         const backgroundColor =
           config.background_color || defaultConfig.background_color;
-        const cardColor = config.card_color || defaultConfig.card_color;
-        const textColor = config.text_color || defaultConfig.text_color;
         const accentColor = config.accent_color || defaultConfig.accent_color;
-        const secondaryTextColor =
-          config.secondary_text_color || defaultConfig.secondary_text_color;
-        const customFont = config.font_family || defaultConfig.font_family;
-        const baseSize = config.font_size || defaultConfig.font_size;
-        const baseFontStack = "system-ui, -apple-system, sans-serif";
 
-        document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        document.getElementById(
+          "hero"
+        ).style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
+        document.getElementById(
+          "contact"
+        ).style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
 
-        // Update store info
-        document.querySelectorAll('[id*="store-name"]').forEach((el) => {
-          el.textContent = storeName;
+        document.querySelectorAll(".gradient-text").forEach((el) => {
+          el.style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
+          el.style.webkitBackgroundClip = "text";
+          el.style.webkitTextFillColor = "transparent";
+          el.style.backgroundClip = "text";
         });
-        document.getElementById("promo-banner-text").textContent = promoText;
-        document.getElementById("contact-description").textContent =
-          storeDescription;
-        document.getElementById("contact-location").textContent = storeLocation;
-        document.getElementById("display-instagram").textContent =
-          instagramHandle;
-        document.getElementById("display-facebook").textContent =
-          facebookHandle;
-        document.getElementById("display-whatsapp").textContent =
-          formatPhoneDisplay(whatsappNumber);
 
-        // Update links
-        document.getElementById(
-          "whatsapp-link"
-        ).href = `https://wa.me/${whatsappNumber}`;
-        document.getElementById(
-          "instagram-link"
-        ).href = `https://instagram.com/${instagramHandle.replace("@", "")}`;
-        document.getElementById(
-          "facebook-link"
-        ).href = `https://facebook.com/${facebookHandle}`;
+        document.querySelectorAll(".gradient-bg").forEach((el) => {
+          el.style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
+        });
 
-        // Update admin form
-        document.getElementById("admin-store-name").value = storeName;
-        document.getElementById("admin-whatsapp").value = whatsappNumber;
-        document.getElementById("admin-promo").value = promoText;
-        document.getElementById("admin-description").value = storeDescription;
-        document.getElementById("admin-location").value = storeLocation;
-        document.getElementById("admin-instagram").value = instagramHandle;
-        document.getElementById("admin-facebook").value = facebookHandle;
+        document.querySelectorAll(".bg-purple-600").forEach((el) => {
+          el.style.backgroundColor = primaryColor;
+        });
 
-        // Apply colors
-        if (currentTheme === "light") {
-          document.body.style.backgroundColor = backgroundColor;
-          document.body.style.color = textColor;
-
-          document.querySelectorAll(".nav-bar").forEach((el) => {
-            el.style.backgroundColor = backgroundColor;
-            el.style.borderColor = cardColor;
+        document
+          .querySelectorAll(".text-green-500, .text-green-600")
+          .forEach((el) => {
+            el.style.color = accentColor;
           });
 
-          document.querySelectorAll(".card-bg").forEach((el) => {
-            el.style.backgroundColor = cardColor;
-          });
-
-          document.querySelectorAll(".text-primary").forEach((el) => {
-            el.style.color = textColor;
-          });
-
-          document.querySelectorAll(".text-secondary").forEach((el) => {
-            el.style.color = secondaryTextColor;
-          });
-
-          document.querySelectorAll(".border-color").forEach((el) => {
-            el.style.borderColor = cardColor;
-          });
-        }
-
-        document.querySelectorAll(".btn-primary").forEach((el) => {
+        document.querySelectorAll(".bg-green-600").forEach((el) => {
           el.style.backgroundColor = accentColor;
         });
 
-        // Font sizes
-        const h1Elements = document.querySelectorAll("h1");
-        h1Elements.forEach((el) => (el.style.fontSize = `${baseSize * 2.5}px`));
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack = "system-ui, -apple-system, sans-serif";
+        document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
 
-        const h2Elements = document.querySelectorAll("h2");
-        h2Elements.forEach((el) => (el.style.fontSize = `${baseSize * 2}px`));
-
-        const h3Elements = document.querySelectorAll("h3");
-        h3Elements.forEach((el) => (el.style.fontSize = `${baseSize * 1.5}px`));
-
-        const pElements = document.querySelectorAll("p, .text-sm, .text-lg");
-        pElements.forEach((el) => {
-          if (el.classList.contains("text-sm")) {
-            el.style.fontSize = `${baseSize * 0.875}px`;
-          } else if (el.classList.contains("text-lg")) {
-            el.style.fontSize = `${baseSize * 1.125}px`;
-          } else {
-            el.style.fontSize = `${baseSize}px`;
-          }
-        });
+        const baseSize = config.font_size || defaultConfig.font_size;
+        heroTitle.style.fontSize = `${baseSize * 3}px`;
+        heroTagline.style.fontSize = `${baseSize * 1.25}px`;
+        aboutTitle.style.fontSize = `${baseSize * 2}px`;
+        packagesTitle.style.fontSize = `${baseSize * 2}px`;
+        testimonialsTitle.style.fontSize = `${baseSize * 2}px`;
+        contactTitle.style.fontSize = `${baseSize * 2}px`;
+        document.body.style.fontSize = `${baseSize}px`;
       }
 
       function mapToCapabilities(config) {
         return {
           recolorables: [
             {
-              get: () =>
-                config.background_color || defaultConfig.background_color,
+              get: () => config.primary_color || defaultConfig.primary_color,
               set: (value) => {
-                config.background_color = value;
+                config.primary_color = value;
                 if (window.elementSdk) {
-                  window.elementSdk.setConfig({ background_color: value });
+                  window.elementSdk.setConfig({ primary_color: value });
                 }
               },
             },
             {
-              get: () => config.card_color || defaultConfig.card_color,
+              get: () =>
+                config.secondary_color || defaultConfig.secondary_color,
               set: (value) => {
-                config.card_color = value;
+                config.secondary_color = value;
                 if (window.elementSdk) {
-                  window.elementSdk.setConfig({ card_color: value });
+                  window.elementSdk.setConfig({ secondary_color: value });
                 }
               },
             },
@@ -822,22 +1610,21 @@ Toko online terpercaya menyediakan berbagai produk berkualitas dengan harga terj
               },
             },
             {
+              get: () =>
+                config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                if (window.elementSdk) {
+                  window.elementSdk.setConfig({ background_color: value });
+                }
+              },
+            },
+            {
               get: () => config.accent_color || defaultConfig.accent_color,
               set: (value) => {
                 config.accent_color = value;
                 if (window.elementSdk) {
                   window.elementSdk.setConfig({ accent_color: value });
-                }
-              },
-            },
-            {
-              get: () =>
-                config.secondary_text_color ||
-                defaultConfig.secondary_text_color,
-              set: (value) => {
-                config.secondary_text_color = value;
-                if (window.elementSdk) {
-                  window.elementSdk.setConfig({ secondary_text_color: value });
                 }
               },
             },
@@ -866,27 +1653,32 @@ Toko online terpercaya menyediakan berbagai produk berkualitas dengan harga terj
 
       function mapToEditPanelValues(config) {
         return new Map([
-          ["store_name", config.store_name || defaultConfig.store_name],
+          ["hero_title", config.hero_title || defaultConfig.hero_title],
+          ["hero_tagline", config.hero_tagline || defaultConfig.hero_tagline],
           [
-            "whatsapp_number",
-            config.whatsapp_number || defaultConfig.whatsapp_number,
+            "cta_button_text",
+            config.cta_button_text || defaultConfig.cta_button_text,
           ],
-          ["promo_text", config.promo_text || defaultConfig.promo_text],
+          ["about_title", config.about_title || defaultConfig.about_title],
           [
-            "store_description",
-            config.store_description || defaultConfig.store_description,
-          ],
-          [
-            "store_location",
-            config.store_location || defaultConfig.store_location,
+            "about_description",
+            config.about_description || defaultConfig.about_description,
           ],
           [
-            "instagram_handle",
-            config.instagram_handle || defaultConfig.instagram_handle,
+            "packages_title",
+            config.packages_title || defaultConfig.packages_title,
           ],
           [
-            "facebook_handle",
-            config.facebook_handle || defaultConfig.facebook_handle,
+            "testimonials_title",
+            config.testimonials_title || defaultConfig.testimonials_title,
+          ],
+          [
+            "contact_title",
+            config.contact_title || defaultConfig.contact_title,
+          ],
+          [
+            "contact_subtitle",
+            config.contact_subtitle || defaultConfig.contact_subtitle,
           ],
         ]);
       }
@@ -900,336 +1692,58 @@ Toko online terpercaya menyediakan berbagai produk berkualitas dengan harga terj
         });
       }
 
-      // Initialize
-      function init() {
-        loadProducts();
-        loadAdminData();
-      }
-
-      // Format currency
-      function formatCurrency(amount) {
-        return new Intl.NumberFormat("id-ID", {
-          style: "currency",
-          currency: "IDR",
-          minimumFractionDigits: 0,
-        }).format(amount);
-      }
-
-      // Format phone display
-      function formatPhoneDisplay(phone) {
-        if (phone.startsWith("62")) {
-          return (
-            "+" +
-            phone.slice(0, 2) +
-            " " +
-            phone.slice(2, 5) +
-            "-" +
-            phone.slice(5, 9) +
-            "-" +
-            phone.slice(9)
-          );
-        }
-        return phone;
-      }
-
-      // Load products
-      function loadProducts() {
-        const featuredContainer = document.getElementById("featured-products");
-        const allProductsContainer = document.getElementById("all-products");
-
-        featuredContainer.innerHTML = "";
-        allProductsContainer.innerHTML = "";
-
-        products.forEach((product) => {
-          const productCard = createProductCard(product);
-
-          if (product.featured) {
-            featuredContainer.innerHTML += productCard;
-          }
-          allProductsContainer.innerHTML += productCard;
-        });
-      }
-
-      // Create product card
-      function createProductCard(product) {
-        return `
-        <div class="product-card card-bg rounded-xl overflow-hidden" onclick="viewProduct(${
-          product.id
-        })">
-          <div class="h-48 flex items-center justify-center text-6xl">
-            ${product.emoji}
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-primary mb-2">${product.name}</h3>
-            <p class="text-secondary text-sm mb-4 line-clamp-2">${product.description.substring(
-              0,
-              80
-            )}...</p>
-            <div class="flex justify-between items-center">
-              <span class="text-xl font-bold text-green-600">${formatCurrency(
-                product.price
-              )}</span>
-              <button class="btn-primary px-4 py-2 rounded-lg text-sm font-semibold">Lihat Detail</button>
-            </div>
-          </div>
-        </div>
-      `;
-      }
-
-      // Navigation
-      function navigateTo(pageName) {
-        document.querySelectorAll(".page").forEach((page) => {
-          page.classList.remove("active");
-        });
-
-        const targetPage = document.getElementById(pageName);
-        if (targetPage) {
-          targetPage.classList.add("active");
-          previousPage = pageName;
-          window.scrollTo(0, 0);
-        }
-      }
-
-      function navigateBack() {
-        navigateTo(previousPage);
-      }
-
-      // View product detail
-      function viewProduct(productId) {
-        const product = products.find((p) => p.id === productId);
-        if (!product) return;
-
-        currentProduct = product;
-
-        document.getElementById(
-          "detail-image"
-        ).innerHTML = `<span class="text-9xl">${product.emoji}</span>`;
-        document.getElementById("detail-name").textContent = product.name;
-        document.getElementById("detail-price").textContent = formatCurrency(
-          product.price
-        );
-        document.getElementById("detail-description").textContent =
-          product.description;
-
-        const currentPage = document.querySelector(".page.active").id;
-        previousPage = currentPage;
-
-        navigateTo("product-detail");
-      }
-
-      // Order via WhatsApp
-      function orderViaWhatsApp() {
-        if (!currentProduct) return;
-
-        const whatsappNumber =
-          window.elementSdk?.config?.whatsapp_number ||
-          defaultConfig.whatsapp_number;
-        const storeName =
-          window.elementSdk?.config?.store_name || defaultConfig.store_name;
-
-        const message =
-          `Halo ${storeName}, saya tertarik dengan produk:\n\n` +
-          `Nama: ${currentProduct.name}\n` +
-          `Harga: ${formatCurrency(currentProduct.price)}\n\n` +
-          `Apakah produk ini masih tersedia?`;
-
-        const encodedMessage = encodeURIComponent(message);
-        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-
-        window.open(whatsappUrl, "_blank", "noopener noreferrer");
-      }
-
-      // Theme toggle
-      function toggleTheme() {
-        const body = document.body;
-        const themeIcon = document.getElementById("theme-icon");
-
-        if (currentTheme === "light") {
-          body.classList.remove("light");
-          body.classList.add("dark");
-          themeIcon.textContent = "☀️";
-          currentTheme = "dark";
-          applyDarkTheme();
-        } else {
-          body.classList.remove("dark");
-          body.classList.add("light");
-          themeIcon.textContent = "🌙";
-          currentTheme = "light";
-          applyLightTheme();
-        }
-
-        localStorage.setItem("theme", currentTheme);
-      }
-
-      // Apply dark theme colors
-      function applyDarkTheme() {
-        document.body.style.backgroundColor = "#111827";
-        document.body.style.color = "#f9fafb";
-
-        document.querySelectorAll(".nav-bar").forEach((el) => {
-          el.style.backgroundColor = "#1f2937";
-          el.style.borderColor = "#374151";
-        });
-
-        document.querySelectorAll(".card-bg").forEach((el) => {
-          el.style.backgroundColor = "#1f2937";
-        });
-
-        document.querySelectorAll(".text-primary").forEach((el) => {
-          el.style.color = "#f9fafb";
-        });
-
-        document.querySelectorAll(".text-secondary").forEach((el) => {
-          el.style.color = "#9ca3af";
-        });
-
-        document.querySelectorAll(".border-color").forEach((el) => {
-          el.style.borderColor = "#374151";
-        });
-
-        document.querySelectorAll("input, textarea").forEach((el) => {
-          el.style.backgroundColor = "#1f2937";
-          el.style.color = "#f9fafb";
-          el.style.borderColor = "#374151";
-        });
-
-        document
-          .querySelectorAll(".product-card h3, #detail-name")
-          .forEach((el) => {
-            el.style.color = "#f9fafb";
-          });
-
-        document
-          .querySelectorAll(".product-card p:not(.text-green-600)")
-          .forEach((el) => {
-            el.style.color = "#9ca3af";
-          });
-      }
-
-      // Apply light theme colors
-      function applyLightTheme() {
-        const config = window.elementSdk?.config || defaultConfig;
-        const backgroundColor =
-          config.background_color || defaultConfig.background_color;
-        const cardColor = config.card_color || defaultConfig.card_color;
-        const textColor = config.text_color || defaultConfig.text_color;
-        const secondaryTextColor =
-          config.secondary_text_color || defaultConfig.secondary_text_color;
-
-        document.body.style.backgroundColor = backgroundColor;
-        document.body.style.color = textColor;
-
-        document.querySelectorAll(".nav-bar").forEach((el) => {
-          el.style.backgroundColor = backgroundColor;
-          el.style.borderColor = "#e5e7eb";
-        });
-
-        document.querySelectorAll(".card-bg").forEach((el) => {
-          el.style.backgroundColor = cardColor;
-        });
-
-        document.querySelectorAll(".text-primary").forEach((el) => {
-          el.style.color = textColor;
-        });
-
-        document.querySelectorAll(".text-secondary").forEach((el) => {
-          el.style.color = secondaryTextColor;
-        });
-
-        document.querySelectorAll(".border-color").forEach((el) => {
-          el.style.borderColor = "#e5e7eb";
-        });
-
-        document.querySelectorAll("input, textarea").forEach((el) => {
-          el.style.backgroundColor = "#ffffff";
-          el.style.color = textColor;
-          el.style.borderColor = "#e5e7eb";
-        });
-
-        document
-          .querySelectorAll(".product-card h3, #detail-name")
-          .forEach((el) => {
-            el.style.color = textColor;
-          });
-
-        document
-          .querySelectorAll(".product-card p:not(.text-green-600)")
-          .forEach((el) => {
-            el.style.color = secondaryTextColor;
-          });
-      }
-
-      // Load theme from localStorage
-      function loadTheme() {
-        const savedTheme = localStorage.getItem("theme");
-        if (savedTheme === "dark") {
-          document.body.classList.remove("light");
-          document.body.classList.add("dark");
-          document.getElementById("theme-icon").textContent = "☀️";
-          currentTheme = "dark";
-          setTimeout(() => applyDarkTheme(), 100);
-        } else {
-          setTimeout(() => applyLightTheme(), 100);
-        }
-      }
-
-      // Admin modal
-      function toggleAdminModal() {
-        const modal = document.getElementById("admin-modal");
-        modal.classList.toggle("active");
-      }
-
-      // Load admin data
-      function loadAdminData() {
-        const savedData = localStorage.getItem("adminData");
-        if (savedData) {
-          const data = JSON.parse(savedData);
-
-          if (window.elementSdk) {
-            window.elementSdk.setConfig(data);
-          }
-        }
-      }
-
-      // Admin form submit
       document
-        .getElementById("admin-form")
+        .getElementById("contact-form")
         .addEventListener("submit", function (e) {
           e.preventDefault();
-
-          const adminData = {
-            store_name: document.getElementById("admin-store-name").value,
-            whatsapp_number: document.getElementById("admin-whatsapp").value,
-            promo_text: document.getElementById("admin-promo").value,
-            store_description:
-              document.getElementById("admin-description").value,
-            store_location: document.getElementById("admin-location").value,
-            instagram_handle: document.getElementById("admin-instagram").value,
-            facebook_handle: document.getElementById("admin-facebook").value,
-          };
-
-          localStorage.setItem("adminData", JSON.stringify(adminData));
-
-          if (window.elementSdk) {
-            window.elementSdk.setConfig(adminData);
-          }
-
-          toggleAdminModal();
-
-          // Show success feedback
-          const btn = e.target.querySelector('button[type="submit"]');
-          const originalText = btn.textContent;
-          btn.textContent = "✓ Berhasil Disimpan!";
-          btn.style.backgroundColor = "#10b981";
-
+          const messageDiv = document.getElementById("form-message");
+          messageDiv.textContent =
+            "Terima kasih! Pesan Anda telah dikirim. Kami akan segera menghubungi Anda.";
+          messageDiv.style.color = "#10b981";
+          this.reset();
           setTimeout(() => {
-            btn.textContent = originalText;
-          }, 2000);
+            messageDiv.textContent = "";
+          }, 5000);
         });
 
-      // Initialize on load
-      loadTheme();
-      init();
+      document.getElementById("cta-btn").addEventListener("click", function () {
+        document
+          .getElementById("contact")
+          .scrollIntoView({ behavior: "smooth" });
+      });
+
+      // Mobile Menu Toggle
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const hamburgerIcon = document.getElementById("hamburger-icon");
+      const closeIcon = document.getElementById("close-icon");
+
+      mobileMenuBtn.addEventListener("click", function () {
+        mobileMenu.classList.toggle("hidden");
+        hamburgerIcon.classList.toggle("hidden");
+        closeIcon.classList.toggle("hidden");
+      });
+
+      // Close mobile menu when clicking menu items
+      const mobileMenuLinks = mobileMenu.querySelectorAll("a");
+      mobileMenuLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+          mobileMenu.classList.add("hidden");
+          hamburgerIcon.classList.remove("hidden");
+          closeIcon.classList.add("hidden");
+        });
+      });
+
+      // Smooth scroll for all navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
     </script>
     <script>
       (function () {
@@ -1238,7 +1752,7 @@ Toko online terpercaya menyediakan berbagai produk berkualitas dengan harga terj
           if (b) {
             var d = b.createElement("script");
             d.innerHTML =
-              "window.__CF$cv$params={r:'9a0bfac9a0c83d99',t:'MTc2MzUxNjIxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+              "window.__CF$cv$params={r:'9a645e3a45385fb7',t:'MTc2NDQ0MzAzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
             b.getElementsByTagName("head")[0].appendChild(d);
           }
         }
